@@ -1,0 +1,50 @@
+.landingPageContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.landingPageContent h1{
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 3rem 1rem;
+    line-height: 1.2;
+
+    color: #fff;
+}
+
+.landingSlogan{
+    font-size: 1.5rem;
+    font-weight: normal;
+
+    margin: 1rem;
+    padding: 0rem 4rem;
+
+    /* background-color: rgba(60, 57, 64, 0.4); */
+
+    /* border: 1px solid rgba(0, 0, 0, 0.1); */
+    border-radius: 10px;
+
+    color: #fff;
+    /* box-shadow: 15px 15px 30px rgb(25, 25, 25),
+        -15px -15px 30px rgb(60, 60, 60); */
+
+
+    backdrop-filter: blur(10px) saturate(70%);
+    
+}
+
+.landingSlogan p{
+    position: relative;
+    z-index: 10;
+
+}   
+
+.landingImg {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    object-position: 100%;
+
+}
