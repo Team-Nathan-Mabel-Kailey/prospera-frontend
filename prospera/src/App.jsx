@@ -4,10 +4,10 @@ import './App.css'
 import LandingPage from './Components/LandingPage/LandingPage';
 import AboutPage from './Components/AboutPage/AboutPage'
 import Header from './Components/Header/Header';
+import ContactPage from './Components/ContactPage/ContactPage'
 import Footer from './Components/Footer/Footer'
 
 function App() {
-
   return (
     <>
       <Header />
@@ -15,12 +15,14 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
           <Route path="/about" element={<AboutPage />} />
-          {/* <Route path="/contact" element={} /> */}
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Router>
-      
 
-      <Footer />
+      <div>
+        <Footer />
+      </div>
+      
     </>
   )
 }
