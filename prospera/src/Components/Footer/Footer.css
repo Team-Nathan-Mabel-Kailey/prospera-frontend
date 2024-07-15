@@ -1,0 +1,32 @@
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(60, 57, 64, 0.3);
+    color: white;
+    /* text-align: center; */
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.footerLinks{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    width: 20%;
+    text-align: center;
+}
+
+.footerLinks a{
+    color: white;
+    text-decoration: none;
+}
+
+
+.footerLinks h2{
+    font-weight: normal;
+}
