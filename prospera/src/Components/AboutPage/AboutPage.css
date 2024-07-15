@@ -1,14 +1,98 @@
-.aboutHeader{
+.aboutBody{
     font-size: 30px;
-    font-weight: bold;
     margin-bottom: 1rem;
-    color: #fff;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    padding: 2rem;
+    color: #fff;
 }
 
-.leftHeaderBody{
-    /* margin: 100px 200px; */
+.leftAboutBody, .rightAboutBody {
+    flex: 1;
+    padding: 1rem;
+
+    display: flex;
+    justify-content: center;
+}
+
+.leftAboutBody h1 {
+    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.leftAboutBody h1 em {
+    display: block;
+    font-style: italic;
+    font-size: 3.5rem;
+}
+
+.rightAboutBody{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-self: center;
+}
+
+.rightAboutBody p {
+    font-weight: normal;
+    line-height: 1.6;
+}
+
+.rightAboutBody button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* Log In Button */
+.aboutLogInButton {
+    padding: 15px 30px;
+
+    border: 2px solid #2c2c2c;
+    background-color: #1a1a1a;
+    color: #ffffff;
+
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.4s ease;
+
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    
+    width: 400px;
+}
+
+.aboutLogInButton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.aboutLogInButton:hover::after {
+    transform: scale(4);
+}
+
+.aboutLogInButton:hover {
+    border-color: #666666;
+    background: #292929;
 }
