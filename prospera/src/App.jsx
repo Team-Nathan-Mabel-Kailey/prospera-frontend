@@ -6,14 +6,13 @@ import ContactPage from './Components/ContactPage/ContactPage'
 import Footer from './Components/Footer/Footer'
 
 function App() {
-
   return (
     <>
       <Router>
         <Routes>
           <Route path="/"  />
           <Route path="/about" element={<AboutPage />} />
-          {/* <Route path="/contact" element={} /> */}
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Router>
 
@@ -21,7 +20,10 @@ function App() {
         
       </div>
 
-      <Footer />
+      <div>
+        <Footer />
+      </div>
+      
     </>
   )
 }
