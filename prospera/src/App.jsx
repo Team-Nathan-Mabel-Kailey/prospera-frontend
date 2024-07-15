@@ -6,7 +6,6 @@ import ContactPage from './Components/ContactPage/ContactPage'
 import Footer from './Components/Footer/Footer'
 
 function App() {
-
   return (
     <>
       <Router>
@@ -21,7 +20,10 @@ function App() {
         
       </div>
 
-      <Footer />
+      <div>
+        <Footer />
+      </div>
+      
     </>
   )
 }
