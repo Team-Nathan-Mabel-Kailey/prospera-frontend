@@ -1,4 +1,5 @@
 // import { useState } from 'react'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
 import AboutPage from './Components/AboutPage/AboutPage'
 import ContactPage from './Components/ContactPage/ContactPage'
@@ -8,8 +9,14 @@ function App() {
 
   return (
     <>
-      <AboutPage />
-      <ContactPage />
+      <Router>
+        <Routes>
+          <Route path="/"  />
+          <Route path="/about" element={<AboutPage />} />
+          {/* <Route path="/contact" element={} /> */}
+        </Routes>
+      </Router>
+
       <div>
         
       </div>
