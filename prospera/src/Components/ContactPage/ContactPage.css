@@ -1,0 +1,34 @@
+.contactBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.leftContactPageContent {
+    margin: 100px 350px 0 350px;
+}
+
+.rightContactPageContent {
+    margin: 100px 350px 0 0; 
+    padding: 25px;
+    color: black;
+    background-color: rgb(161, 161, 241);
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.nameInputs {
+    display: flex;
+    gap: 15px;
+}
+
+.nameInputArea {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
