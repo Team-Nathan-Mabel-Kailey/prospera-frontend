@@ -19,6 +19,7 @@
 .contactForm {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .nameInputs {
@@ -29,4 +30,5 @@
 .nameInputArea {
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
