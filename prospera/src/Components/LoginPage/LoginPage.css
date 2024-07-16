@@ -40,10 +40,13 @@
     margin: 10px 0 0 0;
 }
 
-.loginSubmissionArea {
+.showPasswordArea {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 8px;
+}
+
+.showPasswordArea input {
+    margin: 0;
 }
 
 .loginButtonArea {
