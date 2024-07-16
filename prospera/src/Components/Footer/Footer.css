@@ -2,7 +2,7 @@
     position:absolute;
     bottom: 0;
     width: 100vw;
-    margin-top: 50px;
+
     background-color: rgba(60, 57, 64, 0.3);
     color: white;
 
@@ -28,8 +28,3 @@
 .footerLinks h2{
     font-weight: normal;
 }
-
-/* position: absolute;
-bottom: 0;
-width: 100%;
-height: 2.5rem;  */
