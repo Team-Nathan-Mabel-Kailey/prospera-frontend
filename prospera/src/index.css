@@ -8,4 +8,5 @@ html {
   background: linear-gradient(#6303FF 0%, #000000 100%);
   background-repeat: no-repeat;
   background-size: cover;
+  scroll-behavior: smooth;
 }
