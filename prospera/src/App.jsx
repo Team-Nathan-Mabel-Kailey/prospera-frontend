@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
 import AboutPage from './Components/AboutPage/AboutPage'
 import ContactPage from './Components/ContactPage/ContactPage'
+import LoginPage from './Components/LoginPage/LoginPage'
 import Footer from './Components/Footer/Footer'
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
           <Route path="/"  />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
 
@@ -23,7 +25,6 @@ function App() {
       <div>
         <Footer />
       </div>
-      
     </>
   )
 }

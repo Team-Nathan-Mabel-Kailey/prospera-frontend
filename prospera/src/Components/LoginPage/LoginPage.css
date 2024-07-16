@@ -1,0 +1,152 @@
+.loginBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.loginBox {
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 58rem;
+    height: 42rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 15px;
+    padding: 20px;
+}
+
+.loginDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 80px 0;
+}
+
+.loginDescription h1 {
+    margin: 0;
+}
+
+.loginDescription p {
+    margin: 10px 0 0 0;
+}
+
+.loginSubmissionArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.loginButtonArea {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0 0 0;
+    gap: 0.8rem;
+}
+
+.imageArea {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.imageArea img {
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    max-width: 250%;
+    max-height: 150%;
+    object-fit: cover;
+}
+
+.loginButton {
+    margin: 15px 0 0 0;
+    padding: 15px 30px;
+    border: 2px solid #2c2c2c;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.loginButton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.loginButton:hover::after {
+    transform: scale(4);
+}
+
+.registerButton:hover {
+    border-color: #666666;
+    background: #292929;
+}
+
+.registerButton {
+    margin: 15px 0 0 0;
+    padding: 15px 30px;
+    border: 2px solid #2c2c2c;
+    background-color: #ffffff;
+    color: #1a1a1a;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.registerButton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.registerButton:hover::after {
+    transform: scale(4);
+}
+
+.registerButton:hover {
+    border-color: #292929;
+    background: #5b00ed;
+    color: #ffffff;
+}
