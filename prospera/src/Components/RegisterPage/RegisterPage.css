@@ -1,0 +1,141 @@
+.registerBody {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: 1.88rem 0 0 0;
+}
+
+.registerBox {
+    display: flex;
+    background-color: white;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 68rem;
+    height: 47rem;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex: 1;
+    gap: 15px;
+    padding: 20px;
+}
+
+.registerDescription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 20px 0;
+}
+
+.registerDescription a {
+    color: black;
+}
+
+.registerDescription h1 {
+    margin: 0;
+}
+
+.registerDescription p {
+    margin: 10px 0 0 0;
+}
+
+.showPasswordArea1, .showPasswordArea2 {
+    display: flex;
+    gap: 8px;
+}
+
+.showPasswordArea1 input, .showPasswordArea2 input {
+    margin: 0;
+}
+
+.registerButtonArea {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0 0 0;
+    gap: 0.8rem;
+}
+
+.imageArea {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.imageArea img {
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    max-width: 250%;
+    max-height: 150%;
+    object-fit: cover;
+}
+
+.registerButton {
+    margin: 15px 0 0 0;
+    padding: 15px 30px;
+    border: 2px solid #2c2c2c;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    font-weight: bold;
+}
+
+.registerButton:disabled {
+    color: #ebebeb;
+    border-color: #8d8d8d;
+    background: #7d7d7d;
+    cursor: not-allowed;
+}
+
+.registerButton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.registerButton:hover::after {
+    transform: scale(4);
+}
+
+.registerButton:hover {
+    border-color: #666666;
+    background: #292929;
+}
+
+.registerButton:disabled:hover {
+    border-color: #8d8d8d;
+    background: #7d7d7d;
+    transition: none;
+}
+
+.registerButton:disabled:hover::after {
+    transform: none;
+    background: none;
+    transition: none;
+}
+
+.registerButton:disabled::after {
+    transition: none;
+}

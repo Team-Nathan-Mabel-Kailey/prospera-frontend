@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
-// import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "./LoginPage.css";
-
+// import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import './LoginPage.css';
 
 const LoginPage = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post("http://localhost:3000/users/login", {
+            const response = await axios.post('http://localhost:3000/users/login', {
                 username,
                 password
             });
             // Store token in localStorage
-            localStorage.setItem("token", response.data.token);
-            navigate("/home");  // Navigate to dashboard
+            localStorage.setItem('token', response.data.token);
+            navigate('/home');  // Navigate to dashboard
         } catch (error) {
-            console.error("Error logging in:", error);
+            console.error('Error logging in:', error);
         }
     };
 
@@ -35,32 +34,32 @@ const LoginPage = () => {
 
                     <label>Username</label>
                     <input
-                        type="text"
+                        type='text'
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     <label>Password</label>
                     <input
                         type={
-                            showPassword ? "text" : "password"
+                            showPassword ? 'text' : 'password'
                         }
                         onChange={(e) => setPassword(e.target.value)}
                     />
 
-                    <div className="showPasswordArea">
+                    <div className='showPasswordArea'>
                         <input
-                            id="check"
-                            type="checkbox"
+                            id='check'
+                            type='checkbox'
                             value={showPassword}
                             onChange={() =>
                                 setShowPassword((prev) => !prev)
                             }
                         />
-                        <label for="check">Show Password</label>
+                        <label for='check'>Show Password</label>
                     </div>
                     
                     <div className='loginButtonArea'>
                         <button onClick={handleLogin} className='loginButton'>Login</button>
-                        <button onClick={() => navigate("/register")} className='registerButton'>Go to Register</button>
+                        <button onClick={() => navigate('/register')} className='registerButton'>Go to Register</button>
                     </div>
                 </div>
 
