@@ -7,6 +7,7 @@ import "./LoginPage.css";
 const LoginPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async () => {
@@ -39,9 +40,24 @@ const LoginPage = () => {
                     />
                     <label>Password</label>
                     <input
-                        type="password"
+                        type={
+                            showPassword ? "text" : "password"
+                        }
                         onChange={(e) => setPassword(e.target.value)}
                     />
+
+                    <div className="showPasswordArea">
+                        <input
+                            id="check"
+                            type="checkbox"
+                            value={showPassword}
+                            onChange={() =>
+                                setShowPassword((prev) => !prev)
+                            }
+                        />
+                        <label for="check">Show Password</label>
+                    </div>
+                    
                     <div className='loginButtonArea'>
                         <button onClick={handleLogin} className='loginButton'>Login</button>
                         <button onClick={() => navigate("/register")} className='registerButton'>Go to Register</button>
