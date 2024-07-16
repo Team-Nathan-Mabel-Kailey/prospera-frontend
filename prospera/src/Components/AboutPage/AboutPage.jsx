@@ -1,4 +1,5 @@
 import './AboutPage.css'
+import { Link } from "react-router-dom";
 
 const AboutPage = () => {
     return (
@@ -10,7 +11,9 @@ const AboutPage = () => {
 
                 <div className='rightAboutBody'>
                     <p>Managing finances can be challenging, especially for young adults transitioning into independence and immigrants adapting to a new financial landscape. Our web app aims to simplify and streamline personal finance management, providing users with the resources and guidance they need to achieve financial stability and growth.</p>
-                    <button className='aboutLogInButton'>Log In</button>
+                    <Link to={`/login`} >
+                        <button className='aboutLogInButton'>Log In</button>
+                    </Link>
                 </div>
             </div>
 
