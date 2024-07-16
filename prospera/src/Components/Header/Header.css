@@ -1,10 +1,27 @@
+body{
+    left: 0;
+    right: 0;
+}
 header {
+    position: fixed; /* Ensure the header is fixed */
+    /* width: 100%; */
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 1rem 2rem;
+
     background-color: #fff;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left:0;
+
+    z-index: 1000; /* Ensure it stays on top of other content */
+    z-index: 12;
+    overflow: hidden;
 }
+
 
 .headerLeft {
     display: flex;
@@ -18,7 +35,7 @@ header {
     margin: 0 10px;
 }
 
-.headerLeft nav a {
+header a {
     margin: 0 10px;
     color: #000;
     font-size: 1.2rem;
@@ -37,49 +54,33 @@ header {
 
     outline: none;
     position: relative;
-    overflow: hidden;
+    overflow:hidden ;
     
     width: 150px;
     margin: 0 10px;
 }
 
+.auth-buttons{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    padding-right: 33px;
+}
+
 .login {
-    border: 2px solid #2c2c2c;
     background-color: #000;
     color: #fff;
+    text-decoration: none;
 }
 
 .register{
-    background-color: #fff;
     color: #000;
+    text-decoration: none;
+    background-color: #fff;
     border: none;
 }
 
-.login::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.25) 0%,
-        rgba(255, 255, 255, 0) 70%
-    );
-    transform: scale(0);
-    transition: transform 0.5s ease;
-}
-
-.login:hover::after {
-    transform: scale(4);
-}
-
-.login:hover {
-    border-color: #666666;
-    background: #292929;
-}
-
+.login::after, 
 .register::after {
     content: "";
     position: absolute;
@@ -96,12 +97,16 @@ header {
     transition: transform 0.5s ease;
 }
 
-.register:hover::after {
+.login:hover::after, .register:hover::after {
     transform: scale(4);
 }
 
+.login:hover {
+    border-color: #666666;
+    background: #292929;
+}
+
 .register:hover {
-    border-color: #6303FF;
     background: #6303FF;
     color: #fff;
 }

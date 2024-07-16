@@ -5,17 +5,20 @@ const Header = () => {
         <div>
             <header>
                 <div className='headerLeft'>
-                    <div className="logo">LOGO</div>
+                    <div>
+                        <a href='/' className='logo'>LOGO</a>
+                    </div>
+                    
 
                     <nav>
-                        <a href="#" className="active">ABOUT</a>
-                        <a href="#">CONTACT</a>
+                        <a href="/about" className="active">ABOUT</a>
+                        <a href="/contact">CONTACT</a>
                     </nav>
                 </div>
                 
                 <div className="auth-buttons">
-                    <button className="login">Log In</button>
-                    <button className="register">Register</button>
+                    <a href="/login"><button className="login">Log In</button></a>
+                    <a href='/register'><button className="register">Register</button></a>
                 </div>
 
             </header>
