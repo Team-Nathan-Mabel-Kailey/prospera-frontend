@@ -1,9 +1,13 @@
-html, body {
-  height: 100%;
+html, body, #root {
+  min-height: 100vh;
+  min-width: 100vw;
   margin: 0;
-  padding: 0;
+  padding-top: 40px;
   background: linear-gradient(#6303FF 0%, #000000 100%);
   background-repeat:no-repeat;
   background-size: cover;
   scroll-behavior: smooth;
+  position: relative;
 }
+
+

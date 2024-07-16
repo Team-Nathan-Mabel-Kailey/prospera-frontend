@@ -1,16 +1,13 @@
 .footer {
-    position:static;
-    left: 0;
+    position:absolute;
     bottom: 0;
-    width: 100%;
+    width: 100vw;
     margin-top: 50px;
     background-color: rgba(60, 57, 64, 0.3);
     color: white;
-    /* text-align: center; */
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
@@ -31,3 +28,8 @@
 .footerLinks h2{
     font-weight: normal;
 }
+
+/* position: absolute;
+bottom: 0;
+width: 100%;
+height: 2.5rem;  */
