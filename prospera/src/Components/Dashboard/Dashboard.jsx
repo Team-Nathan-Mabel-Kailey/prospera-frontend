@@ -1,4 +1,5 @@
 import './Dashboard.css'
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
     return (
@@ -32,9 +33,11 @@ const Dashboard = () => {
                     <img className='image3' src="https://placehold.co/200x150" alt="placeholder" />
                 </div>
 
-                <div className='chatIcon'>
-                    <img src="https://placehold.co/50x50" alt="chat icon" />
-                </div>
+                <Link to={`/api/chat`}>
+                    <div className='chatIcon'>
+                        <img src="https://placehold.co/50x50" alt="chat icon" />
+                    </div>
+                </Link>
             </div>
         </div>
     )
