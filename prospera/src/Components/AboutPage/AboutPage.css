@@ -1,6 +1,7 @@
 .aboutBody{
     font-size: 30px;
     margin-bottom: 1rem;
+    margin-top: 20rem;
 
     display: flex;
     align-items: center;
@@ -41,35 +42,23 @@
     line-height: 1.6;
 }
 
-.rightAboutBody button {
-    margin-top: 1rem;
-    padding: 0.5rem 1rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background: #000;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
-
 /* Log In Button */
 .aboutLogInButton {
     padding: 15px 30px;
-
-    border: 2px solid #2c2c2c;
-    background-color: #1a1a1a;
+    background-color: #000;
     color: #ffffff;
 
     font-size: 1.2rem;
     cursor: pointer;
-    border-radius: 20px;
+    border-radius: 10px;
+    padding: 1rem;
     transition: all 0.4s ease;
 
     outline: none;
     position: relative;
     overflow: hidden;
     
-    width: 400px;
+    width: 150px;
 }
 
 .aboutLogInButton::after {
@@ -95,4 +84,46 @@
 .aboutLogInButton:hover {
     border-color: #666666;
     background: #292929;
+}
+
+.teamAbout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+
+    color: #fff;
+}
+
+.teamAbout h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.team {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.teamMember {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 4rem;
+}
+
+.teamMember h3 {
+    font-size: 1.9rem;
+    margin-top: 1rem;
+}
+
+.teamMember img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
 }

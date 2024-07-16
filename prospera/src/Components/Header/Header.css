@@ -3,8 +3,7 @@ body{
     right: 0;
 }
 header {
-    position: fixed; /* Ensure the header is fixed */
-    /* width: 100%; */
+    position: fixed;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -17,8 +16,7 @@ header {
     right: 0;
     left:0;
 
-    z-index: 1000; /* Ensure it stays on top of other content */
-    z-index: 12;
+    z-index: 1000; 
     overflow: hidden;
 }
 
