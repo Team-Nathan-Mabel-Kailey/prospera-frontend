@@ -17,7 +17,7 @@ const LoginPage = () => {
             });
             // Store token in localStorage
             localStorage.setItem("token", response.data.token);
-            navigate("/home");
+            navigate("/home");  // Navigate to dashboard
         } catch (error) {
             console.error("Error logging in:", error);
         }
@@ -32,16 +32,14 @@ const LoginPage = () => {
                         <p>Sign in to continue with us</p>
                     </div>
 
-                    <label>Email or mobile phone number</label>
+                    <label>Username</label>
                     <input
                         type="text"
-                        placeholder="Username"
                         onChange={(e) => setUsername(e.target.value)}
                     />
-                    <label>Your password</label>
+                    <label>Password</label>
                     <input
                         type="password"
-                        placeholder="Password"
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <div className='loginButtonArea'>
