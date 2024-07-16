@@ -18,9 +18,11 @@ const Dashboard = () => {
                                 <h3>Header1</h3>
                             </div>
                         </div>
-
-                        <h3 className='dashboardBankAccts'>Checkings</h3>
-                        <h3 className='dashboardBankAccts'>Savings</h3>
+                        <div className='dashboardBankAccts'>
+                            <h3>Checkings</h3>
+                            <h3>Savings</h3>
+                        </div>
+                        
                     </div>
 
                     <img className='image2 right-column' src="https://preview.redd.it/can-they-please-bring-back-the-old-stocks-widget-v0-tu2me20n0cwb1.jpg?width=1284&format=pjpg&auto=webp&s=217d0fd8abcbfa6eade90e24c873b517e6b583bd" alt="placeholder" />
