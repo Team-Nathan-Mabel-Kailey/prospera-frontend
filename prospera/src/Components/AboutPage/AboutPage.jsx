@@ -18,22 +18,24 @@ const AboutPage = () => {
             </div>
 
             <div className='teamAbout'>
-                    <h2>Meet MKN-force!</h2>
                     <div className='team'>
-                        <div className='teamMember'>
-                            <img src='https://ca.slack-edge.com/E7T5PNK3P-U07685Z465A-b44ceb4c18af-512' alt='team member' />
-                            <h3>Mabel Inoa Mejia</h3>
-                            <p>Software Developer</p>
-                        </div>
-                        <div className='teamMember'>
-                            <img src='https://ca.slack-edge.com/T06TC06DGC8-U06T1RV0MCH-2dffecccbd1d-512' alt='team member' />
-                            <h3>Kailey Chavez</h3>
-                            <p>Software Developer</p>
-                        </div>
-                        <div className='teamMember'>
-                            <img src='https://ca.slack-edge.com/E7T5PNK3P-U076UF9NBME-0edbd7b74d3f-512' alt='team member' />
-                            <h3>Nathan Quiroa</h3>
-                            <p>Software Developer</p>
+                        <h2>Meet MKN-force!</h2>
+                        <div className='teamIcons'>
+                            <div className='teamMember'>
+                                <img src='https://ca.slack-edge.com/E7T5PNK3P-U07685Z465A-b44ceb4c18af-512' alt='team member' />
+                                <h3>Mabel Inoa Mejia</h3>
+                                <p>Software Developer</p>
+                            </div>
+                            <div className='teamMember'>
+                                <img src='https://ca.slack-edge.com/T06TC06DGC8-U06T1RV0MCH-2dffecccbd1d-512' alt='team member' />
+                                <h3>Kailey Chavez</h3>
+                                <p>Software Developer</p>
+                            </div>
+                            <div className='teamMember'>
+                                <img src='https://ca.slack-edge.com/E7T5PNK3P-U076UF9NBME-0edbd7b74d3f-512' alt='team member' />
+                                <h3>Nathan Quiroa</h3>
+                                <p>Software Developer</p>
+                            </div>
                         </div>
                     </div>
                 </div>
