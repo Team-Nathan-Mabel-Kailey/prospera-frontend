@@ -31,11 +31,11 @@ const forgotPasswordPage = () => {
                     </Link>
                     <div className='forgotDescription'>
                         <h1>Forgot Password</h1>
-                        <p>Enter your answer to your selected security question</p>
+                        <p>Enter your answer to the security question</p>
                     </div>
 
                     <div className='securityQuestionArea'>
-                        <p><strong>Security question:</strong> What is your favorite food?</p>
+                        <p><strong>Security question:</strong> What city were you born in?</p>
                     </div>
 
                     <div className='answerInputArea'>
