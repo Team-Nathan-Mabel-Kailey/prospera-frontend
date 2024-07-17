@@ -9,17 +9,18 @@ function NewsCardDetail () {
     const [isFetching, setIsFetching] = useState(false);
     const [error, setError] = useState(null);
     const location = useLocation();
-    const { title, content, createdAt } = location.state;
-
-    console.log("news card detail", title, content, createdAt);
+    const { title, content, createdAt, image } = location.state;
 
     if (error) {
         return <NotFound />;
     }
 
     return (
-        <div>
+        <div className="articleContainer">
             <h1>{title}</h1>
+            {image ? <img src={image} alt={title} /> : <img src="https://placehold.jp/400x200.png" alt={title} />}
+            <p>{createdAt}</p>
+            <p>{content}</p>
         </div>
     )
 }
