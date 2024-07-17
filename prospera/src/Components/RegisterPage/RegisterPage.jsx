@@ -30,9 +30,9 @@ const Register = () => {
 
       // Store the token in the localstorage as token
       localStorage.setItem('token', loginResponse.data.token);
-      navigate('/home');
+      navigate('/dashboard');
     } catch (error) {
-      alert('Registration failed. Try again');
+      alert('Registration failed. Try again.');
     }
   };
 
@@ -43,7 +43,7 @@ const Register = () => {
               <img src='https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='Picture of plant inside pot filled with coins'/>
           </div>
 
-          <div className='registerForm'>
+          <form className='registerForm'>
               <div className='registerDescription'>
                   <h1>Sign Up</h1>
                   <p>Already have an account? <a href='/login'>Log in</a></p>
@@ -53,12 +53,14 @@ const Register = () => {
               <input
                   type='text'
                   onChange={(e) => setEmail(e.target.value)}
+                  required
               />
 
               <label>Username</label>
               <input
                   type='text'
                   onChange={(e) => setUsername(e.target.value)}
+                  required
               />
 
               <label>Password</label>
@@ -67,6 +69,7 @@ const Register = () => {
                       showPassword1 ? 'text' : 'password'
                   }
                   onChange={(e) => setPassword(e.target.value)}
+                  required
               />
 
               <div className='showPassword1Area'>
@@ -87,6 +90,7 @@ const Register = () => {
                       showPassword2 ? 'text' : 'password'
                   }
                   onChange={(e) => setPasswordAgain(e.target.value)}
+                  required
               />
 
               <div className='showPassword2Area'>
@@ -119,7 +123,7 @@ const Register = () => {
                   <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>Create Account</button>
                   {/* <button onClick={() => navigate('/register')} className='registerButton'>Go to Register</button> */}
               </div>
-          </div>
+          </form>
           
       </div>
     </div>

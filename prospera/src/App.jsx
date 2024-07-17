@@ -9,6 +9,7 @@ import LoginPage from './Components/LoginPage/LoginPage'
 import Dashboard from './Components/Dashboard/Dashboard';
 import RegisterPage from './Components/RegisterPage/RegisterPage'
 import NewsFeed from './Components/NewsFeed/NewsFeed'
+import ForgotPasswordPage from './Components/ForgotPasswordPage/ForgotPasswordPage'
 import Footer from './Components/Footer/Footer'
 import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgot" element={<ForgotPasswordPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/news" element={<NewsFeed />} />
