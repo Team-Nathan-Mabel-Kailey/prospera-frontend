@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './ForgotPasswordPage.css';
 
 const forgotPasswordPage = () => {
@@ -26,6 +26,9 @@ const forgotPasswordPage = () => {
         <div className='forgotBody'>
             <div className='forgotBox'>
                 <form className='forgotForm'>
+                    <Link to="/login" className="return">
+                        <span> &lt; </span>
+                    </Link>
                     <div className='forgotDescription'>
                         <h1>Forgot Password</h1>
                         <p>Enter your answer to your selected security question</p>
@@ -35,14 +38,16 @@ const forgotPasswordPage = () => {
                         <p><strong>Security question:</strong> What is your favorite food?</p>
                     </div>
 
-                    <label>Answer</label>
-                    <input
-                        type={
-                            showAnswer ? 'text' : 'password'
-                        }
-                        onChange={(e) => setAnswer(e.target.value)}
-                        required
-                    />
+                    <div className='answerInputArea'>
+                        <label>Answer</label>
+                        <input
+                            type={
+                                showAnswer ? 'text' : 'password'
+                            }
+                            onChange={(e) => setAnswer(e.target.value)}
+                            required
+                        />
+                    </div>
 
                     <div className='showAnswerArea'>
                         <input
