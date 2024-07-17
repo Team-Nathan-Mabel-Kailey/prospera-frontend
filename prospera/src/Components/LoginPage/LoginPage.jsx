@@ -61,7 +61,7 @@ const LoginPage = () => {
                     
                     <div className='loginButtonArea'>
                         <button type='submit' onClick={handleLogin} className='loginButton'>Login</button>
-                        <button onClick={() => navigate('/register')} className='registerButton'>Go to Register</button>
+                        <button onClick={() => navigate('/register')} className='goToRegisterButton'>Go to Register</button>
                     </div>
                 </form>
 
