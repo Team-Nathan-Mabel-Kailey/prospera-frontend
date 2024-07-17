@@ -1,0 +1,14 @@
+.articleContainer {
+    background-color: #fff;
+    color: #000;
+    margin-bottom: 300px;
+
+    margin: 20px 15px;
+    border-radius: 5px;
+
+    margin-bottom: 300px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -11,6 +11,7 @@ import RegisterPage from './Components/RegisterPage/RegisterPage'
 import NewsFeed from './Components/NewsFeed/NewsFeed'
 import ForgotPasswordPage from './Components/ForgotPasswordPage/ForgotPasswordPage'
 import Footer from './Components/Footer/Footer'
+import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/news" element={<NewsFeed />} />
+          <Route path="/news/:articleId" element={<NewsCardDetail />} />
+          <Route path="*" element={<h1>Not Found</h1>} />
         </Routes>
       </Router>
 
