@@ -40,6 +40,17 @@
     margin: 10px 0 0 0;
 }
 
+.loginForm a {
+    text-align: end;
+    color: #6303FF;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.loginForm a:hover {
+    color: #390094;
+}
+
 .showPasswordArea {
     display: flex;
     gap: 8px;
