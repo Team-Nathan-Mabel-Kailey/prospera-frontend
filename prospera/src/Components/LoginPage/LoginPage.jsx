@@ -58,6 +58,8 @@ const LoginPage = () => {
                         />
                         <label htmlFor='check'>Show Password</label>
                     </div>
+
+                    <a href='/forgot'>Forgot password?</a>
                     
                     <div className='loginButtonArea'>
                         <button type='submit' onClick={handleLogin} className='loginButton'>Login</button>
