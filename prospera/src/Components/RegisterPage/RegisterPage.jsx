@@ -8,9 +8,11 @@ const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
+  const [securityAnswer, setSecurityAnswer] = useState('');
   const [passwordAgain, setPasswordAgain] = useState('');
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
+  const [showSecurityAnswer, setShowSecurityAnswer] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -20,12 +22,12 @@ const Register = () => {
       //register the user
       const response = await axios.post(
         'http://localhost:3000/users/register',
-        { username, email, password }
+        { username, email, password, securityAnswer }
       );
       //login the user
       const loginResponse = await axios.post(
         'http://localhost:3000/users/login',
-        { username, email, password }
+        { username, email, password, securityAnswer }
       );
 
       // Store the token in the localstorage as token
@@ -108,7 +110,6 @@ const Register = () => {
               <PasswordChecklist
                   rules={[
                       "minLength",
-                      "specialChar",
                       "number",
                       "capital",
                       "match",
@@ -118,10 +119,35 @@ const Register = () => {
                   valueAgain={passwordAgain}
                   onChange={setIsValidPassword}
               />
+
+              <div className='questionArea'>
+                <p><b>Security question: </b> What city were you born in?</p>
+              </div>
+
+              <label>Answer</label>
+              <input
+                type={
+                    showSecurityAnswer ? 'text' : 'password'
+                }
+                onChange={(e) => setSecurityAnswer(e.target.value)}
+                required
+              />
+
+              <div className='showSecurityAnswerArea'>
+                  <input
+                      id='check3'
+                      type='checkbox'
+                      value={showSecurityAnswer}
+                      onChange={() =>
+                          setShowSecurityAnswer((prev) => !prev)
+                      }
+                  />
+                  <label for='check'>Show Answer</label>
+              </div>
+
               
               <div className='registerButtonArea'>
                   <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>Create Account</button>
-                  {/* <button onClick={() => navigate('/register')} className='registerButton'>Go to Register</button> */}
               </div>
           </form>
           
