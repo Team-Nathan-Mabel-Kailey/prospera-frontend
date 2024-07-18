@@ -21,8 +21,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<LandingPage/>}/>
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<LandingPage scrollTo="aboutPage" />} />
+          <Route path="/contact" element={<LandingPage scrollTo="contactPage" />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/forgot" element={<ForgotPasswordPage />} />
           <Route path="/register" element={<RegisterPage />} />

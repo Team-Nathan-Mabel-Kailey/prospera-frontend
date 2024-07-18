@@ -139,4 +139,16 @@
     width: 200px;
     height: 200px;
     border-radius: 50%;
+    margin: 0px 15px;
+}
+
+.teamMember a img{
+    height: 30px;
+    width: 30px;
+}
+
+.teamSocials {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
