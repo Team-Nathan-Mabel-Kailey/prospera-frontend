@@ -2,9 +2,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
 import LandingPage from './Components/LandingPage/LandingPage';
-import AboutPage from './Components/AboutPage/AboutPage'
 import Header from './Components/Header/Header';
-import ContactPage from './Components/ContactPage/ContactPage'
 import LoginPage from './Components/LoginPage/LoginPage'
 import Dashboard from './Components/Dashboard/Dashboard';
 import RegisterPage from './Components/RegisterPage/RegisterPage'

@@ -5,6 +5,7 @@ import AboutPage from '../AboutPage/AboutPage'
 import ContactPage from '../ContactPage/ContactPage'
 import PropTypes from 'prop-types';
 
+
 const LandingPage = ({ scrollTo }) => {
     // Add prop validation for 'scrollTo'
     LandingPage.propTypes = {
