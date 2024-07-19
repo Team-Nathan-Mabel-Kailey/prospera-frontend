@@ -13,6 +13,15 @@
     align-items: center;
 }
 
+.newsCategories{
+    display: flex;
+    justify-content: center;
+    margin: 20px 20px;
+}
+
+.newsCategories a{
+    margin: 20px 20px;
+}
 .newsArticleCards {
     display: grid;
     max-width: 1200px;

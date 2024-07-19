@@ -21,7 +21,6 @@ const NewsFeed = () => {
             const data = await response.json();
 
             console.log(data);
-            console.log("hello");
 
             if(data.articles && data.articles.length > 0) {
                 const limitedArticles = data.articles.slice(0, 6);
@@ -49,7 +48,7 @@ const NewsFeed = () => {
             <h1>News Feed</h1>
             <h3>Header 2</h3>
 
-            <div className='newsCatergories'>
+            <div className='newsCategories'>
                 <a>Category 1</a>
                 <a>Category 2</a>
                 <a>Category 3</a>
@@ -67,6 +66,7 @@ const NewsFeed = () => {
                         author={article.author}
                         content={article.content}
                         createdAt={article.publishedAt}
+                        url={article.url}
                     />
                 ))}
             </div>

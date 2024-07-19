@@ -1,6 +1,6 @@
 import './Header.css'
 
-const Header = () => {
+const Header = (loggedIn) => {
     return (
         <div>
             <header>
@@ -13,7 +13,7 @@ const Header = () => {
                     <nav>
                         <a href="/about" className="active">ABOUT</a>
                         <a href="/contact">CONTACT</a>
-                        <a href="/dashboard">DASHBOARD</a>
+                        { loggedIn && <a href="/dashboard">DASHBOARD</a>}
                         <a href="/news">NEWS</a>
                     </nav>
                 </div>
