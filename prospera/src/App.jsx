@@ -20,9 +20,10 @@ function App() {
   return (
     <>
         <AuthProvider>
-            <Header />
             
             <Router>
+            <Header />
+
               <Routes>
                 <Route path="/" element={<LandingPage/>}/>
                 <Route path="/about" element={<LandingPage scrollTo="aboutPage" />} />

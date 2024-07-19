@@ -42,15 +42,16 @@ const LoginPage = () => {
                     </div>
 
                     <label>Username
+                    </label>
                     <input
                     id='usernameLogin'
-                        type='text'
+                        type='textarea'
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                    </label>
                     
                     <label>Password
+                    </label>
                     <input
                     id='passwordLogin'
                         type={
@@ -59,7 +60,6 @@ const LoginPage = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    </label>
                     
 
                     <div className='showPasswordArea'>
