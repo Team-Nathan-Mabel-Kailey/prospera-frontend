@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
+import { useAuth } from '../AuthContext/AuthContext';
 
 const LoginPage = () => {
+    const { setIsLoggedIn } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +24,7 @@ const LoginPage = () => {
             console.log(response)
             console.log('Token:', token);
             localStorage.setItem('token', response.data.token);
+            setIsLoggedIn(true);
             navigate('/dashboard');  // Navigate to dashboard
             console.log('Logged in successfully');
         } catch (error) {
