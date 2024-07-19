@@ -1,0 +1,116 @@
+/* ChatbotPage.css */
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f3e5f5; /* Light purple background */
+    margin: 0;
+    padding: 0;
+    color: #4a148c; /* Dark purple text */
+}
+
+.chatbotContainer {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 25%;
+    background-color: #6a1b9a; /* Purple sidebar */
+    color: white;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    border-bottom: 2px solid #4a148c; /* Dark purple underline */
+    padding-bottom: 10px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #8e24aa; /* Lighter purple for list items */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li:hover {
+    background-color: #ab47bc; /* Even lighter purple on hover */
+}
+
+.chatArea {
+    width: 75%;
+    padding: 20px;
+    background-color: #f3e5f5; /* Matching light purple background */
+}
+
+.chatArea h2 {
+    margin-top: 0;
+    border-bottom: 2px solid #4a148c; /* Dark purple underline */
+    padding-bottom: 10px;
+}
+
+.messageContainer {
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #e1bee7; /* Very light purple background for messages */
+    border: 1px solid #ce93d8;
+    border-radius: 10px;
+}
+
+.message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.message.user {
+    background-color: #ba68c8; /* User message background */
+    color: white;
+    align-self: flex-start;
+}
+
+.message.assistant {
+    background-color: #9575cd; /* Assistant message background */
+    color: white;
+    align-self: flex-end;
+}
+
+.inputContainer {
+    display: flex;
+    margin-top: 20px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ce93d8;
+    border-radius: 10px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #8e24aa; /* Purple button */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ab47bc; /* Lighter purple on hover */
+}
