@@ -57,7 +57,7 @@ header a {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    margin-right: 50px;
+    margin-right: 90px;
 }
 
 .login {
@@ -102,4 +102,10 @@ header a {
 .register:hover {
     background: #6303FF;
     color: #fff;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 7px;
 }

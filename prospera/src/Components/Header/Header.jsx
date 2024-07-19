@@ -13,7 +13,9 @@ const Header = () => {
                     <>
                         <div className='headerLeft'>
                             <div>
-                                <a href='/' className='logo'>LOGO</a>
+                                <a href='/' className='logo'>
+                                    <img src='https://i.postimg.cc/ZKfHB4mb/Screenshot-2024-07-18-at-10-21-48-PM.png'></img>
+                                </a>
                             </div>
                             
 
