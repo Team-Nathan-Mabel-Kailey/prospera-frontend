@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
-import axios from "axios";
+// import axios from "axios";
 import LandingPage from './Components/LandingPage/LandingPage';
 import Header from './Components/Header/Header';
 import LoginPage from './Components/LoginPage/LoginPage'
@@ -11,7 +11,7 @@ import NewsFeed from './Components/NewsFeed/NewsFeed'
 import ForgotPasswordPage from './Components/ForgotPasswordPage/ForgotPasswordPage'
 import Footer from './Components/Footer/Footer'
 import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
-import {ScrollContainer} from 'react-scroll-motion';
+// import {ScrollContainer} from 'react-scroll-motion';
 import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
 import { AuthProvider } from './Components/AuthContext/AuthContext';
 

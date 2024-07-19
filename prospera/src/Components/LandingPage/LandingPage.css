@@ -8,6 +8,11 @@
     align-items: center;
 
     height: 100vh;
+
+    --img-scale: 1.001;
+    --title-color: #000;
+    --link-icon-translate: -20px;
+    --link-icon-opacity: 0;
 }
 
 .landingTexts{
