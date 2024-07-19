@@ -12,6 +12,7 @@ import ForgotPasswordPage from './Components/ForgotPasswordPage/ForgotPasswordPa
 import Footer from './Components/Footer/Footer'
 import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
 import {ScrollContainer} from 'react-scroll-motion';
+import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
 import { AuthProvider } from './Components/AuthContext/AuthContext';
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/news" element={<NewsFeed />} />
                 <Route path="/news/:articleId" element={<NewsCardDetail />} />
+                <Route path="/chat" element={<ChatbotPage />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
               </Routes>
             </Router>
