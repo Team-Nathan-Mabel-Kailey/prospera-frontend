@@ -8,6 +8,11 @@
     align-items: center;
 
     height: 100vh;
+
+    --img-scale: 1.001;
+    --title-color: #000;
+    --link-icon-translate: -20px;
+    --link-icon-opacity: 0;
 }
 
 .landingTexts{
@@ -54,4 +59,72 @@
     align-items: center;
 
     margin-bottom: 100px;
+}
+
+.landingCardContainer {
+    position: relative;
+    border-radius: 7px;
+    box-shadow: none;
+    background: #fff;
+    transform-origin: center;
+    transition: all 0.4s ease-in-out;
+    overflow: hidden;
+    color: #000;
+
+    margin-top: 200px;
+}
+
+.landingCardContainer img {
+    max-width: 100%;
+    transform-origin: center;
+    transform: scale(var(--img-scale));
+    transition: transform 0.4s ease-in-out;
+}
+
+.landingCardContainer h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    padding: 16px;
+    color: var(--title-color);
+}
+
+.landingCardContainer a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #28666e;
+}
+
+.landingCardContainer a .icon {
+    min-width: 24px;
+    width: 24px;
+    height: 24px;
+    margin-left: 5px;
+    transform: translateX(var(--link-icon-translate));
+    opacity: var(--link-icon-opacity);
+    transition: all 0.3s;
+}
+
+.landingCardContainer a::after {
+    position: absolute;
+    inset-block: 0;
+    inset-inline: 0;
+    cursor: pointer;
+    content: "";
+}
+
+.landingCardContainer:has(:hover, :focus) {
+    --img-scale: 1.1;
+    --title-color: #28666e;
+    --link-icon-translate: 0;
+    --link-icon-opacity: 1;
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
+    box-shadow: 10px 10px 60px #bebebe,
+    -10px -10px 60px #ffffff;
+}
+
+.landingCards {
+    display: flex;
+    gap: 40px;
 }
