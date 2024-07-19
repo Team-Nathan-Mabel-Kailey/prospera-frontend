@@ -13,11 +13,13 @@ import Footer from './Components/Footer/Footer'
 import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
 import {ScrollContainer} from 'react-scroll-motion';
 import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
+import { AuthProvider } from './Components/AuthContext/AuthContext';
 
 function App() {
 
   return (
     <>
+        <AuthProvider>
             <Header />
             
             <Router>
@@ -37,6 +39,7 @@ function App() {
             </Router>
 
             <Footer />
+        </AuthProvider>
     </>
   )
 }
