@@ -40,7 +40,6 @@ const LandingPage = ({ scrollTo }) => {
                                 <img src="https://placehold.jp/400x200.png" alt="" />
                             </figure>
                         <h3>Placeholder</h3>
-
                         {/* <Link to={`/news/${author}`} state={{title, content, createdAt, image}} className="read-more">Read more */}
                         <Link to={"/"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
@@ -48,13 +47,11 @@ const LandingPage = ({ scrollTo }) => {
                             </svg>
                         </Link>
                     </div>
-
                     <div className='landingCardContainer'>
                             <figure>
                                 <img src="https://placehold.jp/400x200.png" alt="" />
                             </figure>
                         <h3>Placeholder</h3>
-
                         {/* <Link to={`/news/${author}`} state={{title, content, createdAt, image}} className="read-more">Read more */}
                         <Link to={"/"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
@@ -62,13 +59,11 @@ const LandingPage = ({ scrollTo }) => {
                             </svg>
                         </Link>
                     </div>
-
                     <div className='landingCardContainer'>
                             <figure>
                                 <img src="https://placehold.jp/400x200.png" alt="" />
                             </figure>
                         <h3>Placeholder</h3>
-
                         {/* <Link to={`/news/${author}`} state={{title, content, createdAt, image}} className="read-more">Read more */}
                         <Link to={"/"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">

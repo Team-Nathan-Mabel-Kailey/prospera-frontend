@@ -2,26 +2,14 @@
 // import { useAuth } from '../AuthContext/AuthContext';
 
 // const Header = () => {
-//     // const { isLoggedIn, setIsLoggedIn } = useAuth();
-//     const { isLoggedIn} = useAuth();
+//     const { isLoggedIn, setIsLoggedIn } = useAuth();
 
 
 //     return (
 //         <div>
 //             <header>
 
-//                 {isLoggedIn ? (
-//                     <>
-//                         <nav className='headerLeft'>
-//                                 <a href='/' className='logo'>
-//                                     <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png'></img>
-//                                 </a>
-//                             <a href="/dashboard">DASHBOARD</a>
-//                             <a href="/news">NEWS</a>
-//                             <a href='/chat'>CHATBOT</a>
-//                         </nav>
-//                     </>
-//                 ) : (
+//                 {!isLoggedIn ? (
 //                     <>
 //                         <div className='headerLeft'>
 //                             <div>
@@ -43,7 +31,13 @@
 //                         </div>
 
 //                     </>
-                    
+//                 ) : (
+//                     <>
+//                         <nav className='headerLeft'>
+//                             <a href="/dashboard">DASHBOARD</a>
+//                             <a href="/news">NEWS</a>
+//                         </nav>
+//                     </>
 //                 )}
 //             </header>
 //         </div>
@@ -56,10 +50,8 @@
 import './Header.css';
 import { useAuth } from '../AuthContext/AuthContext';
 import { Link } from 'react-router-dom';
-
 const Header = () => {
     const { isLoggedIn } = useAuth();
-
     return (
         <div>
             <header>
@@ -92,10 +84,9 @@ const Header = () => {
                             <Link to='/register'><button className="register">REGISTER</button></Link>
                         </div>
                     </>
-                )}
+                )} 
             </header>
         </div>
     );
 }
-
 export default Header;

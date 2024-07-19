@@ -41,14 +41,17 @@ const LoginPage = () => {
                         <p>Sign in to continue with us</p>
                     </div>
 
-                    <label>Username</label>
+                    <label>Username
+                    </label>
                     <input
+                    id='usernameLogin'
                         type='textarea'
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-
-                    <label>Password</label>
+                    
+                    <label>Password
+                    </label>
                     <input
                         type={
                             showPassword ? 'text' : 'password'
@@ -56,6 +59,7 @@ const LoginPage = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    
 
                     <div className='showPasswordArea'>
                         <input
