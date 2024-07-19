@@ -5,6 +5,7 @@ const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
 
     return (
         <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
@@ -24,4 +25,5 @@ export const useAuth = () => {
 
 AuthProvider.propTypes = {
     children: PropTypes.string.isRequired,
+
 };
