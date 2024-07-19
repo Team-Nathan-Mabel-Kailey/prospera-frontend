@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from 'react'
+import PropTypes from 'prop-types';
 
 const AuthContext = createContext(null);
 
@@ -19,4 +20,8 @@ export const useAuth = () => {
         throw new Error('useAuth must be used within an AuthProvider');
     }
     return context;
+};
+
+AuthProvider.propTypes = {
+    children: PropTypes.string.isRequired,
 };
