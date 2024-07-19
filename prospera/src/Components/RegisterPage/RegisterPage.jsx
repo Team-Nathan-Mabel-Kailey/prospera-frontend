@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import PasswordChecklist from "react-password-checklist";
 import './RegisterPage.css';
@@ -17,7 +17,8 @@ const Register = () => {
   const navigate = useNavigate();
 
   //handle register
-  const handleRegister = async () => {
+  const handleRegister = async (evt) => {
+    evt.preventDefault();
     try {
       //register the user
       const response = await axios.post(
@@ -27,9 +28,9 @@ const Register = () => {
       //login the user
       const loginResponse = await axios.post(
         'http://localhost:3000/users/login',
-        { username, email, password, securityAnswer }
+        { username, password }
       );
-
+        console.log(response);
       // Store the token in the localstorage as token
       localStorage.setItem('token', loginResponse.data.token);
       navigate('/dashboard');
@@ -83,7 +84,7 @@ const Register = () => {
                           setShowPassword1((prev) => !prev)
                       }
                   />
-                  <label for='check'>Show Password</label>
+                  <label htmlFor='check'>Show Password</label>
               </div>
 
               <label>Retype Password</label>
@@ -104,7 +105,7 @@ const Register = () => {
                           setShowPassword2((prev) => !prev)
                       }
                   />
-                  <label for='check'>Show Password</label>
+                  <label htmlFor='check'>Show Password</label>
               </div>
 
               <PasswordChecklist
@@ -142,7 +143,7 @@ const Register = () => {
                           setShowSecurityAnswer((prev) => !prev)
                       }
                   />
-                  <label for='check'>Show Answer</label>
+                  <label htmlFor='check'>Show Answer</label>
               </div>
 
               
