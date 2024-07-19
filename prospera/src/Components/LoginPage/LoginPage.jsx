@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
-// import axios from 'axios';
+import { useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
+import { useAuth } from '../AuthContext/AuthContext';
 
 const LoginPage = () => {
+    const { setIsLoggedIn } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-
-    const handleLogin = async () => {
+    
+    const handleLogin = async (evt) => {
+        evt.preventDefault();
         try {
+            console.log('Logging in...');
             const response = await axios.post('http://localhost:3000/users/login', {
                 username,
                 password
             });
+            const { token } = response.data;
             // Store token in localStorage
+            console.log(response)
+            console.log('Token:', token);
             localStorage.setItem('token', response.data.token);
+            setIsLoggedIn(true);
             navigate('/dashboard');  // Navigate to dashboard
+            console.log('Logged in successfully');
         } catch (error) {
             console.error('Error logging in:', error);
         }
@@ -32,20 +41,26 @@ const LoginPage = () => {
                         <p>Sign in to continue with us</p>
                     </div>
 
-                    <label>Username</label>
+                    <label>Username
                     <input
+                    id='usernameLogin'
                         type='text'
                         onChange={(e) => setUsername(e.target.value)}
                         required
                     />
-                    <label>Password</label>
+                    </label>
+                    
+                    <label>Password
                     <input
+                    id='passwordLogin'
                         type={
                             showPassword ? 'text' : 'password'
                         }
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
+                    </label>
+                    
 
                     <div className='showPasswordArea'>
                         <input

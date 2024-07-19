@@ -21,6 +21,7 @@ header {
 .headerLeft {
     display: flex;
     justify-content: flex-start;
+    align-items: center;
 }
 
 .headerLeft nav {
@@ -33,16 +34,14 @@ header {
 header a {
     margin: 0 10px;
     color: #000;
-    font-size: 1rem;
     text-decoration: none;
     transition: all 0.4s ease;
 }
 
 /* Buttons */
 .auth-buttons button{
-    padding: 15px 30px;
+    padding: 10px;
 
-    font-size: 1rem;
     cursor: pointer;
     border-radius: 10px;
     transition: all 0.4s ease;
@@ -51,7 +50,7 @@ header a {
     position: relative;
     overflow:hidden ;
     
-    width: 150px;
+    width: 120%;
     margin: 0 10px;
 }
 
@@ -59,7 +58,7 @@ header a {
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    padding-right: 33px;
+    margin-right: 90px;
 }
 
 .login {
@@ -104,4 +103,10 @@ header a {
 .register:hover {
     background: #6303FF;
     color: #fff;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 35px;
 }

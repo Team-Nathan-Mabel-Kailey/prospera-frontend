@@ -5,12 +5,11 @@ import NewsCard from './NewsCard'
 
 const NewsFeed = () => {
     const [newsArticles, setNewsArticles] = useState([]);
-    const [selectedArticle, setSelectedArticle] = useState(null);
     const [page, setPage] = useState(1);
 
     const apiKey = import.meta.env.VITE_API_KEY;
     let baseURL = `https://newsapi.org/v2`
-    let daMov = selectedArticle;
+
 
     useEffect(() => {
         //Fetch news articles
@@ -22,7 +21,6 @@ const NewsFeed = () => {
             const data = await response.json();
 
             console.log(data);
-            console.log("hello");
 
             if(data.articles && data.articles.length > 0) {
                 const limitedArticles = data.articles.slice(0, 6);
@@ -50,7 +48,7 @@ const NewsFeed = () => {
             <h1>News Feed</h1>
             <h3>Header 2</h3>
 
-            <div className='newsCatergories'>
+            <div className='newsCategories'>
                 <a>Category 1</a>
                 <a>Category 2</a>
                 <a>Category 3</a>
@@ -65,7 +63,10 @@ const NewsFeed = () => {
                         article={article}
                         title={article.title}
                         image={article.urlToImage}
-                        onClick={() => setSelectedArticle(article)} 
+                        author={article.author}
+                        content={article.content}
+                        createdAt={article.publishedAt}
+                        url={article.url}
                     />
                 ))}
             </div>
