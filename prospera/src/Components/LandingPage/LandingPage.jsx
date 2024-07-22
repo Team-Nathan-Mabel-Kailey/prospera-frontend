@@ -1,11 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import './LandingPage.css'
 import AboutPage from '../AboutPage/AboutPage'
 import ContactPage from '../ContactPage/ContactPage'
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
+function useParallax(value, distance) {
+    return useTransform(value, [0, 1], [-distance, distance]);
+  }
+  
+  function ParallaxText({ id, children }) {
+    const ref = useRef(null);
+    const { scrollYProgress } = useScroll({ target: ref });
+    const y = useParallax(scrollYProgress, 100);
+  
+    return (
+      <motion.div ref={ref} style={{ y }}>
+        <h3>{children}</h3>
+      </motion.div>
+    );
+  }
+  
 
 const LandingPage = ({ scrollTo }) => {
     // Add prop validation for 'scrollTo'
@@ -39,7 +56,7 @@ const LandingPage = ({ scrollTo }) => {
                             <figure>
                                 <img src="https://placehold.jp/400x200.png" alt="" />
                             </figure>
-                        <h3>Placeholder</h3>
+                            <ParallaxText id="landing-card-title">Placeholder</ParallaxText>
                         {/* <Link to={`/news/${author}`} state={{title, content, createdAt, image}} className="read-more">Read more */}
                         <Link to={"/"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
