@@ -14,21 +14,21 @@ import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
 // import {ScrollContainer} from 'react-scroll-motion';
 import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
 import { AuthProvider } from './Components/AuthContext/AuthContext';
+import LogOut from './Components/LogOut/LogOut';
 
 function App() {
 
   return (
     <>
+      <Router>
         <AuthProvider>
-            
-            <Router>
             <Header />
-
               <Routes>
                 <Route path="/" element={<LandingPage/>}/>
                 <Route path="/about" element={<LandingPage scrollTo="aboutPage" />} />
                 <Route path="/contact" element={<LandingPage scrollTo="contactPage" />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/logout" element={<LogOut />} />
                 <Route path="/forgot" element={<ForgotPasswordPage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/dashboard" element={<Dashboard />} />
@@ -37,10 +37,9 @@ function App() {
                 <Route path="/chat" element={<ChatbotPage />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
               </Routes>
-            </Router>
-
-            <Footer />
-        </AuthProvider>
+            </AuthProvider>
+      </Router>
+      <Footer />
     </>
   )
 }

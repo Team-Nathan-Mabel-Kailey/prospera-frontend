@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
 
 const LoginPage = () => {
-    const { setIsLoggedIn } = useAuth();
+    const { setIsLoggedIn, isLoggedIn } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/dashboard'); // Redirect to dashboard or another page
+        }
+    }, [isLoggedIn, navigate]);
     
     const handleLogin = async (evt) => {
         evt.preventDefault();
