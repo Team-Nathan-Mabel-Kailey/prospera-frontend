@@ -13,7 +13,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/dashboard'); // Redirect to dashboard or another page
+            navigate('/'); 
         }
     }, [isLoggedIn, navigate]);
     
@@ -31,7 +31,7 @@ const LoginPage = () => {
             console.log('Token:', token);
             localStorage.setItem('token', response.data.token);
             setIsLoggedIn(true);
-            navigate('/dashboard');  // Navigate to dashboard
+            navigate('/dashboard');  
             console.log('Logged in successfully');
         } catch (error) {
             console.error('Error logging in:', error);
