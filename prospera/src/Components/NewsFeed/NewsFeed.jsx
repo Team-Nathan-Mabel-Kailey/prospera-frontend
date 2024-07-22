@@ -12,20 +12,45 @@ const categories = [
 const NewsFeed = () => {
     const [newsArticles, setNewsArticles] = useState([]);
     const [page, setPage] = useState(1);
-    const [selectedCategory, setSelectedCategory] = useState(categories[0].query);
+    const [selectedCategory, setSelectedCategory] = useState(categories[0].query) || 'stock-news';
     const [loading, setLoading] = useState(false);
-
-    const apiKey = import.meta.env.VITE_API_KEY;
-    let baseURL = `https://newsapi.org/v2`;
+    // const [response, setResponse] = useState(null);
+    // const [data, setData] = useState(null);
 
     useEffect(() => {
         const fetchNewsArticles = async () => {
             setLoading(true);
-            let url = `${baseURL}/everything?q=${selectedCategory}&apiKey=${apiKey}&page=${page}`;
 
             try {
-                const response = await fetch(url);
+
+                let url, options;
+                let apiKey;
+
+                if (selectedCategory === 'stock-news') {
+                    apiKey = import.meta.env.VITE_RAPIDAPI_KEY;
+
+                    url = 'https://real-time-finance-data.p.rapidapi.com/market-trends?trend_type=MARKET_INDEXES&country=us&language=en';
+                    options = {
+                        method: 'GET',
+                        headers: {
+                            'x-rapidapi-key': apiKey,
+                            'x-rapidapi-host': 'real-time-finance-data.p.rapidapi.com',
+                        }
+                    };
+                    
+                } else {
+                    apiKey = import.meta.env.VITE_API_KEY;
+                    let baseURL = `https://newsapi.org/v2`;
+                    url = `${baseURL}/everything?q=${selectedCategory}&apiKey=${apiKey}&page=${page}`;
+
+                    options = {
+                        method: 'GET',
+                    };
+                }
+
+                const response = await fetch(url, options);
                 const data = await response.json();
+                console.log('API Response:', data);
 
                 if (data.articles && data.articles.length > 0) {
                     const filteredArticles = data.articles.filter(article => 
@@ -47,7 +72,7 @@ const NewsFeed = () => {
         };
 
         fetchNewsArticles();
-    }, [page, apiKey, baseURL, selectedCategory]);
+    }, [page, selectedCategory]);
 
     const loadMoreFunction = () => {
         setPage(page => page + 1);
