@@ -34,6 +34,7 @@ function App() {
                 <Route path="/chat" element={<ChatbotPage />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
               </Routes>
+              <div className='footerSpace'></div>
             <Footer  className="footer"/>
         </AuthProvider>
       </Router>
