@@ -1,4 +1,3 @@
-// import { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
 // import axios from "axios";
@@ -19,14 +18,12 @@ import LogOut from './Components/LogOut/LogOut';
 function App() {
 
   return (
-    <>
+    <div className='app'>
       <Router>
         <AuthProvider>
             <Header />
               <Routes>
-                <Route path="/" element={<LandingPage/>}/>
-                <Route path="/about" element={<LandingPage scrollTo="aboutPage" />} />
-                <Route path="/contact" element={<LandingPage scrollTo="contactPage" />} />
+                <Route path="/:section?" element={<LandingPage/>}/>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/logout" element={<LogOut />} />
                 <Route path="/forgot" element={<ForgotPasswordPage />} />
@@ -37,10 +34,10 @@ function App() {
                 <Route path="/chat" element={<ChatbotPage />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
               </Routes>
-            </AuthProvider>
+            <Footer  className="footer"/>
+        </AuthProvider>
       </Router>
-      <Footer />
-    </>
+    </div>
   )
 }
 

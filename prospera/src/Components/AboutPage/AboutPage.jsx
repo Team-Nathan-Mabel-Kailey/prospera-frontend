@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const AboutPage = () => {
     return (
-        <>
+        <div id="aboutPage">
             <div className='aboutBody'>
                 <div className='leftAboutBody'>
                     <h1>The Path to <br /><em>Prospera</em></h1>
@@ -16,7 +16,7 @@ const AboutPage = () => {
                     </Link>
                 </div>
             </div>
-
+            
             <div className='teamAbout'>
                     <div className='team'>
                         <h2>Meet MKN-force!</h2>
@@ -51,7 +51,7 @@ const AboutPage = () => {
                         </div>
                     </div>
                 </div>
-        </>
+        </div>
     )
 }
 

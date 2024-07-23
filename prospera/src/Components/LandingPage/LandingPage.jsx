@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams} from "react-router-dom";
 import './LandingPage.css'
 import AboutPage from '../AboutPage/AboutPage'
 import ContactPage from '../ContactPage/ContactPage'
@@ -7,24 +7,35 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 
 
-const LandingPage = ({ scrollTo }) => {
-    // Add prop validation for 'scrollTo'
+const LandingPage = () => {
     LandingPage.propTypes = {
         scrollTo: PropTypes.string
     };
+
+    const params = useParams()
+    const section = params.section;
     const location = useLocation();
+
     useEffect(() => {
-        if (scrollTo) {
-            const element = document.getElementById(scrollTo);
+        if (section) {
+            const element = document.getElementById(section+'Page');
             if (element) {
                 element.scrollIntoView({ behavior: "smooth" });
             }
+        } else {
+            const element = document.getElementById("tempHeader");
+            if(element) {
+                element.scrollIntoView({ behavior: "smooth" });
+            }
+            
         }
-    }, [scrollTo, location]);
+    }, [section, location]);
 
     return (
         <>
-            <div className="landingPageContent">
+            <div className='headerSpace' id='tempHeader'></div>
+            <div id="landingPageContent" className="landingPageContent">
+
                 <img className='landingImg' src="https://images.unsplash.com/photo-1517768692594-b4295586b7d6?q=80&w=3576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Landing Page" />
                 
                 <div className='landingTexts'>
@@ -40,7 +51,6 @@ const LandingPage = ({ scrollTo }) => {
                                 <img src="https://placehold.jp/400x200.png" alt="" />
                             </figure>
                         <h3>Placeholder</h3>
-                        {/* <Link to={`/news/${author}`} state={{title, content, createdAt, image}} className="read-more">Read more */}
                         <Link to={"/"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -52,7 +62,6 @@ const LandingPage = ({ scrollTo }) => {
                                 <img src="https://placehold.jp/400x200.png" alt="" />
                             </figure>
                         <h3>Placeholder</h3>
-                        {/* <Link to={`/news/${author}`} state={{title, content, createdAt, image}} className="read-more">Read more */}
                         <Link to={"/"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -64,7 +73,6 @@ const LandingPage = ({ scrollTo }) => {
                                 <img src="https://placehold.jp/400x200.png" alt="" />
                             </figure>
                         <h3>Placeholder</h3>
-                        {/* <Link to={`/news/${author}`} state={{title, content, createdAt, image}} className="read-more">Read more */}
                         <Link to={"/"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -74,11 +82,11 @@ const LandingPage = ({ scrollTo }) => {
                 </div>
             </div>
 
-            <div id="aboutPage" style={{ height: "100vh", paddingTop: "90px"}}>
+            <div id="aboutPage" style={{position: "relative"}}>
                 <AboutPage />
             </div>
 
-            <div id="contactPage" style={{ height: "100vh", paddingTop: "50px"}}>
+            <div id="contactPage" style={{position: "relative"}}>
                 <ContactPage />
             </div>
         </>
