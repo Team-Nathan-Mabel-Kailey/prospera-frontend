@@ -1,14 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
 import './Dashboard.css'
+import AddWidgetModal from '../AddWidgetModal/AddWidgetModal';
+import ViewWidgetModal from '../ViewWidgetModal/ViewWidgetModal';
+import EditWidgetModal from '../EditWidgetModal/EditWidgetModal';
+import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
 
 // Makes layout responsive
 const DashboardLayout = WidthProvider(Responsive);
 
+const getUserIdFromToken = (token) => {
+  try {
+    const decoded = jwtDecode(token);
+    return decoded.userId;
+  } catch (error) {
+    console.error('Error decoding token:', error);
+    return null;
+  }
+};
+
 const Dashboard = () => {
-  // Layouts for every screen size, makes dashboard responsive
   const [layouts, setLayouts] = useState({ 
     lg: [],
     md: [],
@@ -17,19 +31,61 @@ const Dashboard = () => {
     xxs: []
   });
 
-  // Widgets for testing purposes
-  const [widgetArray, setWidgetArray] = useState([
-    { i: "Widget 1", x: 0, y: 0, w: 2, h: 2, color: "#FFB6C1" },
-    { i: "Widget 2", x: 2, y: 2, w: 2, h: 2, color: "#ADD8E6" },
-    { i: "Widget 3", x: 4, y: 4, w: 2, h: 2, color: "#90EE90" },
-  ]);
+  const [widgetArray, setWidgetArray] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [viewModalOpen, setViewModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedWidget, setSelectedWidget] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [existingWidgets, setExistingWidgets] = useState([]);
 
-  // Used to handle widget modifications (position/size) and updating layouts
-  // Layouts and allLayouts passed in as arguments by react-grid-layout
-  const handleModify = (layout, allLayouts) => {
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const userIdFromToken = getUserIdFromToken(token);
+      setUserId(userIdFromToken);
+    
+      const fetchUserData = async () => {
+        try {
+          const userDataResponse = await axios.get(`http://localhost:3000/users/${userIdFromToken}`);
+          const userData = userDataResponse.data;
+          // console.log(userData);
+          setExistingWidgets(userData.Widgets);
+          setWidgetArray(userData.Widgets);
+          
+          const initialLayouts = userData.Widgets.reduce((acc, widget) => {
+            const layout = { i: widget.widgetId.toString(), x: widget.x, y: widget.y, w: widget.w, h: widget.h };
+            acc.lg.push(layout);
+            acc.md.push(layout);
+            acc.sm.push(layout);
+            acc.xs.push(layout);
+            acc.xxs.push(layout);
+            return acc;
+          }, { lg: [], md: [], sm: [], xs: [], xxs: [] });
+
+          setLayouts(initialLayouts);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+
+      fetchUserData();
+    }
+  }, []);
+
+  const handleModify = async (layout, allLayouts) => {
     const updatedWidgets = widgetArray.map((widget) => {
-      const updatedWidget = layout.find((obj) => obj.i === widget.i);
+      const updatedWidget = layout.find((obj) => obj.i === widget.widgetId.toString());
       if (updatedWidget) {
+        // Update the widget position and size in the database
+        axios.put('http://localhost:3000/users/widget/layout', {
+          widgetId: widget.widgetId,
+          x: updatedWidget.x,
+          y: updatedWidget.y,
+          w: updatedWidget.w,
+          h: updatedWidget.h
+        });
+
         return {
           ...widget,
           x: updatedWidget.x,
@@ -45,33 +101,20 @@ const Dashboard = () => {
     setWidgetArray(updatedWidgets);
   };
 
-  // Used to handle adding widgets and updating layouts
-  const handleAdd = () => {
-    const colors = ["#FFB6C1", "#ADD8E6", "#90EE90", "#FFD700", "#FFA07A"];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    const newWidget = {
-      i: `Widget ${widgetArray.length + 1}`,
-      x: 0,
-      y: 0,
-      w: 2,
-      h: 2,
-      color: randomColor,
-    };
-
+  const handleAddWidget = (newWidget) => {
     setWidgetArray([...widgetArray, newWidget]);
     setLayouts((prevLayouts) => ({
       ...prevLayouts,
-      lg: [...prevLayouts.lg, newWidget],
-      md: [...prevLayouts.md, newWidget],
-      sm: [...prevLayouts.sm, newWidget],
-      xs: [...prevLayouts.xs, newWidget],
-      xxs: [...prevLayouts.xxs, newWidget],
+      lg: [...prevLayouts.lg, { i: newWidget.widgetId.toString(), x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
+      md: [...prevLayouts.md, { i: newWidget.widgetId.toString(), x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
+      sm: [...prevLayouts.sm, { i: newWidget.widgetId.toString(), x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
+      xs: [...prevLayouts.xs, { i: newWidget.widgetId.toString(), x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
+      xxs: [...prevLayouts.xxs, { i: newWidget.widgetId.toString(), x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
     }));
   };
 
-  // Used to handle deleting widgets and updating layouts
-  const handleDelete = (key) => {
-    const updatedWidgets = widgetArray.filter((widget) => widget.i !== key);
+  const handleDeleteWidget = (key) => {
+    const updatedWidgets = widgetArray.filter((widget) => widget.widgetId.toString() !== key);
     setWidgetArray(updatedWidgets);
     setLayouts((prevLayouts) => ({
       ...prevLayouts,
@@ -83,6 +126,20 @@ const Dashboard = () => {
     }));
   };
 
+  const handleAdd = () => {
+    setModalOpen(true);
+  };
+
+  const handleView = (widget) => {
+    setSelectedWidget(widget);
+    setViewModalOpen(true);
+  };
+
+  const handleEdit = (widget) => {
+    setSelectedWidget(widget);
+    setEditModalOpen(true);
+  };
+
   const stopPropagation = (evt) => {
     evt.stopPropagation();
   };
@@ -90,6 +147,23 @@ const Dashboard = () => {
   return (
     <div className='dashboardBody'>
       <button onClick={handleAdd}>Add Widget</button>
+      <AddWidgetModal 
+        isOpen={modalOpen} 
+        onClose={() => setModalOpen(false)} 
+        onAdd={handleAddWidget} 
+        existingWidgets={existingWidgets} 
+        userId={userId} 
+      />
+      <EditWidgetModal 
+        isOpen={editModalOpen} 
+        onClose={() => setEditModalOpen(false)} 
+        widget={selectedWidget} 
+      />
+      <ViewWidgetModal 
+        isOpen={viewModalOpen} 
+        onClose={() => setViewModalOpen(false)} 
+        widget={selectedWidget} 
+      />
 
       <DashboardLayout
         className='dash'
@@ -105,14 +179,14 @@ const Dashboard = () => {
         {widgetArray.map((widget) => (
           <div
             // Widget container
-            key={widget.i}
+            key={widget.widgetId.toString()}
             className="reactGridItem"
             data-grid={{
               x: widget.x,
               y: widget.y,
               w: widget.w,
               h: widget.h,
-              i: widget.i,
+              i: widget.widgetId.toString(),
             }}
             style={{ backgroundColor: widget.color }}
           >
@@ -122,14 +196,37 @@ const Dashboard = () => {
               onTouchStart={stopPropagation}
               className="deleteButton no-drag"
               onClick={() => {
-                handleDelete(widget.i);
+                handleDeleteWidget(widget.widgetId.toString());
               }}
             >
               x
             </button>
+
+            <button
+              onMouseDown={stopPropagation}
+              onTouchStart={stopPropagation}
+              className="viewButton no-drag"
+              onClick={() => {
+                handleView(widget);
+              }}
+            >
+              View
+            </button>
+          
+            <button
+              onMouseDown={stopPropagation}
+              onTouchStart={stopPropagation}
+              className="editButton no-drag"
+              onClick={() => {
+                handleEdit(widget);
+              }}
+            >
+              Edit
+            </button>
+
             <div // Widget content
             >
-            {widget.i}
+            {widget.type}
             </div>
           </div>
         ))}
