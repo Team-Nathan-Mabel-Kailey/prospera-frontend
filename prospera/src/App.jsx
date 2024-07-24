@@ -14,14 +14,24 @@ import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
 import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
 import { AuthProvider } from './Components/AuthContext/AuthContext';
 import LogOut from './Components/LogOut/LogOut';
+import { useState } from 'react';
+import HamMenu from './Components/HamMenu/HamMenu';
 
 function App() {
+  const [open, setOpen] = useState(false);
 
   return (
     <div className='app'>
       <Router>
         <AuthProvider>
-            <Header />
+            <Header 
+              open= {open}
+              setOpen={setOpen}
+            />
+            <HamMenu
+              open={open}
+            />
+            
               <Routes>
                 <Route path="/:section?" element={<LandingPage/>}/>
                 <Route path="/login" element={<LoginPage />} />

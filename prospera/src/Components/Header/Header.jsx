@@ -1,8 +1,13 @@
 import './Header.css';
 import { useAuth } from '../AuthContext/AuthContext';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Header = () => {
+const Header = ({open, setOpen}) => {
+    Header.propTypes = {
+        open: PropTypes.bool.isRequired,
+        setOpen: PropTypes.func.isRequired
+    };
     const { isLoggedIn } = useAuth();
     return (
         <div className='mainHeader'>
@@ -30,14 +35,21 @@ const Header = () => {
                                 <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
                             </Link>
                         </div>
-                        <nav>
+                        <div className='rightLinks'>
                             <Link to="/about" className="active">ABOUT</Link>
                             <Link to="/contact">CONTACT</Link>
-                        </nav>
+                        </div>
                     </div>
                     <div className="auth-buttons">
                         <Link to="/login"><button className="login">LOG IN</button></Link>
                         <Link to='/register'><button className="register">REGISTER</button></Link>
+                    </div>
+                    <div className='toggleHamburger'>
+                        <button className={`burger ${open ? 'burger-open' : 'burgerClose'}`} onClick={() => setOpen(!open)}>
+                            <div />
+                            <div />
+                            <div />
+                        </button>
                     </div>
                 </>
             )} 

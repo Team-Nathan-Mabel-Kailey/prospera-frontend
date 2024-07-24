@@ -7,12 +7,9 @@
     padding: 1rem 2rem;
 
     background-color: #fff;
-    width: 100%;
-    top: 0;
-    right: 0;
-    left:0;
+    width: 97%;
 
-    z-index: 1; 
+    z-index: 100; 
     overflow: hidden;
 
     margin-bottom: auto;
@@ -24,7 +21,7 @@
     align-items: center;
 }
 
-.headerLeft nav {
+.rightLinks  {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,7 +54,7 @@
 .auth-buttons{
     display: flex;
     justify-content: flex-end;
-    width: 100%;
+    width: 70%;
     margin-right: 90px;
 }
 
@@ -110,3 +107,97 @@
     height: 45px;
     border-radius: 25px;
 }
+
+
+
+/* Hamburger nav */
+.burgerClose {
+    display: none;
+}
+
+@media (max-width: 968px) {
+
+    .auth-buttons{
+        display: none;
+    }
+
+    .rightLinks {
+        display: none;
+    }
+
+    .toggleHamburger {
+        display: flex;
+        align-items: center;
+        /* margin-right: 20px; */
+    }
+
+    .toggleHamburger button:hover {
+        background-color: transparent;
+    }
+
+
+    .burger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        width: 2rem;
+        height: 2rem;
+
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        
+        padding: 0;
+        margin-right: 50px;
+        z-index: 1100; 
+    }
+
+
+
+    .burger:focus {
+        outline: none;
+    }
+
+    .burger div {
+        width: 2rem;
+        height: 0.25rem;
+        background: #000;
+        border-radius: 10px;
+        transition: all 0.3s linear;
+        transform-origin: 1px;
+        margin-right: 0px;
+    }
+
+    .burger-open div {
+        background: #0D0C1D;
+    }
+
+    .burger div:first-child {
+        transform: rotate(0);
+    }
+
+    .burger-open div:first-child {
+        transform: rotate(45deg);
+    }
+
+    .burger div:nth-child(2) {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .burger-open div:nth-child(2) {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    .burger div:nth-child(3) {
+        transform: rotate(0);
+    }
+
+    .burger-open div:nth-child(3) {
+        transform: rotate(-45deg);
+    }
+
+  }
