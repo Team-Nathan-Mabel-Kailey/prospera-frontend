@@ -44,3 +44,7 @@
 .submitBtn:hover, .skipBtn:hover {
     background-color: #0056b3;
 }
+
+.headerSpace {
+    height: 81px;
+}

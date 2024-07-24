@@ -214,3 +214,25 @@
     border-bottom: 0 !important;
     box-shadow: none !important;
 }
+
+.settingsIcon {
+    position: relative;
+    display: inline-block;
+}
+
+.settingsIcon img{
+    width: 35px;
+}
+
+.settingsIcon .hoverImg{
+    display: none;
+}
+
+.settingsIcon:hover .staticImg {
+    display: none;
+}
+
+.settingsIcon:hover .hoverImg{
+    display: block;
+}
+

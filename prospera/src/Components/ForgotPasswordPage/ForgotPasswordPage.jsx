@@ -32,6 +32,9 @@ const forgotPasswordPage = () => {
     };
 
     return (
+        <>
+        <div className='headerSpace' id='tempHeader'></div>
+        
         <div className='forgotBody'>
             <div className='forgotBox'>
                 <div className='forgotForm'>
@@ -149,6 +152,7 @@ const forgotPasswordPage = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 

@@ -38,6 +38,9 @@ const TopicSelectionPage = () => {
     };
 
     return (
+        <>
+        <div className='headerSpace' id='tempHeader'></div>
+        
         <div className="topicSelectionContainer">
             <h1>Select Topics of Interest</h1>
             <div className="topicsList">
@@ -56,6 +59,7 @@ const TopicSelectionPage = () => {
                 <button onClick={handleSkip} className="skipBtn">Skip</button>
             </div>
         </div>
+        </>
     );
 };
 

@@ -40,6 +40,9 @@ const LoginPage = () => {
     };
 
     return (
+        <>
+        <div className='headerSpace' id='tempHeader'></div>
+        
         <div className='loginBody'>
             <div className='loginBox'>
                 <form className='loginForm'>
@@ -93,6 +96,7 @@ const LoginPage = () => {
                 </div>
             </div>
         </div>
+        </>
     )
 }
 
