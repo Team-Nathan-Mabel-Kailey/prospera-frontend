@@ -145,6 +145,9 @@ const Dashboard = () => {
   };
 
   return (
+    <>
+      <div className='headerSpace' id='tempHeader'></div>
+    
     <div className='dashboardBody'>
       <button onClick={handleAdd}>Add Widget</button>
       <AddWidgetModal 
@@ -232,6 +235,7 @@ const Dashboard = () => {
         ))}
       </DashboardLayout>
     </div>
+    </>
   );
 };
 

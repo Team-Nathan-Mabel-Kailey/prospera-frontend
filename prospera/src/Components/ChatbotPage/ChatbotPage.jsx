@@ -85,6 +85,9 @@ const ChatbotPage = () => {
     };
 
     return (
+        <>
+        <div className='headerSpace' id='tempHeader'></div>
+        
         <div className="chatbotContainer">
             <div className="sidebar">
                 <h2>Chatbot</h2>
@@ -119,6 +122,7 @@ const ChatbotPage = () => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

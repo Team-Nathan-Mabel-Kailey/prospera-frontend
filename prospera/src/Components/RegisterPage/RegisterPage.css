@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     color: black;
-    margin: 1.88rem 0 0 0;
+    margin: 1rem 0 2rem 0;
 }
 
 .registerBox {
@@ -142,4 +142,8 @@
 
 .registerButton:disabled::after {
     transition: none;
+}
+
+.headerSpace {
+    height: 81px;
 }

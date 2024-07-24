@@ -40,6 +40,9 @@ const Register = () => {
   };
 
   return (
+    <>
+    <div className='headerSpace' id='tempHeader'></div>
+    
     <div className='registerBody'>
       <div className='registerBox'>
           <div className='imageArea'>
@@ -154,6 +157,7 @@ const Register = () => {
           
       </div>
     </div>
+    </>
   );
 };
 

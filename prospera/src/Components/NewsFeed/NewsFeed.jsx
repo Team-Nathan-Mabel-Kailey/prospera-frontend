@@ -227,6 +227,9 @@ const NewsFeed = () => {
     }, [page]);
 
     return (
+        <>
+        <div className='headerSpace' id='tempHeader'></div>
+        
         <div className="newsFeedContainer">
             <div className="newsCategories">
                 <button 
@@ -291,6 +294,7 @@ const NewsFeed = () => {
                 handleGoToTopics={handleGoToTopics} 
             />
         </div>
+        </>
     );
 };
 
