@@ -200,4 +200,14 @@
         transform: rotate(-45deg);
     }
 
-  }
+}
+
+.goog-te-combo {
+    border-radius:16px;
+}
+
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+    height: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+}

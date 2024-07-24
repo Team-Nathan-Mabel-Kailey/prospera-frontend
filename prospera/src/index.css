@@ -6,6 +6,7 @@ html, body {
   background-size: cover;
   scroll-behavior: smooth;
   position: relative;
+  top: 0px !important;
 }
 
 #root {

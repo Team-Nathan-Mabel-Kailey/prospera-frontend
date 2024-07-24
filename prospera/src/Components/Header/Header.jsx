@@ -52,6 +52,7 @@ const Header = ({open, setOpen}) => {
                         <Link to="/dashboard">DASHBOARD</Link>
                         <Link to="/news">NEWS</Link>
                         <Link to='/chat'>CHATBOT</Link>
+                        <div id="googleTranslateElement"></div>
                     </nav>
                     <div className="auth-buttons">
                         <Link to="/logout"><button className="login">LOG OUT</button></Link>
@@ -69,9 +70,7 @@ const Header = ({open, setOpen}) => {
                         <div className='rightLinks'>
                             <Link to="/about" className="active">ABOUT</Link>
                             <Link to="/contact">CONTACT</Link>
-                            <div id="googleTranslateElement">
-
-                            </div>
+                            <div id="googleTranslateElement"></div>
                         </div>
                     </div>
                     <div className="auth-buttons">
