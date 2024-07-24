@@ -1,17 +1,17 @@
+// App.jsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css'
-// import axios from "axios";
+import './App.css';
 import LandingPage from './Components/LandingPage/LandingPage';
 import Header from './Components/Header/Header';
-import LoginPage from './Components/LoginPage/LoginPage'
+import LoginPage from './Components/LoginPage/LoginPage';
 import Dashboard from './Components/Dashboard/Dashboard';
-import RegisterPage from './Components/RegisterPage/RegisterPage'
-import NewsFeed from './Components/NewsFeed/NewsFeed'
-import ForgotPasswordPage from './Components/ForgotPasswordPage/ForgotPasswordPage'
-import Footer from './Components/Footer/Footer'
+import RegisterPage from './Components/RegisterPage/RegisterPage';
+import NewsFeed from './Components/NewsFeed/NewsFeed';
+import ForgotPasswordPage from './Components/ForgotPasswordPage/ForgotPasswordPage';
+import Footer from './Components/Footer/Footer';
 import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
-// import {ScrollContainer} from 'react-scroll-motion';
 import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
+import TopicSelectionPage from './Components/TopicSelectionPage/TopicSelectionPage';
 import { AuthProvider } from './Components/AuthContext/AuthContext';
 import LogOut from './Components/LogOut/LogOut';
 import { useState } from 'react';
@@ -19,7 +19,7 @@ import HamMenu from './Components/HamMenu/HamMenu';
 
 function App() {
   const [open, setOpen] = useState(false);
-
+  
   return (
     <div className='app'>
       <Router>
@@ -49,7 +49,7 @@ function App() {
         </AuthProvider>
       </Router>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
