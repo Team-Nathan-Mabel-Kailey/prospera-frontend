@@ -1,32 +1,39 @@
-import { useState } from 'react';
+// LoginPage.jsx
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
 
 const LoginPage = () => {
-    const { setIsLoggedIn } = useAuth();
+    const { setIsLoggedIn, isLoggedIn } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/'); 
+        }
+    }, [isLoggedIn, navigate]);
+
     const handleLogin = async (evt) => {
         evt.preventDefault();
         try {
-            console.log('Logging in...');
             const response = await axios.post('http://localhost:3000/users/login', {
                 username,
                 password
             });
-            const { token } = response.data;
-            // Store token in localStorage
-            console.log(response)
-            console.log('Token:', token);
-            localStorage.setItem('token', response.data.token);
+            const { token, userId, hasCompletedTopics } = response.data;
+            localStorage.setItem('token', token);
+            localStorage.setItem('userId', userId);
             setIsLoggedIn(true);
-            navigate('/dashboard');  // Navigate to dashboard
-            console.log('Logged in successfully');
+            if (hasCompletedTopics) {
+                navigate('/dashboard');
+            } else {
+                navigate('/topic-selection');
+            }
         } catch (error) {
             console.error('Error logging in:', error);
         }

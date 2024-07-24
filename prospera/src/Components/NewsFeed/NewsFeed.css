@@ -11,6 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 100px;
 }
 
 .newsCategories{
@@ -127,3 +128,106 @@
     background-color: #6303FF;
 }
 
+.newsCategories {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.newsCategories button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    outline: none;
+    border: none;
+    background-color: #000;
+    color: #fff;
+}
+
+.newsCategories button.active {
+    background-color: #6303FF;
+    color: #fff;
+}
+
+.newsCategories button:hover {
+    background-color: #292929;
+}
+
+.searchForm {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.searchForm input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.searchForm button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: none;
+    background-color: #28666e;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.searchForm button:hover {
+    background-color: #1b4d5b;
+}
+
+.newsArticleCards {
+    display: grid;
+    max-width: 1200px;
+    margin: 30px 0;
+    margin-inline: auto;
+    padding-inline: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 50px;
+}
+
+.loadMoreButton {
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    width: 150px;
+    margin: 20px auto;
+    display: block;
+}
+
+.loadMoreButton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.loadMoreButton:hover::after {
+    transform: scale(4);
+}
+
+.loadMoreButton:hover {
+    border-color: #666666;
+    background: #292929;
+}

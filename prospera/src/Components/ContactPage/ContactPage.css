@@ -1,9 +1,14 @@
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.checkBody{
+    padding-top: 200px;
 }
 
+.checkBody h1 {
+    display: flex;
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+}
 .contactBody {
     display: flex;
     flex-wrap: wrap;
@@ -11,7 +16,11 @@ body {
     align-items: center;
     gap: 125px;
     color: white;
-    margin: 200px;
+    margin-bottom: 100px;
+}
+
+.contactIcon svg{
+    width: 60px;
 }
 
 .leftContactPageContent {
@@ -40,14 +49,31 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 35px 50px 25px 50px;
-    color: black;
-    background-color: rgb(161, 161, 241);
+    padding: 35px 50px 35px 50px;
+    color: #fff;
+
+    border-radius: 7px;
+
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .rightContactPageContent textarea {
     resize: vertical; 
     max-height: 250px;
+    padding: 10px;
+    border: 1px solid #ce93d8;
+    border-radius: 7px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.rightContactPageContent input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ce93d8;
+    border-radius: 7px;
+    margin-right: 10px;
+    font-size: 16px;
 }
 
 .contactForm {
@@ -106,4 +132,27 @@ body {
 .submitButton:hover {
     border-color: #666666;
     background: #292929;
+}
+
+@media (max-width: 968px) {
+    .contactBody {
+        flex-direction: column;
+        margin: 50px;
+    }
+
+    .leftContactPageContent {
+        gap: 10px;
+    }
+
+    .rightContactPageContent {
+        padding: 20px 30px 15px 30px;
+    }
+
+    .nameInputs {
+        flex-direction: column;
+    }
+
+    .submitButton {
+        width: 100%;
+    }
 }

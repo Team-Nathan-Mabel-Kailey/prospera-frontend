@@ -1,7 +1,10 @@
+#aboutPage {
+    padding-top: 20px;
+}
+
 .aboutBody{
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    /* margin-top: 15rem; */
     margin-left: 100px;
     margin-right: 100px;
 
@@ -96,13 +99,14 @@
     align-items: center;
     
     margin-top: 2rem;
-    margin-bottom: 19rem;
+    margin-bottom: 15
+    rem;
 
     color: #fff;
 }
 
 .teamAbout h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
 }
 
@@ -112,7 +116,6 @@
     justify-content: center;
     align-items: center;
 
-    /* margin-top: 2rem; */
     padding: 20px;
     border-radius: 7px;
 
@@ -124,12 +127,6 @@
     justify-content: space-evenly;
     align-items: center;
     margin-top: 1rem;
-}
-
-@media (max-width: 950px) {
-    .teamIcons {
-        flex-direction: column;
-    }
 }
 
 .teamMember {
@@ -153,12 +150,33 @@
 }
 
 .teamMember a img{
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
 }
 
 .teamSocials {
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+@media (max-width: 968px) {
+    .aboutBody {
+        flex-direction: column;
+        font-size: 1rem;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .leftAboutBody h1 {
+        font-size: 2.5rem;
+    }
+
+    .leftAboutBody h1 em {
+        font-size: 3rem;
+    }
+
+    .teamIcons {
+        flex-direction: column;
+    }
 }
