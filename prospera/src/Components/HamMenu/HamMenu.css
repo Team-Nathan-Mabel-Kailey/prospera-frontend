@@ -83,10 +83,10 @@
 }
 
 .register{
+    border: #fff 2px solid;
+    background-color: #fff;
     color: #000;
     text-decoration: none;
-    background-color: #fff;
-    border: none;
 }
 
 .login::after, 
@@ -116,6 +116,7 @@
 }
 
 .register:hover {
+    border-color: #8d47fe;
     background: #6303FF;
     color: #fff;
 }
