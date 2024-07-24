@@ -10,8 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
     "@fontsource/anek-telugu": "^5.0.13",
     "@fortawesome/fontawesome-free": "^6.5.2",
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -19,14 +19,19 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "@mui/icons-material": "^5.16.4",
+    "@mui/material": "^5.16.4",
     "axios": "^1.7.2",
     "gsap": "^3.12.5",
+    "jwt-decode": "^4.0.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-grid-layout": "^1.4.4",
+    "react-modal": "^3.16.1",
     "react-password-checklist": "^1.6.0",
     "react-router-dom": "^6.24.1",
-    "react-scroll-motion": "^0.3.3"
+    "react-scroll-motion": "^0.3.3",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
