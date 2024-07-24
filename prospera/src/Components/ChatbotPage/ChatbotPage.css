@@ -115,3 +115,7 @@ input[type="text"] {
 button:hover {
     background-color: #ab47bc; /* Lighter purple on hover */
 }
+
+.footerSpace{
+    height: 238.44px;
+}

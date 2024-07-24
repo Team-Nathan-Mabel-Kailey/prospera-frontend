@@ -14,6 +14,7 @@ import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
 // import {ScrollContainer} from 'react-scroll-motion';
 import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
 import { AuthProvider } from './Components/AuthContext/AuthContext';
+import TopicSelectionPage from './Components/TopicSelectionPage/TopicSelectionPage';
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/news" element={<NewsFeed />} />
                 <Route path="/news/:articleId" element={<NewsCardDetail />} />
                 <Route path="/chat" element={<ChatbotPage />} />
+                <Route path="/topic-selection" element={<TopicSelectionPage />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
               </Routes>
             </Router>
