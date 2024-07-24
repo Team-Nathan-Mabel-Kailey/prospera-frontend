@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import PasswordChecklist from "react-password-checklist";
 import './RegisterPage.css';
+import { useAuth } from '../AuthContext/AuthContext';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -15,6 +16,7 @@ const Register = () => {
   const [showSecurityAnswer, setShowSecurityAnswer] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
   const navigate = useNavigate();
+  const { setIsLoggedIn, isLoggedIn } = useAuth();
 
   //handle register
   const handleRegister = async (evt) => {
@@ -31,6 +33,7 @@ const Register = () => {
         { username, password }
       );
         console.log(response);
+        setIsLoggedIn(true);
       // Store the token in the localstorage as token
       localStorage.setItem('token', loginResponse.data.token);
       navigate('/dashboard');
