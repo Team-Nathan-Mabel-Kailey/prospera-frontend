@@ -14,27 +14,38 @@ import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
 import TopicSelectionPage from './Components/TopicSelectionPage/TopicSelectionPage';
 import { AuthProvider } from './Components/AuthContext/AuthContext';
 import LogOut from './Components/LogOut/LogOut';
+import { useState } from 'react';
+import HamMenu from './Components/HamMenu/HamMenu';
 
 function App() {
+  const [open, setOpen] = useState(false);
+  
   return (
     <div className='app'>
       <Router>
         <AuthProvider>
-          <Header />
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/logout" element={<LogOut />} />
-            <Route path="/forgot" element={<ForgotPasswordPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/news" element={<NewsFeed />} />
-            <Route path="/news/:articleId" element={<NewsCardDetail />} />
-            <Route path="/chat" element={<ChatbotPage />} />
-            <Route path="/topic-selection" element={<TopicSelectionPage />} />
-            <Route path="*" element={<h1>Not Found</h1>} />
-          </Routes>
-          <Footer className="footer" />
+            <Header 
+              open= {open}
+              setOpen={setOpen}
+            />
+            <HamMenu
+              open={open}
+            />
+            
+              <Routes>
+                <Route path="/:section?" element={<LandingPage/>}/>
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/logout" element={<LogOut />} />
+                <Route path="/forgot" element={<ForgotPasswordPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/news" element={<NewsFeed />} />
+                <Route path="/news/:articleId" element={<NewsCardDetail />} />
+                <Route path="/chat" element={<ChatbotPage />} />
+                <Route path="*" element={<h1>Not Found</h1>} />
+              </Routes>
+              <div className='footerSpace'></div>
+            <Footer  className="footer"/>
         </AuthProvider>
       </Router>
     </div>

@@ -28,7 +28,7 @@ const ContactPage = () => {
         setFormData({firstName: '', lastName: '', email: '', message: ''});
     };
 
-    console.log('All form submissions: ', formSubmissions);
+    // console.log('All form submissions: ', formSubmissions);
     
     return (
         <div className='checkBody'>
