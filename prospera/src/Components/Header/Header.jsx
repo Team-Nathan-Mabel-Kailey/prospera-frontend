@@ -2,6 +2,9 @@ import './Header.css';
 import { useAuth } from '../AuthContext/AuthContext';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
+
+let googleTranslateInitialized = false;
 
 const Header = ({open, setOpen}) => {
     Header.propTypes = {
@@ -9,6 +12,34 @@ const Header = ({open, setOpen}) => {
         setOpen: PropTypes.func.isRequired
     };
     const { isLoggedIn } = useAuth();
+
+    useEffect(() => {
+        //Makes sure the element is only showing up once
+        if (!googleTranslateInitialized) {
+            // Load the Google Translate script
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+            document.body.appendChild(script);
+        
+            // Define the callback function
+            window.googleTranslateElementInit = () => {
+                new window.google.translate.TranslateElement(
+                    { pageLanguage: 'en' },
+                    'googleTranslateElement'
+                );
+            };
+        
+        googleTranslateInitialized = true;
+
+        // Cleanup function
+        return () => {
+            document.body.removeChild(script);
+        };
+
+        }
+    }, []);
+
     return (
         <div className='mainHeader'>
             {isLoggedIn ? (
@@ -38,6 +69,9 @@ const Header = ({open, setOpen}) => {
                         <div className='rightLinks'>
                             <Link to="/about" className="active">ABOUT</Link>
                             <Link to="/contact">CONTACT</Link>
+                            <div id="googleTranslateElement">
+
+                            </div>
                         </div>
                     </div>
                     <div className="auth-buttons">
