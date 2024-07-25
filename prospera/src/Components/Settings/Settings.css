@@ -15,3 +15,13 @@
     flex-direction: column;
     align-items: center;
 }
+
+.settingsTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.settingsTop img {
+    width: 60px;
+}
