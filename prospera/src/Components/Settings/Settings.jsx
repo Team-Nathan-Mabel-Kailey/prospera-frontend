@@ -7,8 +7,8 @@ const Settings = () => {
     const [userId, setUserId] = useState(null);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [securityAnswer, setSecurityAnswer] = useState("");
 
 
     const getUserIdFromToken = (token) => {
@@ -21,6 +21,16 @@ const Settings = () => {
         }
     };
 
+    // const getUserSecurityAnswer = (hashedSecurityAnswer) => {
+    //     try {
+    //         const decoded = jwtDecode(hashedSecurityAnswer);
+    //         return decoded.securityAnswer;
+    //     } catch (error) {
+    //         console.error('Error decoding security answer:', error);
+    //         return null;
+    //     }
+    // }
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         console.log("token:", token);
@@ -28,25 +38,28 @@ const Settings = () => {
         if (token) {
             const userIdFromToken = getUserIdFromToken(token);
             setUserId(userIdFromToken);
-
+            
             console.log("userIdFromToken:", userIdFromToken);
-
+            
             const fetchUserData = async () => {
                 try {
                     const userDataResponse = await axios.get(`http://localhost:3000/users/${userIdFromToken}`);
                     const userData = userDataResponse.data;
-
+                    
                     setFirstName(userData.firstName);
                     setLastName(userData.lastName);
-                    setUsername(userData.username);
                     setEmail(userData.email);
-                    console.log("first name:", firstName, "last:", lastName, "username:", username);
-
+                    console.log("first name:", firstName, "last:", lastName, "email:", email);
+                    
+                    // const answer = getUserSecurityAnswer(userData.securityAnswer);
+                    // setSecurityAnswer(answer);
+                    // console.log("hashed security answer:", securityAnswer);
+                    
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                 }
             }
-    
+            
             fetchUserData();
         }
     }, []);
@@ -54,17 +67,34 @@ const Settings = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
-            const updatedUserData = { firstName, lastName, username };
+            try {
+                const updatedUserNames = { firstName, lastName };
+                await axios.put(`http://localhost:3000/api/settings/name/${userId}`, updatedUserNames);
+                // alert('User information updated successfully!');
 
-            await axios.put(`http://localhost:3000/users/${userId}`, updatedUserData);
+            } catch (error) {
+                console.error('Error updating user names:', error);
+                // alert('Failed to update user names.');
+            }
+            
+            try {
+                const updateUserEmail = {email, securityAnswer}; 
+                await axios.put(`http://localhost:3000/api/settings/email/${userId}`, updateUserEmail)
+                // alert('User email updated successfully!');
 
-            alert('User information updated successfully!');
+            } catch (error) {
+                console.error('Error updating user email:', error);
+                alert('Failed to update user email.');
+            }
+
         } catch (error) {
             console.error('Error updating user data:', error);
             alert('Failed to update user information.');
         }
+        
+        alert('User information updated successfully!');
+
     }
 
     return (
@@ -98,11 +128,19 @@ const Settings = () => {
                             />
                         </div>
                         <div>
-                            <label>Username</label>
+                            <label>Email</label>
                             <input
                                 type="text"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <label>Security password</label>
+                            <input
+                                type="text"
+                                value={securityAnswer}
+                                onChange={(e) => setSecurityAnswer(e.target.value)}
                             />
                         </div>
                         <button type="submit">Update</button>
