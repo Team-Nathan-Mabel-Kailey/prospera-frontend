@@ -1,4 +1,4 @@
-// App.jsx
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import LandingPage from './Components/LandingPage/LandingPage';
@@ -25,29 +25,27 @@ function App() {
     <div className='app'>
       <Router>
         <AuthProvider>
-            <Header 
-              open= {open}
-              setOpen={setOpen}
-            />
-            <HamMenu
-              open={open}
-            />
-              <Routes>
-                <Route path="/:section?" element={<LandingPage/>}/>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/logout" element={<LogOut />} />
-                <Route path="/forgot" element={<ForgotPasswordPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/news" element={<NewsFeed />} />
-                <Route path="/news/:articleId" element={<NewsCardDetail />} />
-                <Route path="/chat" element={<ChatbotPage />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path='/topic-selection' element={<TopicSelectionPage />} />
-                <Route path="*" element={<h1>Not Found</h1>} />
-              </Routes>
-              <div className='footerSpace'></div>
-            <Footer  className="footer"/>
+          <Header 
+            open={open}
+            setOpen={setOpen}
+          />
+          <HamMenu open={open} />
+          <Routes>
+            <Route path="/:section?" element={<LandingPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/logout" element={<LogOut />} />
+            <Route path="/forgot" element={<ForgotPasswordPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/news" element={<NewsFeed />} />
+            <Route path="/news/:articleId" element={<NewsCardDetail />} />
+            <Route path="/chat" element={<ChatbotPage />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path='/topic-selection' element={<TopicSelectionPage />} />
+            <Route path="*" element={<h1>Not Found</h1>} />
+          </Routes>
+          <div className='footerSpace'></div>
+          <Footer className="footer" />
         </AuthProvider>
       </Router>
     </div>
