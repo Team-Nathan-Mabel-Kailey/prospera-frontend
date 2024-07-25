@@ -12,6 +12,7 @@ const NewsFeed = () => {
     const [error, setError] = useState(null);
     const [query, setQuery] = useState('');
     const [page, setPage] = useState(1);
+    const [totalResults, setTotalResults] = useState(0);
     const [userTopics, setUserTopics] = useState([]);
     const [hasCompletedTopics, setHasCompletedTopics] = useState(false);
     const [showModal, setShowModal] = useState(false);
@@ -19,7 +20,12 @@ const NewsFeed = () => {
     const navigate = useNavigate();
 
     const allowedSources = [
-        'fox-business', 'business-insider', 'bloomberg', 'abc-news', 
+        'fox-business', 'business-insider', 'bloomberg', 'abc-news',
+        'reuters', 'forbes', 'the-economist', 'wall-street-journal', 'yahoo-finance'
+    ];
+
+    const economicNewsSources = [
+        'fox-business', 'business-insider', 'bloomberg', 'abc-news',
         'reuters', 'forbes', 'the-economist', 'wall-street-journal', 'yahoo-finance'
     ];
 
@@ -40,7 +46,7 @@ const NewsFeed = () => {
     }, []);
 
     useEffect(() => {
-        const fetchArticles = async (reset = false) => {
+        const fetchArticles = async () => {
             setLoading(true);
             setError(null);
             try {
@@ -64,7 +70,8 @@ const NewsFeed = () => {
                         source: { name: newsItem.source },
                         publishedAt: newsItem.time
                     }));
-                    setArticles(reset ? articles : [...articles, ...articles]);
+                    setArticles(articles);
+                    setTotalResults(response.data.body.length);
                 } else if (category === 'recommended' && userTopics.length > 0) {
                     const recommendedArticles = [];
                     for (const topic of userTopics) {
@@ -75,7 +82,7 @@ const NewsFeed = () => {
                                 q: topic,
                                 language: 'en',
                                 sortBy: 'publishedAt',
-                                pageSize: 5, // Limit the number of articles per topic
+                                pageSize: 9,
                                 page,
                                 apiKey: import.meta.env.VITE_NEWS_API_KEY,
                                 sources: allowedSources.join(',')
@@ -83,8 +90,26 @@ const NewsFeed = () => {
                         };
                         const res = await axios.request(newsApiOptions);
                         recommendedArticles.push(...res.data.articles);
+                        setTotalResults(res.data.totalResults);
                     }
-                    setArticles(reset ? recommendedArticles : [...articles, ...recommendedArticles]);
+                    setArticles(recommendedArticles);
+                } else if (category === 'economic-news') {
+                    const newsApiOptions = {
+                        method: 'GET',
+                        url: 'https://newsapi.org/v2/everything',
+                        params: {
+                            q: query || category,
+                            language: 'en',
+                            sortBy: 'publishedAt',
+                            pageSize: 9,
+                            page,
+                            apiKey: import.meta.env.VITE_NEWS_API_KEY,
+                            sources: economicNewsSources.join(',')
+                        }
+                    };
+                    response = await axios.request(newsApiOptions);
+                    setArticles(response.data.articles);
+                    setTotalResults(response.data.totalResults);
                 } else {
                     const domains = category === 'personal-finance'
                         ? 'forbes.com,bloomberg.com,abcnews.go.com'
@@ -96,14 +121,15 @@ const NewsFeed = () => {
                             q: query || category,
                             language: 'en',
                             sortBy: 'publishedAt',
-                            pageSize: 20,
+                            pageSize: 9,
                             page,
                             apiKey: import.meta.env.VITE_NEWS_API_KEY,
                             domains: domains || undefined,
                         }
                     };
                     response = await axios.request(newsApiOptions);
-                    setArticles(reset ? response.data.articles : [...articles, ...response.data.articles]);
+                    setArticles(response.data.articles);
+                    setTotalResults(response.data.totalResults);
                 }
             } catch (error) {
                 console.error('Error fetching articles:', error);
@@ -113,8 +139,8 @@ const NewsFeed = () => {
             }
         };
 
-        fetchArticles(true);
-    }, [category, query, userTopics]);
+        fetchArticles();
+    }, [category, query, userTopics, page]);
 
     const handleCategoryChange = (newCategory) => {
         if (newCategory === 'recommended' && !hasCompletedTopics) {
@@ -135,8 +161,9 @@ const NewsFeed = () => {
         setPage(1);
     };
 
-    const loadMoreArticles = () => {
-        setPage(page + 1);
+    const handlePageChange = (newPage) => {
+        setPage(newPage);
+        window.scrollTo(0, 0);
     };
 
     const handleCloseModal = () => {
@@ -147,89 +174,7 @@ const NewsFeed = () => {
         navigate('/topic-selection');
     };
 
-    useEffect(() => {
-        if (page > 1) {
-            const fetchMoreArticles = async () => {
-                setLoading(true);
-                setError(null);
-                try {
-                    let response;
-                    if (category === 'stock-news') {
-                        const options = {
-                            method: 'GET',
-                            url: 'https://yahoo-finance15.p.rapidapi.com/api/v2/markets/news',
-                            params: { type: 'ALL' },
-                            headers: {
-                                'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY,
-                                'x-rapidapi-host': 'yahoo-finance15.p.rapidapi.com'
-                            }
-                        };
-                        response = await axios.request(options);
-                        const moreArticles = response.data.body.map(newsItem => ({
-                            title: newsItem.title,
-                            description: newsItem.text,
-                            url: newsItem.url,
-                            urlToImage: newsItem.img,
-                            source: { name: newsItem.source },
-                            publishedAt: newsItem.time
-                        }));
-                        setArticles([...articles, ...moreArticles]);
-                    } else if (category === 'recommended' && userTopics.length > 0) {
-                        const recommendedArticles = [];
-                        for (const topic of userTopics) {
-                            const newsApiOptions = {
-                                method: 'GET',
-                                url: 'https://newsapi.org/v2/everything',
-                                params: {
-                                    q: topic,
-                                    language: 'en',
-                                    sortBy: 'publishedAt',
-                                    pageSize: 5, // Limit the number of articles per topic
-                                    page,
-                                    apiKey: import.meta.env.VITE_NEWS_API_KEY,
-                                    sources: allowedSources.join(',')
-                                }
-                            };
-                            const res = await axios.request(newsApiOptions);
-                            recommendedArticles.push(...res.data.articles);
-                        }
-                        setArticles([...articles, ...recommendedArticles]);
-                    } else {
-                        const domains = category === 'personal-finance'
-                            ? 'forbes.com,bloomberg.com,abcnews.go.com'
-                            : '';
-                        const newsApiOptions = {
-                            method: 'GET',
-                            url: 'https://newsapi.org/v2/everything',
-                            params: {
-                                q: query || category,
-                                language: 'en',
-                                sortBy: 'publishedAt',
-                                pageSize: 20,
-                                page,
-                                apiKey: import.meta.env.VITE_NEWS_API_KEY,
-                                domains: domains || undefined,
-                            }
-                        };
-                        response = await axios.request(newsApiOptions);
-                        setArticles([...articles, ...response.data.articles]);
-                    }
-                } catch (error) {
-                    console.error('Error fetching more articles:', error);
-                    setError('Failed to fetch more articles. Please try again later.');
-                } finally {
-                    setLoading(false);
-                }
-            };
-
-            fetchMoreArticles();
-        }
-    }, [page]);
-
     return (
-        <>
-        <div className='headerSpace' id='tempHeader'></div>
-        
         <div className="newsFeedContainer">
             <div className="newsCategories">
                 <button 
@@ -281,11 +226,25 @@ const NewsFeed = () => {
             ) : (
                 <>
                     <div className="newsArticleCards">
-                        {articles.map((article, index) => (
+                        {articles.slice(0, 9).map((article, index) => (
                             <NewsCard key={index} article={article} />
                         ))}
                     </div>
-                    <button className="loadMoreButton" onClick={loadMoreArticles}>Load More</button>
+                    <div className="pagination">
+                        <button 
+                            onClick={() => handlePageChange(page - 1)} 
+                            disabled={page === 1}
+                        >
+                            Previous
+                        </button>
+                        <span>Page {page}</span>
+                        <button 
+                            onClick={() => handlePageChange(page + 1)} 
+                            disabled={page * 9 >= totalResults}
+                        >
+                            Next
+                        </button>
+                    </div>
                 </>
             )}
             <Modal 
@@ -294,7 +253,6 @@ const NewsFeed = () => {
                 handleGoToTopics={handleGoToTopics} 
             />
         </div>
-        </>
     );
 };
 
