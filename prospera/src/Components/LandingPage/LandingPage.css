@@ -71,6 +71,10 @@
     overflow: hidden;
     color: #000;
     margin-top: 140px;
+
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
 }
 .landingCardContainer img {
     max-width: 100%;
