@@ -6,6 +6,10 @@ import './Dashboard.css'
 import AddWidgetModal from '../AddWidgetModal/AddWidgetModal';
 import ViewWidgetModal from '../ViewWidgetModal/ViewWidgetModal';
 import EditWidgetModal from '../EditWidgetModal/EditWidgetModal';
+import SavingsAccountWidget from '../SavingsAccountWidget/SavingsAccountWidget';
+import CheckingAccountWidget from '../CheckingAccountWidget/CheckingAccountWidget';
+import NewsWidget from '../NewsWidget/NewsWidget'
+import FinancialGoalsWidget from '../FinancialGoalsWidget/FinancialGoalsWidget';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
@@ -209,9 +213,36 @@ const Dashboard = () => {
     evt.stopPropagation();
   };
 
+  const renderWidgetContent = (widget) => {
+    switch (widget.type) {
+        // case 'stock':
+        //   return <StockWidget data={widget.configuration}/>;
+
+        case 'financialGoals':
+          return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
+
+        case 'highlightedSavings':
+          return <HighlightedSavingsWidget data={widget.configuration}/>;
+
+        case 'news':
+          return <NewsWidget data={widget.configuration}/>;
+
+        case 'savingsAccount':
+          return <SavingsAccountWidget data={widget.configuration}/>;
+
+        case 'checkingsAccount':
+          return <CheckingAccountWidget data={widget.configuration}/>;
+
+      default:
+        return <div>Unknown widget type: {widget.type}</div>;
+    }
+  };
+
   return (
     <>
-      <div className='headerSpace' id='tempHeader'></div>
+    <div className='headerSpace' id='tempHeader'>
+      <h1>Your Dashboard</h1>
+    </div>
     
     <div className='dashboardBody'>
       <button onClick={handleAdd}>Add Widget</button>
@@ -258,6 +289,10 @@ const Dashboard = () => {
             }}
             // style={{ backgroundColor }}
           >
+            <div className="widgetContent">
+              {renderWidgetContent(widget)}
+            </div>
+
             <button
               // Prevent dragging when trying to delete widget
               onMouseDown={stopPropagation}
@@ -291,11 +326,6 @@ const Dashboard = () => {
             >
               Edit
             </button>
-
-            <div // Widget content
-            >
-            {widget.type}
-            </div>
           </div>
         ))}
       </DashboardLayout>

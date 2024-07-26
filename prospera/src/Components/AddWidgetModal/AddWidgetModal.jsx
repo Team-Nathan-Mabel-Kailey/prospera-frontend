@@ -10,7 +10,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   const [widgetNum, setWidgetNum] = useState(0);
   const [widgetData, setWidgetData] = useState({});
 
-  const uniqueWidgets = ['financialGoals', 'savingsAccount', 'checkingsAccount'];
+  // const uniqueWidgets = 'financialGoals';
 
   const style = {
     position: 'absolute',
@@ -38,8 +38,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             configuration: widgetData,
             userId,
         });
-
-        
+      
         onAdd(response.data);
         setWidgetNum(widgetNum + 1);
         setWidgetType('');
@@ -59,18 +58,120 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     }));
   };
 
-  const isWidgetTypeAllowed = (type) => {
-    if (uniqueWidgets.includes(type)) {
-      return !existingWidgets.some(widget => widget.type === type);
+  // const isWidgetTypeAllowed = (type) => {
+  //   if (uniqueWidgets.includes(type)) {
+  //     return !existingWidgets.some(widget => widget.type === type);
+  //   }
+  //   return true;
+  // };
+
+  const renderWidgetCreationOptions = (widgetType) => {
+    switch (widgetType) {
+        case 'stock':
+          return (
+            // done
+            <div>
+              <h2>See an overview of a stock's performance in the market.</h2>
+              <h3>Enter the symbol of a stock you're interested in!</h3>
+              <p>A stock symbol is a unique series of letters assigned to a company's stock for trading on a specific market exchange.</p>
+              <p>Click here to search for stock symbols.</p>
+              <input type="text" name="symbol" value={widgetData.symbol || ''} onChange={handleInputChange} placeholder="Stock Name" />
+              <h3>Now, enter a period to view a stock's performance over time.</h3>
+              <p>Selecting a time period for a stock's performance allows you to view how the stock's price has changed over a specific duration, such as a day, a month, or year.</p>
+              <select name='period' value={widgetData.period} onChange={handleInputChange}>
+                <option value="">Select</option>
+                <option value="1D">1 day</option>
+                <option value="5D">5 days</option>
+                <option value="1M">1 month</option>
+                <option value="6M">6 months</option>
+                <option value="1YR">1 year</option>
+              </select>
+            </div>
+          );
+
+        // current
+        case 'financialGoals':
+          return (
+            <div>
+              <h2>Enter some of your financial goals.</h2>
+              <p>Setting financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving financial stability.</p>
+              <p>Each widget can store 5 of your financial goals. Feel free to add another widget to keep track of more goals!</p>
+              <input type="text" name="goal1" value={widgetData.goal1 || ''} onChange={handleInputChange} placeholder="Goal 1" />
+              <input type="text" name="goal2" value={widgetData.goal2 || ''} onChange={handleInputChange} placeholder="Goal 2" />
+              <input type="text" name="goal3" value={widgetData.goal3 || ''} onChange={handleInputChange} placeholder="Goal 3" />
+              <input type="text" name="goal4" value={widgetData.goal4 || ''} onChange={handleInputChange} placeholder="Goal 4" />
+              <input type="text" name="goal5" value={widgetData.goal5 || ''} onChange={handleInputChange} placeholder="Goal 5" />
+            </div>
+          );
+      
+        case 'highlightedSavings':
+          return (
+            <div>
+              <h3>Select a goal or create a new goal:</h3>
+              <input type="text" name="goalId" value={widgetData.goalId || ''} onChange={handleInputChange} placeholder="Goal ID" />
+            </div>
+          );
+
+        // done (need to refine news sources)
+        case 'news':
+          return (
+            <div>
+              <h2>We'll select a random financial news article for you on a topic you're interested in!</h2>
+              <p>Our selected articles cover diverse topics including stock market trends, personal finance tips, corporate news, and global economic developments.</p>
+              <select name='query' value={widgetData.query} onChange={handleInputChange}>
+                <option value="">Select</option>
+                <option value="Stocks">Stocks</option>
+                <option value="Budgeting">Budgeting</option>
+                <option value="Maintaining Good Credit">Maintaining Good Credit</option>
+                <option value="Credit Card Tips">Credit Card Tips</option>
+                <option value="Paying Bills">Paying Bills</option>
+                <option value="Spending">Spending</option>
+              </select>
+            </div>
+          );
+
+        // done
+        case 'savingsAccount':
+          return (
+            <div>
+              <h2>Enter some information about your savings account.</h2>
+              <p>A savings account is a bank account where you can safely store money and earn interest, designed to help you save for future goals or emergencies.</p>
+              <h3>What do you want to name your savings account?</h3>
+              <input type="text" name="savingsName" value={widgetData.savingsName || ''} onChange={handleInputChange} placeholder="Account Name" />
+              <h3>What bank is this savings account located in?</h3>
+              <input type="text" name="bankName" value={widgetData.bankName || ''} onChange={handleInputChange} placeholder="Bank Name" />
+              <h3>Finally, what is the current balance in this savings account?</h3>
+              <p>Notifications will be sent periodically reminding you to update this balance.</p>
+              <input type="number" name="balance" value={widgetData.balance || ''} onChange={handleInputChange} placeholder="Balance" />
+            </div>
+          );
+
+        // done
+        case 'checkingsAccount':
+          return (
+            <div>
+              <h2>Enter some information about your checking account.</h2>
+              <p>A checking account is a bank account for everyday transactions, allowing you to easily deposit money, withdraw cash, and pay bills or make purchases using checks or a debit card.</p>
+              <h3>What do you want to name your checking account?</h3>
+              <input type="text" name="checkingName" value={widgetData.checkingName || ''} onChange={handleInputChange} placeholder="Account Name" />
+              <h3>What bank is this checking account located in?</h3>
+              <input type="text" name="bankName" value={widgetData.bankName || ''} onChange={handleInputChange} placeholder="Bank Name" />
+              <h3>Finally, what is the current balance in this checking account?</h3>
+              <p>Notifications will be sent periodically reminding you to update this balance.</p>
+              <input type="number" name="balance" value={widgetData.balance || ''} onChange={handleInputChange} placeholder="Balance" />
+            </div>
+          );
+
+      default:
+        return <div>Please select a widget type.</div>;
     }
-    return true;
   };
 
-  useEffect(() => {
-    if (!isWidgetTypeAllowed(widgetType)) {
-      setWidgetType('');
-    }
-  }, [widgetType, existingWidgets]);
+  // useEffect(() => {
+  //   if (!isWidgetTypeAllowed(widgetType)) {
+  //     setWidgetType('');
+  //   }
+  // }, [widgetType, existingWidgets]);
 
   return (
     <Modal open={isOpen} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
@@ -79,59 +180,14 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         <select value={widgetType} onChange={(e) => setWidgetType(e.target.value)}>
           <option value="">Select</option>
           <option value="stock">Stock Widget</option>
-          <option value="financialGoals" disabled={!isWidgetTypeAllowed('financialGoals')}>Financial Goals Widget</option>
+          <option value="financialGoals">Financial Goals Widget</option>
           <option value="highlightedSavings">Highlighted Savings Goal Widget</option>
           <option value="news">News Widget</option>
-          <option value="savingsAccount" disabled={!isWidgetTypeAllowed('savingsAccount')}>Savings Account Widget</option>
-          <option value="checkingsAccount" disabled={!isWidgetTypeAllowed('checkingsAccount')}>Checkings Account Widget</option>
+          <option value="savingsAccount">Savings Account Widget</option>
+          <option value="checkingsAccount">Checkings Account Widget</option>
         </select>
 
-        {widgetType === 'stock' && (
-          <div>
-            <h3>Select a stock you're interested in:</h3>
-            <input type="text" name="stockName" value={widgetData.stockName || ''} onChange={handleInputChange} placeholder="Stock Name" />
-          </div>
-        )}
-
-        {widgetType === 'financialGoals' && (
-          <div>
-            <h3>Enter your financial goals:</h3>
-            <input type="text" name="goal1" value={widgetData.goal1 || ''} onChange={handleInputChange} placeholder="Goal 1" />
-            <input type="text" name="goal2" value={widgetData.goal2 || ''} onChange={handleInputChange} placeholder="Goal 2" />
-            <input type="text" name="goal3" value={widgetData.goal3 || ''} onChange={handleInputChange} placeholder="Goal 3" />
-            <input type="text" name="goal4" value={widgetData.goal4 || ''} onChange={handleInputChange} placeholder="Goal 4" />
-            <input type="text" name="goal5" value={widgetData.goal5 || ''} onChange={handleInputChange} placeholder="Goal 5" />
-          </div>
-        )}
-
-        {widgetType === 'highlightedSavings' && (
-          <div>
-            <h3>Select a goal or create a new goal:</h3>
-            <input type="text" name="goalId" value={widgetData.goalId || ''} onChange={handleInputChange} placeholder="Goal ID" />
-          </div>
-        )}
-
-        {widgetType === 'news' && (
-          <div>
-            <h3>We'll select a random financial news article for you!</h3>
-          </div>
-        )}
-
-        {widgetType === 'savingsAccount' && (
-          <div>
-            <h3>Enter your current savings account balance:</h3>
-            <input type="number" name="balance" value={widgetData.balance || ''} onChange={handleInputChange} placeholder="Balance" />
-            <input type="text" name="accountId" value={widgetData.accountId || ''} onChange={handleInputChange} placeholder="Account ID" />
-          </div>
-        )}
-
-        {widgetType === 'checkingsAccount' && (
-          <div>
-            <h3>Enter your current checkings account balance:</h3>
-            <input type="number" name="balance" value={widgetData.balance || ''} onChange={handleInputChange} placeholder="Balance" />
-            <input type="text" name="accountId" value={widgetData.accountId || ''} onChange={handleInputChange} placeholder="Account ID" />
-          </div>
-        )}
+        {renderWidgetCreationOptions(widgetType)}
 
         <Button onClick={handleAddWidget} variant='contained'>Add Widget</Button>
       </Box>
@@ -140,3 +196,5 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
 };
 
 export default AddWidgetModal;
+
+// disabled={!isWidgetTypeAllowed('financialGoals')}
