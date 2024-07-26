@@ -241,11 +241,14 @@ const Dashboard = () => {
   return (
     <>
     <div className='headerSpace' id='tempHeader'>
+    </div>
+
+    <div className="dashboardTitle">
       <h1>Your Dashboard</h1>
     </div>
-    
+
     <div className='dashboardBody'>
-      <button onClick={handleAdd}>Add Widget</button>
+      <button className="newWidgetBtn" onClick={handleAdd}>Add Widget</button>
       <AddWidgetModal 
         isOpen={modalOpen} 
         onClose={() => setModalOpen(false)} 
@@ -293,39 +296,42 @@ const Dashboard = () => {
               {renderWidgetContent(widget)}
             </div>
 
-            <button
-              // Prevent dragging when trying to delete widget
-              onMouseDown={stopPropagation}
-              onTouchStart={stopPropagation}
-              className="deleteButton no-drag"
-              onClick={() => {
-                handleDeleteWidget(widget.id);
-              }}
-            >
-              x
-            </button>
+            <div className="widgetEditBtnd">
 
-            <button
-              onMouseDown={stopPropagation}
-              onTouchStart={stopPropagation}
-              className="viewButton no-drag"
-              onClick={() => {
-                handleView(widget);
-              }}
-            >
-              View
-            </button>
-          
-            <button
-              onMouseDown={stopPropagation}
-              onTouchStart={stopPropagation}
-              className="editButton no-drag"
-              onClick={() => {
-                handleEdit(widget);
-              }}
-            >
-              Edit
-            </button>
+              <button
+                // Prevent dragging when trying to delete widget
+                onMouseDown={stopPropagation}
+                onTouchStart={stopPropagation}
+                className="deleteButton no-drag"
+                onClick={() => {
+                  handleDeleteWidget(widget.id);
+                }}
+              >
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWklEQVR4nGNgGAWDGBxnYGD4j4aPUcvww1gMJxcfHiiLD1ErNIYv+E8lPGoxQTAa1P9HExfDaHZiGC1AGEaLTKLAyCsyH1PB0kfkWOxJoeUgSz3IsXgUDA8AAHlcbV33qhrwAAAAAElFTkSuQmCC"/>
+              </button>
+
+              <button
+                onMouseDown={stopPropagation}
+                onTouchStart={stopPropagation}
+                className="viewButton no-drag"
+                onClick={() => {
+                  handleView(widget);
+                }}
+              >
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABsElEQVR4nO3YW0oDMRTG8b9TKV5fhEpxCdVXN6BvIqIvugcvqHjFRbgKwf2oICK1G/BNEAThSCBCjKjNjElOy3xwmEI7Ib+ezEwY+B6JUPdAm8SRYcFIhLpxjq1BhrQcTLLOSIQiB0YiQZJjJCIkKUYiQ5JhJAEkCUYSQaJjJCEkKkYSQ6JhJAMkCkYyQf4dkxPiY8xRFSTVn/AluScuNcRL7g5I3REvuTsgdUe85O6A1B3xkrsDUnfEiyirJiUjyuoJWB8EyC2wD8wDk8AMsAicWMTn7y6BEY2QN2AbKH6ZSwFcAO8ORhXEIJYC5rTiYDY0QUwnQnNmz+31ewNIcU00SkAKoGvH2NQAMRd22RzZMa41QDoVIB07RlcDZKoCZMyO8aoBMl0BMmHHeBmWpfWoAXJQAXJsx7jSALkrefttOFuWLQ0QU7slIOfOA3FU0xZlOQCx6mxR1vo9SRJi9v5YZoW3aXwOebGdCuJeM4fAgn3GjNst/aldRuIggt7Si7Lq2R1v2yL6xoiyajpzC8KIsvIza5ej+e4BmOOHaIcEYQYhbWeZlXkuqYrB7JhPHx5Gmdmq/xj8AAAAAElFTkSuQmCC"/>
+              </button>
+            
+              <button
+                onMouseDown={stopPropagation}
+                onTouchStart={stopPropagation}
+                className="editButton no-drag"
+                onClick={() => {
+                  handleEdit(widget);
+                }}
+              >
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABSUlEQVR4nO2ZvUoDQRRGT6ONVmKhnRbiCwhW+gD6BoqNo4V5k1QWprBNYS2CvVj5APoG/nRioUlAMSMTvoUQxsI03gv3wMLuzBb38N2dXWYhCP7KJnAFvAF94A7YxxmHwBeQK8c5TjgGhir6DFgBFoAT4EPjeziSaFfmW5orbeZCIgMvwPrEPYua6+FEIv8is6rxVxxJ5IpMR2OXOJPIYzJtnX8CGziUyGPHUEuzGRLwPYVEC0OEhBUiCStEElaIJKwQSVghkrBCJGGFFJ/iRkiRhBFSJGGEFEkYIUUSRkiRhBGOptyLLXu4ZpgHBt4lCrveN5QbTlXgBfDsMYmGBxW5BawBT96SKCypwPLrd3Y0UpcxLVE4UKHXoyuYAbbVZi7aqaGrYm8k8z6RxEAvSfM8Vp6Fey0AO8AcTrjVStVVmy3/d0EBjvkBUA0ZY3SLwb4AAAAASUVORK5CYII="/>
+              </button>
+            </div>
           </div>
         ))}
       </DashboardLayout>
