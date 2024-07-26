@@ -87,7 +87,8 @@ const ChatbotPage = () => {
     return (
         <>
         <div className='headerSpace' id='tempHeader'></div>
-        
+        <div className='chatTile'>
+            <h1>Welcome back!</h1></div>
         <div className="chatbotContainer">
             <div className="sidebar">
                 <h2>Chatbot</h2>
