@@ -15,7 +15,7 @@ const Header = ({ open, setOpen }) => {
         setOpen: PropTypes.func.isRequired
     };
 
-    const { isLoggedIn } = useAuth();
+    const { user, isLoggedIn } = useAuth();
 
     useEffect(() => {
         if (!googleTranslateInitialized) {
@@ -64,7 +64,7 @@ const Header = ({ open, setOpen }) => {
                     <img src={settingGif} alt="Hover" className="hoverImg"/>
                 </div>
                 </Link>
-                <NovuProvider className="notifIcon" subscriberId={'66a180a1f502999ed87ce307'} applicationIdentifier={'9aO_manMoao5'}>
+                <NovuProvider subscriberId={'user.userID'} applicationIdentifier={'9aO_manMoao5'}>
                     <PopoverNotificationCenter colorScheme={'light'}>
                     {({ unseenCount }) => <NotificationBell unseenCount={unseenCount} />}
                     </PopoverNotificationCenter>
