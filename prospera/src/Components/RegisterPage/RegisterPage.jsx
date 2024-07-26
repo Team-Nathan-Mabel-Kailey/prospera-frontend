@@ -88,7 +88,7 @@ const Register = () => {
         <div className='registerBody'>
         <div className='registerBox'>
             <div className='imageArea'>
-                <img src='https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='Picture of plant inside pot filled with coins'/>
+                <img src='https://images.unsplash.com/photo-1632849508137-3ef430962c8e?q=80&w=3109&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='Picture of plant inside pot filled with coins'/>
             </div>
 
             <form className='registerForm'>

@@ -76,13 +76,13 @@ const Header = ({ open, setOpen }) => {
             <>
             <div className='headerLeft'>
                 <div>
-                <Link to='/' className='logo'>
-                    <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
-                </Link>
+                    <Link to='/' className='logo'>
+                        <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
+                    </Link>
                 </div>
                 <div className='rightLinks'>
-                <Link to="/about" className="active">ABOUT</Link>
-                <Link to="/contact">CONTACT</Link>
+                    <Link to="/about" className="active">ABOUT</Link>
+                    <Link to="/contact">CONTACT</Link>
                 </div>
             </div>
             <div className="auth-buttons">

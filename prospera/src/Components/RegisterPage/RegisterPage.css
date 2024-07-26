@@ -10,8 +10,8 @@
     display: flex;
     background-color: white;
     border-radius: 20px;
-    /* overflow: hidden; */
-    width: 74rem;
+    overflow: hidden;
+    width: 65rem;
     min-height: 47rem;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
 }
@@ -20,7 +20,6 @@
     padding: 10px;
     border: 1px solid #ce93d8;
     border-radius: 5px;
-
 }
 
 .registerForm {
@@ -77,10 +76,10 @@
     position: relative;
 }
 
-.imageArea img {
+div.imageArea img {
     position: absolute;
     top: 50%;
-    left: 90%;
+    left: 50%;
     transform: translate(-50%, -50%);
     max-width: 250%;
     max-height: 150%;
