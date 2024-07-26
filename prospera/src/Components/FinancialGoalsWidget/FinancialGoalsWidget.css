@@ -1,0 +1,30 @@
+.financial-goals-widget {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #F9F9F9;
+}
+.financial-goals-widget h2 {
+    margin-bottom: 15px;
+}
+.financial-goals-widget ul {
+    list-style: none;
+    padding: 0;
+}
+.financial-goals-widget li {
+    margin-bottom: 10px;
+}
+.financial-goals-widget label {
+    display: flex;
+    align-items: center;
+}
+.financial-goals-widget input[type="checkbox"] {
+    margin-right: 10px;
+}
+.financial-goals-widget li.checked label {
+    text-decoration: line-through;
+    color: #999;
+}
+
+
+

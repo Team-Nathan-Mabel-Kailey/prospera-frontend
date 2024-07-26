@@ -234,6 +234,7 @@ const NewsFeed = () => {
                         <button 
                             onClick={() => handlePageChange(page - 1)} 
                             disabled={page === 1}
+                            className='prevBtn'
                         >
                             Previous
                         </button>
@@ -241,6 +242,7 @@ const NewsFeed = () => {
                         <button 
                             onClick={() => handlePageChange(page + 1)} 
                             disabled={page * 9 >= totalResults}
+                            className='nexBtn'
                         >
                             Next
                         </button>
