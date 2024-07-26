@@ -2,13 +2,30 @@
     padding-top: 200px;
 }
 
-.checkBody h1 {
+.titleArea {
+    flex: 1;
+    padding: 1rem;
     display: flex;
-    justify-content: center;
-    color: #fff;
-    margin-bottom: 40px;
-    font-size: 2.5rem;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0 0.9rem 0;
 }
+
+.contactTitle h1 {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.contactTitle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(35, 35, 35);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 30px;
+    padding: 0 15px 0 15px;
+}
+
 .contactBody {
     display: flex;
     flex-wrap: wrap;
@@ -31,6 +48,10 @@
 
 .leftContactPageContent h1 {
     text-align: center;
+}
+
+.leftContactPageContent p {
+    font-size: 1.4em;
 }
 
 .contactInfo {
@@ -76,6 +97,15 @@
     font-size: 16px;
 }
 
+/* .rightContactPageContent label {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ce93d8;
+    border-radius: 7px;
+    margin-right: 10px;
+    font-size: 16px;
+} */
+
 .contactForm {
     display: flex;
     flex-direction: column;
@@ -94,6 +124,7 @@
 }
 
 .submitButton {
+    font-weight: 400;
     margin: 15px 0 0 0;
     padding: 15px 30px;
     border: 2px solid #2c2c2c;

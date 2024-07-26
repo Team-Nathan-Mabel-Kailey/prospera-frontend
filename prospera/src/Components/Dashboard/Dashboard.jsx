@@ -6,6 +6,10 @@ import './Dashboard.css'
 import AddWidgetModal from '../AddWidgetModal/AddWidgetModal';
 import ViewWidgetModal from '../ViewWidgetModal/ViewWidgetModal';
 import EditWidgetModal from '../EditWidgetModal/EditWidgetModal';
+import SavingsAccountWidget from '../SavingsAccountWidget/SavingsAccountWidget';
+import CheckingAccountWidget from '../CheckingAccountWidget/CheckingAccountWidget';
+import NewsWidget from '../NewsWidget/NewsWidget'
+import FinancialGoalsWidget from '../FinancialGoalsWidget/FinancialGoalsWidget';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
@@ -209,12 +213,42 @@ const Dashboard = () => {
     evt.stopPropagation();
   };
 
+  const renderWidgetContent = (widget) => {
+    switch (widget.type) {
+        // case 'stock':
+        //   return <StockWidget data={widget.configuration}/>;
+
+        case 'financialGoals':
+          return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
+
+        case 'highlightedSavings':
+          return <HighlightedSavingsWidget data={widget.configuration}/>;
+
+        case 'news':
+          return <NewsWidget data={widget.configuration}/>;
+
+        case 'savingsAccount':
+          return <SavingsAccountWidget data={widget.configuration}/>;
+
+        case 'checkingsAccount':
+          return <CheckingAccountWidget data={widget.configuration}/>;
+
+      default:
+        return <div>Widget type: {widget.type}</div>;
+    }
+  };
+
   return (
     <>
-      <div className='headerSpace' id='tempHeader'></div>
-    
+    <div className='headerSpace' id='tempHeader'>
+    </div>
+
+    <div className="dashboardTitle">
+      <h1>Your Dashboard</h1>
+    </div>
+
     <div className='dashboardBody'>
-      <button onClick={handleAdd}>Add Widget</button>
+      <button className="newWidgetBtn" onClick={handleAdd}>Add Widget</button>
       <AddWidgetModal 
         isOpen={modalOpen} 
         onClose={() => setModalOpen(false)} 
@@ -258,43 +292,44 @@ const Dashboard = () => {
             }}
             // style={{ backgroundColor }}
           >
-            <button
-              // Prevent dragging when trying to delete widget
-              onMouseDown={stopPropagation}
-              onTouchStart={stopPropagation}
-              className="deleteButton no-drag"
-              onClick={() => {
-                handleDeleteWidget(widget.id);
-              }}
-            >
-              x
-            </button>
+            <div className="widgetContent">
+              {renderWidgetContent(widget)}
+            </div>
 
-            <button
-              onMouseDown={stopPropagation}
-              onTouchStart={stopPropagation}
-              className="viewButton no-drag"
-              onClick={() => {
-                handleView(widget);
-              }}
-            >
-              View
-            </button>
-          
-            <button
-              onMouseDown={stopPropagation}
-              onTouchStart={stopPropagation}
-              className="editButton no-drag"
-              onClick={() => {
-                handleEdit(widget);
-              }}
-            >
-              Edit
-            </button>
+            <div className="widgetEditBtns">
 
-            <div // Widget content
-            >
-            {widget.type}
+              <button
+                // Prevent dragging when trying to delete widget
+                onMouseDown={stopPropagation}
+                onTouchStart={stopPropagation}
+                className="deleteButton no-drag"
+                onClick={() => {
+                  handleDeleteWidget(widget.id);
+                }}
+              >
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nO3QwQmAMBBE0ZSnbRvQPmIh37selmwGlDivgPkwpdhXAQdPu2q8olPfCm+SN+aFiMMhX50Vf3uTLjncC1+d5KtDv7z6FHRbJrwOxhuwdIdtGheIAr9DNss0IAAAAABJRU5ErkJggg=="/>
+              </button>
+
+              <button
+                onMouseDown={stopPropagation}
+                onTouchStart={stopPropagation}
+                className="viewButton no-drag"
+                onClick={() => {
+                  handleView(widget);
+                }}
+              >
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABsklEQVR4nO2YXUrDQBCA11aKvy9CRTyC+uoF9E1E9EXvUJUq/uIhPIXgfaogIrUX8E0QBOGThSlE2zSb1p1OJN9LCOwO82Um2SHO/YI4PAFLThPioStDHFqJa73IIvWEjE5liIDE1ZUhkoi6DBFFVGWILKImg4KIigxKItFlUBSJKoOySDQZxiASRYYxify5DGMU6SPTcpZERsGVIsZwZUWM4cqKGMOVFTGGKytiDPdfKgLU/ovIK7BbBJEHoAmsArPAArAOXIhEl1tgwqLIJ9AAKgNyqQA3wFdXxpqIl9jIkdNWQmbPkkgj+MkKwJXs7QR9AJTeiWpmIv3brC0x9p0BkWZmEikAZxLjPmRxbFYyk0jB75UY7ZDFsZnLTCIFYEpifIQsjs18ZhIpADMS4z1kcRFa68WCyMkIIucS486CyOOQn99qYmQ5sCDiORpC5DpxIE5aGlE2c0hsJ0aUndBNKMocD2ozeofGt+Af2+jj35lTYM2fMcC0jPSX0kYkJML/0mOPjp94ffIiESaDPWqJ3MJlMIbrzW9R2tHzDCwXUiSXTBHgZ5vlPpdMITKH/uYbY7tw/1fn3ScAAAAASUVORK5CYII="/>
+              </button>
+            
+              <button
+                onMouseDown={stopPropagation}
+                onTouchStart={stopPropagation}
+                className="editButton no-drag"
+                onClick={() => {
+                  handleEdit(widget);
+                }}
+              >
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABUUlEQVR4nO3ZvU5UQRgG4GmgkYpQSAeF8QZIqOQC5A40NLtSyJ1QUUBhuwW1MbE3VnsBegf8dIQChUQCjxnybbLB00DjN8k81e7MKb4375yTzdlSuu5JsIkvuMQ1pnhfWoIRbg37VFqAXdzH0IdYwzI+4lesvysNhdgf2N+LvWlpJER1jtePrll52OF3aSTEYBisx/pFaSjEP2FwFGufS2Mh5sPsx+c/2CgNhphXrx+VLDDGnaeH2CtZ9BBZ9Cay6E1k0ZvIojeRRW8iC/0HYBJ6E0noTSShN5GE3kQSehNJ6E0kgQ/PfBe7W7LAEm6aDlFhu+kXyjM4iAGPcdZcEzP4GUO+wSucNtVEhZcxYP3rdzHWhsLkDVFhJwb9Gt8XsBXHLP9xmsEkhv1Ww+DqURP1aTYu2eFk4F74EQ+At3hRWoDv8aSaxDFb/d8zdaVhfwG3LEGdXdjCzgAAAABJRU5ErkJggg=="/>              </button>
             </div>
           </div>
         ))}

@@ -11,9 +11,15 @@
     background-color: white;
     border-radius: 20px;
     overflow: hidden;
-    width: 74rem;
-    height: 47rem;
+    width: 65rem;
+    min-height: 47rem;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.registerBox input {
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
 }
 
 .registerForm {
@@ -44,13 +50,19 @@
     margin: 10px 0 0 0;
 }
 
-.showPasswordArea1, .showPasswordArea2 {
+.showSecret {
     display: flex;
-    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.showPasswordArea1 input, .showPasswordArea2 input {
-    margin: 0;
+.showPassword1Btn, .showPassword2Btn, .showPassword3Btn {
+    border: none;
+    background-color: white;
+}
+
+.showSymbol img {
+    width: 80%;
 }
 
 .questionArea p {
@@ -64,10 +76,10 @@
     position: relative;
 }
 
-.imageArea img {
+div.imageArea img {
     position: absolute;
     top: 50%;
-    left: 90%;
+    left: 50%;
     transform: translate(-50%, -50%);
     max-width: 250%;
     max-height: 150%;
@@ -77,12 +89,12 @@
 .registerButtonArea {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    /* gap: 0.8rem; */
 }
 
 .registerButton {
     margin: 15px 0 0 0;
-    padding: 15px 30px;
+    padding: 15px 20px;
     border: 2px solid #2c2c2c;
     background-color: #1a1a1a;
     color: #ffffff;

@@ -19,6 +19,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    font-family: 'Outfit';
+    font-weight: 500;
 }
 
 .rightLinks  {
@@ -51,13 +53,26 @@
     /* margin: 0 10px; */
 }
 
+.auth-buttons-left{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 70%;
+    /* margin-right: 90px; */
+    font-family: 'Outfit';
+    font-weight: 500;
+}
+
 .auth-buttons{
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 70%;
     /* margin-right: 90px; */
+    font-family: 'Outfit';
+    font-weight: 500;
 }
+
 
 .login {
     background-color: #000;
@@ -65,10 +80,10 @@
     text-decoration: none;
 }
 
-.register{
-    border: #fff 2px solid;
-    background-color: #fff;
-    color: #000;
+button.register {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    border: 2px solid #2c2c2c;
     text-decoration: none;
 }
 
@@ -95,11 +110,11 @@
 
 .login:hover {
     border-color: #666666;
-    background: #292929;
+    background: #100f0f;
 }
 
 .register:hover {
-    border-color: #8d47fe;
+    border-color: #9b62f8;
     background: #6303FF;
     color: #fff;
 }

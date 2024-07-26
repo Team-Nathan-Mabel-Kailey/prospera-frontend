@@ -32,7 +32,11 @@ const ContactPage = () => {
     
     return (
         <div className='checkBody'>
-            <h1>Contact Us!</h1>
+            <div className='titleArea'>
+                <div className='contactTitle'>
+                    <h1>Contact Us!</h1>
+                </div>
+            </div>
             <div className='contactBody'>
                 <div className='leftContactPageContent'>
                     <div className='contactInfo'>
@@ -98,7 +102,7 @@ const ContactPage = () => {
                         required
                         ></textarea>
                         
-                        <button type='submit' className='submitButton'>Submit</button>
+                        <button type='submit' className='submitButton'>SUBMIT</button>
                     </form>
                 </div>
             </div>
