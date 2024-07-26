@@ -53,6 +53,12 @@
     color: #390094;
 }
 
+.loginForm input{
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
 .loginPasswordArea {
     display: flex;
     justify-content: space-between;

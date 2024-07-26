@@ -34,7 +34,7 @@ const TopicSelectionPage = () => {
     };
 
     const handleSkip = () => {
-        navigate('/dashboard');
+        navigate('/news');
     };
 
     return (

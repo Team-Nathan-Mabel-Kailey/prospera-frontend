@@ -3,7 +3,7 @@ import './SavingsAccountWidget.css'
 const SavingsAccountWidget = ({ data }) => {
     return  (
         <>
-            <div>
+            <div className='savingsWidget'>
                 <h2>
                     {data.savingsName}
                 </h2>

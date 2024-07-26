@@ -1,8 +1,8 @@
 .financial-goals-widget {
     padding: 20px;
-    border: 1px solid #ccc;
+    border: none;
     border-radius: 5px;
-    background-color: #F9F9F9;
+    background-color: #212121;
 }
 .financial-goals-widget h2 {
     margin-bottom: 15px;
