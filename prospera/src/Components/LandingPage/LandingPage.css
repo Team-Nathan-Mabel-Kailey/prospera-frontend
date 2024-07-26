@@ -28,9 +28,7 @@
 .landingSlogan{
     font-size: 1.85rem;
     padding: 1px 5px;
-
     border-radius: 10px;
-
     color: #fff;
     /* backdrop-filter: blur(10px) saturate(70%); */
 }

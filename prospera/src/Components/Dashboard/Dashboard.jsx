@@ -296,7 +296,7 @@ const Dashboard = () => {
               {renderWidgetContent(widget)}
             </div>
 
-            <div className="widgetEditBtnd">
+            <div className="widgetEditBtn">
 
               <button
                 // Prevent dragging when trying to delete widget

@@ -59,6 +59,8 @@
     align-items: center;
     width: 70%;
     /* margin-right: 90px; */
+    font-family: 'Outfit';
+    font-weight: 500;
 }
 
 .login {
