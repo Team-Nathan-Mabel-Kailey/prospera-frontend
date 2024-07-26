@@ -1,3 +1,38 @@
 .footerSpace{
     height: 238.44px;
 }
+
+h1 {
+    font-family: 'Outfit';
+    font-weight: 700;
+}
+
+h2 {
+    font-family: 'Outfit';
+    font-weight: 600;
+}
+
+p {
+    font-family: 'Manrope';
+    font-weight: 500;
+}
+
+h3 {
+    font-family: 'Outfit';
+    font-weight: 550;
+}
+
+label {
+    font-family: 'Manrope';
+    font-weight: 500;
+}
+
+button {
+    font-family: 'Outfit';
+    font-weight: 600;
+}
+
+.passwordChecklist {
+    font-family: 'Manrope';
+    font-size: 0.9rem;
+}

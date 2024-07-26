@@ -14,6 +14,9 @@ const Register = () => {
     const [showPassword1, setShowPassword1] = useState(false);
     const [showPassword2, setShowPassword2] = useState(false);
     const [showSecurityAnswer, setShowSecurityAnswer] = useState(false);
+    const [showIcon1, setShowIcon1] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+    const [showIcon2, setShowIcon2] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+    const [showIcon3, setShowIcon3] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
     const [isValidPassword, setIsValidPassword] = useState(false);
     const navigate = useNavigate();
     const { setIsLoggedIn } = useAuth();
@@ -41,6 +44,42 @@ const Register = () => {
         alert('Registration failed. Try again.');
         }
     };
+
+    const handleDisplaySecret1 = () => {
+        setShowPassword1((prev) => !prev);
+        
+        if (showIcon1 == 'https://img.icons8.com/ios-glyphs/30/visible--v1.png') {
+            setShowIcon1('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+        }
+
+        else {
+            setShowIcon1('https://img.icons8.com/ios-glyphs/30/visible--v1.png');
+        }
+    }
+
+    const handleDisplaySecret2 = () => {
+        setShowPassword2((prev) => !prev);
+        
+        if (showIcon2 == 'https://img.icons8.com/ios-glyphs/30/visible--v1.png') {
+            setShowIcon2('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+        }
+
+        else {
+            setShowIcon2('https://img.icons8.com/ios-glyphs/30/visible--v1.png');
+        }
+    }
+
+    const handleDisplaySecret3 = () => {
+        setShowSecurityAnswer((prev) => !prev);
+        
+        if (showIcon3 == 'https://img.icons8.com/ios-glyphs/30/visible--v1.png') {
+            setShowIcon3('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+        }
+
+        else {
+            setShowIcon3('https://img.icons8.com/ios-glyphs/30/visible--v1.png');
+        }
+    }
 
     return (
         <>
@@ -72,7 +111,15 @@ const Register = () => {
                     required
                 />
 
-                <label>Password</label>
+                <div className='showSecret'>
+                    <label>Password</label>
+                    <button className='showPassword1Btn'type="button" title="Show Password" onClick={handleDisplaySecret1}>         
+                        <span className='showSymbol'>
+                            <img src={showIcon1}></img>
+                        </span>
+                    </button> 
+                </div>
+
                 <input
                     type={
                         showPassword1 ? 'text' : 'password'
@@ -81,19 +128,15 @@ const Register = () => {
                     required
                 />
 
-                <div className='showPassword1Area'>
-                    <input
-                        id='check1'
-                        type='checkbox'
-                        value={showPassword1}
-                        onChange={() =>
-                            setShowPassword1((prev) => !prev)
-                        }
-                    />
-                    <label htmlFor='check'>Show Password</label>
+                <div className='showSecret'>
+                    <label>Retype Password</label>
+                    <button className='showPassword2Btn'type="button" title="Show Password" onClick={handleDisplaySecret2}>         
+                        <span className='showSymbol'>
+                            <img src={showIcon2}></img>
+                        </span>
+                    </button> 
                 </div>
 
-                <label>Retype Password</label>
                 <input
                     type={
                         showPassword2 ? 'text' : 'password'
@@ -102,17 +145,6 @@ const Register = () => {
                     required
                 />
 
-                <div className='showPassword2Area'>
-                    <input
-                        id='check2'
-                        type='checkbox'
-                        value={showPassword2}
-                        onChange={() =>
-                            setShowPassword2((prev) => !prev)
-                        }
-                    />
-                    <label htmlFor='check'>Show Password</label>
-                </div>
 
                 <PasswordChecklist
                     rules={[
@@ -125,13 +157,22 @@ const Register = () => {
                     value={password}
                     valueAgain={passwordAgain}
                     onChange={setIsValidPassword}
+                    className='passwordChecklist'
                 />
 
                 <div className='questionArea'>
                     <p><b>Security question: </b> What city were you born in?</p>
                 </div>
+                
+                <div className='showSecret'>
+                    <label>Answer</label>
+                    <button className='showPassword3Btn'type="button" title="Show Password" onClick={handleDisplaySecret3}>         
+                        <span className='showSymbol'>
+                            <img src={showIcon3}></img>
+                        </span>
+                    </button> 
+                </div>
 
-                <label>Answer</label>
                 <input
                     type={
                         showSecurityAnswer ? 'text' : 'password'
@@ -139,22 +180,9 @@ const Register = () => {
                     onChange={(e) => setSecurityAnswer(e.target.value)}
                     required
                 />
-
-                <div className='showSecurityAnswerArea'>
-                    <input
-                        id='check3'
-                        type='checkbox'
-                        value={showSecurityAnswer}
-                        onChange={() =>
-                            setShowSecurityAnswer((prev) => !prev)
-                        }
-                    />
-                    <label htmlFor='check'>Show Answer</label>
-                </div>
-
                 
                 <div className='registerButtonArea'>
-                    <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>Create Account</button>
+                    <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>CREATE ACCOUNT</button>
                 </div>
             </form>
             

@@ -18,16 +18,15 @@
 }
 
 .landingPageContent h1{
-    font-size: 4rem;
+    font-size: 5.8rem;
     font-weight: bold;
-    margin: 2.5rem 1rem;
+    margin: 5.5rem 1rem 0 1rem;
     line-height: 1.2;
-    font-style: italic;
     color: #fff;
 }
 
 .landingSlogan{
-    font-size: 1.5rem;
+    font-size: 1.85rem;
     padding: 1px 5px;
 
     border-radius: 10px;
@@ -40,6 +39,7 @@
     z-index: 10;
     margin: 6px;
     font-weight:600;
+    font-family: 'Manrope';
 }   
 
 .landingImg {
@@ -47,7 +47,7 @@
     height: 35vh;
     object-fit: cover;
     object-position: 100%;
-    opacity: 0.7;
+    opacity: 0.6;
     z-index: 0;
 }
 
@@ -61,6 +61,16 @@
     height: 81px;
 }
 
+.landingQuestion {
+    background-color: rgb(35, 35, 35);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 30px;
+    margin: 40px 0 40px 0;
+    padding: 15px 25px 15px 25px;
+    font-size: 2.8rem;
+    color: white;
+}
+
 .landingCardContainer {
     position: relative;
     border-radius: 7px;
@@ -70,12 +80,13 @@
     transition: all 0.4s ease-in-out;
     overflow: hidden;
     color: #000;
-    margin-top: 140px;
-
+    margin-top: 0;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     display: flex;
     flex-direction: column;
-    max-width: 350px;
+    max-width: 430px;
 }
+
 .landingCardContainer img {
     max-width: 100%;
     transform-origin: center;
@@ -83,9 +94,9 @@
     transition: transform 0.4s ease-in-out;
 }
 .landingCardContainer h3 {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     margin: 0;
-    padding: 16px;
+    padding: 25px;
     color: var(--title-color);
 }
 .landingCardContainer a {
@@ -112,15 +123,19 @@
 }
 .landingCardContainer:has(:hover, :focus) {
     --img-scale: 1.1;
-    --title-color: #28666E;
     --link-icon-translate: 0;
     --link-icon-opacity: 1;
-    box-shadow: 10px 10px 60px #BEBEBE,
-    -10px -10px 60px #FFFFFF;
+    box-shadow: 10px 10px 60px #353434,
+    -10px -10px 60px #dfb6f1;
 }
+
 .landingCards {
     display: flex;
-    gap: 40px;
+    gap: 150px;
+}
+
+.read-more {
+    font-family: 'Manrope';
 }
 
 .landingPageContent, #aboutPage {

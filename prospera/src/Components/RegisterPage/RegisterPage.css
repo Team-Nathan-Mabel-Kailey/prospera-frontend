@@ -44,13 +44,19 @@
     margin: 10px 0 0 0;
 }
 
-.showPasswordArea1, .showPasswordArea2 {
+.showSecret {
     display: flex;
-    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.showPasswordArea1 input, .showPasswordArea2 input {
-    margin: 0;
+.showPassword1Btn, .showPassword2Btn, .showPassword3Btn {
+    border: none;
+    background-color: white;
+}
+
+.showSymbol img {
+    width: 80%;
 }
 
 .questionArea p {
