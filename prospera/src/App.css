@@ -36,3 +36,7 @@ button {
     font-family: 'Manrope';
     font-size: 0.9rem;
 }
+
+select {
+    font-size: 1.2rem;
+}
