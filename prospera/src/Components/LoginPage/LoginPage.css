@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     color: black;
-    margin: 1rem 0 2rem 0;
+    margin: 5rem 0 7rem 0;
 }
 
 .loginBox {
@@ -13,7 +13,7 @@
     overflow: hidden;
     width: 63rem;
     height: 39rem;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .loginForm {
@@ -41,8 +41,10 @@
 }
 
 .loginForm a {
+    font-family: 'Manrope';
+    font-size: 0.9rem;
     text-align: end;
-    color: #6303FF;
+    color: black;
     font-weight: bold;
     text-decoration: none;
 }
@@ -51,19 +53,24 @@
     color: #390094;
 }
 
-.loginForm input{
-    padding: 10px;
-    border: 1px solid #ce93d8;
-    border-radius: 5px;
-}
-
-.showPasswordArea {
+.loginPasswordArea {
     display: flex;
-    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.showPasswordArea input {
-    margin: 0;
+.showPasswordBtn {
+    border: none;
+    background-color: white;
+}
+
+.showSymbol img {
+    width: 80%;
+}
+
+.showPasswordBtn:hover {
+    cursor: pointer;
+    background-color: white;
 }
 
 .loginButtonArea {

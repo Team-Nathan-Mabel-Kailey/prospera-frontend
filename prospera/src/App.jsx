@@ -18,6 +18,7 @@ import { useState } from 'react';
 import HamMenu from './Components/HamMenu/HamMenu';
 import Settings from './Components/Settings/Settings';
 import Account from './Components/Settings/Account';
+import './assets/fonts.css';
 
 function App() {
   const [open, setOpen] = useState(false);
