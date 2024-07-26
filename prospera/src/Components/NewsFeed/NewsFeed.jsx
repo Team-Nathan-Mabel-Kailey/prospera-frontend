@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import NewsCard from './NewsCard';
 import Modal from './Modal';
 import './NewsFeed.css';
+import { useAuth } from '../AuthContext/AuthContext';
 
 const NewsFeed = () => {
+    const { user } = useAuth();
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [category, setCategory] = useState('stock-news');
@@ -31,19 +33,20 @@ const NewsFeed = () => {
 
     useEffect(() => {
         const fetchUserTopics = async () => {
-            const userId = localStorage.getItem('userId');
-            try {
-                const response = await axios.get(`http://localhost:3000/users/get-topics/${userId}`);
-                setUserTopics(response.data.topics);
-                setHasCompletedTopics(response.data.hasCompletedTopics);
-            } catch (error) {
-                console.error('Error fetching user topics:', error);
-                setError('Failed to fetch user topics. Please try again later.');
+            if (user) {
+                try {
+                    const response = await axios.get(`http://localhost:3000/users/get-topics/${user.userID}`);
+                    setUserTopics(response.data.topics);
+                    setHasCompletedTopics(response.data.hasCompletedTopics);
+                } catch (error) {
+                    console.error('Error fetching user topics:', error);
+                    setError('Failed to fetch user topics. Please try again later.');
+                }
             }
         };
 
         fetchUserTopics();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         const fetchArticles = async () => {
