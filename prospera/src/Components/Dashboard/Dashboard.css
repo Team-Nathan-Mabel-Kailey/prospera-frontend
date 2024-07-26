@@ -21,18 +21,20 @@
 }
 
 .reactGridItem {
-    background-color: #fff;
+    background-color: #212121;
     border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .dash {
-    background-color: rgb(33, 33, 33);
+    background-color: #fff;
+    color: #fff;
     padding: 10px 10px 100px 10px;
     border-radius: 5px;
 }
 
 .widgetContent {
-    padding: 5px;
+    padding: 10px;
 }
 
 .newWidgetBtn{
@@ -82,6 +84,17 @@
     background: #292929;
 }
 
-.widgetEditBtn img{
+.widgetEditBtns img{
     width: 25px;
+}
+
+.widgetEditBtns button{
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+}
+
+.widgetEditBtns button:hover {
+    cursor: pointer;
+    background-color: white;
 }

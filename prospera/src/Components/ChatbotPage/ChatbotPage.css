@@ -1,13 +1,4 @@
 /* ChatbotPage.css */
-
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f3e5f5; /* Light purple background */
-    margin: 0;
-    padding: 0;
-    color: #4a148c; /* Dark purple text */
-}
-
 .chatTile {
     display: flex;
     justify-content: center;
@@ -107,7 +98,7 @@ body {
     margin-top: 20px;
 }
 
-input[type="text"] {
+.inputContainer input[type="text"] {
     flex: 1;
     padding: 10px;
     border: 1px solid #ce93d8;
