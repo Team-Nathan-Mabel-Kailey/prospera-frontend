@@ -53,6 +53,16 @@
     /* margin: 0 10px; */
 }
 
+.auth-buttons-left{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 70%;
+    /* margin-right: 90px; */
+    font-family: 'Outfit';
+    font-weight: 500;
+}
+
 .auth-buttons{
     display: flex;
     justify-content: flex-end;
@@ -62,6 +72,7 @@
     font-family: 'Outfit';
     font-weight: 500;
 }
+
 
 .login {
     background-color: #000;

@@ -234,7 +234,7 @@ const Dashboard = () => {
           return <CheckingAccountWidget data={widget.configuration}/>;
 
       default:
-        return <div>Unknown widget type: {widget.type}</div>;
+        return <div>Widget type: {widget.type}</div>;
     }
   };
 
@@ -296,7 +296,7 @@ const Dashboard = () => {
               {renderWidgetContent(widget)}
             </div>
 
-            <div className="widgetEditBtn">
+            <div className="widgetEditBtns">
 
               <button
                 // Prevent dragging when trying to delete widget
@@ -307,7 +307,7 @@ const Dashboard = () => {
                   handleDeleteWidget(widget.id);
                 }}
               >
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWklEQVR4nGNgGAWDGBxnYGD4j4aPUcvww1gMJxcfHiiLD1ErNIYv+E8lPGoxQTAa1P9HExfDaHZiGC1AGEaLTKLAyCsyH1PB0kfkWOxJoeUgSz3IsXgUDA8AAHlcbV33qhrwAAAAAElFTkSuQmCC"/>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nO3QwQmAMBBE0ZSnbRvQPmIh37selmwGlDivgPkwpdhXAQdPu2q8olPfCm+SN+aFiMMhX50Vf3uTLjncC1+d5KtDv7z6FHRbJrwOxhuwdIdtGheIAr9DNss0IAAAAABJRU5ErkJggg=="/>
               </button>
 
               <button
@@ -318,7 +318,7 @@ const Dashboard = () => {
                   handleView(widget);
                 }}
               >
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABsElEQVR4nO3YW0oDMRTG8b9TKV5fhEpxCdVXN6BvIqIvugcvqHjFRbgKwf2oICK1G/BNEAThSCBCjKjNjElOy3xwmEI7Ib+ezEwY+B6JUPdAm8SRYcFIhLpxjq1BhrQcTLLOSIQiB0YiQZJjJCIkKUYiQ5JhJAEkCUYSQaJjJCEkKkYSQ6JhJAMkCkYyQf4dkxPiY8xRFSTVn/AluScuNcRL7g5I3REvuTsgdUe85O6A1B3xkrsDUnfEiyirJiUjyuoJWB8EyC2wD8wDk8AMsAicWMTn7y6BEY2QN2AbKH6ZSwFcAO8ORhXEIJYC5rTiYDY0QUwnQnNmz+31ewNIcU00SkAKoGvH2NQAMRd22RzZMa41QDoVIB07RlcDZKoCZMyO8aoBMl0BMmHHeBmWpfWoAXJQAXJsx7jSALkrefttOFuWLQ0QU7slIOfOA3FU0xZlOQCx6mxR1vo9SRJi9v5YZoW3aXwOebGdCuJeM4fAgn3GjNst/aldRuIggt7Si7Lq2R1v2yL6xoiyajpzC8KIsvIza5ej+e4BmOOHaIcEYQYhbWeZlXkuqYrB7JhPHx5Gmdmq/xj8AAAAAElFTkSuQmCC"/>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABsklEQVR4nO2YXUrDQBCA11aKvy9CRTyC+uoF9E1E9EXvUJUq/uIhPIXgfaogIrUX8E0QBOGThSlE2zSb1p1OJN9LCOwO82Um2SHO/YI4PAFLThPioStDHFqJa73IIvWEjE5liIDE1ZUhkoi6DBFFVGWILKImg4KIigxKItFlUBSJKoOySDQZxiASRYYxify5DGMU6SPTcpZERsGVIsZwZUWM4cqKGMOVFTGGKytiDPdfKgLU/ovIK7BbBJEHoAmsArPAArAOXIhEl1tgwqLIJ9AAKgNyqQA3wFdXxpqIl9jIkdNWQmbPkkgj+MkKwJXs7QR9AJTeiWpmIv3brC0x9p0BkWZmEikAZxLjPmRxbFYyk0jB75UY7ZDFsZnLTCIFYEpifIQsjs18ZhIpADMS4z1kcRFa68WCyMkIIucS486CyOOQn99qYmQ5sCDiORpC5DpxIE5aGlE2c0hsJ0aUndBNKMocD2ozeofGt+Af2+jj35lTYM2fMcC0jPSX0kYkJML/0mOPjp94ffIiESaDPWqJ3MJlMIbrzW9R2tHzDCwXUiSXTBHgZ5vlPpdMITKH/uYbY7tw/1fn3ScAAAAASUVORK5CYII="/>
               </button>
             
               <button
@@ -329,8 +329,7 @@ const Dashboard = () => {
                   handleEdit(widget);
                 }}
               >
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABSUlEQVR4nO2ZvUoDQRRGT6ONVmKhnRbiCwhW+gD6BoqNo4V5k1QWprBNYS2CvVj5APoG/nRioUlAMSMTvoUQxsI03gv3wMLuzBb38N2dXWYhCP7KJnAFvAF94A7YxxmHwBeQK8c5TjgGhir6DFgBFoAT4EPjeziSaFfmW5orbeZCIgMvwPrEPYua6+FEIv8is6rxVxxJ5IpMR2OXOJPIYzJtnX8CGziUyGPHUEuzGRLwPYVEC0OEhBUiCStEElaIJKwQSVghkrBCJGGFFJ/iRkiRhBFSJGGEFEkYIUUSRkiRhBGOptyLLXu4ZpgHBt4lCrveN5QbTlXgBfDsMYmGBxW5BawBT96SKCypwPLrd3Y0UpcxLVE4UKHXoyuYAbbVZi7aqaGrYm8k8z6RxEAvSfM8Vp6Fey0AO8AcTrjVStVVmy3/d0EBjvkBUA0ZY3SLwb4AAAAASUVORK5CYII="/>
-              </button>
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABUUlEQVR4nO3ZvU5UQRgG4GmgkYpQSAeF8QZIqOQC5A40NLtSyJ1QUUBhuwW1MbE3VnsBegf8dIQChUQCjxnybbLB00DjN8k81e7MKb4375yTzdlSuu5JsIkvuMQ1pnhfWoIRbg37VFqAXdzH0IdYwzI+4lesvysNhdgf2N+LvWlpJER1jtePrll52OF3aSTEYBisx/pFaSjEP2FwFGufS2Mh5sPsx+c/2CgNhphXrx+VLDDGnaeH2CtZ9BBZ9Cay6E1k0ZvIojeRRW8iC/0HYBJ6E0noTSShN5GE3kQSehNJ6E0kgQ/PfBe7W7LAEm6aDlFhu+kXyjM4iAGPcdZcEzP4GUO+wSucNtVEhZcxYP3rdzHWhsLkDVFhJwb9Gt8XsBXHLP9xmsEkhv1Ww+DqURP1aTYu2eFk4F74EQ+At3hRWoDv8aSaxDFb/d8zdaVhfwG3LEGdXdjCzgAAAABJRU5ErkJggg=="/>              </button>
             </div>
           </div>
         ))}
