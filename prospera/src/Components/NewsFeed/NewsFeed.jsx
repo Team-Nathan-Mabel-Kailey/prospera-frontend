@@ -176,6 +176,10 @@ const NewsFeed = () => {
 
     return (
         <div className="newsFeedContainer">
+            <div className="newsfeedTitle">
+                <h1>Your Newsfeed</h1>
+            </div>
+
             <div className="newsCategories">
                 <button 
                     onClick={() => handleCategoryChange('recommended')} 
