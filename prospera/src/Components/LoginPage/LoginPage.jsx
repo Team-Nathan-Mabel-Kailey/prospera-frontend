@@ -10,6 +10,7 @@ const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [showIcon, setShowIcon] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -21,7 +22,7 @@ const LoginPage = () => {
     const handleLogin = async (evt) => {
         evt.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/users/login', {
+            const response = await axios.post('https://prospera-api.onrender.com/users/login', {
                 username,
                 password
             });
@@ -38,6 +39,18 @@ const LoginPage = () => {
             console.error('Error logging in:', error);
         }
     };
+
+    const handleDisplayPassword = () => {
+        setShowPassword((prev) => !prev);
+        
+        if (showIcon == 'https://img.icons8.com/ios-glyphs/30/visible--v1.png') {
+            setShowIcon('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+        }
+
+        else {
+            setShowIcon('https://img.icons8.com/ios-glyphs/30/visible--v1.png');
+        }
+    }
 
     return (
         <>
@@ -60,8 +73,17 @@ const LoginPage = () => {
                         required
                     />
                     
-                    <label>Password
-                    </label>
+                    <div className='loginPasswordArea'>
+                        <label>Password
+                        </label>
+                        <div className='showPasswordArea'>
+                            <button className='showPasswordBtn'type="button" title="Show Password" onClick={handleDisplayPassword}>         
+                                <span className='showSymbol'>
+                                    <img src={showIcon}></img>
+                                </span>
+                            </button> 
+                        </div>
+                    </div>
                     <input
                         type={
                             showPassword ? 'text' : 'password'
@@ -69,25 +91,12 @@ const LoginPage = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    
-
-                    <div className='showPasswordArea'>
-                        <input
-                            id='check'
-                            type='checkbox'
-                            value={showPassword}
-                            onChange={() =>
-                                setShowPassword((prev) => !prev)
-                            }
-                        />
-                        <label htmlFor='check'>Show Password</label>
-                    </div>
-
-                    <a href='/forgot'>Forgot password?</a>
+         
+                    <a href='/forgot' className='forgotRedirect'><u>Forgot password?</u></a>
                     
                     <div className='loginButtonArea'>
-                        <button type='submit' onClick={handleLogin} className='loginButton'>Login</button>
-                        <button onClick={() => navigate('/register')} className='goToRegisterButton'>Go to Register</button>
+                        <button type='submit' onClick={handleLogin} className='loginButton'>LOGIN</button>
+                        <button onClick={() => navigate('/register')} className='goToRegisterButton'>GO TO REGISTER</button>
                     </div>
                 </form>
 

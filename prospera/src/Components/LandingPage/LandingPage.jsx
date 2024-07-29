@@ -36,22 +36,24 @@ const LandingPage = () => {
             <div className='headerSpace' id='tempHeader'></div>
             <div id="landingPageContent" className="landingPageContent">
 
-                <img className='landingImg' src="https://images.unsplash.com/photo-1517768692594-b4295586b7d6?q=80&w=3576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Landing Page" />
+                <img className='landingImg' src="https://images.unsplash.com/photo-1622480190621-c277f2984fab?q=80&w=3628&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Landing Page" />
                 
                 <div className='landingTexts'>
-                    <h1>Prospera</h1>
+                    <h1>PROSPERA</h1>
                     <div className='landingSlogan'>
                         <p >Thrive Financially, Live Fully</p>
                     </div>  
                 </div>
 
+                <h2 className='landingQuestion'>Did you know?</h2>
+
                 <div className="landingCards">
                     <div className='landingCardContainer'>
                             <figure>
-                                <img src="https://placehold.jp/400x200.png" alt="" />
+                                <img src="https://staffinghub.com/wp-content/uploads/2022/05/bigstock-Depressed-Desperate-Caucasian-424081190-696x464.jpg" alt="" />
                             </figure>
-                        <h3>Placeholder</h3>
-                        <Link to={"/"} target="_blank" className="read-more">Read more
+                        <h3>&quot;Gen Z is the least financially confident generation, as more than 1 in 4 Gen Zers say they are not confident in their financial knowledge and skills.&quot;</h3>
+                        <Link to={"https://wallethub.com/blog/generational-finances-survey/133122"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
@@ -59,10 +61,10 @@ const LandingPage = () => {
                     </div>
                     <div className='landingCardContainer'>
                             <figure>
-                                <img src="https://placehold.jp/400x200.png" alt="" />
+                                <img src="https://focov.org/wp-content/uploads/2023/05/language-barrier.jpg" alt="" />
                             </figure>
-                        <h3>Placeholder</h3>
-                        <Link to={"/"} target="_blank" className="read-more">Read more
+                        <h3>&quot;One in 12 people over the age of five in the U.S. have limited proficiency with the English language and many of these people have trouble accessing products and services from banks and lenders.&quot;</h3>
+                        <Link to={"https://d7a3216312da6f8c5faa-a6c4a22c6d23d8694e5e3f94c3d57dde.ssl.cf2.rackcdn.com/660b2327a6414c6f9b059d17743646ca_Financial-Literacy_-A-Guide-for-Immigrants-First-Gen-Americans.pdf"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
@@ -70,10 +72,10 @@ const LandingPage = () => {
                     </div>
                     <div className='landingCardContainer'>
                             <figure>
-                                <img src="https://placehold.jp/400x200.png" alt="" />
+                                <img src="https://media.gcflearnfree.org/content/58d03ca2e644ea0374142196_03_20_2017/financialproblemsolving_introimage.jpg" alt="" />
                             </figure>
-                        <h3>Placeholder</h3>
-                        <Link to={"/"} target="_blank" className="read-more">Read more
+                        <h3>&quot;Nearly 70% of the foreign-born population in the U.S. hold jobs — a participation rate that exceeds the native-born population — yet poverty rates among immigrant families are more than 20% higher.&quot;</h3>
+                        <Link to={"https://www.rescue.org/sites/default/files/document/1591/lg01jpmwhitepaperdigitalfinal.pdf"} target="_blank" className="read-more">Read more
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>

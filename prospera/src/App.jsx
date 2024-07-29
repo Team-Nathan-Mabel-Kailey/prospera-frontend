@@ -1,4 +1,4 @@
-// import { useState } from 'react'
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css'
 // import axios from "axios";
@@ -14,7 +14,12 @@ import NewsCardDetail from './Components/NewsCardDetail/NewsCardDetail';
 // import {ScrollContainer} from 'react-scroll-motion';
 import ChatbotPage from './Components/ChatbotPage/ChatbotPage';
 import { AuthProvider } from './Components/AuthContext/AuthContext';
-import TopicSelectionPage from './Components/TopicSelectionPage/TopicSelectionPage';
+import LogOut from './Components/LogOut/LogOut';
+import { useState } from 'react';
+import HamMenu from './Components/HamMenu/HamMenu';
+import Settings from './Components/Settings/Settings';
+import Account from './Components/Settings/Account';
+import './assets/fonts.css';
 
 function App() {
 
@@ -36,7 +41,9 @@ function App() {
                 <Route path="/news" element={<NewsFeed />} />
                 <Route path="/news/:articleId" element={<NewsCardDetail />} />
                 <Route path="/chat" element={<ChatbotPage />} />
-                <Route path="/topic-selection" element={<TopicSelectionPage />} />
+                <Route path="/settings" element={<Settings />} />
+                <Route path='/topic-selection' element={<TopicSelectionPage />} />
+                <Route path='/account' element={<Account />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
               </Routes>
             </Router>

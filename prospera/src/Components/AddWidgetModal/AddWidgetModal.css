@@ -1,0 +1,145 @@
+.selectTitle {
+    font-size: 2rem;
+    text-align: center;
+}
+
+.selectDropdown,
+.selectDropdown * {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.selectDropdown {
+  position: relative;
+  background-color: #E6E6E6;
+  border-radius: 4px;
+}
+
+.selectDropdown select {
+  font-size: 1rem;
+  font-weight: normal;
+  max-width: 100%;
+  padding: 8px 24px 8px 10px;
+  border: none;
+  background-color: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  appearance: none;
+}
+
+.selectDropdown select:active, .selectDropdown select:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.selectDropdown:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 0;
+  height: 0;
+  margin-top: -2px;
+  border-top: 5px solid #aaa;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+.defaultSelect {
+    font-family: 'Manrope';
+    color: black;
+    font-weight: 500;
+    margin: 1.5rem 0 1.5rem 0;
+}
+
+.createOptions {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Manrope';
+    color: black;
+    margin: 1.5rem 0 1.5rem 0;
+}
+
+.createOptions h2 {
+    text-align: center;
+    background-color: rgb(35, 35, 35);
+    border-radius: 1.5rem;
+    color: white;
+    padding: 10px;
+    margin: 0;
+}
+
+.createOptions h3 {
+    color: rgb(74, 1, 138);
+    font-weight: 600;
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 0;
+}
+
+p.accountExplanation {
+    margin-bottom: 0;
+}
+
+h3.accountQuestion {
+    margin: 1.5rem 0 1rem 0;
+}
+
+h3.accountQuestion2 {
+    margin: 1.5rem 0 0 0;
+}
+
+.financialGoalInputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+h3.savingsQuestions {
+    margin: 0.2rem 0 1.5rem 0;
+}
+
+.addWidgetBtnModal{
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow:hidden ;
+    align-self: center;
+    width: 150px;
+    margin: 0.8rem auto;
+    display: block;
+}
+
+.addWidgetBtnModal::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.addWidgetBtnModal:hover::after{
+    transform: scale(4);
+}
+
+.addWidgetBtnModal:hover {
+    border-color: #666666;
+    background: #292929;
+}
