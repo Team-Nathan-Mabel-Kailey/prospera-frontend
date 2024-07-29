@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
-    margin: 1rem 0 2rem 0;
+    color: #000;
+    margin: 4rem 0 6rem 0;
 }
 
 .registerBox {
     display: flex;
-    background-color: white;
+    background-color: #fff;
     border-radius: 20px;
     overflow: hidden;
     width: 74rem;
@@ -40,7 +40,13 @@
 }
 
 .registerDescription a {
-    color: black;
+    color: #000;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.registerDescription a:hover {
+    color: #5735df;
 }
 
 .registerDescription h1 {
@@ -59,7 +65,7 @@
 
 .showPassword1Btn, .showPassword2Btn, .showPassword3Btn {
     border: none;
-    background-color: white;
+    background-color: #fff;
 }
 
 .showSymbol img {

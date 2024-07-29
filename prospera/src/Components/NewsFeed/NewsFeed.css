@@ -123,7 +123,7 @@
 
 .newsCategories a.active {
     color: #fff;
-    background-color: #6303FF;
+    background-color: #5735df;
 }
 
 .newsCategories {
@@ -145,7 +145,7 @@
 }
 
 .newsCategories button.active {
-    background-color: #6303FF;
+    background-color: #5735df;
     color: #fff;
 }
 

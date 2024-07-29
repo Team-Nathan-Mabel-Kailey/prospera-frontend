@@ -6,6 +6,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    scroll-behavior: smooth;
 
     --img-scale: 1.001;
     --title-color: #000;
@@ -59,14 +60,28 @@
     height: 81px;
 }
 
-.landingQuestion {
+.landingQuestion{
     background-color: rgb(35, 35, 35);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     border-radius: 30px;
     margin: 40px 0 40px 0;
     padding: 15px 25px 15px 25px;
     font-size: 2.8rem;
-    color: white;
+    color: #fff;
+}
+
+@keyframes scale-up {
+    from {
+        scale: .8;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .landingQuestion {
+        animation: scale-up linear both;
+        animation-timeline: view();
+        animation-range: 25vh 75vh;
+    }
 }
 
 .landingCardContainer {
@@ -147,7 +162,6 @@
     }
 
     .landingTexts {
-        position: static;
         margin: 0 auto;
         width: 100%;
     }

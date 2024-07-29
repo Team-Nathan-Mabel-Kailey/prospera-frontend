@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import PasswordChecklist from "react-password-checklist";
 import './RegisterPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -94,7 +95,7 @@ const Register = () => {
             <form className='registerForm'>
                 <div className='registerDescription'>
                     <h1>Sign Up</h1>
-                    <p>Already have an account? <a href='/login'>Log in</a></p>
+                    <p>Already have an account? <Link to="/login"> <a>Log in</a></Link></p>
                 </div>
 
                 <label>Email</label>
