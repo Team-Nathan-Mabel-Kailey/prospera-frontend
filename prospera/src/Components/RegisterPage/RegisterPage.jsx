@@ -28,12 +28,12 @@ const Register = () => {
         try {
         //register the user
         const response = await axios.post(
-            'http://localhost:3000/users/register',
+            'https://prospera-api.onrender.com/users/register',
             { username, email, password, securityAnswer }
         );
         //login the user
         const loginResponse = await axios.post(
-            'http://localhost:3000/users/login',
+            'https://prospera-api.onrender.com/users/login',
             { username, password }
         );
             console.log(response);
@@ -89,7 +89,7 @@ const Register = () => {
         <div className='registerBody'>
         <div className='registerBox'>
             <div className='imageArea'>
-                <img src='https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='Picture of plant inside pot filled with coins'/>
+                <img src='https://images.unsplash.com/photo-1632849508137-3ef430962c8e?q=80&w=3109&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='Picture of plant inside pot filled with coins'/>
             </div>
 
             <form className='registerForm'>

@@ -22,7 +22,7 @@ const LoginPage = () => {
     const handleLogin = async (evt) => {
         evt.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/users/login', {
+            const response = await axios.post('https://prospera-api.onrender.com/users/login', {
                 username,
                 password
             });
@@ -122,7 +122,7 @@ const LoginPage = () => {
                         required
                     />
          
-                    <a href='/forgot' className='forgotRedirect'>Forgot password?</a>
+                    <a href='/forgot' className='forgotRedirect'><u>Forgot password?</u></a>
                     
                     <div className='loginButtonArea'>
                         <button type='submit' onClick={handleLogin} className='loginButton'>LOGIN</button>

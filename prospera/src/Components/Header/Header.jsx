@@ -15,7 +15,7 @@ const Header = ({ open, setOpen }) => {
         setOpen: PropTypes.func.isRequired
     };
 
-    const { isLoggedIn } = useAuth();
+    const { user, isLoggedIn } = useAuth();
 
     useEffect(() => {
         if (!googleTranslateInitialized) {
@@ -64,7 +64,7 @@ const Header = ({ open, setOpen }) => {
                     <img src={settingGif} alt="Hover" className="hoverImg"/>
                 </div>
                 </Link>
-                <NovuProvider className="notifIcon" subscriberId={'66a180a1f502999ed87ce307'} applicationIdentifier={'9aO_manMoao5'}>
+                <NovuProvider subscriberId={'user.userID'} applicationIdentifier={'9aO_manMoao5'}>
                     <PopoverNotificationCenter colorScheme={'light'}>
                     {({ unseenCount }) => <NotificationBell unseenCount={unseenCount} />}
                     </PopoverNotificationCenter>
@@ -78,13 +78,13 @@ const Header = ({ open, setOpen }) => {
             <>
             <div className='headerLeft'>
                 <div>
-                <Link to='/' className='logo'>
-                    <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
-                </Link>
+                    <Link to='/' className='logo'>
+                        <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
+                    </Link>
                 </div>
                 <div className='rightLinks'>
-                <Link to="/about" className="active">ABOUT</Link>
-                <Link to="/contact">CONTACT</Link>
+                    <Link to="/about" className="active">ABOUT</Link>
+                    <Link to="/contact">CONTACT</Link>
                 </div>
             </div>
             <div className="auth-buttons">

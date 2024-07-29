@@ -12,6 +12,18 @@
     margin-top: 100px;
 }
 
+.newsfeedTitle{
+    display: flex;
+    justify-content: center;
+
+    color: #000;
+    background-color: #fff;
+
+    padding: 0;
+    margin: 20px 15px;
+    border-radius: 5px;
+}
+
 .newsCategories{
     display: flex;
     justify-content: center;

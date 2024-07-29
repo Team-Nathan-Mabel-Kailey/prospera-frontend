@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './TopicSelectionPage.css';
+import { useAuth } from '../AuthContext/AuthContext';
 
 const topicsList = [
     'Stocks', 'Budgeting', 'Debt', 'Investing', 'Maintaining Good Credit', 
@@ -12,6 +13,7 @@ const topicsList = [
 const TopicSelectionPage = () => {
     const [selectedTopics, setSelectedTopics] = useState([]);
     const navigate = useNavigate();
+    const { user } = useAuth();
 
     const handleTopicToggle = (topic) => {
         setSelectedTopics((prev) =>
@@ -20,16 +22,20 @@ const TopicSelectionPage = () => {
     };
 
     const handleSubmit = async () => {
-        const userId = localStorage.getItem('userId'); // Assuming userId is stored in localStorage on login
+        const userId = user?.userID; // Assuming userId is stored in localStorage on login
+        if (!userId) {
+            console.error('User is not authenticated');
+            return;
+        }
         console.log('UserId:', userId);
         console.log('Selected Topics:', selectedTopics);
-
+    
         try {
-            const response = await axios.post('http://localhost:3000/users/save-topics', { userId, topics: selectedTopics });
+            const response = await axios.post('https://prospera-api.onrender.com/users/save-topics', { userId, topics: selectedTopics });
             console.log('Response:', response.data);
             navigate('/dashboard');
         } catch (error) {
-            console.error('Failed to save topics:', error);
+            console.error('Failed to save topics:', error.response?.data || error.message);
         }
     };
 
