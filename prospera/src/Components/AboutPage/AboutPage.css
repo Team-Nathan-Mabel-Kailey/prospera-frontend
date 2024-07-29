@@ -1,7 +1,11 @@
+#aboutPage {
+    padding-top: 20px;
+}
+
 .aboutBody{
     font-size: 1.5rem;
+    margin-top: 1.3rem;
     margin-bottom: 1rem;
-    /* margin-top: 15rem; */
     margin-left: 100px;
     margin-right: 100px;
 
@@ -12,25 +16,38 @@
     color: #fff;
 }
 
+.leftAboutTextArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(35, 35, 35);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    border-radius: 30px;
+    padding: 20px 30px 20px 30px;
+}
+
 .leftAboutBody, .rightAboutBody {
     flex: 1;
     padding: 1rem;
-
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .leftAboutBody h1 {
     font-weight: bold;
     font-size: 3rem;
-    margin-bottom: 1rem;
+    margin: 0 ;
     line-height: 1.2;
 }
 
-.leftAboutBody h1 em {
-    display: block;
-    font-style: italic;
-    font-size: 3.5rem;
+.leftAboutBody span {
+    font-size: 4rem;
+    font-family: 'Outfit';
+    font-weight: 700;
+    color: #af84f4;
+    margin: 0;
+    
 }
 
 .rightAboutBody{
@@ -96,7 +113,8 @@
     align-items: center;
     
     margin-top: 2rem;
-    margin-bottom: 19rem;
+    margin-bottom: 15
+    rem;
 
     color: #fff;
 }
@@ -111,12 +129,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    /* margin-top: 2rem; */
     padding: 20px;
     border-radius: 7px;
-
     background-color: rgba(255, 255, 255, 0.3);
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .teamIcons {
@@ -126,10 +142,9 @@
     margin-top: 1rem;
 }
 
-@media (max-width: 950px) {
-    .teamIcons {
-        flex-direction: column;
-    }
+.teamIcons p {
+    margin-top: 0.3rem;
+    font-size: 1.2rem;
 }
 
 .teamMember {
@@ -143,6 +158,7 @@
 .teamMember h3 {
     font-size: 1.9rem;
     margin-top: 1rem;
+    margin-bottom: 0;
 }
 
 .teamMember img {
@@ -150,15 +166,38 @@
     height: 200px;
     border-radius: 50%;
     margin: 0px 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .teamMember a img{
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
+    box-shadow: none;
 }
 
 .teamSocials {
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+@media (max-width: 968px) {
+    .aboutBody {
+        flex-direction: column;
+        font-size: 1rem;
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .leftAboutBody h1 {
+        font-size: 2.5rem;
+    }
+
+    .leftAboutBody h1 em {
+        font-size: 3rem;
+    }
+
+    .teamIcons {
+        flex-direction: column;
+    }
 }
