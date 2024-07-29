@@ -19,6 +19,7 @@ import { useState } from 'react';
 import HamMenu from './Components/HamMenu/HamMenu';
 import Settings from './Components/Settings/Settings';
 import Account from './Components/Settings/Account';
+import TopicSelectionPage from './Components/TopicSelectionPage/TopicSelectionPage'
 import './assets/fonts.css';
 
 function App() {
