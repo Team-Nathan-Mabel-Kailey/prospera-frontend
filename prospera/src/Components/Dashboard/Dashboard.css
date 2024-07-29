@@ -1,12 +1,104 @@
-.dashboardBody {
-    margin: 55px 0 0 0;
-    padding: 0 30px 30px 30px;
-}
-
 .headerSpace {
     height: 81px;
 }
 
+.dashboardTitle{
+    display: flex;
+    justify-content: center;
+
+    color: #000;
+    background-color: #fff;
+
+    padding: 0;
+    margin: 20px 15px;
+    border-radius: 5px;
+}
+.dashboardBody {
+    margin: 0;
+    padding: 0 15px 30px 15px;
+    min-height: 70vh;
+}
+
 .reactGridItem {
-    background-color: azure;
+    background-color: #212121;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.div.react-grid-layout.dash {
+    width: 10%;
+}
+
+.dash {
+    background-color: #fff;
+    color: #fff;
+    padding: 10px 10px 100px 10px;
+    border-radius: 5px;
+}
+
+.widgetContent {
+    padding: 10px;
+}
+
+.newWidgetBtn{
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+
+    padding: 10px 25px;
+
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+
+    outline: none;
+    position: relative;
+    overflow:hidden ;
+    align-self: center;
+    
+    width: 150px;
+    margin: 10px auto;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.newWidgetBtn::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.newWidgetBtn:hover::after{
+    transform: scale(4);
+}
+
+.newWidgetBtn:hover {
+    border-color: #666666;
+    background: #292929;
+}
+
+.widgetEditBtns img{
+    width: 25px;
+}
+
+.widgetEditBtns button{
+    background-color: transparent;
+    border-radius: 5px;
+    border: none;
+}
+
+.widgetEditBtns button:hover {
+    cursor: pointer;
+    background-color: white;
 }

@@ -1,25 +1,30 @@
 /* ChatbotPage.css */
+.chatTile {
+    display: flex;
+    justify-content: center;
 
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f3e5f5; /* Light purple background */
-    margin: 0;
+    color: #000;
+    background-color: #fff;
+
     padding: 0;
-    color: #4a148c; /* Dark purple text */
+    margin: 20px 15px;
+    border-radius: 5px;
 }
 
 .chatbotContainer {
     display: flex;
     height: 90vh;
-    margin-bottom: 270px;
+    /* margin-bottom: 270px; */
+    margin: 20px 15px 100px 15px;
 }
 
 .sidebar {
     width: 25%;
-    background-color: #6a1b9a; /* Purple sidebar */
+    background-color: rgb(106, 27, 154, 0.6); /* Purple sidebar */
     color: white;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    border-radius: 5px 0px 0px 5px;
 }
 
 .sidebar h2 {
@@ -50,7 +55,8 @@ body {
 .chatArea {
     width: 75%;
     padding: 20px;
-    background-color: #f3e5f5; /* Matching light purple background */
+    background-color: rgba(243, 229, 245, 0.7); /* Matching light purple background */
+    border-radius: 0px 5px 5px 0px;
 }
 
 .chatArea h2 {
@@ -92,7 +98,7 @@ body {
     margin-top: 20px;
 }
 
-input[type="text"] {
+.inputContainer input[type="text"] {
     flex: 1;
     padding: 10px;
     border: 1px solid #ce93d8;

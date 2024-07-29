@@ -8,6 +8,8 @@ const LogOut = () => {
 
     useEffect(() => {
             localStorage.removeItem('token');
+            localStorage.removeItem('userId');
+
             setIsLoggedIn(false);
             navigate('/');
     }, [setIsLoggedIn, navigate])
