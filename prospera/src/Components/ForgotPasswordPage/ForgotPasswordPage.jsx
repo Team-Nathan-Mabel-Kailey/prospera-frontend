@@ -21,7 +21,7 @@ const forgotPasswordPage = () => {
     const handleForgotPassword = async (evt) => {
         evt.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3000/users/forgot-password', {
+            const response = await axios.post('https://prospera-api.onrender.com/users/forgot-password', {
                 username,
                 newPassword,
                 securityAnswer

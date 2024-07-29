@@ -27,12 +27,12 @@ const Register = () => {
         try {
         //register the user
         const response = await axios.post(
-            'http://localhost:3000/users/register',
+            'https://prospera-api.onrender.com/users/register',
             { username, email, password, securityAnswer }
         );
         //login the user
         const loginResponse = await axios.post(
-            'http://localhost:3000/users/login',
+            'https://prospera-api.onrender.com/users/login',
             { username, password }
         );
             console.log(response);

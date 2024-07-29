@@ -41,7 +41,7 @@ const Settings = () => {
             
             const fetchUserData = async () => {
                 try {
-                    const userDataResponse = await axios.get(`http://localhost:3000/users/${userIdFromToken}`);
+                    const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
                     const userData = userDataResponse.data;
                     
                     setFirstName(userData.firstName);
