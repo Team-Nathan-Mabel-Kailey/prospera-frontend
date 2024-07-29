@@ -180,17 +180,20 @@ const ChatbotPage = () => {
         try {
             const response = await axios.post('https://prospera-api.onrender.com/api/chat', {
                 prompt: newMessage,
-                conversationId: selectedConversationId,
+                conversationId: selectedConversationId,  // Pass existing conversationId if available
             });
+
             const newMessages = [
                 ...messages,
                 { role: 'user', content: newMessage },
                 { role: 'assistant', content: response.data.response }
             ];
+
+            setMessages(newMessages);
             setNewMessage('');
-            setMessages(prevMessages => [...prevMessages, newMessages]);
+
             if (!selectedConversationId) {
-                setSelectedConversationId(response.data.conversationId);
+                setSelectedConversationId(response.data.conversationId);  // Only set new conversationId if it was null
                 fetchConversations(user.userID);
             }
         } catch (error) {
@@ -203,11 +206,17 @@ const ChatbotPage = () => {
             const response = await axios.post('https://prospera-api.onrender.com/api/chat/new', {
                 userId: user.userID,
             });
-            setSelectedConversationId(response.data.conversationId);
+            setSelectedConversationId(response.data.conversationId);  // Set new conversationId
             setMessages([]);
-            fetchConversations(user.userID);
+            fetchConversations(user.userID);  // Fetch updated list of conversations
         } catch (error) {
             console.error('Error starting new conversation:', error);
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
         }
     };
 
@@ -215,38 +224,39 @@ const ChatbotPage = () => {
         <>
             <div className='headerSpace' id='tempHeader'></div>
         
-        <div className="chatbotContainer">
-            <div className="sidebar">
-                <h2>Conversations</h2>
-                <ul>
-                    {(conversations || []).map((conv) => (
-                        <li key={conv.conversationId} onClick={() => setSelectedConversationId(conv.conversationId)}>
-                            Conversation {conv.conversationId}
-                        </li>
-                    ))}
-                </ul>
-                <button onClick={handleNewConversation}>New Conversation</button>
-            </div>
-            <div className="chatArea">
-                <h2>Chat</h2>
-                <div className="messageContainer">
-                    {messages.map((msg, index) => (
-                        <div key={index} className={`message ${msg.role}`}>
-                            {msg.content}
-                        </div>
-                    ))}
+            <div className="chatbotContainer">
+                <div className="sidebar">
+                    <h2>Conversations</h2>
+                    <ul>
+                        {(conversations || []).map((conv) => (
+                            <li key={conv.conversationId} onClick={() => setSelectedConversationId(conv.conversationId)}>
+                                Conversation {conv.conversationId}
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={handleNewConversation}>New Conversation</button>
                 </div>
-                <div className="inputContainer">
-                    <input
-                        type="text"
-                        placeholder="Type your message here..."
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                    />
-                    <button onClick={sendMessage}>Send</button>
+                <div className="chatArea">
+                    <h2>Chat</h2>
+                    <div className="messageContainer">
+                        {messages.map((msg, index) => (
+                            <div key={index} className={`message ${msg.role}`}>
+                                {msg.content}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="inputContainer">
+                        <input
+                            type="text"
+                            placeholder="Type your message here..."
+                            value={newMessage}
+                            onChange={(e) => setNewMessage(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                        />
+                        <button onClick={sendMessage}>Send</button>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     );
 };
