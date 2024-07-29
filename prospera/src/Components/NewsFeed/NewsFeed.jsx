@@ -143,7 +143,7 @@ const NewsFeed = () => {
         };
 
         fetchArticles();
-    }, [category, query, userTopics, page]);
+    }, [category, query, userTopics, page, allowedSources, economicNewsSources]);
 
     const handleCategoryChange = (newCategory) => {
         if (newCategory === 'recommended' && !hasCompletedTopics) {
