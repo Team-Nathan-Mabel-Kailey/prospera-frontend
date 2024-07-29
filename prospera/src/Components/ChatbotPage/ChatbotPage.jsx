@@ -187,8 +187,8 @@ const ChatbotPage = () => {
                 { role: 'user', content: newMessage },
                 { role: 'assistant', content: response.data.response }
             ];
-            setMessages(newMessages);
             setNewMessage('');
+            setMessages(prevMessages => [...prevMessages, newMessages]);
             if (!selectedConversationId) {
                 setSelectedConversationId(response.data.conversationId);
                 fetchConversations(user.userID);
@@ -205,6 +205,7 @@ const ChatbotPage = () => {
             });
             setSelectedConversationId(response.data.conversationId);
             setMessages([]);
+            fetchConversations(user.userID);
         } catch (error) {
             console.error('Error starting new conversation:', error);
         }
@@ -219,7 +220,7 @@ const ChatbotPage = () => {
                 <h2>Conversations</h2>
                 <ul>
                     {(conversations || []).map((conv) => (
-                        <li key={conv.conversationId} onClick={() => fetchChatHistory(conv.conversationId)}>
+                        <li key={conv.conversationId} onClick={() => setSelectedConversationId(conv.conversationId)}>
                             Conversation {conv.conversationId}
                         </li>
                     ))}
