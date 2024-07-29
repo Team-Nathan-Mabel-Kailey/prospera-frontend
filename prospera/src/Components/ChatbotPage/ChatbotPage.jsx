@@ -154,7 +154,7 @@ const ChatbotPage = () => {
 
     const fetchConversations = async (userID) => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/chat/conversations/${userID}`);
+            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/conversations/${userID}`);
             setConversations(response.data.conversations);
         } catch (error) {
             console.error('Error fetching conversations:', error);
@@ -163,7 +163,7 @@ const ChatbotPage = () => {
 
     const fetchChatHistory = async (conversationId) => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/chat/${conversationId}`);
+            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/${conversationId}`);
             const formattedMessages = response.data.messages.flatMap(msg => [
                 { role: 'user', content: msg.prompt },
                 { role: 'assistant', content: msg.response }
@@ -178,7 +178,7 @@ const ChatbotPage = () => {
         if (newMessage.trim() === '') return;
 
         try {
-            const response = await axios.post('http://localhost:3000/api/chat', {
+            const response = await axios.post('https://prospera-api.onrender.com/api/chat', {
                 prompt: newMessage,
                 conversationId: selectedConversationId,
             });
@@ -200,7 +200,7 @@ const ChatbotPage = () => {
 
     const handleNewConversation = async () => {
         try {
-            const response = await axios.post('http://localhost:3000/api/chat/new', {
+            const response = await axios.post('https://prospera-api.onrender.com/api/chat/new', {
                 userId: user.userID,
             });
             setSelectedConversationId(response.data.conversationId);

@@ -29,7 +29,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         const newWidgetI = uuidv4();
 
         try {
-        const response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+        const response = await axios.post(`https://prospera-api.onrender.com/api/widgets/create`, {
             i: newWidgetI,
             type: widgetType,
             x: 0,
