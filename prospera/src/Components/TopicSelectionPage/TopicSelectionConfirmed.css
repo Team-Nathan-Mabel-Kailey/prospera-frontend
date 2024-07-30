@@ -18,9 +18,34 @@
     justify-content: center;
 
     height: 60vh;
+    /* border-image: url('/media/examples/border-diamonds.png') 30 / 19px round; */
 }
 
 .topicsConfirmedContainer a {
     color: #000;
     font-size: 1rem;
 }
+
+
+  .topicsConfirmedContainer::before,
+  .topicsConfirmedContainer::after {
+    content: '';
+    position: absolute;
+    width: 150px; /* Adjust size as needed */
+    height: 150px;
+    background-image: url('/Untitled design.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  .topicsConfirmedContainer::before {
+    top: 0;
+    left: 0;
+    transform: rotate(0deg);
+  }
+  
+  .topicsConfirmedContainer::after {
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+  }
