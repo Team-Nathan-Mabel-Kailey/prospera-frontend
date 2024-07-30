@@ -47,7 +47,7 @@
 //         setMessages([...messages, newMessage]);
 
 //         try {
-//             const response = await axios.post('http://localhost:3000/api/chat', {
+//             const response = await axios.post('https://prospera-api.onrender.com/api/chat', {
 //                 prompt: input,
 //                 conversationId: conversationId,
 //             });
@@ -132,17 +132,27 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import './ChatbotPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const ChatbotPage = () => {
-    const { user } = useAuth();
+    const { user, isLoggedIn } = useAuth();
+    const navigate = useNavigate();
     const [conversations, setConversations] = useState([]);
     const [selectedConversationId, setSelectedConversationId] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
 
     useEffect(() => {
-        if (user) {
-            fetchConversations(user.userID);
+        if (!isLoggedIn || !user) {
+            navigate('/login');
+            return;
+        }
+        fetchConversations();
+    }, [user, isLoggedIn, navigate]);
+
+    useEffect(() => {
+        if (user && user.userID) {
+            fetchConversations();
         }
     }, [user]);
 
@@ -152,9 +162,10 @@ const ChatbotPage = () => {
         }
     }, [selectedConversationId]);
 
-    const fetchConversations = async (userID) => {
+    const fetchConversations = async () => {
+        if (!user || !user.userID) return;
         try {
-            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/conversations/${userID}`);
+            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/conversations/${user.userID}`);
             setConversations(response.data.conversations);
         } catch (error) {
             console.error('Error fetching conversations:', error);
@@ -175,12 +186,16 @@ const ChatbotPage = () => {
     };
 
     const sendMessage = async () => {
-        if (newMessage.trim() === '') return;
+        if (newMessage.trim() === '' || !user || !user.userID) {
+            console.error('Cannot send message: User not loaded or missing userID');
+            return;
+        }
 
         try {
             const response = await axios.post('https://prospera-api.onrender.com/api/chat', {
                 prompt: newMessage,
                 conversationId: selectedConversationId,  // Pass existing conversationId if available
+                userId: user.userID,
             });
 
             const newMessages = [
@@ -194,21 +209,25 @@ const ChatbotPage = () => {
 
             if (!selectedConversationId) {
                 setSelectedConversationId(response.data.conversationId);  // Only set new conversationId if it was null
-                fetchConversations(user.userID);
+                fetchConversations();
             }
         } catch (error) {
-            console.error('Error sending message:', error);
+            console.error('Error sending message:', error.response?.data || error.message);
         }
     };
 
     const handleNewConversation = async () => {
+        if (!user) {
+            console.error('User is not authenticated');
+            return;
+        }
         try {
             const response = await axios.post('https://prospera-api.onrender.com/api/chat/new', {
                 userId: user.userID,
             });
             setSelectedConversationId(response.data.conversationId);  // Set new conversationId
             setMessages([]);
-            fetchConversations(user.userID);  // Fetch updated list of conversations
+            fetchConversations();  // Fetch updated list of conversations
         } catch (error) {
             console.error('Error starting new conversation:', error);
         }
