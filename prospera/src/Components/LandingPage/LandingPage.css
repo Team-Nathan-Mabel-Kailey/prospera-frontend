@@ -140,8 +140,9 @@
     --img-scale: 1.1;
     --link-icon-translate: 0;
     --link-icon-opacity: 1;
-    box-shadow: 10px 10px 60px #353434,
-    -10px -10px 60px #dfb6f1;
+    /* box-shadow: 10px 10px 60px #353434,
+    -10px -10px 60px #dfb6f1; */
+    transform: rotate(3deg) scale(1);
 }
 
 .landingCards {
