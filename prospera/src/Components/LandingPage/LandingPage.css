@@ -63,7 +63,7 @@
 .landingQuestion{
     background-color: rgb(35, 35, 35);
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-    border-radius: 30px;
+    border-radius: 15px;
     margin: 40px 0 40px 0;
     padding: 15px 25px 15px 25px;
     font-size: 2.8rem;
@@ -86,18 +86,20 @@
 
 .landingCardContainer {
     position: relative;
-    border-radius: 7px;
-    box-shadow: none;
-    background: #fff;
-    transform-origin: center;
-    transition: all 0.4s ease-in-out;
-    overflow: hidden;
-    color: #000;
-    margin-top: 0;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     display: flex;
     flex-direction: column;
-    max-width: 430px;
+    align-items: center;
+    transform-origin: center;
+    overflow: hidden;
+
+    border-radius: 7px;
+    transition: all 0.4s ease-in-out;
+    margin-top: 0;
+    max-width: 410px;
+
+    background: #fff;
+    color: #000;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .landingCardContainer img {
@@ -144,7 +146,8 @@
 
 .landingCards {
     display: flex;
-    gap: 150px;
+    gap: 130px;
+    margin: 0 20px;
 }
 
 .read-more {

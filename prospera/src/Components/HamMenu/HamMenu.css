@@ -55,6 +55,11 @@
     color: #343078;
 }
 
+.loggedInBurger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 
 .hamAuthButtons button{
@@ -66,8 +71,10 @@
 
     outline: none;
     position: relative;
+    overflow: hidden;
     
     width: 100%;
+    font-size: 1rem;
 }
 
 .hamAuthButtons{

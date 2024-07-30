@@ -107,11 +107,11 @@
     margin: 15px 0 0 0;
     padding: 15px 30px;
     border: 2px solid #2c2c2c;
-    background-color: #1a1a1a;
+    background-color: #232323;
     color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 15px;
     transition: all 0.4s ease;
     outline: none;
     position: relative;
@@ -164,6 +164,7 @@
     align-items: baseline;
     justify-content: center;
     align-items: center;
+    margin-right: 50px;
 }
 
 .logInTitle h1 {
