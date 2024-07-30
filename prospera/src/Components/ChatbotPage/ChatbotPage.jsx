@@ -143,12 +143,12 @@ const ChatbotPage = () => {
     const [newMessage, setNewMessage] = useState('');
 
     useEffect(() => {
-        if (!isLoggedIn || !user) {
+        if (!isLoggedIn) {
             navigate('/login');
             return;
         }
         fetchConversations();
-    }, [user, isLoggedIn, navigate]);
+    }, [isLoggedIn, navigate]);
 
     useEffect(() => {
         if (user && user.userID) {
