@@ -26,10 +26,10 @@
     padding: 0 15px 0 15px;
 }
 
-@keyframes slide-in-left {
+@keyframes slide-in {
     from {
         opacity: 0;
-        transform: translate(100%, 50%);
+        transform: translate(100%, 0%);
     }
     to {
         opacity: 1;

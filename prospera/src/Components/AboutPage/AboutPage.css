@@ -26,11 +26,6 @@
     padding: 20px 30px 20px 30px;
 }
 
-@keyframes scale-up {
-    from {
-        scale: .7;
-    }
-}
 
 @keyframes slide-in {
     from {
@@ -46,7 +41,7 @@
 @keyframes slide-in-left {
     from {
         opacity: 0;
-        transform: translate(100%, 50%);
+        transform: translate(-100%, 50%); /* Change 100% to -100% */
     }
     to {
         opacity: 1;
@@ -56,12 +51,6 @@
 
 @media (prefers-reduced-motion: no-preference) {
     .leftAboutTextArea {
-        animation: slide-in linear both;
-        animation-timeline: view();
-        animation-range: 25vh 75vh;
-    }
-
-    .team h2 {
         animation: slide-in-left linear both;
         animation-timeline: view();
         animation-range: 25vh 75vh;
