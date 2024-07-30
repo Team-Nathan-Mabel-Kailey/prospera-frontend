@@ -46,6 +46,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 20px;
 }
 
 .sidebar ul li:hover {
@@ -85,12 +86,14 @@
     background-color: #ba68c8; /* User message background */
     color: white;
     align-self: flex-start;
+    font-size: 20px;
 }
 
 .message.assistant {
     background-color: #9575cd; /* Assistant message background */
     color: white;
     align-self: flex-end;
+    font-size: 20px;
 }
 
 .inputContainer {
@@ -104,7 +107,7 @@
     border: 1px solid #ce93d8;
     border-radius: 10px;
     margin-right: 10px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .chatbotContainer button {
@@ -114,7 +117,7 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     transition: background-color 0.3s ease;
 }
 
