@@ -221,8 +221,8 @@ const Dashboard = () => {
         case 'financialGoals':
           return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
 
-        case 'highlightedSavings':
-          return <HighlightedSavingsWidget data={widget.configuration}/>;
+        // case 'highlightedSavings':
+        //   return <HighlightedSavingsWidget data={widget.configuration}/>;
 
         case 'news':
           return <NewsWidget data={widget.configuration}/>;

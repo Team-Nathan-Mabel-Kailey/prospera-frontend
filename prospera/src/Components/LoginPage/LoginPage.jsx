@@ -52,6 +52,23 @@ const LoginPage = () => {
         }
     }
 
+    // const texts = document.querySelectorAll('.text');
+// let currentIndex = 0;
+
+// function changeText() {
+//   texts.forEach((text, index) => {
+//     if (index === currentIndex) {
+//       text.style.opacity = '1';
+//     } else {
+//       text.style.opacity = '0';
+//     }
+//   });
+
+//   currentIndex = (currentIndex + 1) % texts.length;
+// }
+
+// setInterval(changeText, 2000);
+
     return (
         <>
         <div className='headerSpace' id='tempHeader'></div>
@@ -60,8 +77,21 @@ const LoginPage = () => {
             <div className='loginBox'>
                 <form className='loginForm'>
                     <div className='loginDescription'>
-                        <h1>Login</h1>
-                        <p>Sign in to continue with us</p>
+                        <div className='logInTitle'>
+                            <div className="animated-text">
+                                <span className="text">Hello,</span>
+                                <span className="text">Hola,</span>
+                                <span className="text">Bonjour,</span>
+                                <span className="text">Hallo,</span>
+                                <span className="text">Ciao,</span>
+                                <span className="text">你好,</span>
+                                <span className="text">नमस्ते,</span>
+                                <span className="text">Olá,</span>
+                                <span className="text">Привет,</span>
+                            </div>
+                            <h1>Login</h1>
+                        </div>
+                        <p>Sign in to continue.</p>
                     </div>
 
                     <label>Username

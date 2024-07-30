@@ -3,37 +3,37 @@
 }
 
 h1 {
-    font-family: 'Outfit';
+    font-family: 'Montseratt';
     font-weight: 700;
 }
 
 h2 {
-    font-family: 'Outfit';
+    font-family: 'Lora';
     font-weight: 600;
 }
 
-p {
-    font-family: 'Manrope';
+p, span {
+    font-family: 'Hind Madurai';
     font-weight: 500;
 }
 
+a, button {
+    font-family: 'Lora';
+    font-weight: 600;
+}
+
 h3 {
-    font-family: 'Outfit';
+    font-family: 'Lora';
     font-weight: 550;
 }
 
 label {
-    font-family: 'Manrope';
+    font-family: 'Hind Madurai';
     font-weight: 500;
 }
 
-button {
-    font-family: 'Outfit';
-    font-weight: 600;
-}
-
 .passwordChecklist {
-    font-family: 'Manrope';
+    font-family: 'Hind Madurai';
     font-size: 0.9rem;
 }
 

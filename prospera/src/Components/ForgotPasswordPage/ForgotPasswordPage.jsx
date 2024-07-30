@@ -4,7 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import PasswordChecklist from "react-password-checklist";
 import './ForgotPasswordPage.css';
 
-const forgotPasswordPage = () => {
+const ForgotPasswordPage = () => {
     const [username, setUsername]  = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordAgain, setNewPasswordAgain] = useState('');
@@ -180,4 +180,4 @@ const forgotPasswordPage = () => {
     )
 }
 
-export default forgotPasswordPage
+export default ForgotPasswordPage

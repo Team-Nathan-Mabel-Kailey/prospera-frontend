@@ -54,7 +54,7 @@ const Header = ({ open, setOpen }) => {
                 <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
                 </Link>
             </nav>
-            <div className="auth-buttons-left">
+            <div className="authButtonsLeft">
                 <Link to="/dashboard">DASHBOARD</Link>
                 <Link to="/news">NEWS</Link>
                 <Link to='/chat'>CHATBOT</Link>
@@ -72,6 +72,15 @@ const Header = ({ open, setOpen }) => {
             </div>
             <div className='auth-buttons'>
                 <Link to="/logout"><button className="login">LOG OUT</button></Link>
+            </div>
+            <div className="burgerAlign">
+                <div className='toggleHamburger'>
+                    <button className={`burger ${open ? 'burger-open' : 'burgerClose'}`} onClick={() => setOpen(!open)}>
+                    <div />
+                    <div />
+                    <div />
+                    </button>
+                </div>
             </div>
             </>
         ) : (
@@ -91,12 +100,14 @@ const Header = ({ open, setOpen }) => {
                 <Link to="/login"><button className="login">LOG IN</button></Link>
                 <Link to='/register'><button className="register">REGISTER</button></Link>
             </div>
-            <div className='toggleHamburger'>
-                <button className={`burger ${open ? 'burger-open' : 'burgerClose'}`} onClick={() => setOpen(!open)}>
-                <div />
-                <div />
-                <div />
-                </button>
+            <div className="burgerAlign">
+                <div className='toggleHamburger'>
+                    <button className={`burger ${open ? 'burger-open' : 'burgerClose'}`} onClick={() => setOpen(!open)}>
+                    <div />
+                    <div />
+                    <div />
+                    </button>
+                </div>
             </div>
             </>
         )} 
