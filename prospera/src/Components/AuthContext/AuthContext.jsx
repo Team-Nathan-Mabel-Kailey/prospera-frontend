@@ -42,7 +42,7 @@ import { jwtDecode } from "jwt-decode";
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
 
     useEffect(() => {
@@ -50,9 +50,8 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('token');
         console.log("token is: ", token)
 
-        const decodedToken = jwtDecode(token)
-
         if (token) {
+            const decodedToken = jwtDecode(token)
             axios.get(`http://localhost:3000/users/${decodedToken.userId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`

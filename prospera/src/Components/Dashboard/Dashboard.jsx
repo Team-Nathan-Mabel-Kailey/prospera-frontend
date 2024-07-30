@@ -10,21 +10,16 @@ import SavingsAccountWidget from '../SavingsAccountWidget/SavingsAccountWidget';
 import CheckingAccountWidget from '../CheckingAccountWidget/CheckingAccountWidget';
 import NewsWidget from '../NewsWidget/NewsWidget'
 import FinancialGoalsWidget from '../FinancialGoalsWidget/FinancialGoalsWidget';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+// import CardMedia from '@mui/material/CardMedia';
+// import Typography from '@mui/material/Typography';
+// import CardHeader from '@mui/material/CardHeader';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
 // Makes layout responsive
 const DashboardLayout = WidthProvider(Responsive);
-
-const getUserIdFromToken = (token) => {
-  try {
-    const decoded = jwtDecode(token);
-    return decoded.userId;
-  } catch (error) {
-    console.error('Error decoding token:', error);
-    return null;
-  }
-};
 
 const Dashboard = () => {
   const [layouts, setLayouts] = useState({ 
@@ -43,40 +38,16 @@ const Dashboard = () => {
   const [userId, setUserId] = useState(null);
   const [existingWidgets, setExistingWidgets] = useState([]);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const userIdFromToken = getUserIdFromToken(token);
-      setUserId(userIdFromToken);
-    
-      const fetchUserData = async () => {
-        try {
-          const userDataResponse = await axios.get(`http://localhost:3000/users/${userIdFromToken}`);
-          const userData = userDataResponse.data;
-
-          setExistingWidgets(userData.Widgets);
-          setWidgetArray(userData.Widgets);
-          
-          const initialLayouts = userData.Widgets.reduce((acc, widget) => {
-            const layout = { i: widget.i, x: widget.x, y: widget.y, w: widget.w, h: widget.h };
-            acc.lg.push(layout);
-            acc.md.push(layout);
-            acc.sm.push(layout);
-            acc.xs.push(layout);
-            acc.xxs.push(layout);
-            return acc;
-          }, { lg: [], md: [], sm: [], xs: [], xxs: [] });
-
-          setLayouts(initialLayouts);
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      };
-
-      fetchUserData();
+  const getUserIdFromToken = (token) => {
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.userId;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
     }
-  }, []);
-
+  };
+  
   const handleModify = async (layout, allLayouts) => {
     const updatedWidgets = widgetArray.map((widget) => {
       const updatedWidget = layout.find((obj) => obj.i === widget.id.toString());
@@ -89,7 +60,7 @@ const Dashboard = () => {
           w: updatedWidget.w,
           h: updatedWidget.h
         });
-
+  
         return {
           ...widget,
           x: updatedWidget.x,
@@ -103,7 +74,51 @@ const Dashboard = () => {
     });
     setLayouts(allLayouts);
     setWidgetArray(updatedWidgets);
-  };
+  };  
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const userIdFromToken = getUserIdFromToken(token);
+      setUserId(userIdFromToken);
+    
+      const fetchUserData = async () => {
+        try {
+          const userDataResponse = await axios.get(`http://localhost:3000/users/${userIdFromToken}`);
+          const userData = userDataResponse.data;
+
+          setExistingWidgets(userData.Widgets);
+          setWidgetArray(userData.Widgets);
+          console.log('a users widgets: ', userData.Widgets);
+          
+          // const initialLayouts = userData.Widgets.reduce((acc, widget) => {
+          // const layout = { i: widget.i, x: widget.x, y: widget.y, w: widget.w, h: widget.h };
+          //   acc.lg.push(layout);
+          //   acc.md.push(layout);
+          //   acc.sm.push(layout);
+          //   acc.xs.push(layout);
+          //   acc.xxs.push(layout);
+          //   return acc;
+          // }, { lg: [], md: [], sm: [], xs: [] });
+  
+          // setLayouts(initialLayouts);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+  
+      fetchUserData();
+    }
+  }, []);
+      
+      //   } catch (error) {
+      //     console.error('Error fetching user data:', error);
+      //   }
+      // };
+
+  //     fetchUserData();
+  //   }
+  // }, []);
 
   const handleAddWidget = (newWidget) => {
     setWidgetArray([...widgetArray, newWidget]);
@@ -113,49 +128,9 @@ const Dashboard = () => {
       md: [...prevLayouts.md, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
       sm: [...prevLayouts.sm, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
       xs: [...prevLayouts.xs, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
-      xxs: [...prevLayouts.xxs, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
+      // xxs: [...prevLayouts.xxs, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
     }));
   };
-
-  // const handleAddWidget = async (newWidget) => {
-  //   try {
-  //     // Send the new widget data to the server
-  //     const response = await axios.post('http://localhost:3000/api/widgets/create', {
-  //       ...newWidget,
-  //       userId: userId // Assuming you have userId in your component's state
-  //     });
-  
-  //     // The server should return the created widget with its new ID
-  //     const createdWidget = response.data;
-  
-  //     // Update widgetArray state
-  //     setWidgetArray(prevWidgets => [...prevWidgets, createdWidget]);
-  
-  //     // Update layouts state
-  //     setLayouts(prevLayouts => {
-  //       const newLayouts = { ...prevLayouts };
-  //       for (const breakpoint in newLayouts) {
-  //         newLayouts[breakpoint] = [
-  //           ...newLayouts[breakpoint],
-  //           {
-  //             i: createdWidget.id.toString(),
-  //             x: createdWidget.x || 0,
-  //             y: createdWidget.y || 0,
-  //             w: createdWidget.w || 2,
-  //             h: createdWidget.h || 2
-  //           }
-  //         ];
-  //       }
-  //       return newLayouts;
-  //     });
-  
-  //     // Close the add widget modal
-  //     setModalOpen(false);
-  //   } catch (error) {
-  //     console.error('Error adding widget:', error);
-  //     // Optionally, show an error message to the user
-  //   }
-  // };
 
   const handleDeleteWidget = async (key) => {
     try {
@@ -179,21 +154,6 @@ const Dashboard = () => {
       // Optionally, you can show an error message to the user here
     }
   };
-
-  // const handleDeleteWidget = async (key) => {
-  //   const updatedWidgets = widgetArray.filter((widget) => widget.i !== key);
-  //   setWidgetArray(updatedWidgets);
-  //   setLayouts((prevLayouts) => ({
-  //     ...prevLayouts,
-  //     lg: prevLayouts.lg.filter((layout) => layout.i !== key),
-  //     md: prevLayouts.md.filter((layout) => layout.i !== key),
-  //     sm: prevLayouts.sm.filter((layout) => layout.i !== key),
-  //     xs: prevLayouts.xs.filter((layout) => layout.i !== key),
-  //     xxs: prevLayouts.xxs.filter((layout) => layout.i !== key),
-  //   }));
-
-  //   axios.delete(`http://localhost:3000/api/widgets/${key}`);
-  // };
 
   const handleAdd = () => {
     setModalOpen(true);
@@ -221,8 +181,8 @@ const Dashboard = () => {
         case 'financialGoals':
           return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
 
-        case 'highlightedSavings':
-          return <HighlightedSavingsWidget data={widget.configuration}/>;
+        // case 'highlightedSavings':
+        //   return <HighlightedSavingsWidget data={widget.configuration}/>;
 
         case 'news':
           return <NewsWidget data={widget.configuration}/>;
@@ -270,16 +230,17 @@ const Dashboard = () => {
       <DashboardLayout
         className='dash'
         onLayoutChange={handleModify}
-        verticalCompact={true}
+        compactType='horizontal'
         layouts={layouts}
         // Breakpoints and cols are used for responsive design
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 8, md: 8, sm: 4, xs: 2, xxs: 2 }}
-        autoSize={true}
-        margin={[20, 20]}
+        // breakpoints={{ lg: 800, xs: 200 }}
+        // cols={{ lg: 8, xs: 2}}
+        // maxRows={4}
+        // autoSize={true}
+        margin={[30, 30]}
       >
         {widgetArray.map((widget) => (
-          <div
+          <Card
             // Widget container
             key={widget.id.toString()}
             className="reactGridItem"
@@ -289,15 +250,14 @@ const Dashboard = () => {
               w: widget.w,
               h: widget.h,
               i: widget.i,
+              minW: widget.minW,
+              maxW: widget.maxW,
+              minH: widget.minH,
+              maxH: widget.maxH
             }}
             // style={{ backgroundColor }}
           >
-            <div className="widgetContent">
-              {renderWidgetContent(widget)}
-            </div>
-
             <div className="widgetEditBtns">
-
               <button
                 // Prevent dragging when trying to delete widget
                 onMouseDown={stopPropagation}
@@ -331,7 +291,12 @@ const Dashboard = () => {
               >
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABUUlEQVR4nO3ZvU5UQRgG4GmgkYpQSAeF8QZIqOQC5A40NLtSyJ1QUUBhuwW1MbE3VnsBegf8dIQChUQCjxnybbLB00DjN8k81e7MKb4375yTzdlSuu5JsIkvuMQ1pnhfWoIRbg37VFqAXdzH0IdYwzI+4lesvysNhdgf2N+LvWlpJER1jtePrll52OF3aSTEYBisx/pFaSjEP2FwFGufS2Mh5sPsx+c/2CgNhphXrx+VLDDGnaeH2CtZ9BBZ9Cay6E1k0ZvIojeRRW8iC/0HYBJ6E0noTSShN5GE3kQSehNJ6E0kgQ/PfBe7W7LAEm6aDlFhu+kXyjM4iAGPcdZcEzP4GUO+wSucNtVEhZcxYP3rdzHWhsLkDVFhJwb9Gt8XsBXHLP9xmsEkhv1Ww+DqURP1aTYu2eFk4F74EQ+At3hRWoDv8aSaxDFb/d8zdaVhfwG3LEGdXdjCzgAAAABJRU5ErkJggg=="/>              </button>
             </div>
-          </div>
+
+            <CardContent className="widgetContent">
+              {renderWidgetContent(widget)}
+            </CardContent>
+
+          </Card>
         ))}
       </DashboardLayout>
     </div>
