@@ -8,7 +8,7 @@ const TopicSelectionConfirmed = () => {
             <div className='headerSpace' id='tempHeader'></div>
             <div className='topicsConfirmedContainer'>
                 <h1>Selection Confirmed!</h1>
-                <p>Navigate to the News Page to view your recommended feed</p>
+                <p>Navigate to the News Page to view your recommended feed.</p>
                 <Link to="/news"><a>News Feed</a></Link>
             </div>
         </>

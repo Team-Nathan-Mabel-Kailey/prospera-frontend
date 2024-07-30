@@ -19,3 +19,8 @@
 
     height: 60vh;
 }
+
+.topicsConfirmedContainer a {
+    color: #000;
+    font-size: 1rem;
+}

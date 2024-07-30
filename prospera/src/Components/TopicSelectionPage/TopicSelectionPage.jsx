@@ -33,7 +33,7 @@ const TopicSelectionPage = () => {
         try {
             const response = await axios.post('https://prospera-api.onrender.com/users/save-topics', { userId, topics: selectedTopics });
             console.log('Response:', response.data);
-            navigate('/dashboard');
+            navigate('/topic-selection-confirmed');
         } catch (error) {
             console.error('Failed to save topics:', error.response?.data || error.message);
         }
