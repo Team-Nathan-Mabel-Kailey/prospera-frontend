@@ -143,29 +143,28 @@ const ChatbotPage = () => {
     const [newMessage, setNewMessage] = useState('');
 
     useEffect(() => {
+        console.log("user is: ", user.userID)
         if (!isLoggedIn) {
             navigate('/login');
             return;
         }
-        fetchConversations();
+        fetchConversations(user.userID);
     }, [isLoggedIn, navigate]);
 
     useEffect(() => {
-        if (user && user.userID) {
-            fetchConversations();
-        }
-    }, [user]);
-
-    useEffect(() => {
-        if (selectedConversationId) {
+        if (selectedConversationId && user && user.userID) {
             fetchChatHistory(selectedConversationId);
         }
-    }, [selectedConversationId]);
+    }, [selectedConversationId, user]);
 
-    const fetchConversations = async () => {
-        if (!user || !user.userID) return;
+    const fetchConversations = async (userId) => {
+        console.log("userId in fetchConversations is: ", userId)
+        // console.log("user is: ", user)
+        // if (!user || !user.userID) return;
+        // if (!userId) return;
         try {
-            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/conversations/${user.userID}`);
+            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/conversations/${userId}`);
+            console.log('conversations data:', response.data);
             setConversations(response.data.conversations);
         } catch (error) {
             console.error('Error fetching conversations:', error);
@@ -173,8 +172,16 @@ const ChatbotPage = () => {
     };
 
     const fetchChatHistory = async (conversationId) => {
+        // if (!user || !user.userID) {
+        //     console.error('Cannot fetch chat history: User not loaded or missing userID');
+        //     return;
+        // }
         try {
-            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/${conversationId}`);
+            console.log("FE user.userID: ", user.userID)
+            console.log("FE conversationId: ", conversationId);
+            
+            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/chathistory/${user.userID}/conversations/${conversationId}`);
+            console.log("Fetching chat history from URL:", response);
             const formattedMessages = response.data.messages.flatMap(msg => [
                 { role: 'user', content: msg.prompt },
                 { role: 'assistant', content: msg.response }
@@ -227,7 +234,7 @@ const ChatbotPage = () => {
             });
             setSelectedConversationId(response.data.conversationId);  // Set new conversationId
             setMessages([]);
-            fetchConversations();  // Fetch updated list of conversations
+            fetchConversations(user.userID);  // Fetch updated list of conversations
         } catch (error) {
             console.error('Error starting new conversation:', error);
         }
