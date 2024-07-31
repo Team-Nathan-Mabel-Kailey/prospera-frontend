@@ -39,14 +39,23 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
 
     let minW, maxW, minH, maxH, startingW, startingH;
 
-    if (widgetType === 'News' || widgetType === 'Stock') {
+    if (widgetType === 'Stock') {
         minW = 2;
         maxW = 4;
-        minH = 2;
+        minH = 3;
         maxH = 3;
-        startingW = 3;
-        startingH = 2;
+        startingW = 4;
+        startingH = 3;
     } 
+
+    else if (widgetType === 'News') {
+      minW = 2;
+      maxW = 3;
+      minH = 3;
+      maxH = 3;
+      startingW = 3;
+      startingH = 3;
+    }
 
     else if (widgetType === 'Financial Goals') {
         minW = 2;

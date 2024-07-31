@@ -9,6 +9,7 @@ import EditWidgetModal from '../EditWidgetModal/EditWidgetModal';
 import SavingsAccountWidget from '../SavingsAccountWidget/SavingsAccountWidget';
 import CheckingAccountWidget from '../CheckingAccountWidget/CheckingAccountWidget';
 import NewsWidget from '../NewsWidget/NewsWidget'
+import StockWidget from '../StockWidget/StockWidget'
 import FinancialGoalsWidget from '../FinancialGoalsWidget/FinancialGoalsWidget';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -47,6 +48,9 @@ const Dashboard = () => {
 
   const style = {
     bgcolor: 'black',
+    height: '100%', 
+    display: 'flex', 
+    flexDirection: 'column'
   }
 
   let theme = createTheme({  
@@ -196,8 +200,8 @@ const Dashboard = () => {
 
   const renderWidgetContent = (widget) => {
     switch (widget.type) {
-        // case 'Stock':
-        //   return <StockWidget data={widget.configuration}/>;
+        case 'Stock':
+          return <StockWidget data={widget.configuration}/>;
 
         case 'Financial Goals':
           return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
@@ -322,7 +326,7 @@ const Dashboard = () => {
             } />
             
 
-            <CardContent className="widgetContent" style={{paddingTop: 15, paddingLeft: 18}}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 15, paddingLeft: 18 }}>
               {renderWidgetContent(widget)}
             </CardContent>
 

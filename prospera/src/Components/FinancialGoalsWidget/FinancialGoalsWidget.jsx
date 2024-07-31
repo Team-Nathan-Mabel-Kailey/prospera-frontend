@@ -180,7 +180,37 @@ const FinancialGoalsWidget = ({ data, id }) => {
     };
 
     return (
-        // <div className="financial-goals-widget">
+    <div className="financial-goals-widget">
+    <ul>
+        {goals.map((goal) => (
+            <li key={goal.id} className={checkedGoals.has(goal.id) ? 'checked' : ''}>
+                <label htmlFor={`checkbox-${goal.id}`}>
+                    <div className="checkbox-wrapper">
+                        <input
+                            id={`checkbox-${goal.id}`}
+                            type="checkbox"
+                            checked={checkedGoals.has(goal.id)}
+                            onChange={() => handleCheck(goal.id)}
+                            onMouseDown={stopPropagation}
+                            onTouchStart={stopPropagation}
+                        />
+                        <span className="custom-checkbox" onMouseDown={stopPropagation}
+                            onTouchStart={stopPropagation}>
+                            <div className="tick_mark"></div>
+                        </span>
+                    </div>
+                    <span className="goal-text">{goal.text}</span>
+                </label>
+            </li>
+        ))}
+    </ul>
+</div>
+      );
+    };
+
+export default FinancialGoalsWidget;
+
+// <div className="financial-goals-widget">
         //     <ul>
         //         {goals.map((goal) => (
         //             <li key={goal.id} className={checkedGoals.has(goal.id) ? 'checked' : ''}>
@@ -220,34 +250,3 @@ const FinancialGoalsWidget = ({ data, id }) => {
     //         ))}
     //     </ul>
     // </div>
-
-
-    <div className="financial-goals-widget">
-    <ul>
-        {goals.map((goal) => (
-            <li key={goal.id} className={checkedGoals.has(goal.id) ? 'checked' : ''}>
-                <label htmlFor={`checkbox-${goal.id}`}>
-                    <div className="checkbox-wrapper">
-                        <input
-                            id={`checkbox-${goal.id}`}
-                            type="checkbox"
-                            checked={checkedGoals.has(goal.id)}
-                            onChange={() => handleCheck(goal.id)}
-                            onMouseDown={stopPropagation}
-                            onTouchStart={stopPropagation}
-                        />
-                        <span className="custom-checkbox" onMouseDown={stopPropagation}
-                            onTouchStart={stopPropagation}>
-                            <div className="tick_mark"></div>
-                        </span>
-                    </div>
-                    <span className="goal-text">{goal.text}</span>
-                </label>
-            </li>
-        ))}
-    </ul>
-</div>
-      );
-    };
-
-export default FinancialGoalsWidget;
