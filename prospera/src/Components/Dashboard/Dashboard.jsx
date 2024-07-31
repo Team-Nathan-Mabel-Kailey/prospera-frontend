@@ -9,22 +9,25 @@ import EditWidgetModal from '../EditWidgetModal/EditWidgetModal';
 import SavingsAccountWidget from '../SavingsAccountWidget/SavingsAccountWidget';
 import CheckingAccountWidget from '../CheckingAccountWidget/CheckingAccountWidget';
 import NewsWidget from '../NewsWidget/NewsWidget'
+import StockWidget from '../StockWidget/StockWidget'
 import FinancialGoalsWidget from '../FinancialGoalsWidget/FinancialGoalsWidget';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
+import CardHeader from '@mui/material/CardHeader';
+import Button from '@mui/material/Button';
+import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
+
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import PageviewIcon from '@mui/icons-material/Pageview';
+import EditIcon from '@mui/icons-material/Edit';
+import { grey } from '@mui/material/colors';
+
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
 // Makes layout responsive
 const DashboardLayout = WidthProvider(Responsive);
-
-const getUserIdFromToken = (token) => {
-  try {
-    const decoded = jwtDecode(token);
-    return decoded.userId;
-  } catch (error) {
-    console.error('Error decoding token:', error);
-    return null;
-  }
-};
 
 const Dashboard = () => {
   const [layouts, setLayouts] = useState({ 
@@ -43,40 +46,44 @@ const Dashboard = () => {
   const [userId, setUserId] = useState(null);
   const [existingWidgets, setExistingWidgets] = useState([]);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const userIdFromToken = getUserIdFromToken(token);
-      setUserId(userIdFromToken);
+  const style = {
+    bgcolor: 'black',
+    height: '100%', 
+    display: 'flex', 
+    flexDirection: 'column'
+  }
+  
+//   useEffect(() => {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//       const userIdFromToken = getUserIdFromToken(token);
+//       setUserId(userIdFromToken);
     
-      const fetchUserData = async () => {
-        try {
-          const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
-          const userData = userDataResponse.data;
+//       const fetchUserData = async () => {
+//         try {
+//           const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
+//           const userData = userDataResponse.data;
 
-          setExistingWidgets(userData.Widgets);
-          setWidgetArray(userData.Widgets);
-          
-          const initialLayouts = userData.Widgets.reduce((acc, widget) => {
-            const layout = { i: widget.i, x: widget.x, y: widget.y, w: widget.w, h: widget.h };
-            acc.lg.push(layout);
-            acc.md.push(layout);
-            acc.sm.push(layout);
-            acc.xs.push(layout);
-            acc.xxs.push(layout);
-            return acc;
-          }, { lg: [], md: [], sm: [], xs: [], xxs: [] });
+  let theme = createTheme({  
+    typography: {
+      fontFamily: [
+        'Outfit',
+        'Manrope',
+      ].join(','),
+    },
+  });
+  theme = responsiveFontSizes(theme);
 
-          setLayouts(initialLayouts);
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-      };
-
-      fetchUserData();
+  const getUserIdFromToken = (token) => {
+    try {
+      const decoded = jwtDecode(token);
+      return decoded.userId;
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
     }
-  }, []);
-
+  };
+  
   const handleModify = async (layout, allLayouts) => {
     const updatedWidgets = widgetArray.map((widget) => {
       const updatedWidget = layout.find((obj) => obj.i === widget.id.toString());
@@ -89,7 +96,7 @@ const Dashboard = () => {
           w: updatedWidget.w,
           h: updatedWidget.h
         });
-
+  
         return {
           ...widget,
           x: updatedWidget.x,
@@ -103,7 +110,51 @@ const Dashboard = () => {
     });
     setLayouts(allLayouts);
     setWidgetArray(updatedWidgets);
-  };
+  };  
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const userIdFromToken = getUserIdFromToken(token);
+      setUserId(userIdFromToken);
+    
+      const fetchUserData = async () => {
+        try {
+          const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
+          const userData = userDataResponse.data;
+
+          setExistingWidgets(userData.Widgets);
+          setWidgetArray(userData.Widgets);
+          console.log('a users widgets: ', userData.Widgets);
+          
+          // const initialLayouts = userData.Widgets.reduce((acc, widget) => {
+          // const layout = { i: widget.i, x: widget.x, y: widget.y, w: widget.w, h: widget.h };
+          //   acc.lg.push(layout);
+          //   acc.md.push(layout);
+          //   acc.sm.push(layout);
+          //   acc.xs.push(layout);
+          //   acc.xxs.push(layout);
+          //   return acc;
+          // }, { lg: [], md: [], sm: [], xs: [] });
+  
+          // setLayouts(initialLayouts);
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      };
+  
+      fetchUserData();
+    }
+  }, []);
+      
+      //   } catch (error) {
+      //     console.error('Error fetching user data:', error);
+      //   }
+      // };
+
+  //     fetchUserData();
+  //   }
+  // }, []);
 
   const handleAddWidget = (newWidget) => {
     setWidgetArray([...widgetArray, newWidget]);
@@ -113,49 +164,9 @@ const Dashboard = () => {
       md: [...prevLayouts.md, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
       sm: [...prevLayouts.sm, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
       xs: [...prevLayouts.xs, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
-      xxs: [...prevLayouts.xxs, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
+      // xxs: [...prevLayouts.xxs, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
     }));
   };
-
-  // const handleAddWidget = async (newWidget) => {
-  //   try {
-  //     // Send the new widget data to the server
-  //     const response = await axios.post('http://localhost:3000/api/widgets/create', {
-  //       ...newWidget,
-  //       userId: userId // Assuming you have userId in your component's state
-  //     });
-  
-  //     // The server should return the created widget with its new ID
-  //     const createdWidget = response.data;
-  
-  //     // Update widgetArray state
-  //     setWidgetArray(prevWidgets => [...prevWidgets, createdWidget]);
-  
-  //     // Update layouts state
-  //     setLayouts(prevLayouts => {
-  //       const newLayouts = { ...prevLayouts };
-  //       for (const breakpoint in newLayouts) {
-  //         newLayouts[breakpoint] = [
-  //           ...newLayouts[breakpoint],
-  //           {
-  //             i: createdWidget.id.toString(),
-  //             x: createdWidget.x || 0,
-  //             y: createdWidget.y || 0,
-  //             w: createdWidget.w || 2,
-  //             h: createdWidget.h || 2
-  //           }
-  //         ];
-  //       }
-  //       return newLayouts;
-  //     });
-  
-  //     // Close the add widget modal
-  //     setModalOpen(false);
-  //   } catch (error) {
-  //     console.error('Error adding widget:', error);
-  //     // Optionally, show an error message to the user
-  //   }
-  // };
 
   const handleDeleteWidget = async (key) => {
     try {
@@ -180,21 +191,6 @@ const Dashboard = () => {
     }
   };
 
-  // const handleDeleteWidget = async (key) => {
-  //   const updatedWidgets = widgetArray.filter((widget) => widget.i !== key);
-  //   setWidgetArray(updatedWidgets);
-  //   setLayouts((prevLayouts) => ({
-  //     ...prevLayouts,
-  //     lg: prevLayouts.lg.filter((layout) => layout.i !== key),
-  //     md: prevLayouts.md.filter((layout) => layout.i !== key),
-  //     sm: prevLayouts.sm.filter((layout) => layout.i !== key),
-  //     xs: prevLayouts.xs.filter((layout) => layout.i !== key),
-  //     xxs: prevLayouts.xxs.filter((layout) => layout.i !== key),
-  //   }));
-
-  //   axios.delete(`http://localhost:3000/api/widgets/${key}`);
-  // };
-
   const handleAdd = () => {
     setModalOpen(true);
   };
@@ -215,22 +211,22 @@ const Dashboard = () => {
 
   const renderWidgetContent = (widget) => {
     switch (widget.type) {
-        // case 'stock':
-        //   return <StockWidget data={widget.configuration}/>;
+        case 'Stock':
+          return <StockWidget data={widget.configuration}/>;
 
-        case 'financialGoals':
+        case 'Financial Goals':
           return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
 
-        // case 'highlightedSavings':
-        //   return <HighlightedSavingsWidget data={widget.configuration}/>;
+        // case 'Highlighted Goal':
+        //   return <HighlightedGoalWidget data={widget.configuration}/>;
 
-        case 'news':
+        case 'News':
           return <NewsWidget data={widget.configuration}/>;
 
-        case 'savingsAccount':
+        case 'Savings Account':
           return <SavingsAccountWidget data={widget.configuration}/>;
 
-        case 'checkingsAccount':
+        case 'Checking Account':
           return <CheckingAccountWidget data={widget.configuration}/>;
 
       default:
@@ -239,7 +235,7 @@ const Dashboard = () => {
   };
 
   return (
-    <>
+    <ThemeProvider theme={theme}>
     <div className='headerSpace' id='tempHeader'>
     </div>
 
@@ -270,16 +266,17 @@ const Dashboard = () => {
       <DashboardLayout
         className='dash'
         onLayoutChange={handleModify}
-        verticalCompact={true}
+        compactType='horizontal'
         layouts={layouts}
         // Breakpoints and cols are used for responsive design
-        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-        cols={{ lg: 8, md: 8, sm: 4, xs: 2, xxs: 2 }}
-        autoSize={true}
-        margin={[20, 20]}
+        // breakpoints={{ lg: 800, xs: 200 }}
+        // cols={{ lg: 8, xs: 2}}
+        // maxRows={4}
+        // autoSize={true}
+        margin={[30, 30]}
       >
         {widgetArray.map((widget) => (
-          <div
+          <Card
             // Widget container
             key={widget.id.toString()}
             className="reactGridItem"
@@ -289,53 +286,66 @@ const Dashboard = () => {
               w: widget.w,
               h: widget.h,
               i: widget.i,
+              minW: widget.minW,
+              maxW: widget.maxW,
+              minH: widget.minH,
+              maxH: widget.maxH
             }}
+            sx={style}
             // style={{ backgroundColor }}
           >
-            <div className="widgetContent">
-              {renderWidgetContent(widget)}
-            </div>
+            <CardHeader
+              subheader={widget.type}
+              subheaderTypographyProps={{ color: 'white' }} 
+              style={{paddingTop: 12, paddingLeft: 8, paddingBottom: 0}}
+              action={
+                <div className="widgetEditBtns">
+                  <button
+                    // Prevent dragging when trying to delete widget
+                    onMouseDown={stopPropagation}
+                    onTouchStart={stopPropagation}
+                    className="deleteButton no-drag"
+                    onClick={() => {
+                      handleDeleteWidget(widget.id);
+                    }}
+                  >
+                    <DeleteForeverIcon sx={{ color: grey[50] }} />
+                  </button>
 
-            <div className="widgetEditBtns">
-
-              <button
-                // Prevent dragging when trying to delete widget
-                onMouseDown={stopPropagation}
-                onTouchStart={stopPropagation}
-                className="deleteButton no-drag"
-                onClick={() => {
-                  handleDeleteWidget(widget.id);
-                }}
-              >
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAWElEQVR4nO3QwQmAMBBE0ZSnbRvQPmIh37selmwGlDivgPkwpdhXAQdPu2q8olPfCm+SN+aFiMMhX50Vf3uTLjncC1+d5KtDv7z6FHRbJrwOxhuwdIdtGheIAr9DNss0IAAAAABJRU5ErkJggg=="/>
-              </button>
-
-              <button
-                onMouseDown={stopPropagation}
-                onTouchStart={stopPropagation}
-                className="viewButton no-drag"
-                onClick={() => {
-                  handleView(widget);
-                }}
-              >
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABsklEQVR4nO2YXUrDQBCA11aKvy9CRTyC+uoF9E1E9EXvUJUq/uIhPIXgfaogIrUX8E0QBOGThSlE2zSb1p1OJN9LCOwO82Um2SHO/YI4PAFLThPioStDHFqJa73IIvWEjE5liIDE1ZUhkoi6DBFFVGWILKImg4KIigxKItFlUBSJKoOySDQZxiASRYYxify5DGMU6SPTcpZERsGVIsZwZUWM4cqKGMOVFTGGKytiDPdfKgLU/ovIK7BbBJEHoAmsArPAArAOXIhEl1tgwqLIJ9AAKgNyqQA3wFdXxpqIl9jIkdNWQmbPkkgj+MkKwJXs7QR9AJTeiWpmIv3brC0x9p0BkWZmEikAZxLjPmRxbFYyk0jB75UY7ZDFsZnLTCIFYEpifIQsjs18ZhIpADMS4z1kcRFa68WCyMkIIucS486CyOOQn99qYmQ5sCDiORpC5DpxIE5aGlE2c0hsJ0aUndBNKMocD2ozeofGt+Af2+jj35lTYM2fMcC0jPSX0kYkJML/0mOPjp94ffIiESaDPWqJ3MJlMIbrzW9R2tHzDCwXUiSXTBHgZ5vlPpdMITKH/uYbY7tw/1fn3ScAAAAASUVORK5CYII="/>
-              </button>
+                  <button
+                    onMouseDown={stopPropagation}
+                    onTouchStart={stopPropagation}
+                    className="viewButton no-drag"
+                    onClick={() => {
+                      handleView(widget);
+                    }}
+                  >
+                    <PageviewIcon sx={{ color: grey[50] }} />
+                  </button>
+                
+                  <button
+                    onMouseDown={stopPropagation}
+                    onTouchStart={stopPropagation}
+                    className="editButton no-drag"
+                    onClick={() => {
+                      handleEdit(widget);
+                    }}
+                  >
+                    <EditIcon sx={{ color: grey[50] }} />
+                  </button>
+                </div>
+            } />
             
-              <button
-                onMouseDown={stopPropagation}
-                onTouchStart={stopPropagation}
-                className="editButton no-drag"
-                onClick={() => {
-                  handleEdit(widget);
-                }}
-              >
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAABUUlEQVR4nO3ZvU5UQRgG4GmgkYpQSAeF8QZIqOQC5A40NLtSyJ1QUUBhuwW1MbE3VnsBegf8dIQChUQCjxnybbLB00DjN8k81e7MKb4375yTzdlSuu5JsIkvuMQ1pnhfWoIRbg37VFqAXdzH0IdYwzI+4lesvysNhdgf2N+LvWlpJER1jtePrll52OF3aSTEYBisx/pFaSjEP2FwFGufS2Mh5sPsx+c/2CgNhphXrx+VLDDGnaeH2CtZ9BBZ9Cay6E1k0ZvIojeRRW8iC/0HYBJ6E0noTSShN5GE3kQSehNJ6E0kgQ/PfBe7W7LAEm6aDlFhu+kXyjM4iAGPcdZcEzP4GUO+wSucNtVEhZcxYP3rdzHWhsLkDVFhJwb9Gt8XsBXHLP9xmsEkhv1Ww+DqURP1aTYu2eFk4F74EQ+At3hRWoDv8aSaxDFb/d8zdaVhfwG3LEGdXdjCzgAAAABJRU5ErkJggg=="/>              </button>
-            </div>
-          </div>
+
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 15, paddingLeft: 18 }}>
+              {renderWidgetContent(widget)}
+            </CardContent>
+
+          </Card>
         ))}
       </DashboardLayout>
     </div>
-    </>
+    </ThemeProvider>
   );
 };
 

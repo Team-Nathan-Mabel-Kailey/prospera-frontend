@@ -19,8 +19,8 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@mui/icons-material": "^5.16.4",
-    "@mui/material": "^5.16.4",
+    "@mui/icons-material": "^5.16.5",
+    "@mui/material": "^5.16.5",
     "@mui/styled-engine-sc": "^6.0.0-alpha.18",
     "@novu/notification-center": "^2.0.0-canary.0",
     "axios": "^1.7.2",
@@ -39,6 +39,7 @@
     "react-router": "^6.25.1",
     "react-router-dom": "^6.24.1",
     "react-scroll-motion": "^0.3.3",
+    "react-ts-tradingview-widgets": "^1.2.5",
     "styled-components": "^6.1.12",
     "uuid": "^10.0.0"
   },

@@ -128,7 +128,7 @@ const NewsWidget = ({ data }) => {
                 sortBy: 'publishedAt',
                 pageSize: 1,
                 apiKey: import.meta.env.VITE_NEWS_API_KEY,
-                // sources: "fox-business,business-insider,bloomberg"
+                sources: "fox-business,business-insider,bloomberg,yahoo-finance"
             },
         });
         return response.data.articles[0];
@@ -158,20 +158,41 @@ const NewsWidget = ({ data }) => {
     if (!article) return <div>No article found</div>;
 
     return (
-        <div className="randomArticle">
+        <div className="news-widget">
             <h2>Your "{data.query}" Article</h2>
-            <figure>
+            <div className="article-content">
+                <figure>
                 <img src={article.urlToImage} alt={article.title} />
-            </figure>
-            <h3>{article.title}</h3>
-            <p>{article.description}</p>
-            <a href={article.url} target="_blank" rel="noopener noreferrer" className="read-more"
-            onMouseDown={stopPropagation}
-            onTouchStart={stopPropagation}>
+                </figure>
+                <h3>{article.title}</h3>
+                <p className="description">{article.description}</p>
+                <a 
+                href={article.url} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="read-more"
+                onMouseDown={stopPropagation}
+                onTouchStart={stopPropagation}
+                >
                 Read more
-                <span className="icon">➜</span>
-            </a>
-        </div>
+                    <span className="icon">➜</span>
+                </a>
+            </div>
+    </div>
+        // <div className="randomArticle">
+        //     <h2>Your "{data.query}" Article</h2>
+        //     <figure>
+        //         <img src={article.urlToImage} alt={article.title} />
+        //     </figure>
+        //     <h3>{article.title}</h3>
+        //     <p>{article.description}</p>
+        //     <a href={article.url} target="_blank" rel="noopener noreferrer" className="read-more"
+        //     onMouseDown={stopPropagation}
+        //     onTouchStart={stopPropagation}>
+        //         Read more
+        //         <span className="icon">➜</span>
+        //     </a>
+        // </div>
     );
 };
 
