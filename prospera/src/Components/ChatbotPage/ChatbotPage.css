@@ -21,7 +21,7 @@
 .sidebar {
     width: 25%;
     background-color: rgb(106, 27, 154, 0.6); /* Purple sidebar */
-    color: white;
+    color: #fff;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     border-radius: 5px 0px 0px 5px;
@@ -46,6 +46,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 20px;
 }
 
 .sidebar ul li:hover {
@@ -72,6 +73,7 @@
     background-color: #e1bee7; /* Very light purple background for messages */
     border: 1px solid #ce93d8;
     border-radius: 10px;
+    scroll-behavior: smooth;
 }
 
 .message {
@@ -83,14 +85,16 @@
 
 .message.user {
     background-color: #ba68c8; /* User message background */
-    color: white;
+    color: #fff;
     align-self: flex-start;
+    font-size: 20px;
 }
 
 .message.assistant {
     background-color: #9575cd; /* Assistant message background */
-    color: white;
+    color: #fff;
     align-self: flex-end;
+    font-size: 20px;
 }
 
 .inputContainer {
@@ -104,17 +108,17 @@
     border: 1px solid #ce93d8;
     border-radius: 10px;
     margin-right: 10px;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .chatbotContainer button {
     padding: 10px 20px;
     background-color: #8e24aa; /* Purple button */
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
     transition: background-color 0.3s ease;
 }
 
@@ -124,4 +128,28 @@ button:hover {
 
 .footerSpace{
     height: 238.44px;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.inputContainer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.message.loading {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }

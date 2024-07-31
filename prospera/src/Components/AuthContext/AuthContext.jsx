@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
 
         if (token) {
             const decodedToken = jwtDecode(token)
-            axios.get(`http://localhost:3000/users/${decodedToken.userId}`, {
+            axios.get(`https://prospera-api.onrender.com/users/${decodedToken.userId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -65,6 +65,9 @@ export const AuthProvider = ({ children }) => {
                 console.error('Error fetching user data:', error);
                 setIsLoggedIn(false);
             });
+        } else {
+            console.warn('No token found in localStorage');
+            setIsLoggedIn(false);
         }
     }, []);
 

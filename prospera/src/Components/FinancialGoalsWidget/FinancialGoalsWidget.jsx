@@ -158,7 +158,7 @@ const FinancialGoalsWidget = ({ data, id }) => {
 
     const handleCheck = async (goalId) => {
         try {
-            await axios.put(`http://localhost:3000/api/widgets/content/${id}`, {
+            await axios.put(`https://prospera-api.onrender.com/api/widgets/content/${id}`, {
                 goalId,
                 checked: !checkedGoals.has(goalId),
             });

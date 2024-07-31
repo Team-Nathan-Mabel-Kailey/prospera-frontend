@@ -35,7 +35,7 @@ const NewsFeed = () => {
         const fetchUserTopics = async () => {
             if (user) {
                 try {
-                    const response = await axios.get(`http://localhost:3000/users/get-topics/${user.userID}`);
+                    const response = await axios.get(`https://prospera-api.onrender.com/users/get-topics/${user.userID}`);
                     setUserTopics(response.data.topics);
                     setHasCompletedTopics(response.data.hasCompletedTopics);
                 } catch (error) {

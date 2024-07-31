@@ -52,6 +52,17 @@ const Dashboard = () => {
     display: 'flex', 
     flexDirection: 'column'
   }
+  
+//   useEffect(() => {
+//     const token = localStorage.getItem('token');
+//     if (token) {
+//       const userIdFromToken = getUserIdFromToken(token);
+//       setUserId(userIdFromToken);
+    
+//       const fetchUserData = async () => {
+//         try {
+//           const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
+//           const userData = userDataResponse.data;
 
   let theme = createTheme({  
     typography: {
@@ -78,7 +89,7 @@ const Dashboard = () => {
       const updatedWidget = layout.find((obj) => obj.i === widget.id.toString());
       if (updatedWidget) {
         // Update the widget position and size in the database
-        axios.put('http://localhost:3000/api/widgets/layout', {
+        axios.put('https://prospera-api.onrender.com/api/widgets/layout', {
           id: widget.id,
           x: updatedWidget.x,
           y: updatedWidget.y,
@@ -109,7 +120,7 @@ const Dashboard = () => {
     
       const fetchUserData = async () => {
         try {
-          const userDataResponse = await axios.get(`http://localhost:3000/users/${userIdFromToken}`);
+          const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
           const userData = userDataResponse.data;
 
           setExistingWidgets(userData.Widgets);
@@ -160,7 +171,7 @@ const Dashboard = () => {
   const handleDeleteWidget = async (key) => {
     try {
       // Delete the widget from the server
-      await axios.delete(`http://localhost:3000/api/widgets/${key}`);
+      await axios.delete(`https://prospera-api.onrender.com/api/widgets/${key}`);
   
       // Update widgetArray state
       setWidgetArray((prevWidgets) => prevWidgets.filter((widget) => widget.id !== key));
@@ -207,7 +218,7 @@ const Dashboard = () => {
           return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
 
         // case 'Highlighted Goal':
-        //   return <HighlightedSavingsWidget data={widget.configuration}/>;
+        //   return <HighlightedGoalWidget data={widget.configuration}/>;
 
         case 'News':
           return <NewsWidget data={widget.configuration}/>;

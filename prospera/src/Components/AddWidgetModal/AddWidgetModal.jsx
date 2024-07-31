@@ -36,7 +36,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   const handleAddWidget = async () => {
     const newWidgetI = uuidv4();
     console.log('widget type: ', widgetType);
-
+    
     let minW, maxW, minH, maxH, startingW, startingH;
 
     if (widgetType === 'Stock') {
@@ -84,8 +84,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         startingH = 1;
     }
 
-    try {
-        const response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+        try {
+        const response = await axios.post(`https://prospera-api.onrender.com/api/widgets/create`, {
             i: newWidgetI,
             type: widgetType,
             x: 0,

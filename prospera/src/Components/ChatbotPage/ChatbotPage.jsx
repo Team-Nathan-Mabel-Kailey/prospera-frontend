@@ -47,7 +47,7 @@
 //         setMessages([...messages, newMessage]);
 
 //         try {
-//             const response = await axios.post('http://localhost:3000/api/chat', {
+//             const response = await axios.post('https://prospera-api.onrender.com/api/chat', {
 //                 prompt: input,
 //                 conversationId: conversationId,
 //             });
@@ -129,32 +129,57 @@
 // export default// ChatbotPage;
 
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ChatbotPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import 'ldrs/ring';
+import { waveform } from 'ldrs'
+
+waveform.register()
 
 const ChatbotPage = () => {
-    const { user } = useAuth();
+    const { user, isLoggedIn } = useAuth();
+    const navigate = useNavigate();
     const [conversations, setConversations] = useState([]);
     const [selectedConversationId, setSelectedConversationId] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const messageContainerRef = useRef(null);
 
     useEffect(() => {
-        if (user) {
-            fetchConversations(user.userID);
+        console.log("user is: ", user.userID)
+        if (!isLoggedIn) {
+            navigate('/login');
+            return;
         }
-    }, [user]);
+        fetchConversations(user.userID);
+    }, [isLoggedIn, navigate]);
 
     useEffect(() => {
-        if (selectedConversationId) {
+        if (selectedConversationId && user && user.userID) {
             fetchChatHistory(selectedConversationId);
         }
-    }, [selectedConversationId]);
+    }, [selectedConversationId, user]);
 
-    const fetchConversations = async (userID) => {
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
+    const scrollToBottom = () => {
+        if (messageContainerRef.current) {
+            messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+        }
+    };
+
+    const fetchConversations = async (userId) => {
+        console.log("userId in fetchConversations is: ", userId)
+        // console.log("user is: ", user)
+        // if (!user || !user.userID) return;
+        // if (!userId) return;
         try {
-            const response = await axios.get(`http://localhost:3000/api/chat/conversations/${userID}`);
+            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/conversations/${userId}`);
+            console.log('conversations data:', response.data);
             setConversations(response.data.conversations);
         } catch (error) {
             console.error('Error fetching conversations:', error);
@@ -162,8 +187,16 @@ const ChatbotPage = () => {
     };
 
     const fetchChatHistory = async (conversationId) => {
+        // if (!user || !user.userID) {
+        //     console.error('Cannot fetch chat history: User not loaded or missing userID');
+        //     return;
+        // }
         try {
-            const response = await axios.get(`http://localhost:3000/api/chat/${conversationId}`);
+            console.log("FE user.userID: ", user.userID)
+            console.log("FE conversationId: ", conversationId);
+            
+            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/chathistory/${user.userID}/conversations/${conversationId}`);
+            console.log("Fetching chat history from URL:", response);
             const formattedMessages = response.data.messages.flatMap(msg => [
                 { role: 'user', content: msg.prompt },
                 { role: 'assistant', content: msg.response }
@@ -175,38 +208,61 @@ const ChatbotPage = () => {
     };
 
     const sendMessage = async () => {
-        if (newMessage.trim() === '') return;
-
+        if (newMessage.trim() === '' || !user || !user.userID) {
+            console.error('Cannot send message: User not loaded or missing userID');
+            return;
+        }
+    
+        const tempId = Date.now(); // Temporary ID for the loading message
+        setMessages(prev => [...prev, 
+            { role: 'user', content: newMessage },
+            { role: 'loading', id: tempId } // Add loading message
+        ]);
+        setNewMessage('');
+        scrollToBottom();
+    
         try {
-            const response = await axios.post('http://localhost:3000/api/chat', {
+            const response = await axios.post('https://prospera-api.onrender.com/api/chat', {
                 prompt: newMessage,
                 conversationId: selectedConversationId,
+                userId: user.userID,
             });
-            const newMessages = [
-                ...messages,
-                { role: 'user', content: newMessage },
+    
+            setMessages(prev => [
+                ...prev.filter(msg => msg.id !== tempId), // Remove loading message
                 { role: 'assistant', content: response.data.response }
-            ];
-            setMessages(newMessages);
-            setNewMessage('');
+            ]);
+    
             if (!selectedConversationId) {
                 setSelectedConversationId(response.data.conversationId);
                 fetchConversations(user.userID);
             }
         } catch (error) {
-            console.error('Error sending message:', error);
+            console.error('Error sending message:', error.response?.data || error.message);
+            setMessages(prev => prev.filter(msg => msg.id !== tempId)); // Remove loading message on error
         }
     };
 
     const handleNewConversation = async () => {
+        if (!user) {
+            console.error('User is not authenticated');
+            return;
+        }
         try {
-            const response = await axios.post('http://localhost:3000/api/chat/new', {
+            const response = await axios.post('https://prospera-api.onrender.com/api/chat/new', {
                 userId: user.userID,
             });
-            setSelectedConversationId(response.data.conversationId);
+            setSelectedConversationId(response.data.conversationId);  // Set new conversationId
             setMessages([]);
+            fetchConversations(user.userID);  // Fetch updated list of conversations
         } catch (error) {
             console.error('Error starting new conversation:', error);
+        }
+    };
+
+    const handleKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            sendMessage();
         }
     };
 
@@ -214,38 +270,50 @@ const ChatbotPage = () => {
         <>
             <div className='headerSpace' id='tempHeader'></div>
         
-        <div className="chatbotContainer">
-            <div className="sidebar">
-                <h2>Conversations</h2>
-                <ul>
-                    {(conversations || []).map((conv) => (
-                        <li key={conv.conversationId} onClick={() => fetchChatHistory(conv.conversationId)}>
-                            Conversation {conv.conversationId}
-                        </li>
-                    ))}
-                </ul>
-                <button onClick={handleNewConversation}>New Conversation</button>
-            </div>
-            <div className="chatArea">
-                <h2>Chat</h2>
-                <div className="messageContainer">
-                    {messages.map((msg, index) => (
-                        <div key={index} className={`message ${msg.role}`}>
-                            {msg.content}
-                        </div>
-                    ))}
+            <div className="chatbotContainer">
+                <div className="sidebar">
+                    <h2>Conversations</h2>
+                    <ul>
+                        {(conversations || []).map((conv) => (
+                            <li key={conv.conversationId} onClick={() => setSelectedConversationId(conv.conversationId)}>
+                                Conversation {conv.conversationId}
+                            </li>
+                        ))}
+                    </ul>
+                    <button onClick={handleNewConversation}>New Conversation</button>
                 </div>
-                <div className="inputContainer">
-                    <input
-                        type="text"
-                        placeholder="Type your message here..."
-                        value={newMessage}
-                        onChange={(e) => setNewMessage(e.target.value)}
-                    />
-                    <button onClick={sendMessage}>Send</button>
+                <div className="chatArea">
+                    <h2>Chat</h2>
+                    <div className="messageContainer" ref={messageContainerRef}>
+                        {messages.map((msg, index) => (
+                            <div key={msg.id || index} className={`message ${msg.role}`}>
+                                {msg.role === 'loading' ? (
+                                    <div className="loading-container">
+                                        <l-waveform
+                                            size="35"
+                                            stroke="3.5"
+                                            speed="1" 
+                                            color="#6303FF" 
+                                        ></l-waveform>
+                                    </div>
+                                ) : (
+                                    msg.content
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                    <div className="inputContainer">
+                        <input
+                            type="text"
+                            placeholder="Type your message here..."
+                            value={newMessage}
+                            onChange={(e) => setNewMessage(e.target.value)}
+                            onKeyPress={handleKeyPress}
+                        />
+                        <button onClick={sendMessage}>Send</button>
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     );
 };
