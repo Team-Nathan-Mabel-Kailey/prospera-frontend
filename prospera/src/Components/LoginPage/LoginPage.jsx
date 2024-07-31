@@ -26,7 +26,7 @@ const LoginPage = () => {
                 username,
                 password
             });
-            const { token, userId, hasCompletedTopics } = response.data;
+            const { token, userId } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('userId', userId);
             setIsLoggedIn(true);

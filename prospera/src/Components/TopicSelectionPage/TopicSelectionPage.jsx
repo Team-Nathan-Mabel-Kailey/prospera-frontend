@@ -27,8 +27,8 @@ const TopicSelectionPage = () => {
             console.error('User is not authenticated');
             return;
         }
-        console.log('UserId:', userId);
-        console.log('Selected Topics:', selectedTopics);
+        console.log('UserId: ', userId);
+        console.log('Selected Topics: ', selectedTopics);
     
         try {
             const response = await axios.post('http://localhost:3000/users/save-topics', { userId, topics: selectedTopics });

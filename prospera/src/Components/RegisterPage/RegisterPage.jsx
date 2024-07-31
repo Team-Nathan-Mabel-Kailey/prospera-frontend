@@ -35,8 +35,14 @@ const Register = () => {
             'http://localhost:3000/users/login',
             { username, password }
         );
+
             console.log(response);
             setIsLoggedIn(true);
+            if (hasCompletedTopics) {
+                navigate('/dashboard');
+            } else {
+                navigate('/topic-selection');
+            }
         // Store the token in the localstorage as token
         localStorage.setItem('token', loginResponse.data.token);
         navigate('/dashboard');

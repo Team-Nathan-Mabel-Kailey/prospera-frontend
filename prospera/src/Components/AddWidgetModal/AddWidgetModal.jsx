@@ -39,7 +39,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
 
     let minW, maxW, minH, maxH, startingW, startingH;
 
-    if (widgetType === 'news' || widgetType === 'stock') {
+    if (widgetType === 'News' || widgetType === 'Stock') {
         minW = 2;
         maxW = 4;
         minH = 2;
@@ -48,7 +48,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         startingH = 2;
     } 
 
-    else if (widgetType === 'financialGoals') {
+    else if (widgetType === 'Financial Goals') {
         minW = 2;
         maxW = 3;
         minH = 2;
@@ -57,7 +57,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         startingH = 2;
     }
     
-    else if (widgetType === 'highlightedSavings') {
+    else if (widgetType === 'Highlighted Goal') {
         minW = 2;
         maxW = 3;
         minH = 1;
@@ -66,7 +66,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         startingH = 2;
     } 
     
-    else if (widgetType === 'checkingsAccount' || widgetType === 'savingsAccount') {
+    else if (widgetType === 'Checking Account' || widgetType === 'Savings Account') {
         minW = 3;
         maxW = 4;
         minH = 1;
@@ -186,7 +186,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
 
   const renderWidgetCreationOptions = (widgetType) => {
     switch (widgetType) {
-        case 'stock':
+        case 'Stock':
           return (
             // done
             <div className='createOptions'>
@@ -208,7 +208,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
 
         // current
-        case 'financialGoals':
+        case 'Financial Goals':
           return (
             <div className='createOptions'>
               <h2>Enter some of your financial goals.</h2>
@@ -224,7 +224,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             </div>
           );
       
-        case 'highlightedSavings':
+        case 'Highlighted Goal':
           return (
             <div className='createOptions'>
               <h2>Create a savings goal!</h2>
@@ -235,7 +235,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
 
         // done (need to refine news sources)
-        case 'news':
+        case 'News':
           return (
             <div className='createOptions'>
               <h2>We'll select a random financial news article for you on a topic you're interested in!</h2>
@@ -253,7 +253,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
 
         // done
-        case 'savingsAccount':
+        case 'Savings Account':
           return (
             <div className='createOptions'>
               <h2>Enter some information about your savings account.</h2>
@@ -269,7 +269,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
 
         // done
-        case 'checkingsAccount':
+        case 'Checking Account':
           return (
             <div className='createOptions'>
               <h2>Enter some information about your checking account.</h2>
@@ -301,12 +301,12 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         <h2 className='selectTitle'>Select Widget Type</h2>
         <select value={widgetType} onChange={(e) => setWidgetType(e.target.value)} className="selectDropdown">
           <option value="">Select</option>
-          <option value="stock">Stock Widget</option>
-          <option value="financialGoals">Financial Goals Widget</option>
-          <option value="highlightedSavings">Highlighted Savings Goal Widget</option>
-          <option value="news">News Widget</option>
-          <option value="savingsAccount">Savings Account Widget</option>
-          <option value="checkingsAccount">Checkings Account Widget</option>
+          <option value="Stock">Stock Widget</option>
+          <option value="Financial Goals">Financial Goals Widget</option>
+          <option value="Highlighted Goal">Highlighted Savings Goal Widget</option>
+          <option value="News">News Widget</option>
+          <option value="Savings Account">Savings Account Widget</option>
+          <option value="Checking Account">Checkings Account Widget</option>
         </select>
 
         {renderWidgetCreationOptions(widgetType)}
