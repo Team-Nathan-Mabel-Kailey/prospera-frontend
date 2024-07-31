@@ -22,18 +22,19 @@ const TopicSelectionPage = () => {
     };
 
     const handleSubmit = async () => {
-        const userId = user?.userID; // Assuming userId is stored in localStorage on login
-        if (!userId) {
-            console.error('User is not authenticated');
-            return;
-        }
+        // console.log('user is:', user)
+        const userId = user.userID; // Assuming userId is stored in localStorage on login
+        // if (!userId) {
+        //     console.error('User is not authenticated');
+        //     return;
+        // }
         console.log('UserId:', userId);
         console.log('Selected Topics:', selectedTopics);
     
         try {
             const response = await axios.post('https://prospera-api.onrender.com/users/save-topics', { userId, topics: selectedTopics });
             console.log('Response:', response.data);
-            navigate('/dashboard');
+            navigate('/topic-selection-confirmed');
         } catch (error) {
             console.error('Failed to save topics:', error.response?.data || error.message);
         }

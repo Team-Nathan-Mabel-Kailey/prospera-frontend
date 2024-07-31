@@ -21,7 +21,7 @@ const LoginPage = () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/'); 
+            navigate('/dashboard'); 
         }
     }, [isLoggedIn, navigate]);
 
@@ -33,15 +33,12 @@ const LoginPage = () => {
                 username,
                 password
             });
-            const { token, userId, hasCompletedTopics } = response.data;
+            const { token, userId } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('userId', userId);
             setIsLoggedIn(true);
-            if (hasCompletedTopics) {
                 navigate('/dashboard');
-            } else {
-                navigate('/topic-selection');
-            }
+        
         } catch (error) {
             console.error('Error logging in:', error);
         } finally {

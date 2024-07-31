@@ -36,11 +36,17 @@ const Register = () => {
             'https://prospera-api.onrender.com/users/login',
             { username, password }
         );
+
+            const {hasCompletedTopics} = response.data;
             console.log(response);
             setIsLoggedIn(true);
         // Store the token in the localstorage as token
         localStorage.setItem('token', loginResponse.data.token);
+        if (hasCompletedTopics) {
         navigate('/dashboard');
+        } else {
+            navigate('/topic-selection');
+        }
         } catch (error) {
         alert('Registration failed. Try again.');
         }
