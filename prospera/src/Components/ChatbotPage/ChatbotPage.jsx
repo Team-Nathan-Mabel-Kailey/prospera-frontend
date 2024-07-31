@@ -129,10 +129,14 @@
 // export default// ChatbotPage;
 
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './ChatbotPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import 'ldrs/ring';
+import { waveform } from 'ldrs'
+
+waveform.register()
 
 const ChatbotPage = () => {
     const { user, isLoggedIn } = useAuth();
@@ -141,6 +145,7 @@ const ChatbotPage = () => {
     const [selectedConversationId, setSelectedConversationId] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const messageContainerRef = useRef(null);
 
     useEffect(() => {
         console.log("user is: ", user.userID)
@@ -156,6 +161,16 @@ const ChatbotPage = () => {
             fetchChatHistory(selectedConversationId);
         }
     }, [selectedConversationId, user]);
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages]);
+
+    const scrollToBottom = () => {
+        if (messageContainerRef.current) {
+            messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+        }
+    };
 
     const fetchConversations = async (userId) => {
         console.log("userId in fetchConversations is: ", userId)
@@ -197,29 +212,34 @@ const ChatbotPage = () => {
             console.error('Cannot send message: User not loaded or missing userID');
             return;
         }
-
+    
+        const tempId = Date.now(); // Temporary ID for the loading message
+        setMessages(prev => [...prev, 
+            { role: 'user', content: newMessage },
+            { role: 'loading', id: tempId } // Add loading message
+        ]);
+        setNewMessage('');
+        scrollToBottom();
+    
         try {
             const response = await axios.post('https://prospera-api.onrender.com/api/chat', {
                 prompt: newMessage,
-                conversationId: selectedConversationId,  // Pass existing conversationId if available
+                conversationId: selectedConversationId,
                 userId: user.userID,
             });
-
-            const newMessages = [
-                ...messages,
-                { role: 'user', content: newMessage },
+    
+            setMessages(prev => [
+                ...prev.filter(msg => msg.id !== tempId), // Remove loading message
                 { role: 'assistant', content: response.data.response }
-            ];
-
-            setMessages(newMessages);
-            setNewMessage('');
-
+            ]);
+    
             if (!selectedConversationId) {
-                setSelectedConversationId(response.data.conversationId);  // Only set new conversationId if it was null
-                fetchConversations();
+                setSelectedConversationId(response.data.conversationId);
+                fetchConversations(user.userID);
             }
         } catch (error) {
             console.error('Error sending message:', error.response?.data || error.message);
+            setMessages(prev => prev.filter(msg => msg.id !== tempId)); // Remove loading message on error
         }
     };
 
@@ -264,10 +284,21 @@ const ChatbotPage = () => {
                 </div>
                 <div className="chatArea">
                     <h2>Chat</h2>
-                    <div className="messageContainer">
+                    <div className="messageContainer" ref={messageContainerRef}>
                         {messages.map((msg, index) => (
-                            <div key={index} className={`message ${msg.role}`}>
-                                {msg.content}
+                            <div key={msg.id || index} className={`message ${msg.role}`}>
+                                {msg.role === 'loading' ? (
+                                    <div className="loading-container">
+                                        <l-waveform
+                                            size="35"
+                                            stroke="3.5"
+                                            speed="1" 
+                                            color="#6303FF" 
+                                        ></l-waveform>
+                                    </div>
+                                ) : (
+                                    msg.content
+                                )}
                             </div>
                         ))}
                     </div>

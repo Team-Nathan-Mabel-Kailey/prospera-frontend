@@ -73,6 +73,7 @@
     background-color: #e1bee7; /* Very light purple background for messages */
     border: 1px solid #ce93d8;
     border-radius: 10px;
+    scroll-behavior: smooth;
 }
 
 .message {
@@ -127,4 +128,28 @@ button:hover {
 
 .footerSpace{
     height: 238.44px;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.inputContainer button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.message.loading {
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
 }
