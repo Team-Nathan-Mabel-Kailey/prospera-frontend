@@ -81,7 +81,7 @@ const Account = () => {
 
             } catch (error) {
                 console.error('Error updating user email:', error);
-                alert('Failed to update user email.');
+                // alert('Failed to update user email.');
             }
 
         } catch (error) {
