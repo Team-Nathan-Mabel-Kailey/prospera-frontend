@@ -21,7 +21,7 @@
 .sidebar {
     width: 25%;
     background-color: rgb(106, 27, 154, 0.6); /* Purple sidebar */
-    color: white;
+    color: #fff;
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
     border-radius: 5px 0px 0px 5px;
@@ -85,14 +85,14 @@
 
 .message.user {
     background-color: #ba68c8; /* User message background */
-    color: white;
+    color: #fff;
     align-self: flex-start;
     font-size: 20px;
 }
 
 .message.assistant {
     background-color: #9575cd; /* Assistant message background */
-    color: white;
+    color: #fff;
     align-self: flex-end;
     font-size: 20px;
 }
@@ -114,7 +114,7 @@
 .chatbotContainer button {
     padding: 10px 20px;
     background-color: #8e24aa; /* Purple button */
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 10px;
     cursor: pointer;

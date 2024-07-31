@@ -17,7 +17,7 @@ import LogOut from './Components/LogOut/LogOut';
 import { useState } from 'react';
 import HamMenu from './Components/HamMenu/HamMenu';
 import Settings from './Components/Settings/Settings';
-import Account from './Components/Settings/Account';
+// import Account from './Components/Settings/Account';
 import './assets/fonts.css';
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
                 <Route path="/chat" element={<ChatbotPage />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path='/topic-selection' element={<TopicSelectionPage />} />
-                <Route path='/account' element={<Account />} />
+                {/* <Route path='/account' element={<Account />} /> */}
                 <Route path="*" element={<h1>Not Found</h1>} />
               </Routes>
               <div className='footerSpace'></div>
