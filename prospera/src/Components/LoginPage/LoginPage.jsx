@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
+import'ldrs/ring';
+import { cardio } from 'ldrs';
 
 const LoginPage = () => {
     const { setIsLoggedIn, isLoggedIn } = useAuth();
@@ -11,7 +13,11 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showIcon, setShowIcon] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    
+
+    cardio.register();
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -21,6 +27,7 @@ const LoginPage = () => {
 
     const handleLogin = async (evt) => {
         evt.preventDefault();
+        setIsLoading(true);
         try {
             const response = await axios.post('https://prospera-api.onrender.com/users/login', {
                 username,
@@ -34,6 +41,8 @@ const LoginPage = () => {
         
         } catch (error) {
             console.error('Error logging in:', error);
+        } finally {
+            setIsLoading(false);  // Hide loader
         }
     };
 
@@ -122,8 +131,19 @@ const LoginPage = () => {
                     <a href='/forgot' className='forgotRedirect'><u>Forgot password?</u></a>
                     
                     <div className='loginButtonArea'>
-                        <button type='submit' onClick={handleLogin} className='loginButton'>LOGIN</button>
-                        <button onClick={() => navigate('/register')} className='goToRegisterButton'>GO TO REGISTER</button>
+                        {isLoading ? (
+                            <l-cardio
+                                size="50"
+                                stroke="4"
+                                speed="2" 
+                                color="black" 
+                            ></l-cardio>
+                        ) : (
+                            <>
+                                <button type='submit' onClick={handleLogin} className='loginButton'>LOGIN</button>
+                                <button onClick={() => navigate('/register')} className='goToRegisterButton'>GO TO REGISTER</button>
+                            </>
+                        )}
                     </div>
                 </form>
 

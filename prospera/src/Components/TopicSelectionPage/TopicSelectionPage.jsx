@@ -22,6 +22,15 @@ const TopicSelectionPage = () => {
     };
 
     const handleSubmit = async () => {
+
+//         const userId = user?.userID; // Assuming userId is stored in localStorage on login
+//         if (!userId) {
+//             console.error('User is not authenticated');
+//             return;
+//         }
+//         console.log('UserId: ', userId);
+//         console.log('Selected Topics: ', selectedTopics);
+
         // console.log('user is:', user)
         const userId = user.userID; // Assuming userId is stored in localStorage on login
         // if (!userId) {

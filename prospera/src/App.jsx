@@ -25,9 +25,9 @@ function App() {
   const [open, setOpen] = useState(false);
   
   return (
-    <div className='app'>
+    <AuthProvider>
       <Router>
-        <AuthProvider>
+        <div className='app'>
             <Header 
               open= {open}
               setOpen={setOpen}
@@ -53,9 +53,9 @@ function App() {
               </Routes>
               <div className='footerSpace'></div>
             <Footer  className="footer"/>
-        </AuthProvider>
-      </Router>
-    </div>
+          </div>
+        </Router>
+    </AuthProvider>
   );
 }
 

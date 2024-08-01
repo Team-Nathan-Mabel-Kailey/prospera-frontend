@@ -9,6 +9,14 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   const [widgetType, setWidgetType] = useState('');
   const [widgetNum, setWidgetNum] = useState(0);
   const [widgetData, setWidgetData] = useState({});
+  const [minW, setMinW] = useState(0);
+  const [maxW, setMaxW] = useState(0);
+  const [minH, setMinH] = useState(0);
+  const [maxH, setMaxH] = useState(0);
+  const [startingW, setStartingW] = useState(0);
+  const [startingH, setStartingH] = useState(0);
+  // const [widgetWidth, setWidgetWidth] = useState(0);
+  // const [widgetHeight, setWidgetHeight] = useState(0);
 
   // const uniqueWidgets = 'financialGoals';
 
@@ -20,13 +28,61 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
-    borderRadius: 10,
-    boxShadow: 24,
+    borderRadius: 18,
+    boxShadow: 50,
     p: 4,
   };
 
-    const handleAddWidget = async () => {
-        const newWidgetI = uuidv4();
+  const handleAddWidget = async () => {
+    const newWidgetI = uuidv4();
+    console.log('widget type: ', widgetType);
+    
+    let minW, maxW, minH, maxH, startingW, startingH;
+
+    if (widgetType === 'Stock') {
+        minW = 2;
+        maxW = 4;
+        minH = 3;
+        maxH = 3;
+        startingW = 4;
+        startingH = 3;
+    } 
+
+    else if (widgetType === 'News') {
+      minW = 2;
+      maxW = 3;
+      minH = 3;
+      maxH = 3;
+      startingW = 3;
+      startingH = 3;
+    }
+
+    else if (widgetType === 'Financial Goals') {
+        minW = 2;
+        maxW = 3;
+        minH = 2;
+        maxH = 2;
+        startingW = 3;
+        startingH = 2;
+    }
+    
+    else if (widgetType === 'Highlighted Goal') {
+        minW = 2;
+        maxW = 3;
+        minH = 1;
+        maxH = 2;
+        startingW = 3;
+        startingH = 2;
+    } 
+    
+    else if (widgetType === 'Checking Account' || widgetType === 'Savings Account') {
+        minW = 3;
+        maxW = 4;
+        minH = 1;
+        maxH = 1;
+        startingW = 4;
+        startingH = 1;
+    }
 
         try {
         const response = await axios.post(`https://prospera-api.onrender.com/api/widgets/create`, {
@@ -34,21 +90,92 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             type: widgetType,
             x: 0,
             y: 0,
-            w: 2,
-            h: 2,
+            w: startingW,
+            h: startingH,
+            minW: minW,
+            maxW: maxW,
+            minH: minH,
+            maxH: maxH,
             configuration: widgetData,
             userId,
         });
       
+        console.log(response.data);
         onAdd(response.data);
         setWidgetNum(widgetNum + 1);
         setWidgetType('');
         setWidgetData({});
         onClose();
-        } catch (error) {
+
+        // Update state after the API call
+        setMinW(minW);
+        setMaxW(maxW);
+        setMinH(minH);
+        setMaxH(maxH);
+        setStartingW(startingW);
+        setStartingH(startingH);
+    } catch (error) {
         console.error('Error adding widget:', error);
-        }
-    };
+    }
+};
+
+    // const handleAddWidget = async () => {
+    //     const newWidgetI = uuidv4();
+    //     console.log('widget type: ', widgetType);
+
+    //     if (widgetType == 'news' || widgetType == 'financialGoals' || widgetType == 'stock') {
+    //       setMinW(2);
+    //       setMaxW(3);
+    //       setMinH(2);
+    //       setMaxH(2);
+    //       setStartingW(3);
+    //       setStartingH(2);
+    //     }
+
+    //     else if (widgetType == 'highlightedSavings') {
+    //       setMinW(2);
+    //       setMaxW(3);
+    //       setMinH(1);
+    //       setMaxH(2);
+    //       setStartingW(3);
+    //       setStartingH(2);
+    //     }
+
+    //     if (widgetType == 'checkingsAccount' || widgetType == 'savingsAccount') {
+    //       setMinW(3);
+    //       setMaxW(4);
+    //       setMinH(1);
+    //       setMaxH(1);
+    //       setStartingW(4);
+    //       setStartingH(1);
+    //     }
+
+    //     try {
+    //     const response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+    //         i: newWidgetI,
+    //         type: widgetType,
+    //         x: 0,
+    //         y: 0,
+    //         w: startingW,
+    //         h: startingH,
+    //         minW: minW,
+    //         maxW: maxW,
+    //         minH: minH,
+    //         maxH: maxH,
+    //         configuration: widgetData,
+    //         userId,
+    //     });
+      
+    //     console.log(response.data);
+    //     onAdd(response.data);
+    //     setWidgetNum(widgetNum + 1);
+    //     setWidgetType('');
+    //     setWidgetData({});
+    //     onClose();
+    //     } catch (error) {
+    //     console.error('Error adding widget:', error);
+    //     }
+    // };
   
 
   const handleInputChange = (e) => {
@@ -68,7 +195,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
 
   const renderWidgetCreationOptions = (widgetType) => {
     switch (widgetType) {
-        case 'stock':
+        case 'Stock':
           return (
             // done
             <div className='createOptions'>
@@ -78,7 +205,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
               <input type="text" name="symbol" value={widgetData.symbol || ''} onChange={handleInputChange} placeholder="Stock Name" />
               <h3>Now, enter a period to view a stock's performance over time.</h3>
               <p>Selecting a time period for a stock's performance allows you to view how the stock's price has changed over a specific duration, such as a day, a month, or year.</p>
-              <select name='period' value={widgetData.period} onChange={handleInputChange} class="selectDropdown">
+              <select name='period' value={widgetData.period} onChange={handleInputChange} className="selectDropdown">
                 <option value="">Select</option>
                 <option value="1D">1 day</option>
                 <option value="5D">5 days</option>
@@ -90,7 +217,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
 
         // current
-        case 'financialGoals':
+        case 'Financial Goals':
           return (
             <div className='createOptions'>
               <h2>Enter some of your financial goals.</h2>
@@ -106,7 +233,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             </div>
           );
       
-        case 'highlightedSavings':
+        case 'Highlighted Goal':
           return (
             <div className='createOptions'>
               <h2>Create a savings goal!</h2>
@@ -117,12 +244,12 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
 
         // done (need to refine news sources)
-        case 'news':
+        case 'News':
           return (
             <div className='createOptions'>
               <h2>We'll select a random financial news article for you on a topic you're interested in!</h2>
               <p>Our selected articles cover diverse topics including stock market trends, personal finance tips, corporate news, and global economic developments.</p>
-              <select name='query' value={widgetData.query} onChange={handleInputChange} class="selectDropdown">
+              <select name='query' value={widgetData.query} onChange={handleInputChange} className="selectDropdown">
                 <option value="">Select</option>
                 <option value="Stocks">Stocks</option>
                 <option value="Budgeting">Budgeting</option>
@@ -135,7 +262,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
 
         // done
-        case 'savingsAccount':
+        case 'Savings Account':
           return (
             <div className='createOptions'>
               <h2>Enter some information about your savings account.</h2>
@@ -151,7 +278,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
 
         // done
-        case 'checkingsAccount':
+        case 'Checking Account':
           return (
             <div className='createOptions'>
               <h2>Enter some information about your checking account.</h2>
@@ -181,14 +308,14 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     <Modal open={isOpen} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <h2 className='selectTitle'>Select Widget Type</h2>
-        <select value={widgetType} onChange={(e) => setWidgetType(e.target.value)} class="selectDropdown">
+        <select value={widgetType} onChange={(e) => setWidgetType(e.target.value)} className="selectDropdown">
           <option value="">Select</option>
-          <option value="stock">Stock Widget</option>
-          <option value="financialGoals">Financial Goals Widget</option>
-          <option value="highlightedSavings">Highlighted Savings Goal Widget</option>
-          <option value="news">News Widget</option>
-          <option value="savingsAccount">Savings Account Widget</option>
-          <option value="checkingsAccount">Checkings Account Widget</option>
+          <option value="Stock">Stock Widget</option>
+          <option value="Financial Goals">Financial Goals Widget</option>
+          <option value="Highlighted Goal">Highlighted Savings Goal Widget</option>
+          <option value="News">News Widget</option>
+          <option value="Savings Account">Savings Account Widget</option>
+          <option value="Checking Account">Checkings Account Widget</option>
         </select>
 
         {renderWidgetCreationOptions(widgetType)}
