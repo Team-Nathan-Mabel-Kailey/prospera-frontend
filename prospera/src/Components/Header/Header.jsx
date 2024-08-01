@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 import { NovuProvider, PopoverNotificationCenter, NotificationBell } from '@novu/notification-center';
 import { useAuth } from '../AuthContext/AuthContext';
 import settingGif from './icons8-settings.gif';
+import Badge from '@mui/material/Badge';
+import Stack from '@mui/material/Stack';
+import MailIcon from '@mui/icons-material/Mail';
 import './Header.css';
 
 let googleTranslateInitialized = false;
@@ -66,7 +69,11 @@ const Header = ({ open, setOpen }) => {
                 </Link>
                 <NovuProvider subscriberId={'user.userID'} applicationIdentifier={'9aO_manMoao5'}>
                     <PopoverNotificationCenter colorScheme={'light'}>
-                    {({ unseenCount }) => <NotificationBell unseenCount={unseenCount} />}
+                    {({ unseenCount }) => <Badge badgeContent=" " variant="dot" color="secondary" unseenCount={unseenCount}>
+                        <MailIcon className="mailIcon" color="#000" />
+                    </Badge>}
+
+                    
                     </PopoverNotificationCenter>
                 </NovuProvider>
             </div>

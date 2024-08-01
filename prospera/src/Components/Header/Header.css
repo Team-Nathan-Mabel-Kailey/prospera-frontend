@@ -65,6 +65,10 @@
     font-weight: 500;
 }
 
+.mailIcon:hover{
+    cursor: pointer;
+}
+
 .auth-buttons{
     display: flex;
     justify-content: flex-end;
@@ -80,6 +84,7 @@
     background-color: #232323 !important;
     color: #fff;
     text-decoration: none;
+    margin-right: 15px;
 }
 
 button.register {
@@ -239,7 +244,7 @@ button.register {
 }
 
 .settingsIcon img{
-    width: 35px;
+    width: 30px;
 }
 
 .settingsIcon .hoverImg{
