@@ -18,6 +18,15 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
       { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false }
     ]
   });
+  const [stockData, setStockData] = useState({
+    stocks: [
+      { symbol: '', period: '' },
+      { symbol: '', period: '' },
+      { symbol: '', period: '' },
+      { symbol: '', period: '' },
+      { symbol: '', period: '' },
+    ]
+  });
   const [minW, setMinW] = useState(0);
   const [maxW, setMaxW] = useState(0);
   const [minH, setMinH] = useState(0);
@@ -38,6 +47,24 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     borderRadius: 18,
     boxShadow: 50,
     p: 4,
+  };
+
+  const resetStockData = () => {
+    setStockData({
+      stocks: Array(5).fill({ symbol: '', period: '' })
+    });
+  };
+
+  const resetGoalData = () => {
+    setGoalData({
+      goals: Array(5).fill({ name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false })
+    });
+  };
+
+  const handleWidgetTypeChange = (e) => {
+    setWidgetType(e.target.value);
+    resetStockData();
+    resetGoalData();
   };
 
   const handleAddWidget = async () => {
@@ -111,6 +138,24 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           userId,
         });
       }
+
+      else if (widgetType === 'Stock') {
+        response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+          i: newWidgetI,
+          type: widgetType,
+          x: 0,
+          y: 0,
+          w: startingW,
+          h: startingH,
+          minW: minW,
+          maxW: maxW,
+          minH: minH,
+          maxH: maxH,
+          configuration: stockData,
+          userId,
+        });
+      }
+        
         
       else {
         response = await axios.post(`http://localhost:3000/api/widgets/create`, {
@@ -135,6 +180,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         setWidgetType('');
         setWidgetData({});
         setGoalData({});
+        setStockData({});
         onClose();
 
         // Update state after the API call
@@ -166,6 +212,15 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     }));
   };
 
+  const handleStockChange = (index, field, value) => {
+    setStockData(prevData => ({
+      ...prevData,
+      stocks: prevData.stocks.map((stock, i) => 
+        i === index ? { ...stock, [field]: value } : stock
+      )
+    }));
+  };
+
   // const isWidgetTypeAllowed = (type) => {
   //   if (uniqueWidgets.includes(type)) {
   //     return !existingWidgets.some(widget => widget.type === type);
@@ -180,37 +235,52 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             // done
             <div className='createOptions'>
               <h2>See an overview of a stock's performance in the market.</h2>
-              <h3>Enter the symbol of a stock you're interested in!</h3>
+              <h3>Enter the symbol of a stock you're interested in and a period to view the stock's performance over time!</h3>
               <p>A stock symbol is a unique series of letters assigned to a company's stock for trading on a specific market exchange. Click <a href='https://finance.yahoo.com/lookup/'>here</a> to search for stock symbols.</p>
-              <input type="text" name="symbol" value={widgetData.symbol || ''} onChange={handleInputChange} placeholder="Stock Name" />
-              <h3>Now, enter a period to view a stock's performance over time.</h3>
               <p>Selecting a time period for a stock's performance allows you to view how the stock's price has changed over a specific duration, such as a day, a month, or year.</p>
-              <select name='period' value={widgetData.period} onChange={handleInputChange} className="selectDropdown">
-                <option value="">Select</option>
-                <option value="1D">1 day</option>
-                <option value="5D">5 days</option>
-                <option value="1M">1 month</option>
-                <option value="6M">6 months</option>
-                <option value="1YR">1 year</option>
-              </select>
+              <div className='stockInputs'>
+                {stockData.stocks.map((stock, index) => (
+                  <div key={index} className='stockGroup'>
+                    <h3>Stock {index + 1}</h3>
+                    <input
+                      type="text"
+                      value={stock.symbol}
+                      onChange={(e) => handleStockChange(index, 'symbol', e.target.value)}
+                      placeholder="Stock Symbol (required)"
+                    />
+                    <select
+                      name="period"
+                      value={stock.period}
+                      onChange={(e) => handleStockChange(index, 'period', e.target.value)}
+                      // placeholder="Period (optional)"
+                    >
+                        <option value="">Select</option>
+                        <option value="1D">1 day</option>
+                        <option value="1m">1 month</option>
+                        <option value="3m">3 months</option>
+                        <option value="12m">1 year</option>
+                        <option value="all">All</option>
+                    </select>
+                  </div>
+                ))}
+              </div>
             </div>
+
+            // <input type="text" name="symbol" value={widgetData.symbol || ''} onChange={handleInputChange} placeholder="Stock Name" />
+                          
+            // <select name='period' value={widgetData.period} onChange={handleInputChange} className="selectDropdown">
+              // <option value="">Select</option>
+              // <option value="1D">1 day</option>
+              // <option value="5D">5 days</option>
+              // <option value="1M">1 month</option>
+              // <option value="6M">6 months</option>
+              // <option value="1YR">1 year</option>
+            // </select>
           );
 
         // current
         case 'Financial Goals':
           return (
-            // <div className='createOptions'>
-            //   <h2>Enter some of your financial goals.</h2>
-            //   <p>Setting general financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving financial stability.</p>
-            //   <p>Each widget can store 5 of your financial goals. Feel free to add another widget to keep track of more goals!</p>
-            //   <div className='financialGoalInputs'>
-            //     <input type="text" name="goal1" value={widgetData.goal1 || ''} onChange={handleInputChange} placeholder="Goal 1" />
-            //     <input type="text" name="goal2" value={widgetData.goal2 || ''} onChange={handleInputChange} placeholder="Goal 2" />
-            //     <input type="text" name="goal3" value={widgetData.goal3 || ''} onChange={handleInputChange} placeholder="Goal 3" />
-            //     <input type="text" name="goal4" value={widgetData.goal4 || ''} onChange={handleInputChange} placeholder="Goal 4" />
-            //     <input type="text" name="goal5" value={widgetData.goal5 || ''} onChange={handleInputChange} placeholder="Goal 5" />
-            //   </div>
-            // </div>
             <div className='createOptions'>
               <h2>Enter your financial goals</h2>
               <p>Setting specific financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving financial stability.</p>
@@ -324,7 +394,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     <Modal open={isOpen} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={style}>
         <h2 className='selectTitle'>Select Widget Type</h2>
-        <select value={widgetType} onChange={(e) => setWidgetType(e.target.value)} className="selectDropdown">
+        <select value={widgetType} onChange={handleWidgetTypeChange} className="selectDropdown">
           <option value="">Select</option>
           <option value="Stock">Stock Widget</option>
           <option value="Financial Goals">Financial Goals Widget</option>
