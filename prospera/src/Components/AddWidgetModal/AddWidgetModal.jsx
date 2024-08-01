@@ -9,14 +9,21 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   const [widgetType, setWidgetType] = useState('');
   const [widgetNum, setWidgetNum] = useState(0);
   const [widgetData, setWidgetData] = useState({});
+  const [goalData, setGoalData] = useState({
+    goals: [
+      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
+      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
+      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
+      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
+      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false }
+    ]
+  });
   const [minW, setMinW] = useState(0);
   const [maxW, setMaxW] = useState(0);
   const [minH, setMinH] = useState(0);
   const [maxH, setMaxH] = useState(0);
   const [startingW, setStartingW] = useState(0);
   const [startingH, setStartingH] = useState(0);
-  // const [widgetWidth, setWidgetWidth] = useState(0);
-  // const [widgetHeight, setWidgetHeight] = useState(0);
 
   // const uniqueWidgets = 'financialGoals';
 
@@ -44,7 +51,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         maxW = 4;
         minH = 3;
         maxH = 3;
-        startingW = 4;
+        startingW = 3;
         startingH = 3;
     } 
 
@@ -64,6 +71,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         maxH = 2;
         startingW = 3;
         startingH = 2;
+
     }
     
     else if (widgetType === 'Highlighted Goal') {
@@ -85,26 +93,48 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     }
 
     try {
-        const response = await axios.post(`http://localhost:3000/api/widgets/create`, {
-            i: newWidgetI,
-            type: widgetType,
-            x: 0,
-            y: 0,
-            w: startingW,
-            h: startingH,
-            minW: minW,
-            maxW: maxW,
-            minH: minH,
-            maxH: maxH,
-            configuration: widgetData,
-            userId,
+      let response;
+
+      if (widgetType === 'Financial Goals') {
+        response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+          i: newWidgetI,
+          type: widgetType,
+          x: 0,
+          y: 0,
+          w: startingW,
+          h: startingH,
+          minW: minW,
+          maxW: maxW,
+          minH: minH,
+          maxH: maxH,
+          configuration: goalData,
+          userId,
         });
+      }
+        
+      else {
+        response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+          i: newWidgetI,
+          type: widgetType,
+          x: 0,
+          y: 0,
+          w: startingW,
+          h: startingH,
+          minW: minW,
+          maxW: maxW,
+          minH: minH,
+          maxH: maxH,
+          configuration: widgetData,
+          userId,
+        });
+      }
       
         console.log(response.data);
         onAdd(response.data);
         setWidgetNum(widgetNum + 1);
         setWidgetType('');
         setWidgetData({});
+        setGoalData({});
         onClose();
 
         // Update state after the API call
@@ -119,70 +149,20 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     }
 };
 
-    // const handleAddWidget = async () => {
-    //     const newWidgetI = uuidv4();
-    //     console.log('widget type: ', widgetType);
-
-    //     if (widgetType == 'news' || widgetType == 'financialGoals' || widgetType == 'stock') {
-    //       setMinW(2);
-    //       setMaxW(3);
-    //       setMinH(2);
-    //       setMaxH(2);
-    //       setStartingW(3);
-    //       setStartingH(2);
-    //     }
-
-    //     else if (widgetType == 'highlightedSavings') {
-    //       setMinW(2);
-    //       setMaxW(3);
-    //       setMinH(1);
-    //       setMaxH(2);
-    //       setStartingW(3);
-    //       setStartingH(2);
-    //     }
-
-    //     if (widgetType == 'checkingsAccount' || widgetType == 'savingsAccount') {
-    //       setMinW(3);
-    //       setMaxW(4);
-    //       setMinH(1);
-    //       setMaxH(1);
-    //       setStartingW(4);
-    //       setStartingH(1);
-    //     }
-
-    //     try {
-    //     const response = await axios.post(`http://localhost:3000/api/widgets/create`, {
-    //         i: newWidgetI,
-    //         type: widgetType,
-    //         x: 0,
-    //         y: 0,
-    //         w: startingW,
-    //         h: startingH,
-    //         minW: minW,
-    //         maxW: maxW,
-    //         minH: minH,
-    //         maxH: maxH,
-    //         configuration: widgetData,
-    //         userId,
-    //     });
-      
-    //     console.log(response.data);
-    //     onAdd(response.data);
-    //     setWidgetNum(widgetNum + 1);
-    //     setWidgetType('');
-    //     setWidgetData({});
-    //     onClose();
-    //     } catch (error) {
-    //     console.error('Error adding widget:', error);
-    //     }
-    // };
-  
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setWidgetData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  const handleGoalChange = (index, field, value) => {
+    setGoalData(prevData => ({
+      ...prevData,
+      goals: prevData.goals.map((goal, i) => 
+        i === index ? { ...goal, [field]: value } : goal
+      )
     }));
   };
 
@@ -219,16 +199,52 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         // current
         case 'Financial Goals':
           return (
+            // <div className='createOptions'>
+            //   <h2>Enter some of your financial goals.</h2>
+            //   <p>Setting general financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving financial stability.</p>
+            //   <p>Each widget can store 5 of your financial goals. Feel free to add another widget to keep track of more goals!</p>
+            //   <div className='financialGoalInputs'>
+            //     <input type="text" name="goal1" value={widgetData.goal1 || ''} onChange={handleInputChange} placeholder="Goal 1" />
+            //     <input type="text" name="goal2" value={widgetData.goal2 || ''} onChange={handleInputChange} placeholder="Goal 2" />
+            //     <input type="text" name="goal3" value={widgetData.goal3 || ''} onChange={handleInputChange} placeholder="Goal 3" />
+            //     <input type="text" name="goal4" value={widgetData.goal4 || ''} onChange={handleInputChange} placeholder="Goal 4" />
+            //     <input type="text" name="goal5" value={widgetData.goal5 || ''} onChange={handleInputChange} placeholder="Goal 5" />
+            //   </div>
+            // </div>
             <div className='createOptions'>
-              <h2>Enter some of your financial goals.</h2>
-              <p>Setting general financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving financial stability.</p>
-              <p>Each widget can store 5 of your financial goals. Feel free to add another widget to keep track of more goals!</p>
+              <h2>Enter your financial goals</h2>
+              <p>Setting specific financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving financial stability.</p>
+              <p>Each widget can store up to 5 of your financial goals. Feel free to add another widget to keep track of more goals!</p>
               <div className='financialGoalInputs'>
-                <input type="text" name="goal1" value={widgetData.goal1 || ''} onChange={handleInputChange} placeholder="Goal 1" />
-                <input type="text" name="goal2" value={widgetData.goal2 || ''} onChange={handleInputChange} placeholder="Goal 2" />
-                <input type="text" name="goal3" value={widgetData.goal3 || ''} onChange={handleInputChange} placeholder="Goal 3" />
-                <input type="text" name="goal4" value={widgetData.goal4 || ''} onChange={handleInputChange} placeholder="Goal 4" />
-                <input type="text" name="goal5" value={widgetData.goal5 || ''} onChange={handleInputChange} placeholder="Goal 5" />
+                {goalData.goals.map((goal, index) => (
+                  <div key={index} className='goalInputGroup'>
+                    <h3>Goal {index + 1}</h3>
+                    <input
+                      type="text"
+                      value={goal.name}
+                      onChange={(e) => handleGoalChange(index, 'name', e.target.value)}
+                      placeholder="Goal Name (required)"
+                    />
+                    <input
+                      type="number"
+                      value={goal.amountSaved}
+                      onChange={(e) => handleGoalChange(index, 'amountSaved', e.target.value)}
+                      placeholder="Amount Saved (optional)"
+                    />
+                    <input
+                      type="number"
+                      value={goal.goalAmount}
+                      onChange={(e) => handleGoalChange(index, 'goalAmount', e.target.value)}
+                      placeholder="Goal Amount (optional)"
+                    />
+                    <input
+                      type="date"
+                      value={goal.endDate}
+                      onChange={(e) => handleGoalChange(index, 'endDate', e.target.value)}
+                      placeholder="Goal End Date (required)"
+                    />
+                  </div>
+                ))}
               </div>
             </div>
           );

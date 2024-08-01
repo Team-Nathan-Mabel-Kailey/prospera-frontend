@@ -50,7 +50,9 @@ const Dashboard = () => {
     bgcolor: 'black',
     height: '100%', 
     display: 'flex', 
-    flexDirection: 'column'
+    flexDirection: 'column',
+    boxShadow: 15,
+    borderRadius: 3
   }
 
   let theme = createTheme({  
@@ -207,7 +209,7 @@ const Dashboard = () => {
           return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
 
         // case 'Highlighted Goal':
-        //   return <HighlightedSavingsWidget data={widget.configuration}/>;
+        //   return <HighlightedGoalWidget data={widget.configuration}/>;
 
         case 'News':
           return <NewsWidget data={widget.configuration}/>;
@@ -284,9 +286,10 @@ const Dashboard = () => {
             // style={{ backgroundColor }}
           >
             <CardHeader
+              className='cardHeader'
               subheader={widget.type}
               subheaderTypographyProps={{ color: 'white' }} 
-              style={{paddingTop: 12, paddingLeft: 8, paddingBottom: 0}}
+              style={{paddingTop: 12, paddingBottom: 0, marginTop: 5, marginRight: 5, marginBottom: 5, marginLeft: 5}}
               action={
                 <div className="widgetEditBtns">
                   <button
@@ -325,8 +328,9 @@ const Dashboard = () => {
                 </div>
             } />
             
+            <hr></hr>
 
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 15, paddingLeft: 18 }}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
               {renderWidgetContent(widget)}
             </CardContent>
 
