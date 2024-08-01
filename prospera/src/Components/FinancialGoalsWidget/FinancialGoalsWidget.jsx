@@ -377,8 +377,20 @@ const FinancialGoalsWidget = ({ data, id }) => {
 
         // Update widget content via API
         try {
-            await axios.put(`http://localhost:3000/api/widgets/content/${id}`, {
-                configuration: updatedWidgetData
+            // await axios.put(`http://localhost:3000/api/widgets/content/${id}`, {
+            //     configuration: updatedWidgetData
+            await axios.put(`https://prospera-api.onrender.com/api/widgets/content/${id}`, {
+                goalId,
+                checked: !checkedGoals.has(goalId),
+            });
+            setCheckedGoals((prevCheckedGoals) => {
+                const newCheckedGoals = new Set(prevCheckedGoals);
+                if (newCheckedGoals.has(goalId)) {
+                    newCheckedGoals.delete(goalId);
+                } else {
+                    newCheckedGoals.add(goalId);
+                }
+                return newCheckedGoals;
             });
         } catch (error) {
             console.error('Error updating widget content:', error);

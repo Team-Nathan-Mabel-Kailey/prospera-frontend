@@ -34,6 +34,14 @@
     gap: 70px;
 }
 
+@media (max-width: 968px) {
+    .firstLastNames{
+        flex-direction: column;
+        gap: 20px;
+        width: 100%;
+    }
+}
+
 .firstLastNames .textInput{
     width: 85%;
 }
@@ -119,7 +127,7 @@
 
 .cancelAcctBtn:hover{
     border-color: #8d47fe;
-    background: #6303FF;
+    background: #5735df;
     color: #fff;
 }
 

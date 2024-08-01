@@ -72,7 +72,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   const handleAddWidget = async () => {
     const newWidgetI = uuidv4();
     console.log('widget type: ', widgetType);
-
+    
     let minW, maxW, minH, maxH, startingW, startingH;
 
     if (widgetType === 'Stock') {
@@ -138,7 +138,23 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           maxH: maxH,
           configuration: goalData,
           userId,
+
         });
+        // try {
+        // const response = await axios.post(`https://prospera-api.onrender.com/api/widgets/create`, {
+        //     i: newWidgetI,
+        //     type: widgetType,
+        //     x: 0,
+        //     y: 0,
+        //     w: startingW,
+        //     h: startingH,
+        //     minW: minW,
+        //     maxW: maxW,
+        //     minH: minH,
+        //     maxH: maxH,
+        //     configuration: widgetData,
+        //     userId,
+        // });
       }
 
       else if (widgetType === 'Stock') {

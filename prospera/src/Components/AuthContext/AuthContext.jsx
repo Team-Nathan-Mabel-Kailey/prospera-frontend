@@ -44,6 +44,7 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const [novuSubscriberId, setNovuSubscriberId] = useState(null);
 
     useEffect(() => {
         // console.log("u")
@@ -52,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
         if (token) {
             const decodedToken = jwtDecode(token)
-            axios.get(`http://localhost:3000/users/${decodedToken.userId}`, {
+            axios.get(`https://prospera-api.onrender.com/users/${decodedToken.userId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -60,16 +61,20 @@ export const AuthProvider = ({ children }) => {
             .then(response => {
                 setUser(response.data);
                 setIsLoggedIn(true);
+                setNovuSubscriberId(response.data.userID.toString());
             })
             .catch(error => {
                 console.error('Error fetching user data:', error);
                 setIsLoggedIn(false);
             });
+        } else {
+            console.warn('No token found in localStorage');
+            setIsLoggedIn(false);
         }
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser }}>
+        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, novuSubscriberId, setNovuSubscriberId }}>
             {children}
         </AuthContext.Provider>
     );

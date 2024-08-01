@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import PasswordChecklist from "react-password-checklist";
 import './RegisterPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
+import { Link } from 'react-router-dom';
+import'ldrs/ring';
+import { cardio } from 'ldrs';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -20,21 +23,26 @@ const Register = () => {
     const [isValidPassword, setIsValidPassword] = useState(false);
     const navigate = useNavigate();
     const { setIsLoggedIn } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
+
+    cardio.register();
 
   //handle register
     const handleRegister = async (evt) => {
         evt.preventDefault();
+        setIsLoading(true);
         try {
         //register the user
         const response = await axios.post(
-            'http://localhost:3000/users/register',
+            'https://prospera-api.onrender.com/users/register',
             { username, email, password, securityAnswer }
         );
         //login the user
         const loginResponse = await axios.post(
-            'http://localhost:3000/users/login',
+            'https://prospera-api.onrender.com/users/login',
             { username, password }
         );
+            const {hasCompletedTopics} = response.data;
 
             console.log(response);
             setIsLoggedIn(true);
@@ -45,9 +53,15 @@ const Register = () => {
             }
         // Store the token in the localstorage as token
         localStorage.setItem('token', loginResponse.data.token);
+        if (hasCompletedTopics) {
         navigate('/dashboard');
+        } else {
+            navigate('/topic-selection');
+        }
         } catch (error) {
         alert('Registration failed. Try again.');
+        } finally {
+            setIsLoading(false);  // Hide loader
         }
     };
 
@@ -100,7 +114,7 @@ const Register = () => {
             <form className='registerForm'>
                 <div className='registerDescription'>
                     <h1>Sign Up</h1>
-                    <p>Already have an account? <a href='/login'>Log in</a></p>
+                    <p>Already have an account? <Link to="/login"> <a>Log in</a></Link></p>
                 </div>
 
                 <label>Email</label>
@@ -188,7 +202,18 @@ const Register = () => {
                 />
                 
                 <div className='registerButtonArea'>
-                    <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>CREATE ACCOUNT</button>
+                {isLoading ? (
+                            <l-cardio
+                                size="50"
+                                stroke="4"
+                                speed="2" 
+                                color="black" 
+                            ></l-cardio>
+                        ) : (
+                            <>
+                                <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>CREATE ACCOUNT</button>
+                            </>
+                        )}
                 </div>
             </form>
             

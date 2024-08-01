@@ -5,6 +5,9 @@ import { useEffect } from 'react';
 import { NovuProvider, PopoverNotificationCenter, NotificationBell } from '@novu/notification-center';
 import { useAuth } from '../AuthContext/AuthContext';
 import settingGif from './icons8-settings.gif';
+import Badge from '@mui/material/Badge';
+import Stack from '@mui/material/Stack';
+import MailIcon from '@mui/icons-material/Mail';
 import './Header.css';
 
 let googleTranslateInitialized = false;
@@ -54,7 +57,7 @@ const Header = ({ open, setOpen }) => {
                 <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
                 </Link>
             </nav>
-            <div className="auth-buttons-left">
+            <div className="authButtonsLeft">
                 <Link to="/dashboard">DASHBOARD</Link>
                 <Link to="/news">NEWS</Link>
                 <Link to='/chat'>CHATBOT</Link>
@@ -64,14 +67,32 @@ const Header = ({ open, setOpen }) => {
                     <img src={settingGif} alt="Hover" className="hoverImg"/>
                 </div>
                 </Link>
-                <NovuProvider subscriberId={'user.userID'} applicationIdentifier={'9aO_manMoao5'}>
+                {isLoggedIn && user && (
+                <NovuProvider 
+                    subscriberId={user.userID.toString()}
+                    applicationIdentifier={import.meta.env.VITE_NOVU_APP_IDENTIFIER}
+                >
                     <PopoverNotificationCenter colorScheme={'light'}>
-                    {({ unseenCount }) => <NotificationBell unseenCount={unseenCount} />}
+                    {({ unseenCount }) => <Badge badgeContent=" " variant="dot" color="secondary" unseenCount={unseenCount}>
+                        <MailIcon className="mailIcon" color="#000" />
+                    </Badge>}
+
+                    
                     </PopoverNotificationCenter>
                 </NovuProvider>
+            )}
             </div>
             <div className='auth-buttons'>
                 <Link to="/logout"><button className="login">LOG OUT</button></Link>
+            </div>
+            <div className="burgerAlign">
+                <div className='toggleHamburger'>
+                    <button className={`burger ${open ? 'burger-open' : 'burgerClose'}`} onClick={() => setOpen(!open)}>
+                    <div />
+                    <div />
+                    <div />
+                    </button>
+                </div>
             </div>
             </>
         ) : (
@@ -91,12 +112,14 @@ const Header = ({ open, setOpen }) => {
                 <Link to="/login"><button className="login">LOG IN</button></Link>
                 <Link to='/register'><button className="register">REGISTER</button></Link>
             </div>
-            <div className='toggleHamburger'>
-                <button className={`burger ${open ? 'burger-open' : 'burgerClose'}`} onClick={() => setOpen(!open)}>
-                <div />
-                <div />
-                <div />
-                </button>
+            <div className="burgerAlign">
+                <div className='toggleHamburger'>
+                    <button className={`burger ${open ? 'burger-open' : 'burgerClose'}`} onClick={() => setOpen(!open)}>
+                    <div />
+                    <div />
+                    <div />
+                    </button>
+                </div>
             </div>
             </>
         )} 

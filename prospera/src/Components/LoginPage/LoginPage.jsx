@@ -4,39 +4,46 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
+import'ldrs/ring';
+import { cardio } from 'ldrs';
 
 const LoginPage = () => {
-    const { setIsLoggedIn, isLoggedIn } = useAuth();
+    const { setIsLoggedIn, isLoggedIn, setNovuSubscriberId } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showIcon, setShowIcon] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+    const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    
+
+    cardio.register();
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/'); 
+            navigate('/dashboard'); 
         }
     }, [isLoggedIn, navigate]);
 
     const handleLogin = async (evt) => {
         evt.preventDefault();
+        setIsLoading(true);
         try {
-            const response = await axios.post('http://localhost:3000/users/login', {
+            const response = await axios.post('https://prospera-api.onrender.com/users/login', {
                 username,
                 password
             });
             const { token, userId } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('userId', userId);
+            setNovuSubscriberId(response.data.novuSubscriberId);
             setIsLoggedIn(true);
-            if (hasCompletedTopics) {
                 navigate('/dashboard');
-            } else {
-                navigate('/topic-selection');
-            }
+        
         } catch (error) {
             console.error('Error logging in:', error);
+        } finally {
+            setIsLoading(false);  // Hide loader
         }
     };
 
@@ -52,6 +59,23 @@ const LoginPage = () => {
         }
     }
 
+    // const texts = document.querySelectorAll('.text');
+// let currentIndex = 0;
+
+// function changeText() {
+//   texts.forEach((text, index) => {
+//     if (index === currentIndex) {
+//       text.style.opacity = '1';
+//     } else {
+//       text.style.opacity = '0';
+//     }
+//   });
+
+//   currentIndex = (currentIndex + 1) % texts.length;
+// }
+
+// setInterval(changeText, 2000);
+
     return (
         <>
         <div className='headerSpace' id='tempHeader'></div>
@@ -60,8 +84,21 @@ const LoginPage = () => {
             <div className='loginBox'>
                 <form className='loginForm'>
                     <div className='loginDescription'>
-                        <h1>Login</h1>
-                        <p>Sign in to continue with us</p>
+                        <div className='logInTitle'>
+                            <div className="animated-text">
+                                <span className="text">Hello,</span>
+                                <span className="text">Hola,</span>
+                                <span className="text">Bonjour,</span>
+                                <span className="text">Hallo,</span>
+                                <span className="text">Ciao,</span>
+                                <span className="text">你好,</span>
+                                <span className="text">नमस्ते,</span>
+                                <span className="text">Olá,</span>
+                                <span className="text">Привет,</span>
+                            </div>
+                            <h1>Login</h1>
+                        </div>
+                        <p>Sign in to continue.</p>
                     </div>
 
                     <label>Username
@@ -95,8 +132,19 @@ const LoginPage = () => {
                     <a href='/forgot' className='forgotRedirect'><u>Forgot password?</u></a>
                     
                     <div className='loginButtonArea'>
-                        <button type='submit' onClick={handleLogin} className='loginButton'>LOGIN</button>
-                        <button onClick={() => navigate('/register')} className='goToRegisterButton'>GO TO REGISTER</button>
+                        {isLoading ? (
+                            <l-cardio
+                                size="50"
+                                stroke="4"
+                                speed="2" 
+                                color="black" 
+                            ></l-cardio>
+                        ) : (
+                            <>
+                                <button type='submit' onClick={handleLogin} className='loginButton'>LOGIN</button>
+                                <button onClick={() => navigate('/register')} className='goToRegisterButton'>GO TO REGISTER</button>
+                            </>
+                        )}
                     </div>
                 </form>
 
