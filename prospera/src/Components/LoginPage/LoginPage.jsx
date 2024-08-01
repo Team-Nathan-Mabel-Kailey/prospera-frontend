@@ -15,8 +15,8 @@ const LoginPage = () => {
     const [showIcon, setShowIcon] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    let BASE_URL = import.meta.env.BASE_URL;
     
-
     cardio.register();
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const LoginPage = () => {
         evt.preventDefault();
         setIsLoading(true);
         try {
-            const response = await axios.post('https://prospera-api.onrender.com/users/login', {
+            const response = await axios.post(`${BASE_URL}/users/login`, {
                 username,
                 password
             });

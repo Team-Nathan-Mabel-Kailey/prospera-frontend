@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
     const [novuSubscriberId, setNovuSubscriberId] = useState(null);
+    let BASE_URL = import.meta.env.BASE_URL;
 
     useEffect(() => {
         // console.log("u")
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }) => {
 
         if (token) {
             const decodedToken = jwtDecode(token)
-            axios.get(`https://prospera-api.onrender.com/users/${decodedToken.userId}`, {
+            axios.get(`${BASE_URL}/users/${decodedToken.userId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

@@ -146,6 +146,7 @@ const ChatbotPage = () => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const messageContainerRef = useRef(null);
+    let BASE_URL = import.meta.env.BASE_URL;
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -182,7 +183,7 @@ const ChatbotPage = () => {
         // if (!user || !user.userID) return;
         // if (!userId) return;
         try {
-            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/conversations/${userId}`);
+            const response = await axios.get(`${BASE_URL}/api/chat/conversations/${userId}`);
             console.log('conversations data:', response.data);
             setConversations(response.data.conversations);
         } catch (error) {
@@ -199,7 +200,7 @@ const ChatbotPage = () => {
             console.log("FE user.userID: ", user.userID)
             console.log("FE conversationId: ", conversationId);
             
-            const response = await axios.get(`https://prospera-api.onrender.com/api/chat/chathistory/${user.userID}/conversations/${conversationId}`);
+            const response = await axios.get(`${BASE_URL}/api/chat/chathistory/${user.userID}/conversations/${conversationId}`);
             console.log("Fetching chat history from URL:", response);
             const formattedMessages = response.data.messages.flatMap(msg => [
                 { role: 'user', content: msg.prompt },
@@ -226,7 +227,7 @@ const ChatbotPage = () => {
         scrollToBottom();
     
         try {
-            const response = await axios.post('https://prospera-api.onrender.com/api/chat', {
+            const response = await axios.post(`${BASE_URL}/api/chat`, {
                 prompt: newMessage,
                 conversationId: selectedConversationId,
                 userId: user.userID,
@@ -253,7 +254,7 @@ const ChatbotPage = () => {
             return;
         }
         try {
-            const response = await axios.post('https://prospera-api.onrender.com/api/chat/new', {
+            const response = await axios.post(`${BASE_URL}/api/chat/new`, {
                 userId: user.userID,
             });
             setSelectedConversationId(response.data.conversationId);  // Set new conversationId

@@ -17,11 +17,12 @@ const ForgotPasswordPage = () => {
     const [showIcon6, setShowIcon6] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
     const [isValidNewPassword, setIsValidNewPassword] = useState(false);
     const navigate = useNavigate();
+    let BASE_URL = import.meta.env.BASE_URL;
 
     const handleForgotPassword = async (evt) => {
         evt.preventDefault();
         try {
-            const response = await axios.post('https://prospera-api.onrender.com/users/forgot-password', {
+            const response = await axios.post(`${BASE_URL}m/users/forgot-password`, {
                 username,
                 newPassword,
                 securityAnswer
