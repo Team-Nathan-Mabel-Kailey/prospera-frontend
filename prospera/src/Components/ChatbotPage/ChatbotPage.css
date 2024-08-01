@@ -85,12 +85,14 @@
     background-color: #ba68c8; /* User message background */
     color: #fff;
     align-self: flex-start;
+    width: 90%;
 }
 
 .message.assistant {
     background-color: #9575cd; /* Assistant message background */
     color: #fff;
     align-self: flex-end;
+    width: 90%;
 }
 
 .inputContainer {
