@@ -65,6 +65,10 @@
     font-weight: 500;
 }
 
+.mailIcon:hover{
+    cursor: pointer;
+}
+
 .auth-buttons{
     display: flex;
     justify-content: flex-end;

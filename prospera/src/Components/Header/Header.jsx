@@ -70,7 +70,7 @@ const Header = ({ open, setOpen }) => {
                 <NovuProvider subscriberId={'user.userID'} applicationIdentifier={'9aO_manMoao5'}>
                     <PopoverNotificationCenter colorScheme={'light'}>
                     {({ unseenCount }) => <Badge badgeContent=" " variant="dot" color="secondary" unseenCount={unseenCount}>
-                        <MailIcon color="#000" />
+                        <MailIcon className="mailIcon" color="#000" />
                     </Badge>}
 
                     
