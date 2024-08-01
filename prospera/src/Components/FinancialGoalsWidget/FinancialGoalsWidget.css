@@ -142,10 +142,15 @@
     margin: 0;
 }
 
+.financial-goals-widget h3 {
+  margin: 2px 0 0 2px;
+}
+
+
 .financial-goals-widget ul {
     list-style: none;
     padding: 0;
-    margin-top: 22px;
+    margin-top: 15px;
     margin-left: 10px;
 }
 

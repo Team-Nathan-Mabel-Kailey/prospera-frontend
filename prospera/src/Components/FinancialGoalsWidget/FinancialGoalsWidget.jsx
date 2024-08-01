@@ -392,13 +392,14 @@ const FinancialGoalsWidget = ({ data, id }) => {
 
     return (
         <div className="financial-goals-widget">
+            {widgetData.listName && <h3>{widgetData.listName}</h3>}
             <ul>
-                {widgetData.goals.filter(goal => !goal.isCompleted).map((goal) => (
-                    <li key={goal.name} className={checkedGoals.has(goal.name) ? 'checked' : ''}>
-                        <label htmlFor={`checkbox-${goal.name}`}>
+                {widgetData.goals.filter(goal => !goal.isCompleted).map((goal, index) => (
+                    <li key={`goal-${index}`} className={checkedGoals.has(goal.name) ? 'checked' : ''}>
+                        <label htmlFor={`checkbox-${index}`}>
                             <div className="checkbox-wrapper">
                                 <input
-                                    id={`checkbox-${goal.name}`}
+                                    id={`checkbox-${index}`}
                                     type="checkbox"
                                     checked={checkedGoals.has(goal.name)}
                                     onChange={() => handleCheck(goal.name)}

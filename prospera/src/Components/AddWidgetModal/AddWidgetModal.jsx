@@ -10,12 +10,13 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   const [widgetNum, setWidgetNum] = useState(0);
   const [widgetData, setWidgetData] = useState({});
   const [goalData, setGoalData] = useState({
+    listName: '',
     goals: [
-      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
-      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
-      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
-      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
-      { name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false }
+      { id: Math.floor(Math.random() * 100), name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
+      { id: Math.floor(Math.random() * 100), name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
+      { id: Math.floor(Math.random() * 100), name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
+      { id: Math.floor(Math.random() * 100), name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false },
+      { id: Math.floor(Math.random() * 100), name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false }
     ]
   });
   const [stockData, setStockData] = useState({
@@ -57,6 +58,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
 
   const resetGoalData = () => {
     setGoalData({
+      listName: '',
       goals: Array(5).fill({ name: '', amountSaved: '', goalAmount: '', endDate: '', isCompleted: false })
     });
   };
@@ -95,9 +97,9 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         minW = 2;
         maxW = 3;
         minH = 2;
-        maxH = 2;
+        maxH = 3;
         startingW = 3;
-        startingH = 2;
+        startingH = 3;
 
     }
     
@@ -221,6 +223,13 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     }));
   };
 
+  const handleListNameChange = (value) => {
+    setGoalData(prevData => ({
+      ...prevData,
+      listName: value
+    }));
+  };
+
   // const isWidgetTypeAllowed = (type) => {
   //   if (uniqueWidgets.includes(type)) {
   //     return !existingWidgets.some(widget => widget.type === type);
@@ -285,6 +294,15 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
               <h2>Enter your financial goals</h2>
               <p>Setting specific financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving financial stability.</p>
               <p>Each widget can store up to 5 of your financial goals. Feel free to add another widget to keep track of more goals!</p>
+
+              <h3>Enter Name of Financial Goal List</h3>
+              <input
+                type="text"
+                value={goalData.listName}
+                onChange={(e) => handleListNameChange(e.target.value)}
+                placeholder="List Name (optional)"
+              />
+
               <div className='financialGoalInputs'>
                 {goalData.goals.map((goal, index) => (
                   <div key={index} className='goalInputGroup'>
