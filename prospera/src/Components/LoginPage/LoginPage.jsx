@@ -8,7 +8,7 @@ import'ldrs/ring';
 import { cardio } from 'ldrs';
 
 const LoginPage = () => {
-    const { setIsLoggedIn, isLoggedIn } = useAuth();
+    const { setIsLoggedIn, isLoggedIn, setNovuSubscriberId } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -36,6 +36,7 @@ const LoginPage = () => {
             const { token, userId } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('userId', userId);
+            setNovuSubscriberId(response.data.novuSubscriberId);
             setIsLoggedIn(true);
                 navigate('/dashboard');
         

@@ -5,6 +5,8 @@ import PasswordChecklist from "react-password-checklist";
 import './RegisterPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
 import { Link } from 'react-router-dom';
+import'ldrs/ring';
+import { cardio } from 'ldrs';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -21,10 +23,14 @@ const Register = () => {
     const [isValidPassword, setIsValidPassword] = useState(false);
     const navigate = useNavigate();
     const { setIsLoggedIn } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
+
+    cardio.register();
 
   //handle register
     const handleRegister = async (evt) => {
         evt.preventDefault();
+        setIsLoading(true);
         try {
         //register the user
         const response = await axios.post(
@@ -54,6 +60,8 @@ const Register = () => {
         }
         } catch (error) {
         alert('Registration failed. Try again.');
+        } finally {
+            setIsLoading(false);  // Hide loader
         }
     };
 
@@ -194,7 +202,18 @@ const Register = () => {
                 />
                 
                 <div className='registerButtonArea'>
-                    <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>CREATE ACCOUNT</button>
+                {isLoading ? (
+                            <l-cardio
+                                size="50"
+                                stroke="4"
+                                speed="2" 
+                                color="black" 
+                            ></l-cardio>
+                        ) : (
+                            <>
+                                <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>CREATE ACCOUNT</button>
+                            </>
+                        )}
                 </div>
             </form>
             
