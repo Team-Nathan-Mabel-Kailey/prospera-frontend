@@ -80,6 +80,7 @@
     background-color: #232323 !important;
     color: #fff;
     text-decoration: none;
+    margin-right: 15px;
 }
 
 button.register {
@@ -239,7 +240,7 @@ button.register {
 }
 
 .settingsIcon img{
-    width: 35px;
+    width: 30px;
 }
 
 .settingsIcon .hoverImg{

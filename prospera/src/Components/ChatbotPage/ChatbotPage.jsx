@@ -148,12 +148,16 @@ const ChatbotPage = () => {
     const messageContainerRef = useRef(null);
 
     useEffect(() => {
-        console.log("user is: ", user.userID)
         if (!isLoggedIn) {
             navigate('/login');
             return;
         }
+        
+        if(user && user.userID) {
+            console.log("user is: ", user.userID)
+
         fetchConversations(user.userID);
+        }
     }, [isLoggedIn, navigate]);
 
     useEffect(() => {
