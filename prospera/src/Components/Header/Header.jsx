@@ -73,15 +73,11 @@ const Header = ({ open, setOpen }) => {
                     applicationIdentifier={import.meta.env.VITE_NOVU_APP_IDENTIFIER}
                 >
                     <PopoverNotificationCenter colorScheme={'light'}>
-<<<<<<< HEAD
                     {({ unseenCount }) => <Badge badgeContent=" " variant="dot" color="secondary" unseenCount={unseenCount}>
                         <MailIcon className="mailIcon" color="#000" />
                     </Badge>}
 
                     
-=======
-                        {({ unseenCount }) => <NotificationBell unseenCount={unseenCount} />}
->>>>>>> notifications-implementation
                     </PopoverNotificationCenter>
                 </NovuProvider>
             )}
