@@ -15,7 +15,7 @@ const LoginPage = () => {
     const [showIcon, setShowIcon] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-    let BASE_URL = import.meta.env.BASE_URL;
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
     
     cardio.register();
 

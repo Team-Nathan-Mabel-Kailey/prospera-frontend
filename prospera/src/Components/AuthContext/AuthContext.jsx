@@ -45,7 +45,8 @@ export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
     const [novuSubscriberId, setNovuSubscriberId] = useState(null);
-    let BASE_URL = import.meta.env.BASE_URL;
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
+    console.log(BASE_URL);
 
     useEffect(() => {
         // console.log("u")

@@ -344,7 +344,7 @@ import './FinancialGoalsWidget.css';
 const FinancialGoalsWidget = ({ data, id }) => {
     const [widgetData, setWidgetData] = useState(data);
     const [checkedGoals, setCheckedGoals] = useState(new Set());
-    let BASE_URL = import.meta.env.BASE_URL;
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         // Initialize checkedGoals with completed goals

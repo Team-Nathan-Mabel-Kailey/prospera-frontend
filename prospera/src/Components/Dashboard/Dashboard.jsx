@@ -45,7 +45,7 @@ const Dashboard = () => {
   const [selectedWidget, setSelectedWidget] = useState(null);
   const [userId, setUserId] = useState(null);
   const [existingWidgets, setExistingWidgets] = useState([]);
-  let BASE_URL = import.meta.env.BASE_URL;
+  let BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const style = {
     bgcolor: 'black',
