@@ -344,6 +344,7 @@ import './FinancialGoalsWidget.css';
 const FinancialGoalsWidget = ({ data, id }) => {
     const [widgetData, setWidgetData] = useState(data);
     const [checkedGoals, setCheckedGoals] = useState(new Set());
+    let BASE_URL = import.meta.env.BASE_URL;
 
     useEffect(() => {
         // Initialize checkedGoals with completed goals
@@ -379,7 +380,7 @@ const FinancialGoalsWidget = ({ data, id }) => {
         try {
             // await axios.put(`http://localhost:3000/api/widgets/content/${id}`, {
             //     configuration: updatedWidgetData
-            await axios.put(`https://prospera-api.onrender.com/api/widgets/content/${id}`, {
+            await axios.put(`${BASE_URL}/api/widgets/content/${id}`, {
                 goalId,
                 checked: !checkedGoals.has(goalId),
             });

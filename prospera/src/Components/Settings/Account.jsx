@@ -14,6 +14,7 @@ const Account = () => {
     const [originalData, setOriginalData] = useState({});
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
+    let BASE_URL = import.meta.env.BASE_URL;
 
     const getUserIdFromToken = (token) => {
         try {
@@ -42,7 +43,7 @@ const Account = () => {
             
             const fetchUserData = async () => {
                 try {
-                    const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
+                    const userDataResponse = await axios.get(`${BASE_URL}/users/${userIdFromToken}`);
                     const userData = userDataResponse.data;
                     
                     setOriginalData(userData);
@@ -66,7 +67,7 @@ const Account = () => {
         try {
             try {
                 const updatedUserNames = { firstName, lastName };
-                await axios.put(`https://prospera-api.onrender.com/api/settings/name/${userId}`, updatedUserNames);
+                await axios.put(`${BASE_URL}/api/settings/name/${userId}`, updatedUserNames);
                 // alert('User information updated successfully!');
 
             } catch (error) {
@@ -76,7 +77,7 @@ const Account = () => {
             
             try {
                 const updateUserEmail = {email, securityAnswer}; 
-                await axios.put(`https://prospera-api.onrender.com/api/settings/email/${userId}`, updateUserEmail)
+                await axios.put(`${BASE_URL}/api/settings/email/${userId}`, updateUserEmail)
                 // alert('User email updated successfully!');
 
             } catch (error) {

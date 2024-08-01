@@ -12,7 +12,7 @@ const Settings = () => {
     const [email, setEmail] = useState("");
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
-
+    let BASE_URL = import.meta.env.BASE_URL;
 
     const getUserIdFromToken = (token) => {
         try {
@@ -41,7 +41,7 @@ const Settings = () => {
             
             const fetchUserData = async () => {
                 try {
-                    const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
+                    const userDataResponse = await axios.get(`${BASE_URL}/users/${userIdFromToken}`);
                     const userData = userDataResponse.data;
                     
                     setFirstName(userData.firstName);

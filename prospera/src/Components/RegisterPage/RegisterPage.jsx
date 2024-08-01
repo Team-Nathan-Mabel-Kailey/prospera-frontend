@@ -24,6 +24,7 @@ const Register = () => {
     const navigate = useNavigate();
     const { setIsLoggedIn } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
+    let BASE_URL = import.meta.env.BASE_URL;
 
     cardio.register();
 
@@ -34,12 +35,12 @@ const Register = () => {
         try {
         //register the user
         const response = await axios.post(
-            'https://prospera-api.onrender.com/users/register',
+            `${BASE_URL}/users/register`,
             { username, email, password, securityAnswer }
         );
         //login the user
         const loginResponse = await axios.post(
-            'https://prospera-api.onrender.com/users/login',
+            `${BASE_URL}/users/login`,
             { username, password }
         );
             const {hasCompletedTopics} = response.data;

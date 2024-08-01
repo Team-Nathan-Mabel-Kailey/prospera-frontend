@@ -34,7 +34,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   const [maxH, setMaxH] = useState(0);
   const [startingW, setStartingW] = useState(0);
   const [startingH, setStartingH] = useState(0);
-
+  let BASE_URL = import.meta.env.BASE_URL;
+  
   // const uniqueWidgets = 'financialGoals';
 
   const style = {
@@ -125,7 +126,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
       let response;
 
       if (widgetType === 'Financial Goals') {
-        response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+        response = await axios.post(`${BASE_URL}/api/widgets/create`, {
           i: newWidgetI,
           type: widgetType,
           x: 0,
@@ -158,7 +159,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
       }
 
       else if (widgetType === 'Stock') {
-        response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+        response = await axios.post(`${BASE_URL}/api/widgets/create`, {
           i: newWidgetI,
           type: widgetType,
           x: 0,
@@ -176,7 +177,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         
         
       else {
-        response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+        response = await axios.post(`${BASE_URL}/api/widgets/create`, {
           i: newWidgetI,
           type: widgetType,
           x: 0,

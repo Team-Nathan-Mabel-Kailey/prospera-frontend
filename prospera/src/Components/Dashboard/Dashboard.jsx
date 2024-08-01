@@ -45,6 +45,7 @@ const Dashboard = () => {
   const [selectedWidget, setSelectedWidget] = useState(null);
   const [userId, setUserId] = useState(null);
   const [existingWidgets, setExistingWidgets] = useState([]);
+  let BASE_URL = import.meta.env.BASE_URL;
 
   const style = {
     bgcolor: 'black',
@@ -91,7 +92,7 @@ const Dashboard = () => {
       const updatedWidget = layout.find((obj) => obj.i === widget.id.toString());
       if (updatedWidget) {
         // Update the widget position and size in the database
-        axios.put('https://prospera-api.onrender.com/api/widgets/layout', {
+        axios.put(`${BASE_URL}/api/widgets/layout`, {
           id: widget.id,
           x: updatedWidget.x,
           y: updatedWidget.y,
@@ -122,7 +123,7 @@ const Dashboard = () => {
     
       const fetchUserData = async () => {
         try {
-          const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
+          const userDataResponse = await axios.get(`${BASE_URL}/users/${userIdFromToken}`);
           const userData = userDataResponse.data;
 
           setExistingWidgets(userData.Widgets);
@@ -173,7 +174,7 @@ const Dashboard = () => {
   const handleDeleteWidget = async (key) => {
     try {
       // Delete the widget from the server
-      await axios.delete(`https://prospera-api.onrender.com/api/widgets/${key}`);
+      await axios.delete(`${BASE_URL}/api/widgets/${key}`);
   
       // Update widgetArray state
       setWidgetArray((prevWidgets) => prevWidgets.filter((widget) => widget.id !== key));
