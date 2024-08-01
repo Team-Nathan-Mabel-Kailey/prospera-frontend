@@ -14,6 +14,7 @@ const TopicSelectionPage = () => {
     const [selectedTopics, setSelectedTopics] = useState([]);
     const navigate = useNavigate();
     const { user } = useAuth();
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
 
     const handleTopicToggle = (topic) => {
         setSelectedTopics((prev) =>

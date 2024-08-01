@@ -12,7 +12,7 @@ const Settings = () => {
     const [email, setEmail] = useState("");
     const { isLoggedIn } = useAuth();
     const navigate = useNavigate();
-    let BASE_URL = import.meta.env.BASE_URL;
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
 
     const getUserIdFromToken = (token) => {
         try {

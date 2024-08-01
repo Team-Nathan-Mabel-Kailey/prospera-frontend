@@ -19,7 +19,7 @@ const NewsFeed = () => {
     const [hasCompletedTopics, setHasCompletedTopics] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
-    let BASE_URL = import.meta.env.BASE_URL;
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
 
     const allowedSources = [
         'fox-business', 'business-insider', 'bloomberg', 'abc-news',

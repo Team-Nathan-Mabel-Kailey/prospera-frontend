@@ -34,8 +34,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   const [maxH, setMaxH] = useState(0);
   const [startingW, setStartingW] = useState(0);
   const [startingH, setStartingH] = useState(0);
-  let BASE_URL = import.meta.env.BASE_URL;
-  
+  let BASE_URL = import.meta.env.VITE_BASE_URL;
+
   // const uniqueWidgets = 'financialGoals';
 
   const style = {
@@ -285,6 +285,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
                         <option value="1m">1 month</option>
                         <option value="3m">3 months</option>
                         <option value="12m">1 year</option>
+                        <option value="60m">5 years</option>
                         <option value="all">All</option>
                     </select>
                   </div>

@@ -146,7 +146,7 @@ const ChatbotPage = () => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const messageContainerRef = useRef(null);
-    let BASE_URL = import.meta.env.BASE_URL;
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
         if (!isLoggedIn) {
