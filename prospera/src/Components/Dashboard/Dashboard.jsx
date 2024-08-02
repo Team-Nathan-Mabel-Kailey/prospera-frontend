@@ -11,6 +11,7 @@ import CheckingAccountWidget from '../CheckingAccountWidget/CheckingAccountWidge
 import NewsWidget from '../NewsWidget/NewsWidget'
 import StockWidget from '../StockWidget/StockWidget'
 import FinancialGoalsWidget from '../FinancialGoalsWidget/FinancialGoalsWidget';
+import HighlightedGoalWidget from '../HighlightedGoalWidget/HighlightedGoalWidget';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -220,8 +221,8 @@ const Dashboard = () => {
         case 'Financial Goals':
           return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
 
-        // case 'Highlighted Goal':
-        //   return <HighlightedGoalWidget data={widget.configuration}/>;
+        case 'Highlighted Goal':
+          return <HighlightedGoalWidget data={widget.configuration}/>;
 
         case 'News':
           return <NewsWidget data={widget.configuration}/>;
