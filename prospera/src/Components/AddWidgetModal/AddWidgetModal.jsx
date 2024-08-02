@@ -132,7 +132,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         maxH = 3;
         startingW = 3;
         startingH = 3;
-
     }
     
     else if (widgetType === 'Highlighted Goal') {

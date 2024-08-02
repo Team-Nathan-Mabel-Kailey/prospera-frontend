@@ -240,6 +240,11 @@ const Dashboard = () => {
 
   return (
     <ThemeProvider theme={theme}>
+      {/* <head>
+      <style>
+        h3 
+        </style>
+      </head> */}
     <div className='headerSpace' id='tempHeader'>
     </div>
 
@@ -302,7 +307,7 @@ const Dashboard = () => {
               className='cardHeader'
               subheader={widget.type}
               subheaderTypographyProps={{ color: 'white' }} 
-              style={{paddingTop: 12, paddingBottom: 0, marginTop: 5, marginRight: 5, marginBottom: 5, marginLeft: 5}}
+              style={{ paddingTop: 5, paddingBottom: 5, paddingLeft: 12, paddingRight: 12, marginTop: 5, marginRight: 0, marginBottom: 0, marginLeft: 0}}
               action={
                 <div className="widgetEditBtns">
                   <button
@@ -341,7 +346,7 @@ const Dashboard = () => {
                 </div>
             } />
             
-            <hr></hr>
+            <hr style={{width: "100%"}}/>
 
             <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
               {renderWidgetContent(widget)}
