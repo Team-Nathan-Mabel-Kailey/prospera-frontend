@@ -218,14 +218,14 @@ const Dashboard = () => {
     switch (widget.type) {
         case 'Stock':
           return (
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
               <StockWidget data={widget.configuration}/>
             </CardContent>
           );
 
         case 'Financial Goals':
           return (
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
               <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>
             </CardContent>
           );
@@ -233,7 +233,7 @@ const Dashboard = () => {
 
         case 'Highlighted Goal':
           return (
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
               <HighlightedGoalWidget data={widget.configuration}/>
             </CardContent>
           );
@@ -241,7 +241,7 @@ const Dashboard = () => {
 
         case 'News':
           return (
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
               <NewsWidget data={widget.configuration}/>
             </CardContent>
           );
@@ -249,7 +249,7 @@ const Dashboard = () => {
 
         case 'Savings Account':
           return (
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
               <SavingsAccountWidget data={widget.configuration}/>
             </CardContent>
           );
@@ -257,7 +257,7 @@ const Dashboard = () => {
 
         case 'Checking Account':
           return (
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
               <CheckingAccountWidget data={widget.configuration}/>
             </CardContent>
           );
@@ -265,7 +265,7 @@ const Dashboard = () => {
 
         case 'Financial Accounts': 
           return (
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
               <FinancialAccountsWidget data={widget.configuration}/>
             </CardContent>
           );
@@ -384,7 +384,7 @@ const Dashboard = () => {
                 </div>
             } />
             
-            <hr style={{width: "100%", borderColor: '#393939'}}/>
+            <hr style={{width: "100%"}}/>
 
 
             {renderWidgetContent(widget)}

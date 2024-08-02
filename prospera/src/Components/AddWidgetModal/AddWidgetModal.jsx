@@ -173,8 +173,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     else if (widgetType === 'Financial Accounts') {
         minW = 4;
         maxW = 6;
-        minH = 4;
-        maxH = 6;
+        minH = 2;
+        maxH = 3;
         startingW = 4;
         startingH = 2;
     }
