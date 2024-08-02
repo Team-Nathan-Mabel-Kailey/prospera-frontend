@@ -217,25 +217,59 @@ const Dashboard = () => {
   const renderWidgetContent = (widget) => {
     switch (widget.type) {
         case 'Stock':
-          return <StockWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+              <StockWidget data={widget.configuration}/>
+            </CardContent>
+          );
 
         case 'Financial Goals':
-          return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+              <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>
+            </CardContent>
+          );
+          // return 
 
         case 'Highlighted Goal':
-          return <HighlightedGoalWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+              <HighlightedGoalWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
         case 'News':
-          return <NewsWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+              <NewsWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
         case 'Savings Account':
-          return <SavingsAccountWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+              <SavingsAccountWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
         case 'Checking Account':
-          return <CheckingAccountWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+              <CheckingAccountWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
         case 'Financial Accounts': 
-          return <FinancialAccountsWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
+              <FinancialAccountsWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
       default:
         return <div>Widget type: {widget.type}</div>;
@@ -311,7 +345,7 @@ const Dashboard = () => {
               className='cardHeader'
               subheader={widget.type}
               subheaderTypographyProps={{ color: 'white' }} 
-              style={{ paddingTop: 5, paddingBottom: 5, paddingLeft: 12, paddingRight: 12, marginTop: 5, marginRight: 0, marginBottom: 0, marginLeft: 0}}
+              style={{ backgroundColor: '#410083', paddingTop: 6, paddingBottom: 5, paddingLeft: 12, paddingRight: 12, marginRight: 0, marginBottom: 0, marginLeft: 0}}
               action={
                 <div className="widgetEditBtns">
                   <button
@@ -350,11 +384,11 @@ const Dashboard = () => {
                 </div>
             } />
             
-            <hr style={{width: "100%"}}/>
+            <hr style={{width: "100%", borderColor: '#393939'}}/>
 
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
-              {renderWidgetContent(widget)}
-            </CardContent>
+
+            {renderWidgetContent(widget)}
+            
 
           </Card>
         ))}
