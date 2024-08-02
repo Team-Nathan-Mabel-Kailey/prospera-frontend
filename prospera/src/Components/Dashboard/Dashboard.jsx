@@ -11,6 +11,7 @@ import CheckingAccountWidget from '../CheckingAccountWidget/CheckingAccountWidge
 import NewsWidget from '../NewsWidget/NewsWidget'
 import StockWidget from '../StockWidget/StockWidget'
 import FinancialGoalsWidget from '../FinancialGoalsWidget/FinancialGoalsWidget';
+import FinancialAccountsWidget from "../FinancialAccountsWidget/FinancialAccountsWidget";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
@@ -228,6 +229,9 @@ const Dashboard = () => {
 
         case 'Checking Account':
           return <CheckingAccountWidget data={widget.configuration}/>;
+
+        case 'Financial Accounts': 
+          return <FinancialAccountsWidget data={widget.configuration}/>;
 
       default:
         return <div>Widget type: {widget.type}</div>;

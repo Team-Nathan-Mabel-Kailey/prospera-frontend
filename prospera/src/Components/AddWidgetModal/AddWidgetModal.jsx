@@ -33,6 +33,18 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     p: 4,
   };
 
+  const [financialAcctData, setfinancialAcctData] = useState({
+    accounts: [
+      { accountType: '', accountName: '', balance: '', bankName: ''},
+      { accountType: '', accountName: '', balance: '', bankName: ''},
+      { accountType: '', accountName: '', balance: '', bankName: ''},
+      { accountType: '', accountName: '', balance: '', bankName: ''},
+      { accountType: '', accountName: '', balance: '', bankName: ''},
+      { accountType: '', accountName: '', balance: '', bankName: ''}
+      
+    ]
+  });
+
   const handleAddWidget = async () => {
     const newWidgetI = uuidv4();
     console.log('widget type: ', widgetType);
@@ -84,27 +96,57 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         startingH = 1;
     }
 
+    else if (widgetType === 'Financial Accounts') {
+        minW = 4;
+        maxW = 6;
+        minH = 3;
+        maxH = 6;
+        startingW = 4;
+        startingH = 3;
+    }
+
+
         try {
-        const response = await axios.post(`https://prospera-api.onrender.com/api/widgets/create`, {
-            i: newWidgetI,
-            type: widgetType,
-            x: 0,
-            y: 0,
-            w: startingW,
-            h: startingH,
-            minW: minW,
-            maxW: maxW,
-            minH: minH,
-            maxH: maxH,
-            configuration: widgetData,
-            userId,
-        });
+          let response;
+
+          if (widgetType === 'Financial Accounts') {
+            response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+              i: newWidgetI,
+              type: widgetType,
+              x: 0,
+              y: 0,
+              w: startingW,
+              h: startingH,
+              minW: minW,
+              maxW: maxW,
+              minH: minH,
+              maxH: maxH,
+              configuration: financialAcctData,
+              userId,
+            });
+          } else {
+            response = await axios.post(`http://localhost:3000/api/widgets/create`, {
+              i: newWidgetI,
+              type: widgetType,
+              x: 0,
+              y: 0,
+              w: startingW,
+              h: startingH,
+              minW: minW,
+              maxW: maxW,
+              minH: minH,
+              maxH: maxH,
+              configuration: widgetData,
+              userId,
+            });
+          }
       
         console.log(response.data);
         onAdd(response.data);
         setWidgetNum(widgetNum + 1);
         setWidgetType('');
         setWidgetData({});
+        setfinancialAcctData({});
         onClose();
 
         // Update state after the API call
@@ -183,6 +225,15 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     setWidgetData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  const handleFinancialAcctChange = (index, field, value) => {
+    setfinancialAcctData(prevData => ({
+      ...prevData,
+      accounts: prevData.accounts.map((account, i) => 
+        i === index ? { ...account, [field]: value } : account
+      )
     }));
   };
 
@@ -293,6 +344,45 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             </div>
           );
 
+      case 'Financial Accounts':
+        return (
+          <div className='createOptions'>
+            <h2>Enter information for up to 6 bank accounts.</h2>
+            <p className='accountExplanation'>This widget allows you to track multiple bank accounts, including both checking and savings accounts.</p>
+            {financialAcctData.accounts.map((account, index) => (
+              <div key={index} className='accountInput'>
+                <h3>Account {index + 1}</h3>
+                <select
+                  value={account.accountType}
+                  onChange={(e) => handleFinancialAcctChange(index, 'accountType', e.target.value)}
+                >
+                  <option value="">Select Account Type</option>
+                  <option value="Checking">Checking</option>
+                  <option value="Savings">Savings</option>
+                </select>
+                <input
+                  type="text"
+                  value={account.accountName}
+                  onChange={(e) => handleFinancialAcctChange(index, 'accountName', e.target.value)}
+                  placeholder="Account Name"
+                />
+                <input
+                  type="text"
+                  value={account.bankName}
+                  onChange={(e) => handleFinancialAcctChange(index, 'bankName', e.target.value)}
+                  placeholder="Bank Name"
+                />
+                <input
+                  type="number"
+                  value={account.balance}
+                  onChange={(e) => handleFinancialAcctChange(index, 'balance', e.target.value)}
+                  placeholder="Balance"
+                />
+              </div>
+            ))}
+          </div>
+        );
+
       default:
         return <div className='defaultSelect'>Please select a widget type.</div>;
     }
@@ -316,6 +406,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           <option value="News">News Widget</option>
           <option value="Savings Account">Savings Account Widget</option>
           <option value="Checking Account">Checkings Account Widget</option>
+          <option value="Financial Accounts">Financial Accounts Widget</option>
         </select>
 
         {renderWidgetCreationOptions(widgetType)}
