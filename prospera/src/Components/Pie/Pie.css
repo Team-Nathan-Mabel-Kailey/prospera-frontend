@@ -1,9 +1,9 @@
 .boxPie {
-    
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 15px;
 }
 
 .boxPie .percent {
@@ -73,6 +73,7 @@
 }
 
 .boxPie .percent .number h2 {
+    margin-bottom: 24px;
     font-size: 48px;
 }
 
