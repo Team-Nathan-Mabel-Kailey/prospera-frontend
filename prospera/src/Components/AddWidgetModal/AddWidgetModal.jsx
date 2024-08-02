@@ -39,12 +39,16 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
       
     ]
   });
+  const [highlightedGoalData, setHighlightedGoalData] = useState({});
   const [minW, setMinW] = useState(0);
   const [maxW, setMaxW] = useState(0);
   const [minH, setMinH] = useState(0);
   const [maxH, setMaxH] = useState(0);
   const [startingW, setStartingW] = useState(0);
   const [startingH, setStartingH] = useState(0);
+
+  const [financialGoals, setFinancialGoals] = useState([]);
+  const [selectedGoal, setSelectedGoal] = useState(null);
   let BASE_URL = import.meta.env.VITE_BASE_URL;
 
   // const uniqueWidgets = 'financialGoals';
@@ -75,11 +79,38 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     });
   };
 
+  const resetHighlightedGoalData = () => {
+    setHighlightedGoalData({});
+  };
+
   const handleWidgetTypeChange = (e) => {
     setWidgetType(e.target.value);
     resetStockData();
     resetGoalData();
+    resetHighlightedGoalData();
   };
+
+  /////
+  useEffect(() => {
+    if (widgetType === 'Highlighted Goal') {
+      fetchFinancialGoals();
+    }
+  }, [widgetType]);
+
+  const fetchFinancialGoals = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}/api/widgets/user/financial-goals/${userId}`);
+      setFinancialGoals(response.data);
+    } catch (error) {
+      console.error('Error fetching financial goals:', error);
+    }
+  };
+
+  const handleGoalSelection = (goal) => {
+    setSelectedGoal(goal);
+    setHighlightedGoalData(goal);
+  };
+  /////
 
   const handleAddWidget = async () => {
     const newWidgetI = uuidv4();
@@ -210,8 +241,27 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           configuration: financialAcctData,
           userId,
         });
-      } 
-        else {
+      }
+
+      else if (widgetType === 'Highlighted Goal') {
+        response = await axios.post(`${BASE_URL}/api/widgets/create`, {
+          i: newWidgetI,
+          type: widgetType,
+          x: 0,
+          y: 0,
+          w: startingW,
+          h: startingH,
+          minW: minW,
+          maxW: maxW,
+          minH: minH,
+          maxH: maxH,
+          configuration: highlightedGoalData,
+          userId,
+        });
+      }
+        
+        
+      else {
         response = await axios.post(`${BASE_URL}/api/widgets/create`, {
           i: newWidgetI,
           type: widgetType,
@@ -323,7 +373,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
                       name="period"
                       value={stock.period}
                       onChange={(e) => handleStockChange(index, 'period', e.target.value)}
-                      // placeholder="Period (optional)"
                     >
                         <option value="">Select</option>
                         <option value="1D">1 day</option>
@@ -337,17 +386,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
                 ))}
               </div>
             </div>
-
-            // <input type="text" name="symbol" value={widgetData.symbol || ''} onChange={handleInputChange} placeholder="Stock Name" />
-                          
-            // <select name='period' value={widgetData.period} onChange={handleInputChange} className="selectDropdown">
-              // <option value="">Select</option>
-              // <option value="1D">1 day</option>
-              // <option value="5D">5 days</option>
-              // <option value="1M">1 month</option>
-              // <option value="6M">6 months</option>
-              // <option value="1YR">1 year</option>
-            // </select>
           );
 
         // current
@@ -401,12 +439,27 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           );
       
         case 'Highlighted Goal':
+          if (financialGoals.length === 0) {
+            return <p>You need to create a Financial Goal Widget first.</p>;
+          }
+
           return (
             <div className='createOptions'>
-              <h2>Create a savings goal!</h2>
-              <p>Making savings goals is crucial because it provides a clear plan and motivation for managing finances, helping individuals prioritize their spending, avoid unnecessary debt, and work towards financial security and specific future objectives.</p>
-              <h3 className='savingsQuestions'>What do you want to name this savings goal?</h3>
-              <input type="text" name="goalName" value={widgetData.goalName || ''} onChange={handleInputChange} placeholder="Goal Name" />
+              <h2>Create a Highlighted Goal</h2>
+              <h3>Select a goal from your Financial Goal Widgets:</h3>
+              {financialGoals.map((widget) => (
+                <div key={widget.id}>
+                  <h4>{widget.configuration.listName}</h4>
+                  {widget.configuration.goals.map((goal) => (
+                    <button
+                      key={goal.id}
+                      onClick={() => handleGoalSelection(goal)}
+                    >
+                      {goal.name}
+                    </button>
+                  ))}
+                </div>
+              ))}
             </div>
           );
 
@@ -518,7 +571,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           <option value="">Select</option>
           <option value="Stock">Stock Widget</option>
           <option value="Financial Goals">Financial Goals Widget</option>
-          <option value="Highlighted Goal">Highlighted Savings Goal Widget</option>
+          <option value="Highlighted Goal">Highlighted Goal Widget</option>
           <option value="News">News Widget</option>
           <option value="Savings Account">Savings Account Widget</option>
           <option value="Checking Account">Checkings Account Widget</option>
