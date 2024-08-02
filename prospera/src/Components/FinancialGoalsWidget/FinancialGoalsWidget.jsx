@@ -359,12 +359,10 @@ const FinancialGoalsWidget = ({ data, id }) => {
             }
             return goal;
         });
-
         const updatedWidgetData = {
             ...widgetData,
             goals: updatedGoals
         };
-
         setWidgetData(updatedWidgetData);
 
         // Update checkedGoals
@@ -375,23 +373,10 @@ const FinancialGoalsWidget = ({ data, id }) => {
             newCheckedGoals.add(goalName);
         }
         setCheckedGoals(newCheckedGoals);
-
         // Update widget content via API
         try {
-            // await axios.put(`http://localhost:3000/api/widgets/content/${id}`, {
-            //     configuration: updatedWidgetData
             await axios.put(`${BASE_URL}/api/widgets/content/${id}`, {
-                goalId,
-                checked: !checkedGoals.has(goalId),
-            });
-            setCheckedGoals((prevCheckedGoals) => {
-                const newCheckedGoals = new Set(prevCheckedGoals);
-                if (newCheckedGoals.has(goalId)) {
-                    newCheckedGoals.delete(goalId);
-                } else {
-                    newCheckedGoals.add(goalId);
-                }
-                return newCheckedGoals;
+                configuration: updatedWidgetData
             });
         } catch (error) {
             console.error('Error updating widget content:', error);
@@ -399,20 +384,34 @@ const FinancialGoalsWidget = ({ data, id }) => {
         }
     };
 
+    const handleLabelClick = (e) => {
+        // Prevent the label click from triggering the checkbox
+        e.preventDefault();
+    };
+
     const stopPropagation = (e) => {
         e.stopPropagation();
     };
 
+    // Filter out empty goals
+    const nonEmptyGoals = widgetData.goals.filter(goal => goal.name.trim() !== '');
+
+    // Check if all goals are completed
+    const allGoalsCompleted = nonEmptyGoals.length > 0 && nonEmptyGoals.every(goal => goal.isCompleted);
+
     return (
         <div className="financial-goals-widget">
             {widgetData.listName && <h3>{widgetData.listName}</h3>}
+            {allGoalsCompleted ? (
+                <p className="goals-completed-message">Your goals have been completed!</p>
+            ) : (
             <ul>
-                {widgetData.goals.filter(goal => !goal.isCompleted).map((goal, index) => (
-                    <li key={`goal-${index}`} className={checkedGoals.has(goal.name) ? 'checked' : ''}>
-                        <label htmlFor={`checkbox-${index}`}>
+                {nonEmptyGoals.filter(goal => !goal.isCompleted).map((goal, index) => (
+                    <li key={`goal-${goal.name}-${index}`} className={checkedGoals.has(goal.name) ? 'checked' : ''}>
+                        <label htmlFor={`checkbox-${goal.name}-${index}`}>
                             <div className="checkbox-wrapper">
                                 <input
-                                    id={`checkbox-${index}`}
+                                    id={`checkbox-${goal.name}-${index}`}
                                     type="checkbox"
                                     checked={checkedGoals.has(goal.name)}
                                     onChange={() => handleCheck(goal.name)}
@@ -429,6 +428,7 @@ const FinancialGoalsWidget = ({ data, id }) => {
                     </li>
                 ))}
             </ul>
+            )}
         </div>
     );
 };

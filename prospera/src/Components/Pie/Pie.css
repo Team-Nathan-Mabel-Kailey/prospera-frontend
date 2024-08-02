@@ -1,0 +1,81 @@
+.boxPie {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.boxPie .percent {
+    position: relative;
+   
+}
+
+.boxPie .percent svg {
+    position: relative;
+    width: 150px;
+    height: 150px;
+}
+
+.boxPie .percent svg circle {
+    fill: none;
+    stroke-width: 10;
+    stroke: greenyellow;
+    width: 150px;
+    height: 150px;
+    transform: translate(5px, 5px);
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+}
+
+.boxPie .percent svg circle:nth-child(1){
+    stroke-dashoffset: 0;
+    stroke: #585858;
+}
+
+.boxPie .percent svg circle:nth-child(2) {
+    /* transition: stroke-dashoffset 1s ease-in-out; */
+    animation: animate-circle 4s cubic-bezier(0,0.23,1,.1); 
+  }
+
+/* .boxPie .percent svg circle:nth-child(2){
+    transition: stroke-dashoffset 0.5s;
+    animation: animate-circle 3s cubic-bezier(0,0.23,1,.1); 
+} */
+
+@keyframes animate-circle {
+    0% {
+        opacity: 0;
+        stroke-dashoffset: 440;
+    }
+    30% {
+        opacity: 0.30;
+        stroke-dashoffset: 200;
+    }
+    80% {
+        opacity: 0.80;
+        stroke-dashoffset: 100;
+    }
+    100% {
+        opacity: 10;
+    }
+}
+
+.boxPie .percent .number {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boxPie .percent .number h2 {
+    font-size: 48px;
+}
+
+.boxPie .percent .number h2 span {
+    font-size: 24px;
+}
