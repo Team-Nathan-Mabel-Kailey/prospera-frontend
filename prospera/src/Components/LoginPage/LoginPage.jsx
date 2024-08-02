@@ -8,15 +8,15 @@ import'ldrs/ring';
 import { cardio } from 'ldrs';
 
 const LoginPage = () => {
-    const { setIsLoggedIn, isLoggedIn } = useAuth();
+    const { setIsLoggedIn, isLoggedIn, setNovuSubscriberId } = useAuth();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [showIcon, setShowIcon] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
     
-
     cardio.register();
 
     useEffect(() => {
@@ -29,13 +29,14 @@ const LoginPage = () => {
         evt.preventDefault();
         setIsLoading(true);
         try {
-            const response = await axios.post('https://prospera-api.onrender.com/users/login', {
+            const response = await axios.post(`${BASE_URL}/users/login`, {
                 username,
                 password
             });
             const { token, userId } = response.data;
             localStorage.setItem('token', token);
             localStorage.setItem('userId', userId);
+            setNovuSubscriberId(response.data.novuSubscriberId);
             setIsLoggedIn(true);
                 navigate('/dashboard');
         

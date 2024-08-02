@@ -44,6 +44,9 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [user, setUser] = useState(null);
+    const [novuSubscriberId, setNovuSubscriberId] = useState(null);
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
+    console.log(BASE_URL);
 
     useEffect(() => {
         // console.log("u")
@@ -52,7 +55,7 @@ export const AuthProvider = ({ children }) => {
 
         if (token) {
             const decodedToken = jwtDecode(token)
-            axios.get(`https://prospera-api.onrender.com/users/${decodedToken.userId}`, {
+            axios.get(`${BASE_URL}/users/${decodedToken.userId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -60,6 +63,7 @@ export const AuthProvider = ({ children }) => {
             .then(response => {
                 setUser(response.data);
                 setIsLoggedIn(true);
+                setNovuSubscriberId(response.data.userID.toString());
             })
             .catch(error => {
                 console.error('Error fetching user data:', error);
@@ -72,7 +76,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser }}>
+        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, novuSubscriberId, setNovuSubscriberId }}>
             {children}
         </AuthContext.Provider>
     );

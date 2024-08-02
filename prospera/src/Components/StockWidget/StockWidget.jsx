@@ -2,75 +2,106 @@
 import React, { useEffect, useRef, memo } from 'react';
 
 // Add widget.configuration data to get names of stocks entered + default periods
-function StockWidget() {
+function StockWidget({ data }) {
   const container = useRef();
 
-  useEffect(
-    () => {
-      const script = document.createElement("script");
-      script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
-      script.type = "text/javascript";
-      script.async = true;
-      script.innerHTML = `
-        {
-          "symbols": [
-            [
-              "Apple",
-              "AAPL|1D"
-            ],
-            [
-              "Google",
-              "GOOGL|1D"
-            ],
-            [
-              "Microsoft",
-              "MSFT|1D"
-            ],
-            [
-              "BINANCE:BTCUSDT|1D"
-            ],
-            [
-              "NASDAQ:AMD|1M"
-            ]
-          ],
-          "chartOnly": false,
-          "width": "100%",
-          "height": "100%",
-          "locale": "en",
-          "colorTheme": "dark",
-          "autosize": true,
-          "showVolume": false,
-          "showMA": false,
-          "hideDateRanges": false,
-          "hideMarketStatus": false,
-          "hideSymbolLogo": false,
-          "scalePosition": "right",
-          "scaleMode": "Normal",
-          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-          "fontSize": "10",
-          "noTimeScale": false,
-          "valuesTracking": "1",
-          "changeMode": "price-and-percent",
-          "chartType": "area",
-          "maLineColor": "#2962FF",
-          "maLineWidth": 1,
-          "maLength": 9,
-          "headerFontSize": "medium",
-          "lineWidth": 2,
-          "lineType": 0,
-          "dateRanges": [
-            "1d|1",
-            "1m|30",
-            "3m|60",
-            "12m|1D",
-            "60m|1W",
-            "all|1M"
-          ]
-        }`;
-      container.current.appendChild(script);
-    },
-    []
-  );
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
+    script.type = "text/javascript";
+    script.async = true;
+  
+    // Filter out empty stock entries and map to the required format
+    const stockSymbols = data.stocks
+      .filter(stock => stock.symbol && stock.period)
+      .map(stock => [stock.symbol, `${stock.symbol}|${stock.period}`]);
+  
+    const widgetConfig = {
+      symbols: stockSymbols,
+      chartOnly: false,
+      width: "100%",
+      height: "100%",
+      locale: "en",
+      colorTheme: "dark",
+      autosize: true,
+      showVolume: false,
+      showMA: false,
+      headerFontSize: "medium",
+      lineWidth: 2,
+      lineType: 0,
+      dateRanges: [
+        "1d|1",
+        "1m|30",
+        "3m|60",
+        "12m|1D",
+        "60m|1W",
+        "all|1M"
+      ]
+    };
+  
+    script.innerHTML = JSON.stringify(widgetConfig);
+    container.current.appendChild(script);
+    
+  }, []); // Add data as a dependency
+  
+  // useEffect(
+  //   () => {
+  //     const script = document.createElement("script");
+  //     script.src = "https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js";
+  //     script.type = "text/javascript";
+  //     script.async = true;
+
+  //     // Filter out empty stock entries and map to the required format
+  //     const stockSymbols = data.stocks
+  //     .filter(stock => stock.symbol && stock.period)
+  //     .map(stock => [stock.symbol, `${stock.symbol}|${stock.period}`]);
+
+  //     script.innerHTML = `
+  //       {
+  //         "symbols": [
+  //           [
+  //             "Apple",
+  //             "AAPL|1D"
+  //           ],
+  //           [
+  //             "Google",
+  //             "GOOGL|1D"
+  //           ],
+  //           [
+  //             "Microsoft",
+  //             "MSFT|1D"
+  //           ],
+  //           [
+  //             "BINANCE:BTCUSDT|1D"
+  //           ],
+  //           [
+  //             "NASDAQ:AMD|1M"
+  //           ]
+  //         ],
+  //         "chartOnly": false,
+  //         "width": "100%",
+  //         "height": "100%",
+  //         "locale": "en",
+  //         "colorTheme": "dark",
+  //         "autosize": true,
+  //         "showVolume": false,
+  //         "showMA": false,
+  //         "headerFontSize": "medium",
+  //         "lineWidth": 2,
+  //         "lineType": 0,
+  //         "dateRanges": [
+  //           "1d|1",
+  //           "1m|30",
+  //           "3m|60",
+  //           "12m|1D",
+  //           "60m|1W",
+  //           "all|1M"
+  //         ]
+  //       }`;
+  //     container.current.appendChild(script);
+  //   },
+  //   []
+  // );
   
   return (
     <div className="tradingview-widget-container" ref={container}>

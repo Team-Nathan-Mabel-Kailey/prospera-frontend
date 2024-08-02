@@ -46,12 +46,15 @@ const Dashboard = () => {
   const [selectedWidget, setSelectedWidget] = useState(null);
   const [userId, setUserId] = useState(null);
   const [existingWidgets, setExistingWidgets] = useState([]);
+  let BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const style = {
     bgcolor: 'black',
     height: '100%', 
     display: 'flex', 
-    flexDirection: 'column'
+    flexDirection: 'column',
+    boxShadow: 15,
+    borderRadius: 3
   }
   
 //   useEffect(() => {
@@ -90,7 +93,7 @@ const Dashboard = () => {
       const updatedWidget = layout.find((obj) => obj.i === widget.id.toString());
       if (updatedWidget) {
         // Update the widget position and size in the database
-        axios.put('https://prospera-api.onrender.com/api/widgets/layout', {
+        axios.put(`${BASE_URL}/api/widgets/layout`, {
           id: widget.id,
           x: updatedWidget.x,
           y: updatedWidget.y,
@@ -121,7 +124,7 @@ const Dashboard = () => {
     
       const fetchUserData = async () => {
         try {
-          const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
+          const userDataResponse = await axios.get(`${BASE_URL}/users/${userIdFromToken}`);
           const userData = userDataResponse.data;
 
           setExistingWidgets(userData.Widgets);
@@ -172,7 +175,7 @@ const Dashboard = () => {
   const handleDeleteWidget = async (key) => {
     try {
       // Delete the widget from the server
-      await axios.delete(`https://prospera-api.onrender.com/api/widgets/${key}`);
+      await axios.delete(`${BASE_URL}/api/widgets/${key}`);
   
       // Update widgetArray state
       setWidgetArray((prevWidgets) => prevWidgets.filter((widget) => widget.id !== key));
@@ -299,9 +302,10 @@ const Dashboard = () => {
             // style={{ backgroundColor }}
           >
             <CardHeader
+              className='cardHeader'
               subheader={widget.type}
               subheaderTypographyProps={{ color: 'white' }} 
-              style={{paddingTop: 12, paddingLeft: 8, paddingBottom: 0}}
+              style={{paddingTop: 12, paddingBottom: 0, marginTop: 5, marginRight: 5, marginBottom: 5, marginLeft: 5}}
               action={
                 <div className="widgetEditBtns">
                   <button
@@ -340,8 +344,9 @@ const Dashboard = () => {
                 </div>
             } />
             
+            <hr></hr>
 
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 15, paddingLeft: 18 }}>
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
               {renderWidgetContent(widget)}
             </CardContent>
 

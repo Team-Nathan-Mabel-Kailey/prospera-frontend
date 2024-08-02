@@ -67,7 +67,11 @@ const Header = ({ open, setOpen }) => {
                     <img src={settingGif} alt="Hover" className="hoverImg"/>
                 </div>
                 </Link>
-                <NovuProvider subscriberId={'user.userID'} applicationIdentifier={'9aO_manMoao5'}>
+                {isLoggedIn && user && (
+                <NovuProvider 
+                    subscriberId={user.userID.toString()}
+                    applicationIdentifier={import.meta.env.VITE_NOVU_APP_IDENTIFIER}
+                >
                     <PopoverNotificationCenter colorScheme={'light'}>
                     {({ unseenCount }) => <Badge badgeContent=" " variant="dot" color="secondary" unseenCount={unseenCount}>
                         <MailIcon className="mailIcon" color="#000" />
@@ -76,6 +80,7 @@ const Header = ({ open, setOpen }) => {
                     
                     </PopoverNotificationCenter>
                 </NovuProvider>
+            )}
             </div>
             <div className='auth-buttons'>
                 <Link to="/logout"><button className="login">LOG OUT</button></Link>

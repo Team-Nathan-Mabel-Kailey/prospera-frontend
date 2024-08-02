@@ -18,8 +18,8 @@ const NewsFeed = () => {
     const [userTopics, setUserTopics] = useState([]);
     const [hasCompletedTopics, setHasCompletedTopics] = useState(false);
     const [showModal, setShowModal] = useState(false);
-
     const navigate = useNavigate();
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
 
     const allowedSources = [
         'fox-business', 'business-insider', 'bloomberg', 'abc-news',
@@ -35,7 +35,7 @@ const NewsFeed = () => {
         const fetchUserTopics = async () => {
             if (user) {
                 try {
-                    const response = await axios.get(`https://prospera-api.onrender.com/users/get-topics/${user.userID}`);
+                    const response = await axios.get(`${BASE_URL}/users/get-topics/${user.userID}`);
                     setUserTopics(response.data.topics);
                     setHasCompletedTopics(response.data.hasCompletedTopics);
                 } catch (error) {
