@@ -28,7 +28,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
       { symbol: '', period: '' },
     ]
   });
-  const [financialAcctData, setfinancialAcctData] = useState({
+  const [financialAcctData, setFinancialAcctData] = useState({
     accounts: [
       { accountType: '', accountName: '', balance: '', bankName: ''},
       { accountType: '', accountName: '', balance: '', bankName: ''},
@@ -79,6 +79,12 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     });
   };
 
+  const resetFinancialAcctData = () => {
+    setFinancialAcctData({
+      accounts: Array(5).fill({ accountType: '', accountName: '', balance: '', bankName: ''})
+    });
+  };
+
   const resetHighlightedGoalData = () => {
     setHighlightedGoalData({});
   };
@@ -88,6 +94,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     resetStockData();
     resetGoalData();
     resetHighlightedGoalData();
+    resetFinancialAcctData();
   };
 
   /////
@@ -166,8 +173,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     else if (widgetType === 'Financial Accounts') {
         minW = 4;
         maxW = 6;
-        minH = 4;
-        maxH = 6;
+        minH = 2;
+        maxH = 3;
         startingW = 4;
         startingH = 2;
     }
@@ -282,7 +289,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         setWidgetNum(widgetNum + 1);
         setWidgetType('');
         setWidgetData({});
-        setfinancialAcctData({});
+        setFinancialAcctData({});
         setGoalData({});
         setStockData({});
         onClose();
@@ -308,7 +315,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   };
 
   const handleFinancialAcctChange = (index, field, value) => {
-    setfinancialAcctData(prevData => ({
+    setFinancialAcctData(prevData => ({
       ...prevData,
       accounts: prevData.accounts.map((account, i) => 
         i === index ? { ...account, [field]: value } : account
@@ -446,19 +453,29 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             <div className='createOptions'>
               <h2>Create a Highlighted Goal</h2>
               <h3>Select a goal from your Financial Goal Widgets:</h3>
-              {financialGoals.map((widget) => (
-                <div key={widget.id}>
-                  <h4>{widget.configuration.listName}</h4>
-                  {widget.configuration.goals.map((goal) => (
-                    <button
-                      key={goal.id}
-                      onClick={() => handleGoalSelection(goal)}
-                    >
-                      {goal.name}
-                    </button>
-                  ))}
-                </div>
-              ))}
+              {financialGoals.map((widget) => {
+                // Filter out empty goals
+                const nonEmptyGoals = widget.configuration.goals.filter(goal => goal.name.trim() !== '');
+                
+                // Only render the widget if it has non-empty goals
+                if (nonEmptyGoals.length > 0) {
+                  return (
+                    <div key={widget.id}>
+                      <h4>{widget.configuration.listName}</h4>
+                      {nonEmptyGoals.map((goal) => (
+                        <button
+                          key={goal.id}
+                          onClick={() => handleGoalSelection(goal)}
+                        >
+                          {goal.name}
+                        </button>
+                      ))}
+                    </div>
+                  );
+                }
+                // If all goals in this widget are empty, don't render anything for this widget
+                return null;
+              })}
             </div>
           );
 
