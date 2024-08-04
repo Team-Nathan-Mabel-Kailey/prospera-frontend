@@ -25,6 +25,8 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import PageviewIcon from '@mui/icons-material/Pageview';
 import EditIcon from '@mui/icons-material/Edit';
 import { grey } from '@mui/material/colors';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
@@ -48,6 +50,8 @@ const Dashboard = () => {
   const [selectedWidget, setSelectedWidget] = useState(null);
   const [userId, setUserId] = useState(null);
   const [existingWidgets, setExistingWidgets] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [userName, setUserName] = useState("");
   let BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const style = {
@@ -122,15 +126,21 @@ const Dashboard = () => {
     const token = localStorage.getItem('token');
     if (token) {
       const userIdFromToken = getUserIdFromToken(token);
+      console.log("userid", userIdFromToken);
       setUserId(userIdFromToken);
     
       const fetchUserData = async () => {
         try {
+          console.log("userid in try", userIdFromToken);
           const userDataResponse = await axios.get(`${BASE_URL}/users/${userIdFromToken}`);
+          console.log("userdata", userDataResponse.data)
           const userData = userDataResponse.data;
 
           setExistingWidgets(userData.Widgets);
           setWidgetArray(userData.Widgets);
+          setFirstName(userData.firstName);
+          setUserName(userData.username);
+          console.log("first name", firstName, "username", userName);
           console.log('a users widgets: ', userData.Widgets);
           
           // const initialLayouts = userData.Widgets.reduce((acc, widget) => {
@@ -231,25 +241,59 @@ const Dashboard = () => {
   const renderWidgetContent = (widget) => {
     switch (widget.type) {
         case 'Stock':
-          return <StockWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
+              <StockWidget data={widget.configuration}/>
+            </CardContent>
+          );
 
         case 'Financial Goals':
-          return <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
+              <FinancialGoalsWidget data={widget.configuration} id={widget.id}/>
+            </CardContent>
+          );
+          // return 
 
         case 'Highlighted Goal':
-          return <HighlightedGoalWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
+              <HighlightedGoalWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
         case 'News':
-          return <NewsWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
+              <NewsWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
         case 'Savings Account':
-          return <SavingsAccountWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
+              <SavingsAccountWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
         case 'Checking Account':
-          return <CheckingAccountWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
+              <CheckingAccountWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
 
         case 'Financial Accounts': 
-          return <FinancialAccountsWidget data={widget.configuration}/>;
+          return (
+            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 7, paddingLeft: 18, paddingBottom: 0}}>
+              <FinancialAccountsWidget data={widget.configuration}/>
+            </CardContent>
+          );
+          // return 
         case 'Portfolio Monitor':
           console.log("Rendering Portfolio Monitor widget:", widget);
           return <PortfolioMonitorWidget 
@@ -273,11 +317,28 @@ const Dashboard = () => {
     </div>
 
     <div className="dashboardTitle">
-      <h1>Your Dashboard</h1>
+      <h1>Welcome back to your Dashboard, &nbsp;{firstName && firstName.trim() !== '' ? firstName : userName}!</h1>
+      <button className="newWidgetBtn" onClick={handleAdd}>Add Widget</button>
+    </div>
+
+    <div className="descriptionContainer">
+      <div className="descriptionParagraph">
+        <p>Say hello to your comprehensive tool for managing and 
+          enhancing your financial well-being. Here, you can effortlessly keep track of your finances and financial education resources.</p>
+      </div>
+        <Stack direction="row" spacing={1}>
+          <Chip label="Monitor balance totals across multiple bank accounts" variant="outlined" sx={{ bgcolor: '#4a0a77', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px' }} />
+          <Chip label="Stay updated on stock trends" variant="outlined" sx={{ bgcolor: '#5a108f', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+          <Chip label="Managing your stock portfolio" variant="outlined" sx={{ bgcolor: '#6818a5', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+          <Chip label="Set and achieve financial goals" variant="outlined" sx={{ bgcolor: '#8b2fc9', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+          <Chip label="Access news articles tailored to your financial interests" variant="outlined" sx={{ bgcolor: '#ab51e3', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+        </Stack>
+        {/* <div className="descriptionParagraph">
+          <p>Take control of your financial future with Prospera, where you can thrive financially and live fully.</p>
+        </div> */}
     </div>
 
     <div className='dashboardBody'>
-      <button className="newWidgetBtn" onClick={handleAdd}>Add Widget</button>
       <AddWidgetModal 
         isOpen={modalOpen} 
         onClose={() => setModalOpen(false)} 
@@ -331,7 +392,7 @@ const Dashboard = () => {
               className='cardHeader'
               subheader={widget.type}
               subheaderTypographyProps={{ color: 'white' }} 
-              style={{ paddingTop: 5, paddingBottom: 5, paddingLeft: 12, paddingRight: 12, marginTop: 5, marginRight: 0, marginBottom: 0, marginLeft: 0}}
+              style={{ backgroundColor: '#410083', paddingTop: 6, paddingBottom: 5, paddingLeft: 12, paddingRight: 12, marginRight: 0, marginBottom: 0, marginLeft: 0}}
               action={
                 <div className="widgetEditBtns">
                   <button
@@ -372,9 +433,9 @@ const Dashboard = () => {
             
             <hr style={{width: "100%"}}/>
 
-            <CardContent className="widgetContent" style={{ flex: 1, overflow: 'hidden', paddingTop: 6, paddingLeft: 18, paddingBottom: 0}}>
-              {renderWidgetContent(widget)}
-            </CardContent>
+
+            {renderWidgetContent(widget)}
+            
 
           </Card>
         ))}

@@ -28,6 +28,7 @@
 
 import React, { useState, useEffect } from 'react';
 import moment from "moment";
+import './CountdownTimerWidget.css'
 
 const CountdownTimerWidget = ({ endDate }) => {
     const targetTime = moment(endDate);
@@ -43,17 +44,35 @@ const CountdownTimerWidget = ({ endDate }) => {
     }, []);
   
     return (
-      <>
-        <p>Deadline comes in</p>
-        <p className="counter">
-          <span>{timeBetween.years()}yr </span>
-          <span>{timeBetween.months()}m </span>
-          <span>{timeBetween.days()}d </span>
-          <span>{timeBetween.hours()}h </span>
-          <span>{timeBetween.minutes()}min </span>
-          <span>{timeBetween.seconds()}s </span>
-        </p>
-      </>
+        <div className="countdown-timer-widget">
+        <p className="title">Deadline comes in</p>
+        <div className="counter">
+          <div className="time-unit">
+            <span className="time-value">{timeBetween.years()}</span>
+            <span className="time-label">yr</span>
+          </div>
+          <div className="time-unit">
+            <span className="time-value">{timeBetween.months()}</span>
+            <span className="time-label">m</span>
+          </div>
+          <div className="time-unit">
+            <span className="time-value">{timeBetween.days()}</span>
+            <span className="time-label">d</span>
+          </div>
+          <div className="time-unit">
+            <span className="time-value">{timeBetween.hours()}</span>
+            <span className="time-label">h</span>
+          </div>
+          <div className="time-unit">
+            <span className="time-value">{timeBetween.minutes()}</span>
+            <span className="time-label">min</span>
+          </div>
+          <div className="time-unit">
+            <span className="time-value">{timeBetween.seconds()}</span>
+            <span className="time-label">s</span>
+          </div>
+        </div>
+      </div>
     );
 };
 

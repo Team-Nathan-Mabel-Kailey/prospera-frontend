@@ -34,7 +34,7 @@ const ContactPage = () => {
         <div className='checkBody'>
             <div className='titleArea'>
                 <div className='contactTitle'>
-                    <h1>Contact Us!</h1>
+                    <h1>Contact <span>Us!</span></h1>
                 </div>
             </div>
             <div className='contactBody'>

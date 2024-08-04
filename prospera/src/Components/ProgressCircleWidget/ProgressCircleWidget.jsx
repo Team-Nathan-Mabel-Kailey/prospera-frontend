@@ -27,12 +27,12 @@ const ProgressCircleWidget = ({ amountSaved, goalAmount, isCompleted, endDate })
       <div className="box">
         <Pie progress={percent} />
       </div>
-      <div>
-        <p>Amount Saved: ${amountSaved}</p>
-        <p>Goal Amount: ${goalAmount}</p>
-        <p>Remainder: ${remainder}</p>
-        <p>End Date: {endDate}</p>
-        <p>Status: {isCompleted ? 'Completed' : 'In Progress'}</p>
+      <div className="progressInfo">
+        <p><strong>Amount Saved:</strong> ${amountSaved}</p>
+        <p><strong>Goal Amount:</strong> ${goalAmount}</p>
+        <p><strong>Remainder:</strong> ${remainder}</p>
+        <p><strong>End Date:</strong> {endDate}</p>
+        <p><strong>Status:</strong> {isCompleted ? 'Completed' : 'In Progress'}</p>
       </div>
     </div>
   );
