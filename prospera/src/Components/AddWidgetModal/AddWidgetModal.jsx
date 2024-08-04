@@ -589,8 +589,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           <option value="Financial Goals">Financial Goals Widget</option>
           <option value="Highlighted Goal">Highlighted Goal Widget</option>
           <option value="News">News Widget</option>
-          <option value="Savings Account">Savings Account Widget</option>
-          <option value="Checking Account">Checkings Account Widget</option>
+          {/* <option value="Savings Account">Savings Account Widget</option>
+          <option value="Checking Account">Checkings Account Widget</option> */}
           <option value="Financial Accounts">Financial Accounts Widget</option>
         </select>
 

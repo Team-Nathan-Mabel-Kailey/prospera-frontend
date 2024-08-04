@@ -33,7 +33,8 @@ const TopicSelectionPage = () => {
 //         console.log('Selected Topics: ', selectedTopics);
 
         // console.log('user is:', user)
-        const userId = user.userID; // Assuming userId is stored in localStorage on login
+        // const userId = user.userId; // Assuming userId is stored in localStorage on login
+        let userId = localStorage.getItem("userId");
         // if (!userId) {
         //     console.error('User is not authenticated');
         //     return;
