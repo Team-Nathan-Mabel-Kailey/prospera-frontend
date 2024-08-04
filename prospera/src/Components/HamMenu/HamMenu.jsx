@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext/AuthContext';
 import { NovuProvider, PopoverNotificationCenter, NotificationBell } from '@novu/notification-center';
 import PropTypes from 'prop-types';
-import settingGif from '../Header/icons8-settings.gif';
+import settingGif from '../../../public/icons8-settings.gif';
 
 
 const HamMenu = ({ open }) => {
