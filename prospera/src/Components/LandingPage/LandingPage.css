@@ -46,7 +46,7 @@
     height: 35vh;
     object-fit: cover;
     object-position: 100%;
-    opacity: 0.6;
+    opacity: 0.7;
     z-index: 0;
 }
 
@@ -163,6 +163,9 @@
 }
 
 @media (max-width: 968px) {
+    .landingTexts h1{
+        font-size: 5.5rem;
+    }
     .landingPageContent {
         height: auto;
     }
