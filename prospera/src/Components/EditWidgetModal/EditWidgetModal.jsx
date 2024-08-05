@@ -270,14 +270,16 @@
 
 // export default EditWidgetModal;
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import axios from 'axios';
 import './EditWidgetModal.css'; // You'll need to create this CSS file
+import { FinancialGoalsContext } from '../FinancialGoalsContext/FinancialGoalsContext';
 
 const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
   const [widgetData, setWidgetData] = useState({});
+  const { fetchGoals } = useContext(FinancialGoalsContext);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -345,7 +347,6 @@ const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
         
         // Refresh financial goals after editing
         if (widgetType === 'Financial Goals') {
-            const { fetchGoals } = useContext(FinancialGoalsContext);
             await fetchGoals();
         }
         
