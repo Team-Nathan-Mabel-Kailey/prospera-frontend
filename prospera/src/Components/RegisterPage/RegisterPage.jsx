@@ -45,16 +45,20 @@ const Register = () => {
             `${BASE_URL}/users/login`,
             { username, password }
         );
-            const {hasCompletedTopics} = response.data;
-            localStorage.setItem('token', loginResponse.data.token);
-            await fetchUserData(loginResponse.data.token);
-            console.log(response);
-            setIsLoggedIn(true);
-            if (hasCompletedTopics) {
-                navigate('/dashboard');
-            } else {
-                navigate('/topic-selection');
-            }
+
+        localStorage.setItem('token', loginResponse.data.token);
+        await fetchUserData(loginResponse.data.token);
+
+
+        const {hasCompletedTopics} = response.data;
+
+        console.log(response);
+        setIsLoggedIn(true);
+        if (hasCompletedTopics) {
+            navigate('/dashboard');
+        } else {
+            navigate('/topic-selection');
+        }
         // Store the token in the localstorage as token
         
         if (hasCompletedTopics) {
@@ -64,6 +68,7 @@ const Register = () => {
         }
         } catch (error) {
         alert('Registration failed. Try again.');
+        console.log('error:', error)
         } finally {
             setIsLoading(false);  // Hide loader
         }

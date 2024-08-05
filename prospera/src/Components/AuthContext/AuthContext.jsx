@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
                     'Authorization': `Bearer ${token}`
                 }
             });
+            console.log('user data:', response.data);
             setUser(response.data);
             setIsLoggedIn(true);
             setNovuSubscriberId(response.data.userID.toString());
@@ -32,7 +33,7 @@ export const AuthProvider = ({ children }) => {
         // console.log("u")
         const token = localStorage.getItem('token');
         console.log("token is: ", token)
-        
+
         if (token) {
             fetchUserData(token);
         } else {
@@ -42,7 +43,7 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, novuSubscriberId, setNovuSubscriberId }}>
+        <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn, user, setUser, novuSubscriberId, setNovuSubscriberId, fetchUserData }}>
             {children}
         </AuthContext.Provider>
     );
