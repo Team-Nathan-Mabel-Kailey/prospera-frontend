@@ -22,7 +22,7 @@ const Register = () => {
     const [showIcon3, setShowIcon3] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
     const [isValidPassword, setIsValidPassword] = useState(false);
     const navigate = useNavigate();
-    const { setIsLoggedIn } = useAuth();
+    const { setIsLoggedIn, fetchUserData } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
     let BASE_URL = import.meta.env.VITE_BASE_URL;
     // console.log(BASE_URL);
@@ -45,7 +45,8 @@ const Register = () => {
             { username, password }
         );
             const {hasCompletedTopics} = response.data;
-
+            localStorage.setItem('token', loginResponse.data.token);
+            await fetchUserData(loginResponse.data.token);
             console.log(response);
             setIsLoggedIn(true);
             if (hasCompletedTopics) {
@@ -54,7 +55,7 @@ const Register = () => {
                 navigate('/topic-selection');
             }
         // Store the token in the localstorage as token
-        localStorage.setItem('token', loginResponse.data.token);
+        
         if (hasCompletedTopics) {
         navigate('/dashboard');
         } else {
