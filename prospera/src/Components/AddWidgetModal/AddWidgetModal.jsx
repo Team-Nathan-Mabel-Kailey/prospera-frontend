@@ -5,7 +5,7 @@ import axios from 'axios';
 import './AddWidgetModal.css'
 import { v4 as uuidv4 } from 'uuid';
 
-const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => {
+const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
   const [widgetType, setWidgetType] = useState('');
   const [widgetNum, setWidgetNum] = useState(0);
   const [widgetData, setWidgetData] = useState({});
@@ -497,38 +497,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             </div>
           );
 
-        // done
-        case 'Savings Account':
-          return (
-            <div className='createOptions'>
-              <h2>Enter some information about your savings account.</h2>
-              <p className='accountExplanation'>A savings account is a bank account where you can safely store money and earn interest, designed to help you save for future goals or emergencies.</p>
-              <h3 className='accountQuestion'>What do you want to name your savings account?</h3>
-              <input type="text" name="savingsName" value={widgetData.savingsName || ''} onChange={handleInputChange} placeholder="Account Name" />
-              <h3 className='accountQuestion'>What bank is this savings account located in?</h3>
-              <input type="text" name="bankName" value={widgetData.bankName || ''} onChange={handleInputChange} placeholder="Bank Name" />
-              <h3 className='accountQuestion2'>Finally, what is the current balance in this savings account?</h3>
-              <p>Notifications will be sent periodically reminding you to update this balance.</p>
-              <input type="number" name="balance" value={widgetData.balance || ''} onChange={handleInputChange} placeholder="Balance" />
-            </div>
-          );
-
-        // done
-        case 'Checking Account':
-          return (
-            <div className='createOptions'>
-              <h2>Enter some information about your checking account.</h2>
-              <p className='accountExplanation'>A checking account is a bank account for everyday transactions, allowing you to easily deposit money, withdraw cash, and pay bills or make purchases using checks or a debit card.</p>
-              <h3 className='accountQuestion'>What do you want to name your checking account?</h3>
-              <input type="text" name="checkingName" value={widgetData.checkingName || ''} onChange={handleInputChange} placeholder="Account Name" />
-              <h3 className='accountQuestion'>What bank is this checking account located in?</h3>
-              <input type="text" name="bankName" value={widgetData.bankName || ''} onChange={handleInputChange} placeholder="Bank Name" />
-              <h3 className='accountQuestion2'>Finally, what is the current balance in this checking account?</h3>
-              <p>Notifications will be sent periodically reminding you to update this balance.</p>
-              <input type="number" name="balance" value={widgetData.balance || ''} onChange={handleInputChange} placeholder="Balance" />
-            </div>
-          );
-
       case 'Financial Accounts':
         return (
           <div className='createOptions'>
@@ -589,8 +557,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           <option value="Financial Goals">Financial Goals Widget</option>
           <option value="Highlighted Goal">Highlighted Goal Widget</option>
           <option value="News">News Widget</option>
-          <option value="Savings Account">Savings Account Widget</option>
-          <option value="Checking Account">Checkings Account Widget</option>
           <option value="Financial Accounts">Financial Accounts Widget</option>
         </select>
 
