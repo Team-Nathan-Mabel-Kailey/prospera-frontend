@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { jwtDecode } from "jwt-decode";
 import './TopicSelectionPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
 
@@ -12,9 +13,27 @@ const topicsList = [
 
 const TopicSelectionPage = () => {
     const [selectedTopics, setSelectedTopics] = useState([]);
+    const [userId, setUserId] = useState(null);
     const navigate = useNavigate();
-    const { user } = useAuth();
+    const { user, fetchUserData } = useAuth();
     let BASE_URL = import.meta.env.VITE_BASE_URL;
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            try {
+                const decodedToken = jwtDecode(token);
+                setUserId(decodedToken.userId);
+                fetchUserData(token);
+            } catch (error) {
+                console.error('Error decoding token:', error);
+                navigate('/login'); // Redirect to login if token is invalid
+            }
+        } else {
+            console.warn('No token found in localStorage');
+            navigate('/login'); // Redirect to login if no token
+        }
+    }, [fetchUserData, navigate]);
 
     const handleTopicToggle = (topic) => {
         setSelectedTopics((prev) =>
@@ -23,27 +42,20 @@ const TopicSelectionPage = () => {
     };
 
     const handleSubmit = async () => {
-
-//         const userId = user?.userID; // Assuming userId is stored in localStorage on login
-//         if (!userId) {
-//             console.error('User is not authenticated');
-//             return;
-//         }
-//         console.log('UserId: ', userId);
-//         console.log('Selected Topics: ', selectedTopics);
-
-        // console.log('user is:', user)
-        // const userId = user.userId; // Assuming userId is stored in localStorage on login
-        let userId = localStorage.getItem("userId");
-        // if (!userId) {
-        //     console.error('User is not authenticated');
-        //     return;
-        // }
+        if (!userId) {
+            console.error('User is not authenticated');
+            navigate('/login');
+            return;
+        }
         console.log('UserId:', userId);
         console.log('Selected Topics:', selectedTopics);
     
         try {
-            const response = await axios.post(`${BASE_URL}/users/save-topics`, { userId, topics: selectedTopics });
+            const response = await axios.post(`${BASE_URL}/users/save-topics`, { userId, topics: selectedTopics }, {
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
             console.log('Response:', response.data);
             navigate('/topic-selection-confirmed');
         } catch (error) {
@@ -52,7 +64,7 @@ const TopicSelectionPage = () => {
     };
 
     const handleSkip = () => {
-        navigate('/news');
+        navigate('/dashboard');
     };
 
     return (
