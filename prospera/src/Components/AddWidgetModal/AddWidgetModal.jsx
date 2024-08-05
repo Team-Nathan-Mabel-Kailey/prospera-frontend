@@ -17,6 +17,7 @@ import InputLabel from '@mui/material/InputLabel';
 
 const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
   const [widgetType, setWidgetType] = useState('');
+  const [widgetOptions, setWidgetOptions] = useState({});
   const [widgetNum, setWidgetNum] = useState(0);
   const [widgetData, setWidgetData] = useState({});
   const [goalData, setGoalData] = useState({
@@ -79,6 +80,13 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
     p: 4,
   };
 
+  useEffect(() => {
+    if (!isOpen) {
+      setWidgetType('');
+      setWidgetOptions({});
+    }
+  }, [isOpen]);
+
   const resetStockData = () => {
     setStockData({
       stocks: Array(5).fill({ symbol: '', period: '' })
@@ -110,6 +118,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
 
   const handleWidgetTypeChange = (e) => {
     setWidgetType(e.target.value);
+    setWidgetOptions({});
     resetStockData();
     resetGoalData();
     resetHighlightedGoalData();
@@ -159,7 +168,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
       maxW = 3;
       minH = 3;
       maxH = 3;
-      startingW = 3;
+      startingW = 2;
       startingH = 3;
     }
 
@@ -168,8 +177,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
         maxW = 3;
         minH = 2;
         maxH = 3;
-        startingW = 3;
-        startingH = 3;
+        startingW = 2;
+        startingH = 2;
     }
     
     else if (widgetType === 'Highlighted Goal') {
@@ -177,8 +186,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
         maxW = 3;
         minH = 1;
         maxH = 2;
-        startingW = 3;
-        startingH = 2;
+        startingW = 2;
+        startingH = 1;
     } 
     
     else if (widgetType === 'Checking Account' || widgetType === 'Savings Account') {
@@ -186,7 +195,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
         maxW = 4;
         minH = 1;
         maxH = 1;
-        startingW = 4;
+        startingW = 3;
         startingH = 1;
     }
 
@@ -200,7 +209,12 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
     } 
     
     else if (widgetType === 'Portfolio Monitor') {
-      minW = 3; maxW = 6; minH = 3; maxH = 6; startingW = 4; startingH = 4;
+      minW = 3; 
+      maxW = 6; 
+      minH = 3; 
+      maxH = 6; 
+      startingW = 3; 
+      startingH = 3;
     }
 
     try {
@@ -674,23 +688,32 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
   };
 
   return (
-    <Modal open={isOpen} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-      <Box sx={style}>
-        <h2 className='selectTitle'>Select Widget Type</h2>
-        <select value={widgetType} onChange={handleWidgetTypeChange} className="selectDropdown">
-          <option value="">Select</option>
-          <option value="Stock">Stock Widget</option>
-          <option value="Financial Goals">Financial Goals Widget</option>
-          <option value="Highlighted Goal">Highlighted Goal Widget</option>
-          <option value="News">News Widget</option>
-          <option value="Financial Accounts">Financial Accounts Widget</option>
-          <option value="Portfolio Monitor">Portfolio Monitor Widget</option>
-        </select>
-
-        {renderWidgetCreationOptions(widgetType)}
-
-        <button onClick={handleAddWidget} className='addWidgetBtnModal'>Add Widget</button>
-      </Box>
+      <Modal 
+      open={isOpen} 
+      onClose={onClose} 
+      aria-labelledby="modal-modal-title" 
+      aria-describedby="modal-modal-description"
+      >
+        <Box className="modal-content">
+          <h2 className='modal-title'>Select Widget Type</h2>
+          <div className="modal-body">
+            <div className="widget-type-buttons">
+              {['Stock', 'Financial Goals', 'Highlighted Goal', 'News', 'Financial Accounts', 'Portfolio Monitor'].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => handleWidgetTypeChange({ target: { value: type } })}
+                  className={`widget-type-btn ${widgetType === type ? "active" : ""}`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+            {renderWidgetCreationOptions(widgetType)}
+          </div>
+          <div className="modal-footer">
+            <button onClick={handleAddWidget} className='add-widget-btn'>Add Widget</button>
+          </div>
+        </Box>
     </Modal>
   );
 };
