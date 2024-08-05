@@ -306,7 +306,7 @@ const Dashboard = () => {
         <p>Say hello to your comprehensive tool for managing and 
           enhancing your financial well-being. Here, you can effortlessly keep track of your finances and financial education resources.</p>
       </div>
-        <Stack direction="row" spacing={1}>
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
           <Chip label="Monitor balance totals across multiple bank accounts" variant="outlined" sx={{ bgcolor: '#4a0a77', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px' }} />
           <Chip label="Stay updated on stock trends" variant="outlined" sx={{ bgcolor: '#5a108f', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
           <Chip label="Managing your stock portfolio" variant="outlined" sx={{ bgcolor: '#6818a5', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
