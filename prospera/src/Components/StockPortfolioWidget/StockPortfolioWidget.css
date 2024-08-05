@@ -1,0 +1,158 @@
+.portfolio-monitor-widget {
+    background-color: #232323;
+    color: #fff;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    font-family: 'Outfit', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    overflow: hidden;
+}
+
+.portfolio-monitor-widget h3 {
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 0 0 10px 0;
+    color: #fff;
+}
+
+.stocks-list {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    padding-right: 5px;
+}
+
+.stock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+
+.stock-symbol {
+    font-weight: bold;
+    color: #9b62f8;
+}
+
+.stock-position, .stock-quantity, .stock-price, .stock-current-price {
+    color: #fff;
+}
+
+.stock-profit-loss, .stock-total-pl {
+    font-weight: bold;
+}
+
+.profit {
+    color: #4caf50;
+}
+
+.loss {
+    color: #f44336;
+}
+
+.total-profit-loss {
+    font-size: 1rem;
+    text-align: right;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.widget-bottom {
+    flex-shrink: 0;
+}
+
+.add-new-stock {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.add-new-stock input, .add-new-stock select {
+    flex: 1;
+    min-width: 60px;
+    padding: 5px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 0.8rem;
+}
+
+.add-new-stock button, .update-prices-btn {
+    padding: 5px 10px;
+    background-color: #232323;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    font-size: 0.8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.add-new-stock button::after, .update-prices-btn::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.add-new-stock button:hover::after, .update-prices-btn:hover::after {
+    transform: scale(4);
+}
+
+.add-new-stock button:hover, .update-prices-btn:hover {
+    background: #292929;
+}
+
+.update-prices-btn {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.loading, .error {
+    text-align: center;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    color: #fff;
+}
+
+@media (max-width: 600px) {
+    .portfolio-monitor-widget {
+        padding: 8px;
+    }
+
+    .portfolio-monitor-widget h3 {
+        font-size: 1rem;
+    }
+
+    .stock-item {
+        font-size: 0.8rem;
+        padding: 5px;
+    }
+
+    .add-new-stock input, .add-new-stock select, .add-new-stock button, .update-prices-btn {
+        font-size: 0.7rem;
+    }
+}

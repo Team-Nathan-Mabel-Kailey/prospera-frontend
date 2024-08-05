@@ -19,6 +19,7 @@ import CardActions from '@mui/material/CardActions';
 import CardHeader from '@mui/material/CardHeader';
 import Button from '@mui/material/Button';
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material/styles';
+import PortfolioMonitorWidget from '../StockPortfolioWidget/StockPortfolioWidget'
 
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import PageviewIcon from '@mui/icons-material/Pageview';
@@ -206,6 +207,19 @@ const Dashboard = () => {
     }
   };
 
+  const handleUpdateWidget = async (widgetId, updatedWidget) => {
+    try {
+        await axios.put(`${BASE_URL}/api/widgets/content/${widgetId}`, {
+            configuration: updatedWidget.configuration
+        });
+        setWidgetArray(prevWidgets => 
+            prevWidgets.map(w => w.id === widgetId ? updatedWidget : w)
+        );
+    } catch (error) {
+        console.error('Error updating widget:', error);
+    }
+  };
+
   const handleAdd = () => {
     setModalOpen(true);
   };
@@ -280,6 +294,12 @@ const Dashboard = () => {
             </CardContent>
           );
           // return 
+        case 'Portfolio Monitor':
+          console.log("Rendering Portfolio Monitor widget:", widget);
+          return <PortfolioMonitorWidget 
+              data={widget} 
+              onUpdate={(updatedWidget) => handleUpdateWidget(updatedWidget.id, updatedWidget)}
+          />;
 
       default:
         return <div>Widget type: {widget.type}</div>;
