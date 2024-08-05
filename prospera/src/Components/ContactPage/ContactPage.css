@@ -216,4 +216,8 @@
     .submitButton {
         width: 100%;
     }
+
+    .contactBody {
+        margin-bottom: 200px;
+    }
 }
