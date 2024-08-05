@@ -226,6 +226,10 @@ button.register {
         transform: rotate(-45deg);
     }
 
+    /* .mainHeader{
+        flex-direction: column;
+    } */
+
 }
 
 .goog-te-combo {

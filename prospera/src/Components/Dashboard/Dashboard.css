@@ -38,12 +38,6 @@
     align-items: center;
     margin: 0px 55px;
     gap: 20px;
-    /* width: 45%; */
-    /* text-align: justify;
-    padding: 5px;
-    border-radius: 5px;
-    color: #303030ee;
-    background-color: rgba(175, 132, 244, 0.4); */
 }
 
 .dashboardBody {
@@ -141,4 +135,14 @@
 hr {
     width: 100%;
     margin:0 auto;
+}
+
+@media (max-width: 968px) {
+    .dashboardTitle{
+        flex-direction: column;
+    }
+
+    .dashboardTitle h1{
+        text-align: center;
+    }
 }

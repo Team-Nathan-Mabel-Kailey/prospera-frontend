@@ -33,6 +33,7 @@
 .newsCategories a{
     margin: 20px 20px;
 }
+
 .newsArticleCards {
     display: grid;
     max-width: 1200px;
@@ -42,7 +43,6 @@
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 50px;
 }
-
 
 .loadMoreButton{
     background-color: #000;
@@ -154,6 +154,7 @@
     border: none;
     background-color: #000;
     color: #fff;
+    font-size: 1rem;
 }
 
 .newsCategories button.active {
@@ -182,27 +183,20 @@
 .searchForm button {
     padding: 10px 20px;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 10px;
     border: none;
-    background-color: #28666e;
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
+    background-color: #000;
 }
 
 .searchForm button:hover {
-    background-color: #1b4d5b;
+    background-color: #292929;
 }
 
-.newsArticleCards {
-    display: grid;
-    max-width: 1200px;
-    margin: 30px 0;
-    margin-inline: auto;
-    padding-inline: 24px;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 50px;
-}
+
 
 .loadMoreButton {
     background-color: #000;
@@ -309,4 +303,23 @@
     display: flex;
     align-items: center;
     gap: 15px;
+}
+
+@media (max-width: 968px) {
+    .newsCategories{
+        display:grid;
+        gap: 10px;
+    }
+
+    .newsArticleCards{
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .newsFeedContainer{
+        background-color: #fff;
+        color: #000;
+        margin-bottom: 250px;
+    }
 }

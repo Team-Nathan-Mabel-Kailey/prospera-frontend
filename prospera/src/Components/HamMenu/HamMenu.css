@@ -1,5 +1,6 @@
 .menu {
     display: none;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 } 
 
 @media (max-width: 968px) {
@@ -8,11 +9,11 @@
         flex-direction: column;
         justify-content: center;
 
-        background: #fff;
+        background: #c0a5ec;
         transform: translateX(100%);
         height: 60vh;
         text-align: left;
-        padding: 2rem;
+        /* padding: 2rem; */
         position: fixed;
         top: 0;
         right: 0;
