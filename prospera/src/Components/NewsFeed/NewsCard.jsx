@@ -1,11 +1,13 @@
 import React from 'react';
 import './NewsCard.css';
+import noImagePlaceholder from './no_image_placeholder.png';
 
 const NewsCard = ({ article }) => {
     return (
         <div className="newsCardContainer">
         <figure>
-            <img src={article.urlToImage} alt={article.title} />
+            {/* <img src={article.urlToImage} alt={article.title} /> */}
+            <img src={article.urlToImage ? article.urlToImage : noImagePlaceholder} alt={article.title}/>
         </figure>
         <h3>{article.title}</h3>
         <p>{article.description || article.content}</p>

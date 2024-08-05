@@ -4,15 +4,42 @@
 
 .dashboardTitle{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+
 
     color: #000;
     background-color: #fff;
 
     padding: 0;
-    margin: 20px 15px;
+    margin: 20px 55px;
+    margin-bottom: 10px;
     border-radius: 5px;
 }
+
+.descriptionParagraph{
+    /* width: 45%; */
+    text-align: justify;
+    padding: 10px;
+    border-radius: 5px;
+    color: #303030ee;
+    background-color: rgba(175, 132, 244, 0.4);
+}
+
+.descriptionParagraph p {
+    margin: 0;
+    font-size: 1.35rem;
+    text-align: center;
+    font-weight: 550;
+}
+
+.descriptionContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 55px;
+    gap: 20px;
+}
+
 .dashboardBody {
     margin: 0;
     padding: 0 15px 30px 15px;
@@ -61,8 +88,7 @@
     align-self: center;
     
     width: 150px;
-    margin: 10px auto;
-    margin-bottom: 20px;
+    margin: 10px 30px;
     display: block;
 }
 
@@ -109,4 +135,14 @@
 hr {
     width: 100%;
     margin:0 auto;
+}
+
+@media (max-width: 968px) {
+    .dashboardTitle{
+        flex-direction: column;
+    }
+
+    .dashboardTitle h1{
+        text-align: center;
+    }
 }

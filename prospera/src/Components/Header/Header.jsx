@@ -4,9 +4,8 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { NovuProvider, PopoverNotificationCenter, NotificationBell } from '@novu/notification-center';
 import { useAuth } from '../AuthContext/AuthContext';
-import settingGif from './icons8-settings.gif';
+import settingGif from '../../../public/icons8-settings.gif';
 import Badge from '@mui/material/Badge';
-import Stack from '@mui/material/Stack';
 import MailIcon from '@mui/icons-material/Mail';
 import './Header.css';
 
@@ -77,7 +76,6 @@ const Header = ({ open, setOpen }) => {
                         <MailIcon className="mailIcon" color="#000" />
                     </Badge>}
 
-                    
                     </PopoverNotificationCenter>
                 </NovuProvider>
             )}
