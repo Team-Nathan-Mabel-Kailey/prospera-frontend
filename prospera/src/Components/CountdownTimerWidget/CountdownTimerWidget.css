@@ -20,14 +20,16 @@
   
   .countdown-timer-widget .counter {
     display: flex;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 7px;
   }
   
   .countdown-timer-widget .time-unit {
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* margin: 10px 10px; */
+
   }
   
   .countdown-timer-widget .time-value {

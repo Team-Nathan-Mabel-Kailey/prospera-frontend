@@ -30,7 +30,7 @@ import React, { useState, useEffect } from 'react';
 import moment from "moment";
 import './CountdownTimerWidget.css'
 
-const CountdownTimerWidget = ({ endDate }) => {
+const CountdownTimerWidget = ({ endDate, isCompleted }) => {
     const targetTime = moment(endDate);
     const [currentTime, setCurrentTime] = useState(moment());
     const timeBetween = moment.duration(targetTime.diff(currentTime));
@@ -42,6 +42,15 @@ const CountdownTimerWidget = ({ endDate }) => {
   
       return () => clearInterval(interval);
     }, []);
+
+    if (isCompleted) {
+      return (
+          <div className="countdown-timer-widget completed">
+              <p className="title">Goal Completed!</p>
+              <p>Congratulations on achieving your goal!</p>
+          </div>
+      );
+  }
   
     return (
         <div className="countdown-timer-widget">

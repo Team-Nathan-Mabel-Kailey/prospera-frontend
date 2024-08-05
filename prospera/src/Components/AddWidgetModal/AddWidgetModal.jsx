@@ -4,9 +4,20 @@ import Modal from '@mui/material/Modal';
 import axios from 'axios';
 import './AddWidgetModal.css'
 import { v4 as uuidv4 } from 'uuid';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
 
-const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => {
+const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
   const [widgetType, setWidgetType] = useState('');
+  const [widgetOptions, setWidgetOptions] = useState({});
   const [widgetNum, setWidgetNum] = useState(0);
   const [widgetData, setWidgetData] = useState({});
   const [goalData, setGoalData] = useState({
@@ -40,6 +51,9 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     ]
   });
   const [highlightedGoalData, setHighlightedGoalData] = useState({});
+  const [portfolioData, setPortfolioData] = useState({
+    stocks: [{ ticker: '', position: '', quantity: '', price: '' }]
+  });
   const [minW, setMinW] = useState(0);
   const [maxW, setMaxW] = useState(0);
   const [minH, setMinH] = useState(0);
@@ -66,6 +80,13 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     p: 4,
   };
 
+  useEffect(() => {
+    if (!isOpen) {
+      setWidgetType('');
+      setWidgetOptions({});
+    }
+  }, [isOpen]);
+
   const resetStockData = () => {
     setStockData({
       stocks: Array(5).fill({ symbol: '', period: '' })
@@ -89,11 +110,19 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     setHighlightedGoalData({});
   };
 
+  const resetPortfolioData = () => {
+    setPortfolioData({
+      stocks: [{ ticker: '', position: '', quantity: '', price: '' }]
+    });
+  };
+
   const handleWidgetTypeChange = (e) => {
     setWidgetType(e.target.value);
+    setWidgetOptions({});
     resetStockData();
     resetGoalData();
     resetHighlightedGoalData();
+    resetPortfolioData();
     resetFinancialAcctData();
   };
 
@@ -139,7 +168,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
       maxW = 3;
       minH = 3;
       maxH = 3;
-      startingW = 3;
+      startingW = 2;
       startingH = 3;
     }
 
@@ -148,8 +177,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         maxW = 3;
         minH = 2;
         maxH = 3;
-        startingW = 3;
-        startingH = 3;
+        startingW = 2;
+        startingH = 2;
     }
     
     else if (widgetType === 'Highlighted Goal') {
@@ -157,8 +186,8 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         maxW = 3;
         minH = 1;
         maxH = 2;
-        startingW = 3;
-        startingH = 2;
+        startingW = 2;
+        startingH = 1;
     } 
     
     else if (widgetType === 'Checking Account' || widgetType === 'Savings Account') {
@@ -166,7 +195,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         maxW = 4;
         minH = 1;
         maxH = 1;
-        startingW = 4;
+        startingW = 3;
         startingH = 1;
     }
 
@@ -177,6 +206,15 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         maxH = 3;
         startingW = 4;
         startingH = 2;
+    } 
+    
+    else if (widgetType === 'Portfolio Monitor') {
+      minW = 3; 
+      maxW = 6; 
+      minH = 3; 
+      maxH = 6; 
+      startingW = 3; 
+      startingH = 3;
     }
 
     try {
@@ -198,21 +236,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           userId,
 
         });
-        // try {
-        // const response = await axios.post(`https://prospera-api.onrender.com/api/widgets/create`, {
-        //     i: newWidgetI,
-        //     type: widgetType,
-        //     x: 0,
-        //     y: 0,
-        //     w: startingW,
-        //     h: startingH,
-        //     minW: minW,
-        //     maxW: maxW,
-        //     minH: minH,
-        //     maxH: maxH,
-        //     configuration: widgetData,
-        //     userId,
-        // });
       }
 
       else if (widgetType === 'Stock') {
@@ -265,7 +288,25 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
           userId,
         });
       }
-        
+
+      else if (widgetType === 'Portfolio Monitor') {
+        response = await axios.post(`${BASE_URL}/api/widgets/create`, {
+          i: newWidgetI,
+          type: widgetType,
+          x: 0,
+          y: 0,
+          w: startingW,
+          h: startingH,
+          minW: minW,
+          maxW: maxW,
+          minH: minH,
+          maxH: maxH,
+          configuration: {
+            stocks: portfolioData.stocks  // Make sure this is correct
+          },
+          userId,
+        });
+      }        
         
       else {
         response = await axios.post(`${BASE_URL}/api/widgets/create`, {
@@ -292,6 +333,9 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
         setFinancialAcctData({});
         setGoalData({});
         setStockData({});
+        setPortfolioData({
+          stocks: [{ ticker: '', position: '', quantity: '', price: '' }]
+        });
         onClose();
 
         // Update state after the API call
@@ -341,6 +385,29 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     }));
   };
 
+  const handlePortfolioStockChange = (index, field, value) => {
+    setPortfolioData(prevData => {
+      const newStocks = [...prevData.stocks];
+      newStocks[index] = { ...newStocks[index], [field]: value };
+      console.log("Updated portfolio data:", { ...prevData, stocks: newStocks });
+      return { ...prevData, stocks: newStocks };
+    });
+  };
+
+  const addPortfolioStock = () => {
+    setPortfolioData(prevData => ({
+      ...prevData,
+      stocks: [...prevData.stocks, { ticker: '', position: '', quantity: '', price: '' }]
+    }));
+  };
+
+  const removePortfolioStock = (index) => {
+    setPortfolioData(prevData => ({
+      ...prevData,
+      stocks: prevData.stocks.filter((_, i) => i !== index)
+    }));
+  };
+
   const handleListNameChange = (value) => {
     setGoalData(prevData => ({
       ...prevData,
@@ -354,6 +421,18 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
   //   }
   //   return true;
   // };
+
+  const isConfigValid = () => {
+    switch (widgetType) {
+      case 'Portfolio Monitor':
+        return portfolioData.stocks.every(stock => 
+          stock.ticker && stock.position && stock.quantity && stock.price
+        );
+      // Add other cases as needed
+      default:
+        return true;
+    }
+  };
 
   const renderWidgetCreationOptions = (widgetType) => {
     switch (widgetType) {
@@ -393,7 +472,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
               </div>
             </div>
           );
-
+        
         // current
         case 'Financial Goals':
           return (
@@ -497,37 +576,72 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
             </div>
           );
 
-        // done
-        case 'Savings Account':
-          return (
-            <div className='createOptions'>
-              <h2>Enter some information about your savings account.</h2>
-              <p className='accountExplanation'>A savings account is a bank account where you can safely store money and earn interest, designed to help you save for future goals or emergencies.</p>
-              <h3 className='accountQuestion'>What do you want to name your savings account?</h3>
-              <input type="text" name="savingsName" value={widgetData.savingsName || ''} onChange={handleInputChange} placeholder="Account Name" />
-              <h3 className='accountQuestion'>What bank is this savings account located in?</h3>
-              <input type="text" name="bankName" value={widgetData.bankName || ''} onChange={handleInputChange} placeholder="Bank Name" />
-              <h3 className='accountQuestion2'>Finally, what is the current balance in this savings account?</h3>
-              <p>Notifications will be sent periodically reminding you to update this balance.</p>
-              <input type="number" name="balance" value={widgetData.balance || ''} onChange={handleInputChange} placeholder="Balance" />
-            </div>
-          );
-
-        // done
-        case 'Checking Account':
-          return (
-            <div className='createOptions'>
-              <h2>Enter some information about your checking account.</h2>
-              <p className='accountExplanation'>A checking account is a bank account for everyday transactions, allowing you to easily deposit money, withdraw cash, and pay bills or make purchases using checks or a debit card.</p>
-              <h3 className='accountQuestion'>What do you want to name your checking account?</h3>
-              <input type="text" name="checkingName" value={widgetData.checkingName || ''} onChange={handleInputChange} placeholder="Account Name" />
-              <h3 className='accountQuestion'>What bank is this checking account located in?</h3>
-              <input type="text" name="bankName" value={widgetData.bankName || ''} onChange={handleInputChange} placeholder="Bank Name" />
-              <h3 className='accountQuestion2'>Finally, what is the current balance in this checking account?</h3>
-              <p>Notifications will be sent periodically reminding you to update this balance.</p>
-              <input type="number" name="balance" value={widgetData.balance || ''} onChange={handleInputChange} placeholder="Balance" />
-            </div>
-          );
+          case 'Portfolio Monitor':
+            return (
+              <div className='createOptions'>
+                <h2>Add stocks to your portfolio</h2>
+                <p>Enter the details of the stocks in your portfolio. You can add multiple stocks.</p>
+                {portfolioData.stocks.map((stock, index) => (
+                  <div key={index} className='stockGroup'>
+                    <h3>Stock {index + 1}</h3>
+                    <TextField
+                      label="Ticker"
+                      value={stock.ticker}
+                      onChange={(e) => handlePortfolioStockChange(index, 'ticker', e.target.value)}
+                      fullWidth
+                      margin="dense"
+                    />
+                    <FormControl fullWidth margin="dense">
+                      <InputLabel>Position</InputLabel>
+                      <Select
+                        value={stock.position}
+                        onChange={(e) => handlePortfolioStockChange(index, 'position', e.target.value)}
+                      >
+                        <MenuItem value="BUY">Buy</MenuItem>
+                        <MenuItem value="SELL">Sell</MenuItem>
+                      </Select>
+                    </FormControl>
+                    <TextField
+                      label="Quantity"
+                      type="number"
+                      value={stock.quantity}
+                      onChange={(e) => handlePortfolioStockChange(index, 'quantity', e.target.value)}
+                      fullWidth
+                      margin="dense"
+                    />
+                    <TextField
+                      label="Purchase Price"
+                      type="number"
+                      value={stock.price}
+                      onChange={(e) => handlePortfolioStockChange(index, 'price', e.target.value)}
+                      fullWidth
+                      margin="dense"
+                    />
+                    {portfolioData.stocks.length > 1 && (
+                      <Button 
+                        onClick={() => removePortfolioStock(index)} 
+                        color="secondary"
+                        startIcon={<DeleteIcon />}
+                        fullWidth
+                        variant="outlined"
+                        sx={{ mt: 1 }}
+                      >
+                        Remove Stock
+                      </Button>
+                    )}
+                  </div>
+                ))}
+                <Button 
+                  startIcon={<AddIcon />} 
+                  onClick={addPortfolioStock} 
+                  fullWidth 
+                  variant="outlined" 
+                  sx={{ mt: 2 }}
+                >
+                  Add Another Stock
+                </Button>
+         </div>
+      );
 
       case 'Financial Accounts':
         return (
@@ -573,35 +687,35 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, existingWidgets, userId }) => 
     }
   };
 
-  // useEffect(() => {
-  //   if (!isWidgetTypeAllowed(widgetType)) {
-  //     setWidgetType('');
-  //   }
-  // }, [widgetType, existingWidgets]);
-
   return (
-    <Modal open={isOpen} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-      <Box sx={style}>
-        <h2 className='selectTitle'>Select Widget Type</h2>
-        <select value={widgetType} onChange={handleWidgetTypeChange} className="selectDropdown">
-          <option value="">Select</option>
-          <option value="Stock">Stock Widget</option>
-          <option value="Financial Goals">Financial Goals Widget</option>
-          <option value="Highlighted Goal">Highlighted Goal Widget</option>
-          <option value="News">News Widget</option>
-          {/* <option value="Savings Account">Savings Account Widget</option>
-          <option value="Checking Account">Checkings Account Widget</option> */}
-          <option value="Financial Accounts">Financial Accounts Widget</option>
-        </select>
-
-        {renderWidgetCreationOptions(widgetType)}
-
-        <button onClick={handleAddWidget} className='addWidgetBtnModal'>Add Widget</button>
-      </Box>
+      <Modal 
+      open={isOpen} 
+      onClose={onClose} 
+      aria-labelledby="modal-modal-title" 
+      aria-describedby="modal-modal-description"
+      >
+        <Box className="modal-content">
+          <h2 className='modal-title'>Select Widget Type</h2>
+          <div className="modal-body">
+            <div className="widget-type-buttons">
+              {['Stock', 'Financial Goals', 'Highlighted Goal', 'News', 'Financial Accounts', 'Portfolio Monitor'].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => handleWidgetTypeChange({ target: { value: type } })}
+                  className={`widget-type-btn ${widgetType === type ? "active" : ""}`}
+                >
+                  {type}
+                </button>
+              ))}
+            </div>
+            {renderWidgetCreationOptions(widgetType)}
+          </div>
+          <div className="modal-footer">
+            <button onClick={handleAddWidget} className='add-widget-btn'>Add Widget</button>
+          </div>
+        </Box>
     </Modal>
   );
 };
 
 export default AddWidgetModal;
-
-// disabled={!isWidgetTypeAllowed('financialGoals')}
