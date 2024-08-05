@@ -154,15 +154,15 @@ const Dashboard = () => {
   };
 
   // New function to check if a goal exists
-  const checkGoalExists = async (goalId) => {
-    try {
-      const response = await axios.get(`${BASE_URL}/api/widgets/user/goals/${goalId}`);
-      return response.data.exists;
-    } catch (error) {
-      console.error('Error checking goal existence:', error);
-      return false;
-    }
-  };
+  // const checkGoalExists = async (goalId) => {
+  //   try {
+  //     const response = await axios.get(`${BASE_URL}/api/widgets/user/goals/${goalId}`);
+  //     return response.data.exists;
+  //   } catch (error) {
+  //     console.error('Error checking goal existence:', error);
+  //     return false;
+  //   }
+  // };
 
   // Dashboard.jsx
 
