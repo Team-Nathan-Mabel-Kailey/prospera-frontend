@@ -63,17 +63,6 @@ const Dashboard = () => {
     boxShadow: 15,
     borderRadius: 3
   }
-  
-//   useEffect(() => {
-//     const token = localStorage.getItem('token');
-//     if (token) {
-//       const userIdFromToken = getUserIdFromToken(token);
-//       setUserId(userIdFromToken);
-    
-//       const fetchUserData = async () => {
-//         try {
-//           const userDataResponse = await axios.get(`https://prospera-api.onrender.com/users/${userIdFromToken}`);
-//           const userData = userDataResponse.data;
 
   let theme = createTheme({  
     typography: {
@@ -143,18 +132,7 @@ const Dashboard = () => {
           setUserName(userData.username);
           console.log("first name", firstName, "username", userName);
           console.log('a users widgets: ', userData.Widgets);
-          
-          // const initialLayouts = userData.Widgets.reduce((acc, widget) => {
-          // const layout = { i: widget.i, x: widget.x, y: widget.y, w: widget.w, h: widget.h };
-          //   acc.lg.push(layout);
-          //   acc.md.push(layout);
-          //   acc.sm.push(layout);
-          //   acc.xs.push(layout);
-          //   acc.xxs.push(layout);
-          //   return acc;
-          // }, { lg: [], md: [], sm: [], xs: [] });
-  
-          // setLayouts(initialLayouts);
+
         } catch (error) {
           console.error('Error fetching user data:', error);
         }
@@ -163,16 +141,7 @@ const Dashboard = () => {
       fetchUserData();
     }
   }, []);
-      
-      //   } catch (error) {
-      //     console.error('Error fetching user data:', error);
-      //   }
-      // };
-
-  //     fetchUserData();
-  //   }
-  // }, []);
-
+    
   const handleAddWidget = (newWidget) => {
     setWidgetArray([...widgetArray, newWidget]);
     setLayouts((prevLayouts) => ({
@@ -181,7 +150,6 @@ const Dashboard = () => {
       md: [...prevLayouts.md, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
       sm: [...prevLayouts.sm, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
       xs: [...prevLayouts.xs, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
-      // xxs: [...prevLayouts.xxs, { i: newWidget.id, x: newWidget.x, y: newWidget.y, w: newWidget.w, h: newWidget.h }],
     }));
   };
 
@@ -236,68 +204,6 @@ const handleDeleteWidget = async (key, widgetType) => {
       console.error('Error deleting widget:', error);
   }
 };
-
-  // CLAUDE VERSION 1
-  // const handleDeleteWidget = async (key, widgetType) => {
-  //   try {
-  //     // Delete the widget from the server
-  //     await axios.delete(`${BASE_URL}/api/widgets/${key}`);
-
-  //     // Update widgetArray state
-  //     setWidgetArray((prevWidgets) => prevWidgets.filter((widget) => widget.id !== key));
-
-  //     // Update layouts state
-  //     setLayouts((prevLayouts) => {
-  //       const newLayouts = {};
-  //       for (const breakpoint in prevLayouts) {
-  //         newLayouts[breakpoint] = prevLayouts[breakpoint].filter((layout) => layout.i !== key.toString());
-  //       }
-  //       return newLayouts;
-  //     });
-
-  //     // If the deleted widget is a FinancialGoalWidget, check and update HighlightedGoalWidgets
-  //     if (widgetType === 'Financial Goals') {
-  //       const highlightedGoalWidgets = widgetArray.filter(widget => widget.type === 'Highlighted Goal');
-  //       for (const highlightedWidget of highlightedGoalWidgets) {
-  //         const goalExists = await checkGoalExists(highlightedWidget.configuration.goalId);
-  //         if (!goalExists) {
-  //           // Update the HighlightedGoalWidget to show it doesn't exist
-  //           await axios.patch(`${BASE_URL}/api/widgets/${highlightedWidget.id}`, {
-  //             configuration: { ...highlightedWidget.configuration, goalExists: false }
-  //           });
-  //         }
-  //       }
-  //       // Refresh the widget data after updates
-  //       fetchWidgets();
-  //     }
-
-  //   } catch (error) {
-  //     console.error('Error deleting widget:', error);
-  //   }
-  // };
-
-  // ORIGINAL
-  // const handleDeleteWidget = async (key) => {
-  //   try {
-  //     // Delete the widget from the server
-  //     await axios.delete(`${BASE_URL}/api/widgets/${key}`);
-  
-  //     // Update widgetArray state
-  //     setWidgetArray((prevWidgets) => prevWidgets.filter((widget) => widget.id !== key));
-  
-  //     // Update layouts state
-  //     setLayouts((prevLayouts) => {
-  //       const newLayouts = {};
-  //       for (const breakpoint in prevLayouts) {
-  //         newLayouts[breakpoint] = prevLayouts[breakpoint].filter((layout) => layout.i !== key.toString());
-  //       }
-  //       return newLayouts;
-  //     });
-
-  //   } catch (error) {
-  //     console.error('Error deleting widget:', error);
-  //   }
-  // };
 
   const handleUpdateWidget = async (widgetId, updatedWidget) => {
     try {
@@ -422,13 +328,9 @@ const handleDeleteWidget = async (key, widgetType) => {
                 <Chip label="Set and achieve financial goals" variant="outlined" sx={{ bgcolor: '#8b2fc9', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
                 <Chip label="Access news articles tailored to your financial interests" variant="outlined" sx={{ bgcolor: '#ab51e3', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
               </Stack>
-              {/* <div className="descriptionParagraph">
-                <p>Take control of your financial future with Prospera, where you can thrive financially and live fully.</p>
-              </div> */}
           </div>
 
           <div className='dashboardBody'>
-            <button className="newWidgetBtn" onClick={handleAdd}>Add Widget</button>
             <AddWidgetModal 
               isOpen={modalOpen} 
               onClose={() => setModalOpen(false)} 
@@ -452,11 +354,6 @@ const handleDeleteWidget = async (key, widgetType) => {
               onLayoutChange={handleModify}
               compactType='horizontal'
               layouts={layouts}
-              // Breakpoints and cols are used for responsive design
-              // breakpoints={{ lg: 800, xs: 200 }}
-              // cols={{ lg: 8, xs: 2}}
-              // maxRows={4}
-              // autoSize={true}
               margin={[30, 30]}
             >
 
@@ -477,7 +374,6 @@ const handleDeleteWidget = async (key, widgetType) => {
                   maxH: widget.maxH
                 }}
                 sx={style}
-                // style={{ backgroundColor }}
               >
                 <CardHeader
                   className='cardHeader'
