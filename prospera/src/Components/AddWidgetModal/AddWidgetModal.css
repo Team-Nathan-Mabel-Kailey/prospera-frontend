@@ -302,3 +302,33 @@
     text-decoration: #5000c7 underline;
     text-decoration-thickness: 3px;
 }
+
+p.error-message {
+    font-weight: bold;
+    color: #f44336;
+    margin-top: 10px;
+    font-size: 0.875rem;
+  }
+
+  .add-widget-btn:disabled {
+    color: #ebebeb;
+    border-color: #8d8d8d;
+    background: #7d7d7d;
+    cursor: not-allowed;
+}
+
+  .add-widget-btn:disabled:hover {
+    border-color: #8d8d8d;
+    background: #7d7d7d;
+    transition: none;
+}
+
+.add-widget-btn:disabled:hover::after {
+    transform: none;
+    background: none;
+    transition: none;
+}
+
+.add-widget-btn:disabled::after {
+    transition: none;
+}
