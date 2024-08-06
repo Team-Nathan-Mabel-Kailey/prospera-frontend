@@ -28,19 +28,15 @@ const Account = () => {
     };
 
     useEffect(() => {
-        console.log(isLoggedIn)
         if (!isLoggedIn) {
             navigate('/login'); 
         }
 
         const token = localStorage.getItem('token');
-        console.log("token:", token);
 
         if (token) {
             const userIdFromToken = getUserIdFromToken(token);
             setUserId(userIdFromToken);
-            
-            console.log("userIdFromToken:", userIdFromToken);
             
             const fetchUserData = async () => {
                 try {
@@ -52,7 +48,6 @@ const Account = () => {
                     setLastName(userData.lastName);
                     setEmail(userData.email);
                     setUserName(userData.username);
-                    console.log("first name:", firstName, "last:", lastName, "email:", email);
                     
                 } catch (error) {
                     console.error('Error fetching user data:', error);
@@ -70,21 +65,17 @@ const Account = () => {
             try {
                 const updatedUserNames = { firstName, lastName };
                 await axios.put(`${BASE_URL}/api/settings/name/${userId}`, updatedUserNames);
-                // alert('User information updated successfully!');
 
             } catch (error) {
                 console.error('Error updating user names:', error);
-                // alert('Failed to update user names.');
             }
             
             try {
                 const updateUserEmail = {email, securityAnswer}; 
                 await axios.put(`${BASE_URL}/api/settings/email/${userId}`, updateUserEmail)
-                // alert('User email updated successfully!');
 
             } catch (error) {
                 console.error('Error updating user email:', error);
-                // alert('Failed to update user email.');
             }
 
         } catch (error) {
@@ -102,21 +93,11 @@ const Account = () => {
         setEmail(originalData.email);
         setSecurityAnswer('');
     };
-
-    // const handleBack = () => {
-    //     navigate('/settings'); 
-    // };
-
-
 return (
     <>
         <div className='headerSpace' id='tempHeader'></div>
         <div className="settingsBox">
             <div className='updaterUserInfoSpace'>
-            {/* <div className='backButtonContainer'>
-                <button className='acctButton' onClick={handleBack}>Back</button>
-            </div> */}
-            
                 <h1>ACCOUNT SETTINGS</h1>
                 <div className='test'>
                         <div className='settingsTop'>

@@ -26,7 +26,6 @@ const Register = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     let BASE_URL = import.meta.env.VITE_BASE_URL;
-    // console.log(BASE_URL);
 
     tailChase.register();
 

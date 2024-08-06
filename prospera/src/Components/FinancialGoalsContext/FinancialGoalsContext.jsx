@@ -1,34 +1,3 @@
-// // contexts/FinancialGoalsContext.js
-// import React, { createContext, useState, useEffect } from 'react';
-// import axios from 'axios';
-
-// export const FinancialGoalsContext = createContext();
-
-// export const FinancialGoalsProvider = ({ children }) => {
-//     const [financialGoals, setFinancialGoals] = useState([]);
-//     let BASE_URL = import.meta.env.VITE_BASE_URL;
-//     let userId = localStorage.getItem('userId');
-
-//     useEffect(() => {
-//         const fetchGoals = async () => {
-//             try {
-//                 const response = await axios.get(`${BASE_URL}/api/widgets/user/financial-goals/${userId}`);
-//                 setFinancialGoals(response.data);
-//             } catch (error) {
-//                 console.error('Error fetching financial goals:', error);
-//             }
-//         };
-
-//         fetchGoals();
-//     }, []);
-
-//     return (
-//         <FinancialGoalsContext.Provider value={{ financialGoals, setFinancialGoals }}>
-//             {children}
-//         </FinancialGoalsContext.Provider>
-//     );
-// };
-
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
@@ -42,13 +11,13 @@ export const FinancialGoalsProvider = ({ children }) => {
 
     const getUserIdFromToken = (token) => {
         try {
-          const decoded = jwtDecode(token);
-          return decoded.userId;
-        } catch (error) {
-          console.error('Error decoding token:', error);
-          return null;
-        }
-      };
+            const decoded = jwtDecode(token);
+            return decoded.userId;
+            } catch (error) {
+            console.error('Error decoding token:', error);
+            return null;
+            }
+        };
 
     useEffect(() => {
         fetchGoals();

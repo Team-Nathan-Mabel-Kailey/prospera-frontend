@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [novuSubscriberId, setNovuSubscriberId] = useState(null);
     let BASE_URL = import.meta.env.VITE_BASE_URL;
-    console.log(BASE_URL);
 
     const fetchUserData = async (token) => {
         try {
@@ -19,7 +18,6 @@ export const AuthProvider = ({ children }) => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            console.log('user data:', response.data);
             setUser(response.data);
             setIsLoggedIn(true);
             setNovuSubscriberId(response.data.userID.toString());
@@ -30,9 +28,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        // console.log("u")
         const token = localStorage.getItem('token');
-        console.log("token is: ", token)
 
         if (token) {
             fetchUserData(token);

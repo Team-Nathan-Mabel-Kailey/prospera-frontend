@@ -97,8 +97,46 @@ const PortfolioMonitorWidget = ({ data, onUpdate }) => {
         }
     };
 
+    const deleteStock = async (index) => {
+        try {
+            const updatedStocks = [...stocks];
+            updatedStocks.splice(index, 1);
+
+            // Update the widget configuration in the database
+            const updatedConfiguration = {
+                ...data.configuration,
+                stocks: updatedStocks
+            };
+
+            await axios.put(`${BASE_URL}/api/widgets/content/${data.id}`, {
+                configuration: updatedConfiguration
+            });
+
+            // Update local state
+            setStocks(updatedStocks);
+
+            // Fetch current prices for the updated stocks list
+            await fetchCurrentPrices(updatedStocks);
+
+            // If onUpdate is provided, call it with the updated data
+            if (onUpdate) {
+                onUpdate({
+                    ...data,
+                    configuration: updatedConfiguration
+                });
+            }
+        } catch (error) {
+            console.error('Error deleting stock:', error);
+            setError('Failed to delete stock. Please try again.');
+        }
+    };
+
     if (isLoading) return <div className="loading">Loading portfolio data...</div>;
     if (error) return <div className="error">{error}</div>;
+
+    const stopPropagation = (evt) => {
+        evt.stopPropagation();
+    };
 
     return (
         <div className='portfolio-monitor-widget'>
@@ -117,6 +155,9 @@ const PortfolioMonitorWidget = ({ data, onUpdate }) => {
                         <span className={`stock-total-pl ${stock.totalPL > 0 ? 'profit' : 'loss'}`}>
                             Total P/L: ${stock.totalPL?.toFixed(2) || 'N/A'}
                         </span>
+                        <button onMouseDown={stopPropagation}
+                        onTouchStart={stopPropagation}
+                        onClick={() => deleteStock(index)} className="delete-stock-btn">Delete</button>
                     </div>
                 ))}
             </div>

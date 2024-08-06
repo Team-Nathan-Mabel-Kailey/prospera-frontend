@@ -1,4 +1,3 @@
-/* General styles */
 .landingPageContent {
     position: relative;
     text-align: center;
@@ -72,7 +71,7 @@
 }
 
 .headerSpace {
-    height: 81px;
+    height: 106px;
 }
 
 .landingQuestion {
@@ -99,7 +98,6 @@
     }
 }
 
-/* Card styles */
 .landingCardContainer {
     position: relative;
     display: flex;
@@ -173,7 +171,6 @@
     width: 100%;
 }
 
-/* Mobile styles */
 @media (max-width: 968px) {
 
 
@@ -184,8 +181,8 @@
     .landingTexts {
         margin: 0 auto;
         width: 100%;
-        right: 0; /* Center text on small screens */
-        top: 60px; /* Adjust top positioning */
+        right: 0;
+        top: 60px; 
     }
 
     .landingTexts h1{
@@ -239,7 +236,7 @@
     }
 
     .getStartedButton {
-        padding: 12px 30px; /* Adjust button size for mobile */
+        padding: 12px 30px;
         font-size: 0.9rem;
     }
 }

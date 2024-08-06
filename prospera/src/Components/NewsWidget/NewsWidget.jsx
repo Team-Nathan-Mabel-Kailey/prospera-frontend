@@ -70,20 +70,6 @@ const NewsWidget = ({ data }) => {
                 </a>
             </div>
     </div>
-        // <div className="randomArticle">
-        //     <h2>Your "{data.query}" Article</h2>
-        //     <figure>
-        //         <img src={article.urlToImage} alt={article.title} />
-        //     </figure>
-        //     <h3>{article.title}</h3>
-        //     <p>{article.description}</p>
-        //     <a href={article.url} target="_blank" rel="noopener noreferrer" className="read-more"
-        //     onMouseDown={stopPropagation}
-        //     onTouchStart={stopPropagation}>
-        //         Read more
-        //         <span className="icon">➜</span>
-        //     </a>
-        // </div>
     );
 };
 

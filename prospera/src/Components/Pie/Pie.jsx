@@ -2,10 +2,6 @@ import React from 'react';
 import './Pie.css'
 
 const Pie = ({ progress }) => {
-//   const pi = 3.14159265359;
-//   const r = 400 / 2;
-//   const c = 2 * pi * r;
-//   const realProgress = c * progress;
 
 // Ensure progress is between 0 and 100
 const safeProgress = Math.min(100, Math.max(0, progress));

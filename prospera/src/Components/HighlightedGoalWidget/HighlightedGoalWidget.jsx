@@ -57,9 +57,9 @@ const HighlightedGoalWidget = ( {data, widgetId} ) => {
 
     const renderGoalProgress = () => {
         if (widgetData.amountSaved !== '' && widgetData.goalAmount !== '') {
-          return <ProgressCircleWidget amountSaved={widgetData.amountSaved} goalAmount={widgetData.goalAmount} isCompleted={widgetData.isCompleted} endDate={widgetData.endDate} />;
+            return <ProgressCircleWidget amountSaved={widgetData.amountSaved} goalAmount={widgetData.goalAmount} isCompleted={widgetData.isCompleted} endDate={widgetData.endDate} />;
         } else {
-          return <CountdownTimerWidget endDate={widgetData.endDate} isCompleted={widgetData.isCompleted} />;
+            return <CountdownTimerWidget endDate={widgetData.endDate} isCompleted={widgetData.isCompleted} />;
         }
     }
 
