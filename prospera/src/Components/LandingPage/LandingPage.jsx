@@ -42,7 +42,7 @@ const LandingPage = () => {
                 <div className='landingTexts'>
                     <h1>Let Us Help You Thrive Financially and Live Fully</h1>
                     <div className='landingSlogan'>
-                        <p>Enter some text here about Prospera and what we offer.</p>
+                        <p>Your Go-To Place for Learning and Tracking Your Finances</p>
                         <Link to="./register">
                             <button className="getStartedButton">GET STARTED</button>
                         </Link>
