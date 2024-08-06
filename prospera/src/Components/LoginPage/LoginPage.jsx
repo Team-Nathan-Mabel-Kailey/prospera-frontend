@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
 import'ldrs/ring';
-import { cardio } from 'ldrs';
+import { tailChase } from 'ldrs';
 
 const LoginPage = () => {
     const { setIsLoggedIn, isLoggedIn, setNovuSubscriberId, fetchUserData } = useAuth();
@@ -17,7 +17,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     let BASE_URL = import.meta.env.VITE_BASE_URL;
     
-    cardio.register();
+    tailChase.register();
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -118,12 +118,11 @@ const LoginPage = () => {
                     
                     <div className='loginButtonArea'>
                         {isLoading ? (
-                            <l-cardio
-                                size="50"
-                                stroke="4"
-                                speed="2" 
-                                color="black" 
-                            ></l-cardio>
+                            <l-tail-chase
+                            size="50"
+                            speed="1.75" 
+                            color="purple" 
+                            ></l-tail-chase>
                         ) : (
                             <>
                                 <button type='submit' onClick={handleLogin} className='loginButton'>LOGIN</button>
