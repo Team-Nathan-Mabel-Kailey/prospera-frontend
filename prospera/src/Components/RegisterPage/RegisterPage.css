@@ -41,7 +41,6 @@
 .registerDescription a {
     color: #000;
     font-weight: bold;
-    text-decoration: none;
 }
 
 .registerDescription a:hover {
@@ -94,8 +93,10 @@ div.imageArea img {
 
 .registerButtonArea {
     display: flex;
-    flex-direction: column;
-    /* gap: 0.8rem; */
+    flex-direction: row;
+    gap: 0.8rem;
+    justify-content: center;
+
 }
 
 .registerButton {
@@ -164,4 +165,10 @@ div.imageArea img {
 
 .headerSpace {
     height: 81px;
+}
+
+@media (max-width: 968px) {
+    .registerBody{
+        margin-bottom: 200px;
+    }
 }

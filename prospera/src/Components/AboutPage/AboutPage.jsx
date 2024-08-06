@@ -7,7 +7,7 @@ const AboutPage = () => {
             <div className='aboutBody'>
                 <div className='leftAboutBody'>
                     <div className='leftAboutTextArea'>
-                        <h1>The Path to</h1>
+                        <h1>Make it possible with</h1>
                         <span>PROSPERA</span>
                     </div>
                 </div>
@@ -15,7 +15,7 @@ const AboutPage = () => {
                 <div className='rightAboutBody'>
                     <p className='.reveal-type'>Managing finances can be challenging, especially for young adults transitioning into independence and immigrants adapting to a new financial landscape. Our web app aims to simplify and streamline personal finance management, providing users with the resources and guidance they need to achieve financial stability and growth.</p>
                     <Link to={`/login`} >
-                        <button className='aboutLogInButton'>LOG IN</button>
+                        {/* <button className='aboutLogInButton'>LOG IN</button> */}
                     </Link>
                 </div>
             </div>

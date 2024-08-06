@@ -4,8 +4,8 @@
 
 .aboutBody{
     font-size: 1.5rem;
-    margin-top: 1.3rem;
-    margin-bottom: 1rem;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
     margin-left: 100px;
     margin-right: 100px;
 
@@ -21,7 +21,6 @@
     flex-direction: column;
     align-items: center;
     background-color: rgb(35, 35, 35);
-    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border-radius: 15px;
     padding: 20px 30px 20px 30px;
@@ -30,7 +29,6 @@
 .leftAboutTextArea h1 {
     color: #fff;
 }
-
 
 @keyframes slide-in {
     from {
@@ -163,14 +161,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 50px 25px;
+    padding: 70px 25px;
     border-radius: 7px;
-    /* background-color: rgba(195, 120, 242, 0.3); */
     background-color: #af84f466;
-    
-    /* box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; */
-    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
-    width: 100%;
+    width: 97%;
 }
 
 .teamIcons {
@@ -238,5 +232,14 @@
 
     .teamIcons {
         flex-direction: column;
+        gap: 40px;
+    }
+
+    .leftAboutTextArea h1 {
+        text-align: center;
+    }
+
+    .rightAboutBody{
+        font-size: 1.2rem;
     }
 }

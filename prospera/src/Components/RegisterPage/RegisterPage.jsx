@@ -6,7 +6,7 @@ import './RegisterPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
 import { Link } from 'react-router-dom';
 import'ldrs/ring';
-import { cardio } from 'ldrs';
+import { tailChase } from 'ldrs';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -22,29 +22,34 @@ const Register = () => {
     const [showIcon3, setShowIcon3] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
     const [isValidPassword, setIsValidPassword] = useState(false);
     const navigate = useNavigate();
-    const { setIsLoggedIn } = useAuth();
+    const { setIsLoggedIn, fetchUserData } = useAuth();
     const [isLoading, setIsLoading] = useState(false);
 
     let BASE_URL = import.meta.env.VITE_BASE_URL;
     // console.log(BASE_URL);
 
-    cardio.register();
+    tailChase.register();
 
   //handle register
     const handleRegister = async (evt) => {
         evt.preventDefault();
         setIsLoading(true);
         try {
-        //register the user
-        const response = await axios.post(
-            `${BASE_URL}/users/register`,
-            { username, email, password, securityAnswer }
-        );
-        //login the user
-        const loginResponse = await axios.post(
-            `${BASE_URL}/users/login`,
-            { username, password }
-        );
+            //register the user
+            const response = await axios.post(
+                `${BASE_URL}/users/register`,
+                { username, email, password, securityAnswer }
+            );
+            //login the user
+            const loginResponse = await axios.post(
+                `${BASE_URL}/users/login`,
+                { username, password }
+            );
+
+            localStorage.setItem('token', loginResponse.data.token);
+            await fetchUserData(loginResponse.data.token);
+
+
             const {hasCompletedTopics} = response.data;
 
             console.log(response);
@@ -54,15 +59,16 @@ const Register = () => {
             } else {
                 navigate('/topic-selection');
             }
-        // Store the token in the localstorage as token
-        localStorage.setItem('token', loginResponse.data.token);
-        if (hasCompletedTopics) {
-        navigate('/dashboard');
-        } else {
-            navigate('/topic-selection');
-        }
+            // Store the token in the localstorage as token
+            
+            if (hasCompletedTopics) {
+            navigate('/dashboard');
+            } else {
+                navigate('/topic-selection');
+            }
         } catch (error) {
-        alert('Registration failed. Try again.');
+            alert(error.response.data.error);
+            console.log('error:', error)
         } finally {
             setIsLoading(false);  // Hide loader
         }
@@ -206,12 +212,11 @@ const Register = () => {
                 
                 <div className='registerButtonArea'>
                 {isLoading ? (
-                            <l-cardio
-                                size="50"
-                                stroke="4"
-                                speed="2" 
-                                color="black" 
-                            ></l-cardio>
+                            <l-tail-chase
+                            size="50"
+                            speed="1.75" 
+                            color="purple" 
+                            ></l-tail-chase>
                         ) : (
                             <>
                                 <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>CREATE ACCOUNT</button>

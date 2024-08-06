@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //import settingGif from '../Header/icons8-settings.gif';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
-import settingGif from '../../../public/icons8-settings.gif';
+import settingGif from '/icons8-settings.gif';
 
 
 const HamMenu = ({ open }) => {
@@ -29,26 +29,22 @@ const HamMenu = ({ open }) => {
                         <img src={settingGif} alt="Hover" className="hoverImg"/>
                     </div>
                     </Link>
-                    {/* <NovuProvider subscriberId={'user.userID'} applicationIdentifier={'9aO_manMoao5'}>
+                    <NovuProvider 
+                        subscriberId={user.userID.toString()}
+                        applicationIdentifier={import.meta.env.VITE_NOVU_APP_IDENTIFIER}
+                    >
                         <PopoverNotificationCenter colorScheme={'light'}>
-                        {({ unseenCount }) => <NotificationBell unseenCount={unseenCount} />}
+                            {({ unseenCount }) => <Badge badgeContent=" " variant="dot" color="secondary" unseenCount={unseenCount}>
+                                <MailIcon className="mailIcon" color="#000" />
+                            </Badge>}
                         </PopoverNotificationCenter>
-                    </NovuProvider> */}
-
-<NovuProvider 
-                    subscriberId={user.userID.toString()}
-                    applicationIdentifier={import.meta.env.VITE_NOVU_APP_IDENTIFIER}
-                >
-                    <PopoverNotificationCenter colorScheme={'light'}>
-                    {({ unseenCount }) => <Badge badgeContent=" " variant="dot" color="secondary" unseenCount={unseenCount}>
-                        <MailIcon className="mailIcon" color="#000" />
-                    </Badge>}
-
-                    </PopoverNotificationCenter>
-                </NovuProvider>
+                    </NovuProvider>
+                <div className="hamLogOutButton">
+                    <Link to="/logout"><button className="logout">LOG OUT</button></Link>
+                </div>
                 </div>
             ) : (
-                <div>
+                <div className='nonLoggedIn'>
                     <Link to="/about">
                         <a href="/">
                             <span role="img" aria-label="about us"></span>

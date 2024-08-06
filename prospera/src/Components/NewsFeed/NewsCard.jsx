@@ -10,13 +10,16 @@ const NewsCard = ({ article }) => {
             <img src={article.urlToImage ? article.urlToImage : noImagePlaceholder} alt={article.title}/>
         </figure>
         <h3>{article.title}</h3>
+        {/* <p><small>{article.source.name}</small></p> */}
         <p>{article.description || article.content}</p>
-        <a href={article.url} target="_blank" rel="noopener noreferrer" className="read-more">
-            Read more
-            <span className="icon">➜</span>
-        </a>
-        <p><small>Source: {article.source.name}</small></p>
-        <p><small>Published at: {new Date(article.publishedAt).toLocaleString()}</small></p>
+
+        <div className="bottomText">
+            <a href={article.url} target="_blank" rel="noopener noreferrer" className="read-more">
+                Read more
+                <span className="icon">➜</span>
+            </a>
+            <p><small>{new Date(article.publishedAt).toLocaleString()}</small></p>
+        </div>
         </div>
     );
 };
