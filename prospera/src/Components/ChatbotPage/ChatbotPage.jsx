@@ -16,20 +16,27 @@ const ChatbotPage = () => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
     const messageContainerRef = useRef(null);
+    const logInRef = useRef(null);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     let BASE_URL = import.meta.env.VITE_BASE_URL;
 
     useEffect(() => {
-        if (!isLoggedIn) {
-            navigate('/login');
-            return;
+        console.log("islogged", isLoggedIn);
+        if (logInRef.current) {
+            if (!isLoggedIn) {
+                navigate('/login');
+                return;
+            }
+            
+            if(user && user.userID) {
+                console.log("user is: ", user.userID)
+    
+                fetchConversations(user.userID);
+            }
+        } else {
+            logInRef.current = true;
         }
-        
-        if(user && user.userID) {
-            console.log("user is: ", user.userID)
 
-        fetchConversations(user.userID);
-        }
     }, [isLoggedIn, navigate]);
 
     useEffect(() => {

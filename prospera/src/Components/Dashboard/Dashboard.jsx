@@ -321,12 +321,12 @@ const handleDeleteWidget = async (key, widgetType) => {
               <p>Say hello to your comprehensive tool for managing and 
                 enhancing your financial well-being. Here, you can effortlessly keep track of your finances and financial education resources.</p>
             </div>
-              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1}>
-                <Chip label="Monitor balance totals across multiple bank accounts" variant="outlined" sx={{ bgcolor: '#4a0a77', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px' }} />
+              <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} >
+                <Chip label="Monitor account balances" variant="outlined" sx={{ bgcolor: '#4a0a77', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px' }}/>
                 <Chip label="Stay updated on stock trends" variant="outlined" sx={{ bgcolor: '#5a108f', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
                 <Chip label="Managing your stock portfolio" variant="outlined" sx={{ bgcolor: '#6818a5', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
                 <Chip label="Set and achieve financial goals" variant="outlined" sx={{ bgcolor: '#8b2fc9', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
-                <Chip label="Access news articles tailored to your financial interests" variant="outlined" sx={{ bgcolor: '#ab51e3', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+                <Chip label="Access tailored articles" variant="outlined" sx={{ bgcolor: '#ab51e3', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
               </Stack>
           </div>
 

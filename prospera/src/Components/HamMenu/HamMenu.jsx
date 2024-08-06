@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 //import settingGif from '../Header/icons8-settings.gif';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
-import settingGif from '../../../public/icons8-settings.gif';
+import settingGif from '/icons8-settings.gif';
 
 
 const HamMenu = ({ open }) => {
