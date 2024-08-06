@@ -122,6 +122,7 @@ const ChatbotPage = () => {
             }
         } catch (error) {
             console.error('Error sending message:', error.response?.data || error.message);
+            alert(error.response.data.error);
             setMessages(prev => prev.filter(msg => msg.id !== tempId)); // Remove loading message on error
         }
     };

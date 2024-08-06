@@ -203,6 +203,7 @@
     .landingTexts h1 {
         font-size: 2.5rem;
         margin: 1.5rem 0rem;
+        padding: 0 20px;
     }
 
     .landingSlogan {

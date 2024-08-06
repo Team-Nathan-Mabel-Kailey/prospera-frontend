@@ -41,7 +41,6 @@
 .registerDescription a {
     color: #000;
     font-weight: bold;
-    text-decoration: none;
 }
 
 .registerDescription a:hover {
@@ -164,4 +163,10 @@ div.imageArea img {
 
 .headerSpace {
     height: 81px;
+}
+
+@media (max-width: 968px) {
+    .registerBody{
+        margin-bottom: 200px;
+    }
 }

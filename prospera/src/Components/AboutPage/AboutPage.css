@@ -234,4 +234,12 @@
         flex-direction: column;
         gap: 40px;
     }
+
+    .leftAboutTextArea h1 {
+        text-align: center;
+    }
+
+    .rightAboutBody{
+        font-size: 1.2rem;
+    }
 }
