@@ -17,6 +17,7 @@ const ChatbotPage = () => {
     const [newMessage, setNewMessage] = useState('');
     const messageContainerRef = useRef(null);
     const logInRef = useRef(null);
+    const [conversationStarted, setConversationStarted] = useState(false);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     let BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -85,6 +86,7 @@ const ChatbotPage = () => {
                 { role: 'assistant', content: msg.response }
             ]);
             setMessages(formattedMessages);
+            setConversationStarted(true);
         } catch (error) {
             console.error('Error fetching chat history:', error);
         }
@@ -138,6 +140,7 @@ const ChatbotPage = () => {
             });
             setSelectedConversationId(response.data.conversationId);  // Set new conversationId
             setMessages([]);
+            setConversationStarted(false);
             fetchConversations(user.userID);  // Fetch updated list of conversations
         } catch (error) {
             console.error('Error starting new conversation:', error);
@@ -176,7 +179,12 @@ const ChatbotPage = () => {
                 </div>
                 <div className='conversationArea'>
 
+                {!conversationStarted ? (
+                    <div className="placeholderMessage"><h2>How can I help you Prosper today?</h2></div>
+                ) : (
                     <h2>Chat</h2>
+                )}
+                
                     <div className="messageContainer" ref={messageContainerRef}>
                         {messages.map((msg, index) => (
                             <div key={msg.id || index} className={`message ${msg.role}`}>
