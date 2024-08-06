@@ -1,155 +1,9 @@
-/* .selectTitle {
-    font-size: 2rem;
-    text-align: center;
-}
-
-.selectDropdown,
-.selectDropdown * {
-  margin: 0;
-  padding: 0;
-  position: relative;
-  box-sizing: border-box;
-}
-
-.selectDropdown {
-  position: relative;
-  background-color: #E6E6E6;
-  border-radius: 4px;
-}
-
-.selectDropdown select {
-  font-size: 1rem;
-  font-weight: normal;
-  max-width: 100%;
-  padding: 8px 24px 8px 10px;
-  border: none;
-  background-color: transparent;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-  appearance: none;
-}
-
-.selectDropdown select:active, .selectDropdown select:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.selectDropdown:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 8px;
-  width: 0;
-  height: 0;
-  margin-top: -2px;
-  border-top: 5px solid #aaa;
-  border-right: 5px solid transparent;
-  border-left: 5px solid transparent;
-}
-
-.defaultSelect {
-    font-family: 'Manrope';
-    color: #000;
-    font-weight: 500;
-    margin: 1.5rem 0 1.5rem 0;
-}
-
-.createOptions {
-    display: flex;
-    flex-direction: column;
-    font-family: 'Manrope';
-    color: #000;
-    margin: 1.5rem 0 1.5rem 0;
-}
-
-.createOptions h2 {
-    text-align: center;
-    background-color: rgb(35, 35, 35);
-    border-radius: 1.5rem;
-    color: #fff;
-    padding: 10px;
-    margin: 0;
-}
-
-.createOptions h3 {
-    color: rgb(74, 1, 138);
-    font-weight: 600;
-    text-align: center;
-    margin-top: 3rem;
-    margin-bottom: 0;
-}
-
-p.accountExplanation {
-    margin-bottom: 0;
-}
-
-h3.accountQuestion {
-    margin: 1.5rem 0 1rem 0;
-}
-
-h3.accountQuestion2 {
-    margin: 1.5rem 0 0 0;
-}
-
-.financialGoalInputs {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-h3.savingsQuestions {
-    margin: 0.2rem 0 1.5rem 0;
-}
-
-.addWidgetBtnModal{
-    background-color: #000;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 25px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: all 0.4s ease;
-    outline: none;
-    position: relative;
-    overflow:hidden ;
-    align-self: center;
-    width: 150px;
-    margin: 0.8rem auto;
-    display: block;
-}
-
-.addWidgetBtnModal::after{
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.25) 0%,
-        rgba(255, 255, 255, 0) 70%
-    );
-    transform: scale(0);
-    transition: transform 0.5s ease;
-}
-
-.addWidgetBtnModal:hover::after{
-    transform: scale(4);
-}
-
-.addWidgetBtnModal:hover {
-    border-color: #666666;
-    background: #292929;
-} */
-
 .modal-content {
-    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
-    color: #fff;
+    background: white;
+    color: black;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
     margin: 2rem auto;
     display: flex;
@@ -159,11 +13,33 @@ h3.savingsQuestions {
   
   .modal-title {
     text-align: center;
-    padding: 1.5rem;
     margin: 0;
+    padding-top: 10px;
     font-size: 1.8rem;
-    color: #a020f0;
+    color: black;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .close-button {
+    background: none;
+    border: none;
+    color: black;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+    padding-top: 0;
+  }
+  
+  .close-button:hover {
+    color: #a020f0;
   }
   
   .modal-body {
@@ -178,18 +54,15 @@ h3.savingsQuestions {
     gap: 1rem;
     margin-bottom: 2rem;
   }
-  
-  .widget-type-buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
+
+  button.widget-type-btn {
+    font-size: 18px;
   }
-  
+
   .widget-type-btn {
     background: linear-gradient(45deg, #4a0e4e, #7b2cbf);
     color: white;
-    border: none;
+    border-color:#4a0e4e;
     padding: 0.8rem 1.2rem;
     border-radius: 8px;
     font-size: 0.9rem;
@@ -205,79 +78,136 @@ h3.savingsQuestions {
   }
   
   .widget-type-btn.active {
-    background: linear-gradient(45deg, #9d4edd, #c77dff);
-    box-shadow: 0 0 15px rgba(157, 78, 221, 0.6);
+    /* background: linear-gradient(45deg, #9d4edd, #c77dff);
+    box-shadow: 0 0 15px rgba(157, 78, 221, 0.6); */
+    background: white;
+    border-color: #7b2cbf;
+    color: black;
   }
-  
-  .add-widget-btn {
-    background: linear-gradient(45deg, #4a0e4e, #7b2cbf);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: block;
-    margin: 2rem auto 0;
-    width: 100%;
-    max-width: 200px;
-  }
-  
-  .add-widget-btn:hover {
-    background: linear-gradient(45deg, #7b2cbf, #9d4edd);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(123, 44, 191, 0.4);
-  }
-  
+
   /* Styles for the widget creation options */
-  .createOptions {
-    background: rgba(255, 255, 255, 0.1);
+  /* .createOptions {
+    background: rgb(255, 255, 255);
     padding: 1.5rem;
+    padding-top: 0.25rem;
     border-radius: 10px;
-    margin-top: 1.5rem;
-  }
-  
-  .createOptions h2 {
-    color: #a020f0;
-    margin-bottom: 1rem;
+    margin-top: 0;
+  } */
+
+  .createOptions p, .createOptions h3,  .createOptions h2 {
+    color: black;
   }
   
   .createOptions input,
   .createOptions select {
-    width: 100%;
+    width: 210px;
     padding: 0.8rem;
     margin-bottom: 1rem;
     border-radius: 5px;
     border: 1px solid #4a0e4e;
     background: rgba(255, 255, 255, 0.1);
-    color: white;
+    color: black;
   }
   
   .createOptions input::placeholder,
   .createOptions select::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: black;
+  }
+
+  .definedWord {
+    color: #a020f0;
+  }
+
+  .goalListName {
+    margin-top: 2rem;
+  }
+
+  div.inputsGroup, div.goalsListInputArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .newsSelect {
+    margin-top: 22px;
+  }
+
+  .inputsAreaCreate {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .inputsAreaCreate select {
+    margin-left: 25px;
+  }
+
+  .inputsGroupFinancial, .inputsGroupAccts {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inputsAreaFinancial, .inputsAreaAccts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   
   .modal-footer {
+    display: flex;
+    justify-content: center;
     padding: 1.5rem;
+    padding-top: 0;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
-  
+
   .add-widget-btn {
-    background: linear-gradient(45deg, #4a0e4e, #7b2cbf);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 8px;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+
+    padding: 10px 25px;
+
     font-size: 1rem;
     cursor: pointer;
-    transition: all 0.3s ease;
-    display: block;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 200px;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+
+    outline: none;
+    position: relative;
+    overflow:hidden ;
+    align-self: center;
+    
+    width: 150px;
+    margin: 10px 30px;
+    text-align: center;
   }
+  
+  .add-widget-btn::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.add-widget-btn:hover::after{
+    transform: scale(4);
+}
+
+.add-widget-btn:hover {
+    border-color: #666666;
+    background: #292929;
+}
   
   /* ... (rest of the styles remain the same) ... */
   
@@ -292,10 +222,83 @@ h3.savingsQuestions {
   }
   
   .modal-body::-webkit-scrollbar-thumb {
-    background: #4a0e4e;
+    background: #d6d6d6;
     border-radius: 10px;
   }
   
   .modal-body::-webkit-scrollbar-thumb:hover {
-    background: #7b2cbf;
+    background: #a7a7a7;
   }
+
+  .createOptions, .portfolioOptions {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .createOptions h2, .portfolioOptions h2 {
+    color: #000000;
+    font-size: 24px;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .createOptions h3, .portfolioOptions h3 {
+    color: #37474f;
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .createOptions h4 {
+    color: #455a64;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+  }
+  
+  .goal-select-btn {
+    background-color: #fff;
+    border: 2px solid #7c4dff;
+    border-radius: 20px;
+    color: #7c4dff;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .goal-select-btn:hover {
+    background-color: #7c4dff;
+    color: #fff;
+  }
+  
+  .goal-select-btn:focus {
+    outline: none;
+    background-color: #290065;
+    color: white;
+    box-shadow: 0 0 0 2px rgba(124, 77, 255, 0.4);
+  }
+  
+  .goal-select-btn.selected:hover {
+    background-color: #5000c7;
+    border-color: #5000c7;
+  }
+  
+.MuiTextField-root,
+.MuiFormControl-root {
+  margin-bottom: 20px !important;
+}
+
+.portfolioInputsGroup h3 {
+    margin-top: 50px;
+}
+
+.underlinedWord {
+    text-decoration: #5000c7 underline;
+    text-decoration-thickness: 3px;
+}

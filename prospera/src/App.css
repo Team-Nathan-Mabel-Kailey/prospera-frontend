@@ -1,42 +1,39 @@
+
 .footerSpace{
     height: 238.44px;
 }
 
 h1 {
-    font-family: 'Montseratt';
+    font-family: 'Playfair Display';
     font-weight: 700;
 }
 
 h2 {
-    font-family: 'Lora';
+    font-family: 'Lato';
     font-weight: 600;
 }
 
 p, span {
-    font-family: 'Hind Madurai';
+    font-family: 'Lato';
     font-weight: 500;
 }
 
 a, button {
-    font-family: 'Lora';
+    font-family: 'Lato';
     font-weight: 600;
 }
 
 h3 {
-    font-family: 'Lora';
+    font-family: 'Lato';
     font-weight: 550;
 }
 
 label {
-    font-family: 'Hind Madurai';
+    font-family: 'Lato';
     font-weight: 500;
 }
 
 .passwordChecklist {
-    font-family: 'Hind Madurai';
+    font-family: 'Lato';
     font-size: 0.9rem;
-}
-
-select {
-    font-size: 1.2rem;
 }

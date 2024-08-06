@@ -46,7 +46,7 @@ const CountdownTimerWidget = ({ endDate, isCompleted }) => {
     if (isCompleted) {
       return (
           <div className="countdown-timer-widget completed">
-              <p className="title">Goal Completed!</p>
+              <h2 className="title">Goal Completed!</h2>
               <p>Congratulations on achieving your goal!</p>
           </div>
       );

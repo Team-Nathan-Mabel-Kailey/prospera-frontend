@@ -202,6 +202,7 @@ const handleDeleteWidget = async (key, widgetType) => {
       });
   } catch (error) {
       console.error('Error deleting widget:', error);
+      alert(error.response.data.error);
   }
 };
 
@@ -215,6 +216,7 @@ const handleDeleteWidget = async (key, widgetType) => {
         );
     } catch (error) {
         console.error('Error updating widget:', error);
+        alert(error.response.data.error);
     }
   };
 
@@ -313,7 +315,7 @@ const handleDeleteWidget = async (key, widgetType) => {
 
           <div className="dashboardTitle">
             <h1>Welcome back to your Dashboard, &nbsp;{firstName && firstName.trim() !== '' ? firstName : userName}!</h1>
-            <button className="newWidgetBtn" onClick={handleAdd}>Add Widget</button>
+            <button className="newWidgetBtn" onClick={handleAdd}>ADD</button>
           </div>
 
           <div className="descriptionContainer">
