@@ -20,6 +20,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
   const [widgetOptions, setWidgetOptions] = useState({});
   const [widgetNum, setWidgetNum] = useState(0);
   const [widgetData, setWidgetData] = useState({});
+  const [choseGoal, setChoseGoal] = useState(false);
   const [goalData, setGoalData] = useState({
     listName: '',
     goals: [
@@ -145,11 +146,37 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
   const handleGoalSelection = (goal) => {
     setSelectedGoal(goal);
     setHighlightedGoalData(goal);
+    setChoseGoal(true);
   };
   /////
 
   const handleAddWidget = async () => {
-    const newWidgetI = uuidv4();
+    let isValid = false;
+    switch (widgetType) {
+      case 'Stock':
+        isValid = isStockValid();
+        break;
+      case 'Financial Goals':
+        isValid = isFinancialGoalValid();
+        break;
+      case 'News':
+        isValid = !!widgetData.query;
+        break;
+      case 'Highlighted Goal':
+        isValid = !!choseGoal;
+        break;
+      case 'Portfolio Monitor':
+        isValid = isPortfolioValid();
+        break;
+      case 'Financial Accounts':
+        isValid = isFinancialAccountValid();
+        break;
+      default:
+        isValid = false;
+    }
+
+    if (isValid) {
+      const newWidgetI = uuidv4();
     console.log('widget type: ', widgetType);
     
     let minW, maxW, minH, maxH, startingW, startingH;
@@ -327,6 +354,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
         setPortfolioData({
           stocks: [{ ticker: '', position: '', quantity: '', price: '' }]
         });
+        setChoseGoal(false);
         onClose();
 
         // Update state after the API call
@@ -337,9 +365,11 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
         setStartingW(startingW);
         setStartingH(startingH);
     } catch (error) {
+        alert('Please fill in all required fields before adding the widget.');
         console.error('Error adding widget:', error);
         alert(error.response.data.error);
     }
+  }
 };
 
   const handleInputChange = (e) => {
@@ -426,18 +456,65 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
     }
   };
 
+  // Function to check if at least one stock is valid
+  const isStockValid = () => {
+    return stockData.stocks.some(stock => stock.symbol && stock.period);
+  };
+
+  // Function to check if at least one financial goal is valid
+  const isFinancialGoalValid = () => {
+    return goalData.goals.some(goal => goal.name && goal.endDate);
+  };
+
+  // Function to check if portfolio has at least one valid stock
+  const isPortfolioValid = () => {
+    return portfolioData.stocks.some(stock => 
+      stock.ticker && stock.position && stock.quantity && stock.price
+    );
+  };
+
+  // Function to check if at least one financial account is valid
+  const isFinancialAccountValid = () => {
+    return financialAcctData.accounts.some(account => 
+      account.accountType && account.accountName && account.bankName && account.balance
+    );
+  };
+
   const renderWidgetCreationOptions = (widgetType) => {
+    // State for error messages
+    const [errorMessage, setErrorMessage] = useState('');
+
+    // Update error message when inputs change
+    useEffect(() => {
+      switch (widgetType) {
+        case 'Stock':
+          setErrorMessage(isStockValid() ? '' : 'Please enter at least one stock with symbol and period.');
+          break;
+        case 'Financial Goals':
+          setErrorMessage(isFinancialGoalValid() ? '' : 'Please enter at least one goal with name and end date.');
+          break;
+        case 'News':
+          setErrorMessage(widgetData.query ? '' : 'Please select a news topic.');
+          break;
+        case 'Portfolio Monitor':
+          setErrorMessage(isPortfolioValid() ? '' : 'Please add at least one stock to your portfolio with all fields filled.');
+          break;
+        case 'Financial Accounts':
+          setErrorMessage(isFinancialAccountValid() ? '' : 'Please add at least one account with all fields filled.');
+          break;
+        default:
+          setErrorMessage('');
+      }
+    }, [widgetType, stockData, goalData, widgetData, portfolioData, financialAcctData]);
+
     switch (widgetType) {
         case 'Stock':
           return (
-            // done
             <div className='createOptions'>
               <h2>See an Overview of a Stock's Performance in the Market.</h2>
               <h3>Enter the <a className='definedWord'data-tooltip-id="symbolTooltip" data-tooltip-content="A stock symbol is a unique series of letters assigned to a company's stock for trading on a specific market exchange." data-tooltip-place="top">symbol</a> of a stock you're interested in and a <a className='definedWord' data-tooltip-id="periodTooltip" data-tooltip-content="Selecting a time period for a stock's performance allows you to view how the stock's price has changed over a specific duration, such as a day, a month, or year." data-tooltip-place="top">period</a> to view the stock's performance over time!</h3>
               <Tooltip id="symbolTooltip" style={{ fontSize: '18px', backgroundColor: '#4a0e4e'}}/>
               <Tooltip id="periodTooltip" style={{ fontSize: '18px', backgroundColor: '#4a0e4e'}}/>
-              {/* <p>A stock symbol is a unique series of letters assigned to a company's stock for trading on a specific market exchange. Click <a href='https://finance.yahoo.com/lookup/'>here</a> to search for stock symbols.</p>
-              <p>Selecting a time period for a stock's performance allows you to view how the stock's price has changed over a specific duration, such as a day, a month, or year.</p> */}
               <div className='inputsGroup'>
                 {stockData.stocks.map((stock, index) => (
                   <div key={index} className='stockGroup'>
@@ -467,10 +544,17 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
                   </div>
                 ))}
               </div>
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <button 
+                onClick={handleAddWidget} 
+                className='add-widget-btn'
+                disabled={!isStockValid()}
+              >
+                ADD
+              </button>
             </div>
           );
         
-        // current
         case 'Financial Goals':
           return (
             <div className='createOptions'>
@@ -521,6 +605,14 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
                   </div>
                 ))}
               </div>
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <button 
+                onClick={handleAddWidget} 
+                className='add-widget-btn'
+                disabled={!isFinancialGoalValid()}
+              >
+                ADD
+              </button>
             </div>
           );
       
@@ -560,10 +652,16 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
                   // If all goals in this widget are empty or completed, don't render anything for this widget
                   return null;
                 })}
+                <button 
+                onClick={handleAddWidget} 
+                className='add-widget-btn'
+                disabled={!choseGoal}
+              >
+                ADD
+              </button>
               </div>
             );
 
-        // done (need to refine news sources)
         case 'News':
           return (
             <div className='createOptions'>
@@ -580,14 +678,22 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
                   <option value="Spending">Spending</option>
                 </select>
               </div>
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <button 
+                onClick={handleAddWidget} 
+                className='add-widget-btn'
+                disabled={!widgetData.query}
+              >
+                ADD
+              </button>
             </div>
           );
 
-          case 'Portfolio Monitor':
-            return (
-              <div className='portfolioOptions'>
-                <h2>Add Stocks to your Portfolio.</h2>
-                <h3>Enter the details of the stocks in your portfolio. You can add multiple stocks.</h3>
+        case 'Portfolio Monitor':
+          return (
+            <div className='portfolioOptions'>
+              <h2>Add Stocks to your Portfolio.</h2>
+              <h3>Enter the details of the stocks in your portfolio. You can add multiple stocks.</h3>
                 {portfolioData.stocks.map((stock, index) => (
                   <div key={index} className='portfolioInputsGroup'>
                     <h3 className='underlinedWord'>Stock {index + 1}</h3>
@@ -655,14 +761,34 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
                 >
                   Add Another Stock
                 </Button>
-         </div>
-      );
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <Button 
+                onClick={handleAddWidget}
+                disabled={!isPortfolioValid()}
+                fullWidth 
+                variant="contained" 
+                sx={{ 
+                  mt: 2, 
+                  backgroundColor: '#6200ea',
+                  '&:hover': {
+                    backgroundColor: '#3700b3',
+                  },
+                  '&:disabled': {
+                    backgroundColor: '#bbb',
+                    color: '#666',
+                  }
+                }}
+              >
+                ADD
+              </Button>
+            </div>
+          );
 
-      case 'Financial Accounts':
-        return (
-          <div className='createOptions'>
-            <h2>Enter Information about your Bank Accounts.</h2>
-            <h3 className='accountExplanation'>This widget allows you to track multiple bank accounts, including both checking and savings accounts.</h3>
+        case 'Financial Accounts':
+          return (
+            <div className='createOptions'>
+              <h2>Enter Information about your Bank Accounts.</h2>
+              <h3 className='accountExplanation'>This widget allows you to track multiple bank accounts, including both checking and savings accounts.</h3>
             <h3>Each widget can store up to 5 of your financial accounts; <strong>leave account information blank, if not needed.</strong> Feel free to add another widget to keep track of more accounts!</h3>
             <div className='inputsGroupAccts'>
               {financialAcctData.accounts.map((account, index) => (
@@ -699,13 +825,21 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
                 </div>
               ))}
             </div>
-          </div>
-        );
+              {errorMessage && <p className="error-message">{errorMessage}</p>}
+              <button 
+                onClick={handleAddWidget} 
+                className='add-widget-btn'
+                disabled={!isFinancialAccountValid()}
+              >
+                ADD
+              </button>
+            </div>
+          );
 
-      default:
-        return <div className='defaultSelect'>Please select a widget type.</div>;
+        default:
+          return <div className='defaultSelect'>Please select a widget type.</div>;
     }
-  };
+};
 
   return (
       <Modal 
@@ -739,9 +873,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
               ))}
             </div>
             {renderWidgetCreationOptions(widgetType)}
-          </div>
-          <div className="modal-footer">
-            <button onClick={handleAddWidget} className='add-widget-btn'>ADD</button>
           </div>
         </Box>
     </Modal>

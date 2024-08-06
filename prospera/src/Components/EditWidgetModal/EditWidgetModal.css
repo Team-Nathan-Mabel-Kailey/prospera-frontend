@@ -171,3 +171,33 @@
     text-decoration: #5000c7 underline;
     text-decoration-thickness: 3px;
 }
+
+p.validation-message {
+    font-weight: bold;
+    color: #f44336;
+    margin-top: 10px;
+    font-size: 0.875rem;
+  }
+
+.save-widget-btn:disabled {
+    color: #ebebeb;
+    border-color: #8d8d8d;
+    background: #7d7d7d;
+    cursor: not-allowed;
+}
+
+  .save-widget-btn:disabled:hover {
+    border-color: #8d8d8d;
+    background: #7d7d7d;
+    transition: none;
+}
+
+.save-widget-btn:disabled:hover::after {
+    transform: none;
+    background: none;
+    transition: none;
+}
+
+.save-widget-btn:disabled::after {
+    transition: none;
+}
