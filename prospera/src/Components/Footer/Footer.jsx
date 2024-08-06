@@ -1,5 +1,6 @@
 import './Footer.css'
 import { Link } from 'react-router-dom';
+import FooterLogo from '../../assets/Logos/ProsperaFooterLogo.png';
 
 const Footer = () => {
     return (
@@ -8,7 +9,7 @@ const Footer = () => {
                 <div className='innerFooterCont'>
                     <div className='footerLeft'>
                         <Link to='/' className='footerLogo'>
-                            <img src='https://i.postimg.cc/nzYzpgR5/Screenshot-2024-07-18-at-10-21-48-PM-1-removebg-preview.png' alt="logo"/>
+                            <img src={FooterLogo} alt="logo"/>
                         </Link>
                         <p>Thrive Financially, Live Fully</p>
                     </div>
