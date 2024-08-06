@@ -15,7 +15,6 @@ const AboutPage = () => {
                 <div className='rightAboutBody'>
                     <p className='.reveal-type'>Managing finances can be challenging, especially for young adults transitioning into independence and immigrants adapting to a new financial landscape. Our web app aims to simplify and streamline personal finance management, providing users with the resources and guidance they need to achieve financial stability and growth.</p>
                     <Link to={`/login`} >
-                        {/* <button className='aboutLogInButton'>LOG IN</button> */}
                     </Link>
                 </div>
             </div>

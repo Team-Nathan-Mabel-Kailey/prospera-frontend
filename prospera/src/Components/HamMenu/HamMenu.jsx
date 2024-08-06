@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../AuthContext/AuthContext';
 import { NovuProvider, PopoverNotificationCenter, NotificationBell } from '@novu/notification-center';
 import PropTypes from 'prop-types';
-//import settingGif from '../Header/icons8-settings.gif';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import settingGif from '/icons8-settings.gif';
@@ -18,6 +17,7 @@ const HamMenu = ({ open }) => {
 
     return (
         <nav className={`menu ${open ? 'menu-open' : ''}`}>
+            {/* Dynamic hamburger menu that changes based on logged in user or not */}
             {isLoggedIn ? (
                 <div className='loggedInBurger'>
                     <Link to="/dashboard">DASHBOARD</Link>

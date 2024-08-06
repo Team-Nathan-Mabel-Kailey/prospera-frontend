@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './ContactPage.css'
 
 const ContactPage = () => {
@@ -27,8 +26,6 @@ const ContactPage = () => {
         // Reset formData for the next submission
         setFormData({firstName: '', lastName: '', email: '', message: ''});
     };
-
-    // console.log('All form submissions: ', formSubmissions);
     
     return (
         <div className='checkBody'>
