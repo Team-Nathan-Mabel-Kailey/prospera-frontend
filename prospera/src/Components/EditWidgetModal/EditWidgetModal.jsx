@@ -139,9 +139,10 @@ const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
         onClose();
       } catch (error) {
         console.error('Error updating widget:', error);
-      }
+        alert('Error updating widget:');
     }
   };
+};
 
   const renderEditFields = () => {
     switch (widgetType) {

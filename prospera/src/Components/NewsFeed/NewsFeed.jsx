@@ -13,6 +13,7 @@ const NewsFeed = () => {
     const [category, setCategory] = useState('stock-news');
     const [error, setError] = useState(null);
     const [query, setQuery] = useState('');
+    const [currentSearch, setCurrentSearch] = useState('');
     const [page, setPage] = useState(1);
     const [totalResults, setTotalResults] = useState(0);
     const [userTopics, setUserTopics] = useState([]);
@@ -46,104 +47,97 @@ const NewsFeed = () => {
         };
 
         fetchUserTopics();
-    }, [user]);
+    }, [user, BASE_URL]);
+
+    const fetchArticles = async (pageNum = page) => {
+        setLoading(true);
+        setError(null);
+        try {
+            let response;
+            if (category === 'stock-news') {
+                const options = {
+                    method: 'GET',
+                    url: 'https://yahoo-finance15.p.rapidapi.com/api/v2/markets/news',
+                    params: { type: 'ALL' },
+                    headers: {
+                        'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY,
+                        'x-rapidapi-host': 'yahoo-finance15.p.rapidapi.com'
+                    }
+                };
+                response = await axios.request(options);
+                let allArticles = response.data.body.map(newsItem => ({
+                    title: newsItem.title,
+                    description: newsItem.text,
+                    url: newsItem.url,
+                    urlToImage: newsItem.img,
+                    source: { name: newsItem.source },
+                    publishedAt: newsItem.time
+                }));
+
+                if (currentSearch) {
+                    allArticles = allArticles.filter(article => 
+                        article.title.toLowerCase().includes(currentSearch.toLowerCase()) ||
+                        article.description.toLowerCase().includes(currentSearch.toLowerCase())
+                    );
+                }
+
+                setTotalResults(allArticles.length);
+                const startIndex = (pageNum - 1) * 9;
+                setArticles(allArticles.slice(startIndex, startIndex + 9));
+            } else if (category === 'recommended' && userTopics.length > 0) {
+                const recommendedArticles = [];
+                for (const topic of userTopics) {
+                    const newsApiOptions = {
+                        method: 'GET',
+                        url: 'https://newsapi.org/v2/everything',
+                        params: {
+                            q: `${topic} ${currentSearch}`.trim(),
+                            language: 'en',
+                            sortBy: 'publishedAt',
+                            pageSize: 9,
+                            page: pageNum,
+                            apiKey: import.meta.env.VITE_NEWS_API_KEY,
+                            sources: allowedSources.join(',')
+                        }
+                    };
+                    const res = await axios.request(newsApiOptions);
+                    recommendedArticles.push(...res.data.articles);
+                    setTotalResults(res.data.totalResults);
+                }
+                setArticles(recommendedArticles.slice(0, 9));
+            } else {
+                const domains = category === 'personal-finance'
+                    ? 'forbes.com,bloomberg.com,abcnews.go.com'
+                    : '';
+                const newsApiOptions = {
+                    method: 'GET',
+                    url: 'https://newsapi.org/v2/everything',
+                    params: {
+                        q: `${category} ${currentSearch}`.trim(),
+                        language: 'en',
+                        sortBy: 'publishedAt',
+                        pageSize: 9,
+                        page: pageNum,
+                        apiKey: import.meta.env.VITE_NEWS_API_KEY,
+                        domains: domains || undefined,
+                        sources: category === 'economic-news' ? economicNewsSources.join(',') : undefined,
+                    }
+                };
+                response = await axios.request(newsApiOptions);
+                setArticles(response.data.articles);
+                setTotalResults(response.data.totalResults);
+            }
+        } catch (error) {
+            console.error('Error fetching articles:', error);
+            setError('Failed to fetch articles. Please try again later.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const fetchArticles = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-                let response;
-                if (category === 'stock-news') {
-                    const options = {
-                        method: 'GET',
-                        url: 'https://yahoo-finance15.p.rapidapi.com/api/v2/markets/news',
-                        params: { type: 'ALL' },
-                        headers: {
-                            'x-rapidapi-key': import.meta.env.VITE_RAPIDAPI_KEY,
-                            'x-rapidapi-host': 'yahoo-finance15.p.rapidapi.com'
-                        }
-                    };
-                    response = await axios.request(options);
-                    const articles = response.data.body.map(newsItem => ({
-                        title: newsItem.title,
-                        description: newsItem.text,
-                        url: newsItem.url,
-                        urlToImage: newsItem.img,
-                        source: { name: newsItem.source },
-                        publishedAt: newsItem.time
-                    }));
-                    setArticles(articles);
-                    setTotalResults(response.data.body.length);
-                } else if (category === 'recommended' && userTopics.length > 0) {
-                    const recommendedArticles = [];
-                    for (const topic of userTopics) {
-                        const newsApiOptions = {
-                            method: 'GET',
-                            url: 'https://newsapi.org/v2/everything',
-                            params: {
-                                q: topic,
-                                language: 'en',
-                                sortBy: 'publishedAt',
-                                pageSize: 9,
-                                page,
-                                apiKey: import.meta.env.VITE_NEWS_API_KEY,
-                                sources: allowedSources.join(',')
-                            }
-                        };
-                        const res = await axios.request(newsApiOptions);
-                        recommendedArticles.push(...res.data.articles);
-                        setTotalResults(res.data.totalResults);
-                    }
-                    setArticles(recommendedArticles);
-                } else if (category === 'economic-news') {
-                    const newsApiOptions = {
-                        method: 'GET',
-                        url: 'https://newsapi.org/v2/everything',
-                        params: {
-                            q: query || category,
-                            language: 'en',
-                            sortBy: 'publishedAt',
-                            pageSize: 9,
-                            page,
-                            apiKey: import.meta.env.VITE_NEWS_API_KEY,
-                            sources: economicNewsSources.join(',')
-                        }
-                    };
-                    response = await axios.request(newsApiOptions);
-                    setArticles(response.data.articles);
-                    setTotalResults(response.data.totalResults);
-                } else {
-                    const domains = category === 'personal-finance'
-                        ? 'forbes.com,bloomberg.com,abcnews.go.com'
-                        : '';
-                    const newsApiOptions = {
-                        method: 'GET',
-                        url: 'https://newsapi.org/v2/everything',
-                        params: {
-                            q: query || category,
-                            language: 'en',
-                            sortBy: 'publishedAt',
-                            pageSize: 9,
-                            page,
-                            apiKey: import.meta.env.VITE_NEWS_API_KEY,
-                            domains: domains || undefined,
-                        }
-                    };
-                    response = await axios.request(newsApiOptions);
-                    setArticles(response.data.articles);
-                    setTotalResults(response.data.totalResults);
-                }
-            } catch (error) {
-                console.error('Error fetching articles:', error);
-                setError('Failed to fetch articles. Please try again later.');
-            } finally {
-                setLoading(false);
-            }
-        };
-
         fetchArticles();
-    }, [category, query, userTopics, page]);
+    }, [category, currentSearch, userTopics]);
 
     const handleCategoryChange = (newCategory) => {
         if (newCategory === 'recommended' && !hasCompletedTopics) {
@@ -152,6 +146,7 @@ const NewsFeed = () => {
             setCategory(newCategory);
             setPage(1);
             setQuery('');
+            setCurrentSearch('');
         }
     };
 
@@ -161,11 +156,14 @@ const NewsFeed = () => {
 
     const handleSearchSubmit = (event) => {
         event.preventDefault();
+        setCurrentSearch(query);
         setPage(1);
+        fetchArticles(1);
     };
 
     const handlePageChange = (newPage) => {
         setPage(newPage);
+        fetchArticles(newPage);
         window.scrollTo(0, 0);
     };
 
@@ -233,10 +231,13 @@ const NewsFeed = () => {
             ) : (
                 <>
                     <div className="newsArticleCards">
-                        {articles.slice(0, 9).map((article, index) => (
+                        {articles.map((article, index) => (
                             <NewsCard key={index} article={article} />
                         ))}
                     </div>
+                    {articles.length === 0 && (
+                        <div>No articles found. Try a different search or category.</div>
+                    )}
                     <div className="pagination">
                         <button 
                             onClick={() => handlePageChange(page - 1)} 

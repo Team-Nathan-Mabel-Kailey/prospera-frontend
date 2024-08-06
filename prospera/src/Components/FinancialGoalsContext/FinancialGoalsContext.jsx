@@ -78,6 +78,7 @@ export const FinancialGoalsProvider = ({ children }) => {
             await fetchGoals(); // Refetch all goals after update
         } catch (error) {
             console.error('Error updating goal:', error);
+            alert('Error updating goal. Please try again.');
         }
     };
 

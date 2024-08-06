@@ -139,6 +139,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
       setFinancialGoals(response.data);
     } catch (error) {
       console.error('Error fetching financial goals:', error);
+      alert(error.response.data.error);
     }
   };
 
@@ -366,6 +367,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
     } catch (error) {
         alert('Please fill in all required fields before adding the widget.');
         console.error('Error adding widget:', error);
+        alert(error.response.data.error);
     }
   }
 };

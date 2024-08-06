@@ -73,6 +73,7 @@
     font-size: 3rem;
     margin: 0 ;
     line-height: 1.2;
+    text-align: center;
 }
 
 .leftAboutBody span {
@@ -154,6 +155,8 @@
 .teamAbout h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    font-family: 'Playfair Display';
+    font-weight: 700;
 }
 
 .team {
