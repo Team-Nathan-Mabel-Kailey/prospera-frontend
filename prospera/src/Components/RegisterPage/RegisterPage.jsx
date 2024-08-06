@@ -6,7 +6,7 @@ import './RegisterPage.css';
 import { useAuth } from '../AuthContext/AuthContext';
 import { Link } from 'react-router-dom';
 import'ldrs/ring';
-import { cardio } from 'ldrs';
+import { tailChase } from 'ldrs';
 
 const Register = () => {
     const [username, setUsername] = useState('');
@@ -28,7 +28,7 @@ const Register = () => {
     let BASE_URL = import.meta.env.VITE_BASE_URL;
     // console.log(BASE_URL);
 
-    cardio.register();
+    tailChase.register();
 
   //handle register
     const handleRegister = async (evt) => {
@@ -212,12 +212,11 @@ const Register = () => {
                 
                 <div className='registerButtonArea'>
                 {isLoading ? (
-                            <l-cardio
-                                size="50"
-                                stroke="4"
-                                speed="2" 
-                                color="black" 
-                            ></l-cardio>
+                            <l-tail-chase
+                            size="50"
+                            speed="1.75" 
+                            color="purple" 
+                            ></l-tail-chase>
                         ) : (
                             <>
                                 <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>CREATE ACCOUNT</button>

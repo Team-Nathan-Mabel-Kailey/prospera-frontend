@@ -93,8 +93,10 @@ div.imageArea img {
 
 .registerButtonArea {
     display: flex;
-    flex-direction: column;
-    /* gap: 0.8rem; */
+    flex-direction: row;
+    gap: 0.8rem;
+    justify-content: center;
+
 }
 
 .registerButton {
