@@ -20,6 +20,7 @@
 .contactTitle span {
     color: #af84f4;
     font-weight: 700;
+    font-family: headerFont;
 }
 
 .contactTitle {
@@ -199,6 +200,11 @@
     .contactBody {
         flex-direction: column;
         margin: 50px;
+        padding-top: 25px;
+    }
+
+    .contactBody p {
+        font-size: 1.2rem;
     }
 
     .leftContactPageContent {

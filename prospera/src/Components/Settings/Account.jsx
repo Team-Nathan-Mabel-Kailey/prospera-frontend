@@ -117,7 +117,7 @@ return (
                 <button className='acctButton' onClick={handleBack}>Back</button>
             </div> */}
             
-                <h1>Account Settings</h1>
+                <h1>ACCOUNT SETTINGS</h1>
                 <div className='test'>
                         <div className='settingsTop'>
                             <img src="https://loremflickr.com/150/150/flower"></img>

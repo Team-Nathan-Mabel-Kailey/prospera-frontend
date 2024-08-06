@@ -180,7 +180,7 @@ const ChatbotPage = () => {
                 <div className='conversationArea'>
 
                 {!conversationStarted ? (
-                    <div className="placeholderMessage"><h2>How can I help you Prosper today?</h2></div>
+                    <div className="placeholderMessage"><h2>HOW CAN I HELP YOU PROSPER TODAY?</h2></div>
                 ) : (
                     <h2>Chat</h2>
                 )}

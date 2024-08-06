@@ -314,7 +314,7 @@ const handleDeleteWidget = async (key, widgetType) => {
           </div>
 
           <div className="dashboardTitle">
-            <h1>Welcome back to your Dashboard, &nbsp;{firstName && firstName.trim() !== '' ? firstName : userName}!</h1>
+            <h1>WELCOME BACK TO YOUR DASHBOARD,<span>&nbsp;{firstName && firstName.trim() !== '' ? firstName : userName}</span>!</h1>
             <button className="newWidgetBtn" onClick={handleAdd}>ADD WIDGET</button>
           </div>
 
@@ -324,11 +324,11 @@ const handleDeleteWidget = async (key, widgetType) => {
                 enhancing your financial well-being. Here, you can effortlessly keep track of your finances and financial education resources.</p>
             </div>
               <Stack direction={{ xs: 'column', sm: 'row' }} spacing={1} >
-                <Chip label="Monitor account balances" variant="outlined" sx={{ bgcolor: '#4a0a77', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px' }}/>
-                <Chip label="Stay updated on stock trends" variant="outlined" sx={{ bgcolor: '#5a108f', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
-                <Chip label="Managing your stock portfolio" variant="outlined" sx={{ bgcolor: '#6818a5', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
-                <Chip label="Set and achieve financial goals" variant="outlined" sx={{ bgcolor: '#8b2fc9', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
-                <Chip label="Access tailored articles" variant="outlined" sx={{ bgcolor: '#ab51e3', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+                <Chip label="MONITOR ACCOUNT BALANCES" variant="outlined" sx={{ bgcolor: '#4a0a77', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px' }}/>
+                <Chip label="STAY UPDATED ON STOCK TRENDS" variant="outlined" sx={{ bgcolor: '#5a108f', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+                <Chip label="MANAGE YOUR STOCK PORTFOLIO" variant="outlined" sx={{ bgcolor: '#6818a5', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+                <Chip label="SET AND ACHIEVE FINANCIAL GOALS" variant="outlined" sx={{ bgcolor: '#8b2fc9', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
+                <Chip label="ACCESS TAILORED ARTICLES" variant="outlined" sx={{ bgcolor: '#ab51e3', color: 'white', fontSize: '1.2rem', padding: '17px 0px 17px 0px'   }}/>
               </Stack>
           </div>
 
@@ -381,7 +381,7 @@ const handleDeleteWidget = async (key, widgetType) => {
                   className='cardHeader'
                   subheader={widget.type}
                   subheaderTypographyProps={{ color: 'white' }} 
-                  style={{ backgroundColor: '#410083', paddingTop: 6, paddingBottom: 5, paddingLeft: 12, paddingRight: 12, marginRight: 0, marginBottom: 0, marginLeft: 0}}
+                  style={{ backgroundColor: '#410083', paddingTop: 6, paddingBottom: 5, paddingLeft: 12, paddingRight: 12, marginRight: 0, marginBottom: 0, marginLeft: 0 }}
                   action={
                     <div className="widgetEditBtns">
                       <button

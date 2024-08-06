@@ -10,7 +10,7 @@ const Footer = () => {
                         <Link to='/' className='footerLogo'>
                             <img src='https://i.postimg.cc/nzYzpgR5/Screenshot-2024-07-18-at-10-21-48-PM-1-removebg-preview.png' alt="logo"/>
                         </Link>
-                        <p>Thrive Financially, Live Fully</p>
+                        <p>THRIVE FINANCIALLY, LIVE FULLY</p>
                     </div>
 
                     <div className='footerRight'>

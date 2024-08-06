@@ -137,6 +137,15 @@ hr {
     margin:0 auto;
 }
 
+.css-5azppo-MuiTypography-root {
+    font-family: 'Lato' !important;
+}
+
+.css-1jzq0dw-MuiChip-label {
+    font-family: headerFont !important;
+    font-weight: 600 !important;
+}
+
 @media (max-width: 968px) {
     .dashboardTitle{
         flex-direction: column;

@@ -122,7 +122,7 @@ const Register = () => {
 
             <form className='registerForm'>
                 <div className='registerDescription'>
-                    <h1>Sign Up</h1>
+                    <h1>SIGN UP</h1>
                     <p>Already have an account? <Link to="/login"> <a>Log in</a></Link></p>
                 </div>
 
