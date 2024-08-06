@@ -202,6 +202,7 @@ const handleDeleteWidget = async (key, widgetType) => {
       });
   } catch (error) {
       console.error('Error deleting widget:', error);
+      alert(error.response.data.error);
   }
 };
 
@@ -215,6 +216,7 @@ const handleDeleteWidget = async (key, widgetType) => {
         );
     } catch (error) {
         console.error('Error updating widget:', error);
+        alert(error.response.data.error);
     }
   };
 

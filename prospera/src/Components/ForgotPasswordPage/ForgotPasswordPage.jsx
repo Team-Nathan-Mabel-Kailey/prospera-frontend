@@ -32,7 +32,7 @@ const ForgotPasswordPage = () => {
             navigate('/login');  // Navigate back to login
         } catch (error) {
             console.error('Error resetting password:', error);
-            alert(error.response.data.error);
+            alert('Error resetting password:');
         }
     };
 

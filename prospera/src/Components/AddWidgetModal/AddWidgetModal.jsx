@@ -138,6 +138,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
       setFinancialGoals(response.data);
     } catch (error) {
       console.error('Error fetching financial goals:', error);
+      alert(error.response.data.error);
     }
   };
 
@@ -337,6 +338,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
         setStartingH(startingH);
     } catch (error) {
         console.error('Error adding widget:', error);
+        alert(error.response.data.error);
     }
 };
 
