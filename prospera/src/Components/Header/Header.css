@@ -128,8 +128,8 @@ button.register {
 }
 
 .logo img {
-    width: 45px;
-    height: 45px;
+    width: 70px;
+    /* height: 50px; */
     border-radius: 25px;
 }
 

@@ -7,6 +7,7 @@ import { useAuth } from '../AuthContext/AuthContext';
 import settingGif from '/icons8-settings.gif';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
+import HeaderLogo from '../../assets/Logos/ProsperaNavbarLogo.png';
 import './Header.css';
 
 let googleTranslateInitialized = false;
@@ -53,7 +54,7 @@ const Header = ({ open, setOpen }) => {
             <>
             <nav className='headerLeft'>
                 <Link to='/' className='logo'>
-                <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
+                    <img src={HeaderLogo} alt="logo"/>
                 </Link>
             </nav>
             <div className="authButtonsLeft">
@@ -98,7 +99,7 @@ const Header = ({ open, setOpen }) => {
             <div className='headerLeft'>
                 <div>
                     <Link to='/' className='logo'>
-                        <img src='https://i.postimg.cc/g2WtFXMV/Screenshot-2024-07-18-at-10-21-48-PM-1.png' alt="logo"/>
+                        <img src={HeaderLogo} alt="logo"/>
                     </Link>
                 </div>
                 <div className='rightLinks'>
