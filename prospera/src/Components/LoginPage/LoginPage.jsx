@@ -113,7 +113,6 @@ const LoginPage = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-         
                     <a href='/forgot' className='forgotRedirect'><u>Forgot password?</u></a>
                     
                     <div className='loginButtonArea'>

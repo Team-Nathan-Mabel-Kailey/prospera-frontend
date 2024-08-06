@@ -93,8 +93,6 @@ const Account = () => {
         setEmail(originalData.email);
         setSecurityAnswer('');
     };
-
-
 return (
     <>
         <div className='headerSpace' id='tempHeader'></div>
