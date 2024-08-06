@@ -11,6 +11,7 @@
 
         background: #c0a5ec;
         transform: translateX(100%);
+        margin-top: 50px;
         height: 60vh;
         text-align: left;
         /* padding: 2rem; */
@@ -62,8 +63,7 @@
     align-items: center;
 }
 
-
-.hamAuthButtons button{
+.hamAuthButtons button, .hamLogOutButton button{
     padding: 10px;
 
     cursor: pointer;
@@ -78,13 +78,19 @@
     font-size: 1rem;
 }
 
+.logout {
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+}
+
 .hamAuthButtons{
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-.login {
+.login{
     background-color: #000;
     color: #fff;
     text-decoration: none;
@@ -127,4 +133,13 @@
     border-color: #8d47fe;
     background: #5735df;
     color: #fff;
+}
+
+.nonLoggedIn{
+    display: flex;
+    flex-direction: column;
+}
+
+.hamLogOutButton{
+    margin-top: 2rem;
 }

@@ -79,6 +79,8 @@
     background-color: #e1bee7; /* Very light purple background for messages */
     border-radius: 10px;
     scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
 }
 
 .message {
@@ -86,22 +88,44 @@
     margin: 10px 0;
     border-radius: 10px;
     max-width: 80%;
+    display: flex;
 }
 
 .message.user {
     background-color: #ba68c8; /* User message background */
     color: #fff;
-    align-self: flex-end;
     width: 80%;
     font-size: 20px;
+
+    align-self: flex-end;
+    text-align: right;
 }
 
 .message.assistant {
     background-color: #9575cd; /* Assistant message background */
     color: #fff;
-    align-self: flex-start;
     width: 98%;
     font-size: 20px;
+    
+    align-self: flex-start;
+    text-align: left;
+}
+
+.message.user, .message.assistant {
+    margin: 0;
+    margin: 10px;
+}
+
+.message.user:before {
+    content: '';
+    display: block;
+    margin-right: auto;
+}
+
+.message.assistant:before {
+    content: '';
+    display: block;
+    margin-left: auto;
 }
 
 .inputContainer {
@@ -231,4 +255,12 @@
     .conversationArea{
         padding: 0;
     }
+}
+
+
+.placeholderMessage h1{
+    color: #232323;
+    text-align: center;
+    display: flex;
+    justify-content: center;
 }

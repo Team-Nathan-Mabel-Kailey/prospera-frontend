@@ -35,40 +35,40 @@ const Register = () => {
         evt.preventDefault();
         setIsLoading(true);
         try {
-        //register the user
-        const response = await axios.post(
-            `${BASE_URL}/users/register`,
-            { username, email, password, securityAnswer }
-        );
-        //login the user
-        const loginResponse = await axios.post(
-            `${BASE_URL}/users/login`,
-            { username, password }
-        );
+            //register the user
+            const response = await axios.post(
+                `${BASE_URL}/users/register`,
+                { username, email, password, securityAnswer }
+            );
+            //login the user
+            const loginResponse = await axios.post(
+                `${BASE_URL}/users/login`,
+                { username, password }
+            );
 
-        localStorage.setItem('token', loginResponse.data.token);
-        await fetchUserData(loginResponse.data.token);
+            localStorage.setItem('token', loginResponse.data.token);
+            await fetchUserData(loginResponse.data.token);
 
 
-        const {hasCompletedTopics} = response.data;
+            const {hasCompletedTopics} = response.data;
 
-        console.log(response);
-        setIsLoggedIn(true);
-        if (hasCompletedTopics) {
+            console.log(response);
+            setIsLoggedIn(true);
+            if (hasCompletedTopics) {
+                navigate('/dashboard');
+            } else {
+                navigate('/topic-selection');
+            }
+            // Store the token in the localstorage as token
+            
+            if (hasCompletedTopics) {
             navigate('/dashboard');
-        } else {
-            navigate('/topic-selection');
-        }
-        // Store the token in the localstorage as token
-        
-        if (hasCompletedTopics) {
-        navigate('/dashboard');
-        } else {
-            navigate('/topic-selection');
-        }
+            } else {
+                navigate('/topic-selection');
+            }
         } catch (error) {
-        alert('Registration failed. Try again.');
-        console.log('error:', error)
+            alert(error.response.data.error);
+            console.log('error:', error)
         } finally {
             setIsLoading(false);  // Hide loader
         }

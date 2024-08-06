@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { NovuProvider, PopoverNotificationCenter, NotificationBell } from '@novu/notification-center';
 import { useAuth } from '../AuthContext/AuthContext';
-import settingGif from '../../../public/icons8-settings.gif';
+import settingGif from '/icons8-settings.gif';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import './Header.css';

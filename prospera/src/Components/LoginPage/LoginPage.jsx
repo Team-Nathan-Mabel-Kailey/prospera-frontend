@@ -43,6 +43,7 @@ const LoginPage = () => {
         
         } catch (error) {
             console.error('Error logging in:', error);
+            alert(error.response.data.error)
         } finally {
             setIsLoading(false);  // Hide loader
         }
@@ -59,23 +60,6 @@ const LoginPage = () => {
             setShowIcon('https://img.icons8.com/ios-glyphs/30/visible--v1.png');
         }
     }
-
-    // const texts = document.querySelectorAll('.text');
-// let currentIndex = 0;
-
-// function changeText() {
-//   texts.forEach((text, index) => {
-//     if (index === currentIndex) {
-//       text.style.opacity = '1';
-//     } else {
-//       text.style.opacity = '0';
-//     }
-//   });
-
-//   currentIndex = (currentIndex + 1) % texts.length;
-// }
-
-// setInterval(changeText, 2000);
 
     return (
         <>

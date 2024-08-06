@@ -5,6 +5,7 @@ import AboutPage from '../AboutPage/AboutPage'
 import ContactPage from '../ContactPage/ContactPage'
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import LandingImg from "./LandingImage.jpg";
 
 
 const LandingPage = () => {
@@ -36,16 +37,19 @@ const LandingPage = () => {
             <div className='headerSpace' id='tempHeader'></div>
             <div id="landingPageContent" className="landingPageContent">
 
-                <img className='landingImg' src="https://images.unsplash.com/photo-1622480190621-c277f2984fab?q=80&w=3628&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Landing Page" />
+                <img className='landingImg' src={LandingImg} alt="Landing Page" />
                 
                 <div className='landingTexts'>
-                    <h1>PROSPERA</h1>
+                    <h1>Let Us Help You Thrive Financially and Live Fully</h1>
                     <div className='landingSlogan'>
-                        <p >Thrive Financially, Live Fully</p>
+                        <p>The Go-To Place for Tracking Finances and Building Financial Literacy</p>
+                        <Link to="./register">
+                            <button className="getStartedButton">GET STARTED</button>
+                        </Link>
                     </div>  
                 </div>
 
-                <h2 className='landingQuestion'>Did you know?</h2>
+                {/* <h2 className='landingQuestion'>Did you know?</h2> */}
 
                 <div className="landingCards">
                     <div className='landingCardContainer'>

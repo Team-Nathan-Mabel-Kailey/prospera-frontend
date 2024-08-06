@@ -16,6 +16,10 @@
     --title-color: #000;
     --link-icon-translate: -20px;
     --link-icon-opacity: 0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 figure{
@@ -36,16 +40,29 @@ figure{
     font-size: 1.2rem;
     font-weight: 700;
     margin: 0;
-    padding: 16px;
+    padding: 10px;
     color: var(--title-color);
 }
 
+.newsCardContainer p{
+    font-size: 1.1rem;
+    margin: 0;
+    padding: 0 10px 10px 10px;
+    color: var(--title-color);
+    text-align: justify;
+}
+
 .newsCardContainer a {
-    display: inline-flex;
-    align-items: center;
+    display: flex;
+    align-items: end;
+    bottom: 0;
+    justify-content: center;
+    text-align: center;
     text-decoration: none;
     color: #4a0a77;
+    padding: 10px;
 }
+
 
 .newsCardContainer a .icon {
     min-width: 24px;
@@ -76,13 +93,30 @@ figure{
 }
 
 .read-more {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: 17px;
     margin: 16px;
     transition: all 0.3s;
     color: #4a0a77;
+}
+
+.bottomText{
+    display: flex;
+    justify-content: space-between
+}
+
+.bottomText p{
+    display: flex;
+    align-items: end;
+    bottom: 0;
+    right: 0;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
 }
 
 @media (max-width: 968px) {

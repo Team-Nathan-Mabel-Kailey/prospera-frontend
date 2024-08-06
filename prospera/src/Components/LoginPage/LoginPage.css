@@ -220,11 +220,15 @@
     }
 }
 
-/* @media (max-width: 768px) {
-    .animated-text, h1 {
-        font-size: 1.5rem;
+@media (max-width: 968px) {
+    .imageArea{
+        display: none;
     }
-} */
+
+    .loginBody{
+        margin-bottom: 200px;
+    }
+}
     
 .loginButtonArea {
     display: flex;
