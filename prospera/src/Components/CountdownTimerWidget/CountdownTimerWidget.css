@@ -43,3 +43,12 @@
     color: #666;
     text-transform: uppercase;
   }
+
+  .countdown-timer-widget.completed h2 {
+    color: black;
+    margin-top: 0;
+  }
+
+  .countdown-timer-widget.completed p {
+    color: #7700b7;
+  }

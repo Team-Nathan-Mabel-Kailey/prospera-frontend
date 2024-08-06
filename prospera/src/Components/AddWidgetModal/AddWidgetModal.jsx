@@ -8,12 +8,12 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
+import { Tooltip } from 'react-tooltip'
 
 const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
   const [widgetType, setWidgetType] = useState('');
@@ -47,7 +47,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
       { accountType: '', accountName: '', balance: '', bankName: ''},
       { accountType: '', accountName: '', balance: '', bankName: ''},
       { accountType: '', accountName: '', balance: '', bankName: ''}
-      
     ]
   });
   const [highlightedGoalData, setHighlightedGoalData] = useState({});
@@ -182,22 +181,13 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
     }
     
     else if (widgetType === 'Highlighted Goal') {
-        minW = 2;
-        maxW = 3;
-        minH = 1;
-        maxH = 2;
-        startingW = 2;
-        startingH = 1;
-    } 
-    
-    else if (widgetType === 'Checking Account' || widgetType === 'Savings Account') {
         minW = 3;
-        maxW = 4;
-        minH = 1;
-        maxH = 1;
+        maxW = 3;
+        minH = 2;
+        maxH = 2;
         startingW = 3;
-        startingH = 1;
-    }
+        startingH = 2;
+    } 
 
     else if (widgetType === 'Financial Accounts') {
         minW = 4;
@@ -440,25 +430,29 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
           return (
             // done
             <div className='createOptions'>
-              <h2>See an overview of a stock's performance in the market.</h2>
-              <h3>Enter the symbol of a stock you're interested in and a period to view the stock's performance over time!</h3>
-              <p>A stock symbol is a unique series of letters assigned to a company's stock for trading on a specific market exchange. Click <a href='https://finance.yahoo.com/lookup/'>here</a> to search for stock symbols.</p>
-              <p>Selecting a time period for a stock's performance allows you to view how the stock's price has changed over a specific duration, such as a day, a month, or year.</p>
-              <div className='stockInputs'>
+              <h2>See an Overview of a Stock's Performance in the Market.</h2>
+              <h3>Enter the <a className='definedWord'data-tooltip-id="symbolTooltip" data-tooltip-content="A stock symbol is a unique series of letters assigned to a company's stock for trading on a specific market exchange." data-tooltip-place="top">symbol</a> of a stock you're interested in and a <a className='definedWord' data-tooltip-id="periodTooltip" data-tooltip-content="Selecting a time period for a stock's performance allows you to view how the stock's price has changed over a specific duration, such as a day, a month, or year." data-tooltip-place="top">period</a> to view the stock's performance over time!</h3>
+              <Tooltip id="symbolTooltip" style={{ fontSize: '18px', backgroundColor: '#4a0e4e'}}/>
+              <Tooltip id="periodTooltip" style={{ fontSize: '18px', backgroundColor: '#4a0e4e'}}/>
+              {/* <p>A stock symbol is a unique series of letters assigned to a company's stock for trading on a specific market exchange. Click <a href='https://finance.yahoo.com/lookup/'>here</a> to search for stock symbols.</p>
+              <p>Selecting a time period for a stock's performance allows you to view how the stock's price has changed over a specific duration, such as a day, a month, or year.</p> */}
+              <div className='inputsGroup'>
                 {stockData.stocks.map((stock, index) => (
                   <div key={index} className='stockGroup'>
-                    <h3>Stock {index + 1}</h3>
-                    <input
-                      type="text"
-                      value={stock.symbol}
-                      onChange={(e) => handleStockChange(index, 'symbol', e.target.value)}
-                      placeholder="Stock Symbol (required)"
-                    />
-                    <select
-                      name="period"
-                      value={stock.period}
-                      onChange={(e) => handleStockChange(index, 'period', e.target.value)}
-                    >
+                    <h3 className='underlinedWord'>Stock {index + 1}</h3>
+                    <div className='inputsAreaCreate'>
+                      <input
+                        type="text"
+                        value={stock.symbol}
+                        onChange={(e) => handleStockChange(index, 'symbol', e.target.value)}
+                        placeholder="Stock Symbol (required)"
+                      />
+                      <select
+                        name="period"
+                        value={stock.period}
+                        onChange={(e) => handleStockChange(index, 'period', e.target.value)}
+                        styles={{fontSize: 2}}
+                      >
                         <option value="">Select</option>
                         <option value="1D">1 day</option>
                         <option value="1m">1 month</option>
@@ -467,6 +461,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
                         <option value="60m">5 years</option>
                         <option value="all">All</option>
                     </select>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -477,113 +472,123 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
         case 'Financial Goals':
           return (
             <div className='createOptions'>
-              <h2>Enter your financial goals</h2>
-              <p>Setting specific financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving financial stability.</p>
-              <p>Each widget can store up to 5 of your financial goals. Feel free to add another widget to keep track of more goals!</p>
+              <h2>Enter your Financial Goals.</h2>
+              <h3>Setting specific financial goals is important because it provides a clear roadmap for managing money, saving for the future, and achieving <a className='definedWord'data-tooltip-id="stabilityTooltip" data-tooltip-content="Financial stability means having enough money to cover expenses and handle emergencies without financial stress." data-tooltip-place="top">financial stability</a>.</h3>
+              <Tooltip id="stabilityTooltip" style={{ fontSize: '18px', backgroundColor: '#4a0e4e'}}/>
+              <h3>Each widget can store up to 5 of your financial goals; <strong>leave goal information empty, if not needed.</strong> Feel free to add another widget to keep track of more goals!</h3>
+              <div className='goalsListInputArea'>
+                <h3 className='goalListName'>Enter Name of Financial Goal List</h3>
+                <input
+                  type="text"
+                  value={goalData.listName}
+                  onChange={(e) => handleListNameChange(e.target.value)}
+                  placeholder="List Name"
+                />
+              </div>
 
-              <h3>Enter Name of Financial Goal List</h3>
-              <input
-                type="text"
-                value={goalData.listName}
-                onChange={(e) => handleListNameChange(e.target.value)}
-                placeholder="List Name (optional)"
-              />
-
-              <div className='financialGoalInputs'>
+              <div className='inputsGroupFinancial'>
                 {goalData.goals.map((goal, index) => (
                   <div key={index} className='goalInputGroup'>
-                    <h3>Goal {index + 1}</h3>
-                    <input
-                      type="text"
-                      value={goal.name}
-                      onChange={(e) => handleGoalChange(index, 'name', e.target.value)}
-                      placeholder="Goal Name (required)"
-                    />
-                    <input
-                      type="number"
-                      value={goal.amountSaved}
-                      onChange={(e) => handleGoalChange(index, 'amountSaved', e.target.value)}
-                      placeholder="Amount Saved (optional)"
-                    />
-                    <input
-                      type="number"
-                      value={goal.goalAmount}
-                      onChange={(e) => handleGoalChange(index, 'goalAmount', e.target.value)}
-                      placeholder="Goal Amount (optional)"
-                    />
-                    <input
-                      type="date"
-                      value={goal.endDate}
-                      onChange={(e) => handleGoalChange(index, 'endDate', e.target.value)}
-                      placeholder="Goal End Date (required)"
-                    />
+                    <h3 className='underlinedWord'>Goal {index + 1}</h3>
+                    <div className='inputsAreaFinancial'>
+                      <input
+                        type="text"
+                        value={goal.name}
+                        onChange={(e) => handleGoalChange(index, 'name', e.target.value)}
+                        placeholder="Goal Name (required)"
+                      />
+                      <input
+                        type="number"
+                        value={goal.amountSaved}
+                        onChange={(e) => handleGoalChange(index, 'amountSaved', e.target.value)}
+                        placeholder="Amount Saved (optional)"
+                      />
+                      <input
+                        type="number"
+                        value={goal.goalAmount}
+                        onChange={(e) => handleGoalChange(index, 'goalAmount', e.target.value)}
+                        placeholder="Goal Amount (optional)"
+                      />
+                      <input
+                        type="date"
+                        value={goal.endDate}
+                        onChange={(e) => handleGoalChange(index, 'endDate', e.target.value)}
+                        placeholder="Goal End Date (required)"
+                      />
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           );
       
-        case 'Highlighted Goal':
-          if (financialGoals.length === 0) {
-            return <p>You need to create a Financial Goal Widget first.</p>;
-          }
-
-          return (
-            <div className='createOptions'>
-              <h2>Create a Highlighted Goal</h2>
-              <h3>Select a goal from your Financial Goal Widgets:</h3>
-              {financialGoals.map((widget) => {
-                // Filter out empty goals
-                const nonEmptyGoals = widget.configuration.goals.filter(goal => goal.name.trim() !== '');
-                
-                // Only render the widget if it has non-empty goals
-                if (nonEmptyGoals.length > 0) {
-                  return (
-                    <div key={widget.id}>
-                      <h4>{widget.configuration.listName}</h4>
-                      {nonEmptyGoals.map((goal) => (
-                        <button
-                          key={goal.id}
-                          onClick={() => handleGoalSelection(goal)}
-                        >
-                          {goal.name}
-                        </button>
-                      ))}
-                    </div>
+          case 'Highlighted Goal':
+            if (financialGoals.length === 0) {
+              return <p>You need to create a Financial Goal Widget first.</p>;
+            }
+          
+            return (
+              <div className='createOptions'>
+                <h2>Highlight a Financial Goal.</h2>
+                <h3>Select an active goal from your Financial Goals widget(s).</h3>
+                {financialGoals.map((widget) => {
+                  // Filter out empty goals and completed goals
+                  const activeGoals = widget.configuration.goals.filter(goal => 
+                    goal.name.trim() !== '' && !goal.isCompleted
                   );
-                }
-                // If all goals in this widget are empty, don't render anything for this widget
-                return null;
-              })}
-            </div>
-          );
+                  
+                  // Only render the widget if it has active goals
+                  if (activeGoals.length > 0) {
+                    return (
+                      <div key={widget.id}>
+                        <h4 style={{fontSize: 20}}>{widget.configuration.listName}</h4>
+                        {activeGoals.map((goal) => (
+                          <button
+                            key={goal.id}
+                            onClick={() => handleGoalSelection(goal)}
+                            className="goal-select-btn"
+                            style={{fontSize: 16}}
+                          >
+                            {goal.name}
+                          </button>
+                        ))}
+                      </div>
+                    );
+                  }
+                  // If all goals in this widget are empty or completed, don't render anything for this widget
+                  return null;
+                })}
+              </div>
+            );
 
         // done (need to refine news sources)
         case 'News':
           return (
             <div className='createOptions'>
-              <h2>We'll select a random financial news article for you on a topic you're interested in!</h2>
-              <p>Our selected articles cover diverse topics including stock market trends, personal finance tips, corporate news, and global economic developments.</p>
-              <select name='query' value={widgetData.query} onChange={handleInputChange} className="selectDropdown">
-                <option value="">Select</option>
-                <option value="Stocks">Stocks</option>
-                <option value="Budgeting">Budgeting</option>
-                <option value="Maintaining Good Credit">Maintaining Good Credit</option>
-                <option value="Credit Card Tips">Credit Card Tips</option>
-                <option value="Paying Bills">Paying Bills</option>
-                <option value="Spending">Spending</option>
-              </select>
+              <h2>Generate a Random News Article.</h2>
+              <h3>Our selected articles cover diverse topics including stock market trends, personal finance tips, corporate news, and global economic developments.</h3>
+              <div className='inputsGroup'>
+                <select className='newsSelect' name='query' value={widgetData.query} onChange={handleInputChange}>
+                  <option value="">Select</option>
+                  <option value="Stocks">Stocks</option>
+                  <option value="Budgeting">Budgeting</option>
+                  <option value="Maintaining Good Credit">Maintaining Good Credit</option>
+                  <option value="Credit Card Tips">Credit Card Tips</option>
+                  <option value="Paying Bills">Paying Bills</option>
+                  <option value="Spending">Spending</option>
+                </select>
+              </div>
             </div>
           );
 
           case 'Portfolio Monitor':
             return (
-              <div className='createOptions'>
-                <h2>Add stocks to your portfolio</h2>
-                <p>Enter the details of the stocks in your portfolio. You can add multiple stocks.</p>
+              <div className='portfolioOptions'>
+                <h2>Add Stocks to your Portfolio.</h2>
+                <h3>Enter the details of the stocks in your portfolio. You can add multiple stocks.</h3>
                 {portfolioData.stocks.map((stock, index) => (
-                  <div key={index} className='stockGroup'>
-                    <h3>Stock {index + 1}</h3>
+                  <div key={index} className='portfolioInputsGroup'>
+                    <h3 className='underlinedWord'>Stock {index + 1}</h3>
                     <TextField
                       label="Ticker"
                       value={stock.ticker}
@@ -636,7 +641,15 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
                   onClick={addPortfolioStock} 
                   fullWidth 
                   variant="outlined" 
-                  sx={{ mt: 2 }}
+                  sx={{ 
+                    mt: 2, 
+                    color: '#6200ea', 
+                    borderColor: '#6200ea',
+                    '&:hover': {
+                      backgroundColor: 'rgba(98, 0, 234, 0.04)',
+                      borderColor: '#6200ea',
+                    }
+                  }}
                 >
                   Add Another Stock
                 </Button>
@@ -646,39 +659,44 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
       case 'Financial Accounts':
         return (
           <div className='createOptions'>
-            <h2>Enter information for up to 6 bank accounts.</h2>
-            <p className='accountExplanation'>This widget allows you to track multiple bank accounts, including both checking and savings accounts.</p>
-            {financialAcctData.accounts.map((account, index) => (
-              <div key={index} className='accountInput'>
-                <h3>Account {index + 1}</h3>
-                <select
-                  value={account.accountType}
-                  onChange={(e) => handleFinancialAcctChange(index, 'accountType', e.target.value)}
-                >
-                  <option value="">Select Account Type</option>
-                  <option value="Checking">Checking</option>
-                  <option value="Savings">Savings</option>
-                </select>
-                <input
-                  type="text"
-                  value={account.accountName}
-                  onChange={(e) => handleFinancialAcctChange(index, 'accountName', e.target.value)}
-                  placeholder="Account Name"
-                />
-                <input
-                  type="text"
-                  value={account.bankName}
-                  onChange={(e) => handleFinancialAcctChange(index, 'bankName', e.target.value)}
-                  placeholder="Bank Name"
-                />
-                <input
-                  type="number"
-                  value={account.balance}
-                  onChange={(e) => handleFinancialAcctChange(index, 'balance', e.target.value)}
-                  placeholder="Balance"
-                />
-              </div>
-            ))}
+            <h2>Enter Information about your Bank Accounts.</h2>
+            <h3 className='accountExplanation'>This widget allows you to track multiple bank accounts, including both checking and savings accounts.</h3>
+            <h3>Each widget can store up to 5 of your financial accounts; <strong>leave account information blank, if not needed.</strong> Feel free to add another widget to keep track of more accounts!</h3>
+            <div className='inputsGroupAccts'>
+              {financialAcctData.accounts.map((account, index) => (
+                <div key={index} className='acctInputGroup'>
+                  <h3 className='underlinedWord'>Account {index + 1}</h3>
+                  <div className='inputsAreaAccts'>
+                    <select
+                      value={account.accountType}
+                      onChange={(e) => handleFinancialAcctChange(index, 'accountType', e.target.value)}
+                    >
+                      <option value="">Select Account Type</option>
+                      <option value="Checking">Checking</option>
+                      <option value="Savings">Savings</option>
+                    </select>
+                    <input
+                      type="text"
+                      value={account.accountName}
+                      onChange={(e) => handleFinancialAcctChange(index, 'accountName', e.target.value)}
+                      placeholder="Account Name"
+                    />
+                    <input
+                      type="text"
+                      value={account.bankName}
+                      onChange={(e) => handleFinancialAcctChange(index, 'bankName', e.target.value)}
+                      placeholder="Bank Name"
+                    />
+                    <input
+                      type="number"
+                      value={account.balance}
+                      onChange={(e) => handleFinancialAcctChange(index, 'balance', e.target.value)}
+                      placeholder="Balance"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         );
 
@@ -693,9 +711,19 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
       onClose={onClose} 
       aria-labelledby="modal-modal-title" 
       aria-describedby="modal-modal-description"
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
       >
         <Box className="modal-content">
+        <div className="modal-header">
           <h2 className='modal-title'>Select Widget Type</h2>
+          <button onClick={onClose} className="close-button">
+            <CloseIcon />
+          </button>
+        </div>
           <div className="modal-body">
             <div className="widget-type-buttons">
               {['Stock', 'Financial Goals', 'Highlighted Goal', 'News', 'Financial Accounts', 'Portfolio Monitor'].map((type) => (
@@ -711,7 +739,7 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
             {renderWidgetCreationOptions(widgetType)}
           </div>
           <div className="modal-footer">
-            <button onClick={handleAddWidget} className='add-widget-btn'>Add Widget</button>
+            <button onClick={handleAddWidget} className='add-widget-btn'>ADD</button>
           </div>
         </Box>
     </Modal>
