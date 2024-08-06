@@ -437,25 +437,6 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
     }));
   };
 
-  // const isWidgetTypeAllowed = (type) => {
-  //   if (uniqueWidgets.includes(type)) {
-  //     return !existingWidgets.some(widget => widget.type === type);
-  //   }
-  //   return true;
-  // };
-
-  const isConfigValid = () => {
-    switch (widgetType) {
-      case 'Portfolio Monitor':
-        return portfolioData.stocks.every(stock => 
-          stock.ticker && stock.position && stock.quantity && stock.price
-        );
-      // Add other cases as needed
-      default:
-        return true;
-    }
-  };
-
   // Function to check if at least one stock is valid
   const isStockValid = () => {
     return stockData.stocks.some(stock => stock.symbol && stock.period);

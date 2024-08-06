@@ -153,20 +153,20 @@ const ForgotPasswordPage = () => {
                             required
                         />
 
-                <PasswordChecklist
-                  rules={[
-                      "minLength",
-                      "number",
-                      "capital",
-                      "match",
-                  ]}
-                  minLength={8}
-                  value={newPassword}
-                  valueAgain={newPasswordAgain}
-                  onChange={setIsValidNewPassword}
-                  className='passwordChecklist'
-                  id='registerChecklist'
-                 />
+                    <PasswordChecklist
+                    rules={[
+                        "minLength",
+                        "number",
+                        "capital",
+                        "match",
+                    ]}
+                    minLength={8}
+                    value={newPassword}
+                    valueAgain={newPasswordAgain}
+                    onChange={setIsValidNewPassword}
+                    className='passwordChecklist'
+                    id='registerChecklist'
+                    />
                     
                     <div className='forgotButtonArea'>
                         <button type='submit' onClick={handleForgotPassword} className='forgotButton' disabled={!isValidNewPassword}>RESET PASSWORD</button>

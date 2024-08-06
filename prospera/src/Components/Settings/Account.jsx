@@ -103,20 +103,11 @@ const Account = () => {
         setSecurityAnswer('');
     };
 
-    // const handleBack = () => {
-    //     navigate('/settings'); 
-    // };
-
-
 return (
     <>
         <div className='headerSpace' id='tempHeader'></div>
         <div className="settingsBox">
-            <div className='updaterUserInfoSpace'>
-            {/* <div className='backButtonContainer'>
-                <button className='acctButton' onClick={handleBack}>Back</button>
-            </div> */}
-            
+            <div className='updaterUserInfoSpace'>       
                 <h1>Account Settings</h1>
                 <div className='test'>
                         <div className='settingsTop'>

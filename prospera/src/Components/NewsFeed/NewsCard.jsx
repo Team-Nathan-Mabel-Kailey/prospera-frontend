@@ -6,11 +6,9 @@ const NewsCard = ({ article }) => {
     return (
         <div className="newsCardContainer">
         <figure>
-            {/* <img src={article.urlToImage} alt={article.title} /> */}
             <img src={article.urlToImage ? article.urlToImage : noImagePlaceholder} alt={article.title}/>
         </figure>
         <h3>{article.title}</h3>
-        {/* <p><small>{article.source.name}</small></p> */}
         <p>{article.description || article.content}</p>
 
         <div className="bottomText">

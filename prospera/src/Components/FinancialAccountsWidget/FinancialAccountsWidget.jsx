@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import './FinancialAccountsWidget.css'
 
 const FinancialAccountsWidget = ({ data }) => {
-    // const [widgetData, setWidgetData] = useState(data);
     const [accounts, setAccounts] = useState([]);
     const [totals, setTotals] = useState({
         checkings: 0,

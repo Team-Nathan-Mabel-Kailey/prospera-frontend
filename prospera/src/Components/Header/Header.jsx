@@ -44,12 +44,6 @@ const Header = ({ open, setOpen }) => {
 
     return (
         <div className='mainHeader'>
-        {/* <NovuProvider subscriberId={'on-boarding-subscriber-id-123'} applicationIdentifier={'9aO_manMoao5'}>
-            <PopoverNotificationCenter colorScheme={'light'}>
-            {({ unseenCount }) => <NotificationBell unseenCount={unseenCount} />}
-            </PopoverNotificationCenter>
-        </NovuProvider> */}
-        
         {isLoggedIn ? (
             <>
             <nav className='headerLeft'>
