@@ -174,8 +174,8 @@
 
 .animated-text {
     position: relative;
-    font-family: 'Arial', sans-serif;
-    font-weight: bold;
+    font-family: 'Playfair Display' !important;
+    font-weight: 700;
     font-size: 2rem;
     line-height: 1.2;
     height: 2.6rem;
