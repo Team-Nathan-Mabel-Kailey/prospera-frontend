@@ -8,6 +8,9 @@ import { FinancialGoalsContext } from '../FinancialGoalsContext/FinancialGoalsCo
 
 const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
   const [widgetData, setWidgetData] = useState({});
+  const [originalData, setOriginalData] = useState({});
+  const [isValid, setIsValid] = useState(false);
+  const [validationMessage, setValidationMessage] = useState('');
   const { fetchGoals } = useContext(FinancialGoalsContext);
 
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -15,8 +18,13 @@ const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
   useEffect(() => {
     if (widget) {
       setWidgetData(widget.configuration);
+      setOriginalData(widget.configuration);
     }
   }, [widget]);
+
+  useEffect(() => {
+    validateInputs();
+  }, [widgetData]);
 
   const style = {
     position: 'absolute',
@@ -66,22 +74,72 @@ const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
     });
   };
 
+  const validateInputs = () => {
+    switch (widgetType) {
+      case 'Stock':
+        const changedStock = widgetData.stocks.some((stock, index) => 
+          stock.symbol !== originalData.stocks[index].symbol || 
+          stock.period !== originalData.stocks[index].period
+        );
+        setIsValid(changedStock);
+        setValidationMessage(changedStock ? '' : 'At least one stock must be updated.');
+        break;
+
+      case 'Financial Goals':
+        const changedGoal = widgetData.goals.some((goal, index) => {
+          const originalGoal = originalData.goals[index];
+          return !goal.isCompleted && (
+            (goal.name && !originalGoal.name) ||
+            goal.endDate !== originalGoal.endDate ||
+            goal.amountSaved !== originalGoal.amountSaved ||
+            goal.goalAmount !== originalGoal.goalAmount
+          );
+        });
+        setIsValid(changedGoal);
+        setValidationMessage(changedGoal ? '' : 'At least one incomplete goal must be updated.');
+        break;
+
+      case 'News':
+        const changedNews = widgetData.query !== originalData.query;
+        setIsValid(changedNews);
+        setValidationMessage(changedNews ? '' : 'Please select a different news topic.');
+        break;
+
+      case 'Financial Accounts':
+        const changedAccount = widgetData.accounts.some((account, index) => {
+          const originalAccount = originalData.accounts[index];
+          return account.accountType !== originalAccount.accountType ||
+                 account.accountName !== originalAccount.accountName ||
+                 account.bankName !== originalAccount.bankName ||
+                 account.balance !== originalAccount.balance;
+        });
+        setIsValid(changedAccount);
+        setValidationMessage(changedAccount ? '' : 'At least one account must be updated.');
+        break;
+
+      default:
+        setIsValid(true);
+        setValidationMessage('');
+    }
+  };
+
   const handleSave = async () => {
-    try {
+    if (isValid) {
+      try {
         let response = await axios.put(`${BASE_URL}/api/widgets/content/${widget.id}`, {
-            configuration: widgetData,
-            userId,
+          configuration: widgetData,
+          userId,
         });
         console.log('test edit response: ', response);
         
-        // Refresh financial goals after editing
         if (widgetType === 'Financial Goals') {
-            await fetchGoals();
+          await fetchGoals();
         }
         
         onClose();
-    } catch (error) {
+      } catch (error) {
         console.error('Error updating widget:', error);
+      }
     }
   };
 
@@ -117,8 +175,9 @@ const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
                 </div>
               ))}
             </div>
+            {validationMessage && <p className="validation-message">{validationMessage}</p>}
             <div className="edit-modal-footer">
-                <button onClick={handleSave} className='save-widget-btn'>SAVE</button>
+              <button onClick={handleSave} className='save-widget-btn' disabled={!isValid}>SAVE</button>
             </div>
           </div>
         );
@@ -133,182 +192,131 @@ const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
                 onChange={(e) => handleInputChange(e)}
                 placeholder="List Name"
               />
-
               <div className='inputsGroupEdit'>
               {widgetData.goals && widgetData.goals.map((goal, index) => (
                 <div key={index} className='editInputGroup'>
                   <h3 className='underlinedWord'>Goal {index + 1}</h3>
                   <div className='inputsAreaEdit'>
-                    <h3>
-                      {goal.name ? (
-                        goal.name
-                      ) : (
+                    {goal.isCompleted ? (
+                      <h3>{goal.name}</h3>
+                    ) : originalData.goals[index]?.name ? (
+                      <h3>{goal.name}</h3>
+                    ) : (
+                      <input
+                        type="text"
+                        value={goal.name || ''}
+                        onChange={(e) => handleInputChange(e, index, 'name')}
+                        placeholder="Enter Goal Name"
+                      />
+                    )}
+                    {!goal.isCompleted && (
+                      <>
                         <input
-                          type="text"
-                          value={goal.name}
-                          onChange={(e) => handleInputChange(e, index, 'name')}
-                          placeholder="Enter Goal Name"
+                          type="number"
+                          value={goal.amountSaved}
+                          onChange={(e) => handleInputChange(e, index, 'amountSaved')}
+                          placeholder="Amount Saved"
                         />
-                      )}
-                    </h3>
-                    <input
-                      type="number"
-                      value={goal.amountSaved}
-                      onChange={(e) => handleInputChange(e, index, 'amountSaved')}
-                      placeholder="Amount Saved"
-                    />
-                    <input
-                      type="number"
-                      value={goal.goalAmount}
-                      onChange={(e) => handleInputChange(e, index, 'goalAmount')}
-                      placeholder="Goal Amount"
-                    />
-                    <input
-                      type="date"
-                      value={goal.endDate}
-                      onChange={(e) => handleInputChange(e, index, 'endDate')}
-                      placeholder="Goal End Date"
-                    />
+                        <input
+                          type="number"
+                          value={goal.goalAmount}
+                          onChange={(e) => handleInputChange(e, index, 'goalAmount')}
+                          placeholder="Goal Amount"
+                        />
+                        <input
+                          type="date"
+                          value={goal.endDate}
+                          onChange={(e) => handleInputChange(e, index, 'endDate')}
+                          placeholder="Goal End Date"
+                        />
+                      </>
+                    )}
                   </div>
                 </div>
               ))}
               </div>
+              {validationMessage && <p className="validation-message">{validationMessage}</p>}
               <div className="edit-modal-footer">
-                <button onClick={handleSave} className='save-widget-btn'>SAVE</button>
+                <button onClick={handleSave} className='save-widget-btn' disabled={!isValid}>SAVE</button>
               </div>
             </div>
           );
 
-          case 'News':
-            return (
-              <div className='editOptions'>
-                <div className='inputsGroupEdit'>
-                  <div className='editInputGroup'>
-                    <h3>News Topic</h3>
-                    <div className='inputsAreaEdit'>
-                      <select 
-                        name='query' 
-                        value={widgetData.query} 
-                        onChange={handleInputChange}
-                        className="selectDropdown"
-                      >
-                        <option value="">Select</option>
-                        <option value="Stocks">Stocks</option>
-                        <option value="Budgeting">Budgeting</option>
-                        <option value="Maintaining Good Credit">Maintaining Good Credit</option>
-                        <option value="Credit Card Tips">Credit Card Tips</option>
-                        <option value="Paying Bills">Paying Bills</option>
-                        <option value="Spending">Spending</option>
-                      </select>
-                    </div>
-                  </div>
+      case 'News':
+        return (
+          <div className='editOptions'>
+            <div className='inputsGroupEdit'>
+              <div className='editInputGroup'>
+                <h3>News Topic</h3>
+                <div className='inputsAreaEdit'>
+                  <select 
+                    name='query' 
+                    value={widgetData.query} 
+                    onChange={handleInputChange}
+                    className="selectDropdown"
+                  >
+                    <option value="">Select</option>
+                    <option value="Stocks">Stocks</option>
+                    <option value="Budgeting">Budgeting</option>
+                    <option value="Maintaining Good Credit">Maintaining Good Credit</option>
+                    <option value="Credit Card Tips">Credit Card Tips</option>
+                    <option value="Paying Bills">Paying Bills</option>
+                    <option value="Spending">Spending</option>
+                  </select>
                 </div>
-                <div className="edit-modal-footer">
-                  <button onClick={handleSave} className='save-widget-btn'>SAVE</button>
-                </div>
-              </div>
-            );
-
-      // case 'News':
-      //   return (
-      //     <div className='editOptions'>
-      //       <select 
-      //         name='query' 
-      //         value={widgetData.query} 
-      //         onChange={handleInputChange}
-      //         className="selectDropdown"
-      //       >
-      //         <option value="">Select</option>
-      //         <option value="Stocks">Stocks</option>
-      //         <option value="Budgeting">Budgeting</option>
-      //         <option value="Maintaining Good Credit">Maintaining Good Credit</option>
-      //         <option value="Credit Card Tips">Credit Card Tips</option>
-      //         <option value="Paying Bills">Paying Bills</option>
-      //         <option value="Spending">Spending</option>
-      //       </select>
-      //     </div>
-      //   );
-
-        case 'Financial Accounts':
-          return (
-            <div className='editOptions'>
-              <div className='inputsGroupEdit'>
-                {widgetData.accounts && widgetData.accounts.map((account, index) => (
-                  <div key={index} className='editInputGroup'>
-                    <h3 className='underlinedWord'>Account {index + 1}</h3>
-                    <div className='inputsAreaEdit'>
-                      <select
-                        value={account.accountType}
-                        onChange={(e) => handleInputChange(e, index, 'accountType')}
-                      >
-                        <option value="">Select Account Type</option>
-                        <option value="Checking">Checking</option>
-                        <option value="Savings">Savings</option>
-                      </select>
-                      <input
-                        type="text"
-                        value={account.accountName}
-                        onChange={(e) => handleInputChange(e, index, 'accountName')}
-                        placeholder="Account Name"
-                      />
-                      <input
-                        type="text"
-                        value={account.bankName}
-                        onChange={(e) => handleInputChange(e, index, 'bankName')}
-                        placeholder="Bank Name"
-                      />
-                      <input
-                        type="number"
-                        value={account.balance}
-                        onChange={(e) => handleInputChange(e, index, 'balance')}
-                        placeholder="Balance"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="edit-modal-footer">
-                <button onClick={handleSave} className='save-widget-btn'>SAVE</button>
               </div>
             </div>
-          );
+            {validationMessage && <p className="validation-message">{validationMessage}</p>}
+            <div className="edit-modal-footer">
+              <button onClick={handleSave} className='save-widget-btn' disabled={!isValid}>SAVE</button>
+            </div>
+          </div>
+        );
 
-      // case 'Financial Accounts':
-      //   return (
-      //     <div className='editOptions'>
-      //       {widgetData.accounts && widgetData.accounts.map((account, index) => (
-      //         <div key={index} className='accountInput'>
-      //           <h3>Account {index + 1}</h3>
-      //           <select
-      //             value={account.accountType}
-      //             onChange={(e) => handleInputChange(e, index, 'accountType')}
-      //           >
-      //             <option value="">Select Account Type</option>
-      //             <option value="Checking">Checking</option>
-      //             <option value="Savings">Savings</option>
-      //           </select>
-      //           <input
-      //             type="text"
-      //             value={account.accountName}
-      //             onChange={(e) => handleInputChange(e, index, 'accountName')}
-      //             placeholder="Account Name"
-      //           />
-      //           <input
-      //             type="text"
-      //             value={account.bankName}
-      //             onChange={(e) => handleInputChange(e, index, 'bankName')}
-      //             placeholder="Bank Name"
-      //           />
-      //           <input
-      //             type="number"
-      //             value={account.balance}
-      //             onChange={(e) => handleInputChange(e, index, 'balance')}
-      //             placeholder="Balance"
-      //           />
-      //         </div>
-      //       ))}
-      //     </div>
-      //   );
+      case 'Financial Accounts':
+        return (
+          <div className='editOptions'>
+            <div className='inputsGroupEdit'>
+              {widgetData.accounts && widgetData.accounts.map((account, index) => (
+                <div key={index} className='editInputGroup'>
+                  <h3 className='underlinedWord'>Account {index + 1}</h3>
+                  <div className='inputsAreaEdit'>
+                    <select
+                      value={account.accountType}
+                      onChange={(e) => handleInputChange(e, index, 'accountType')}
+                    >
+                      <option value="">Select Account Type</option>
+                      <option value="Checking">Checking</option>
+                      <option value="Savings">Savings</option>
+                    </select>
+                    <input
+                      type="text"
+                      value={account.accountName}
+                      onChange={(e) => handleInputChange(e, index, 'accountName')}
+                      placeholder="Account Name"
+                    />
+                    <input
+                      type="text"
+                      value={account.bankName}
+                      onChange={(e) => handleInputChange(e, index, 'bankName')}
+                      placeholder="Bank Name"
+                    />
+                    <input
+                      type="number"
+                      value={account.balance}
+                      onChange={(e) => handleInputChange(e, index, 'balance')}
+                      placeholder="Balance"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+            {validationMessage && <p className="validation-message">{validationMessage}</p>}
+            <div className="edit-modal-footer">
+              <button onClick={handleSave} className='save-widget-btn' disabled={!isValid}>SAVE</button>
+            </div>
+          </div>
+        );
 
       default:
         return <div className='editOptions'>Nothing to edit!</div>;
@@ -323,10 +331,10 @@ const EditWidgetModal = ({ isOpen, onClose, widget, userId }) => {
     }}>
       <Box className="edit-modal-content">
         <div className="edit-modal-header">
-            <h2 className='edit-modal-title'>Edit Your {widgetType} Widget</h2>
-            <button onClick={onClose} className="close-button">
-              <CloseIcon />
-            </button>
+          <h2 className='edit-modal-title'>Edit Your {widgetType} Widget</h2>
+          <button onClick={onClose} className="close-button">
+            <CloseIcon />
+          </button>
         </div>
         <div className="edit-modal-body">
           {renderEditFields()}
