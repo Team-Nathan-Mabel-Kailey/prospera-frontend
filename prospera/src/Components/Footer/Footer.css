@@ -26,6 +26,11 @@
     flex-direction: column;
 }
 
+.footerLeft p {
+    font-family: headerFont;
+    font-size: 19px;
+}
+
 .footerRight{
     width: 100%;
     display: flex;

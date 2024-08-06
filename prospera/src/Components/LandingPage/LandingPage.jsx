@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import LandingImg from "./LandingImage.jpg";
 
-
 const LandingPage = () => {
     LandingPage.propTypes = {
         scrollTo: PropTypes.string
@@ -40,9 +39,9 @@ const LandingPage = () => {
                 <img className='landingImg' src={LandingImg} alt="Landing Page" />
                 
                 <div className='landingTexts'>
-                    <h1>Let Us Help You Thrive Financially and Live Fully</h1>
+                    <h1 style={{fontSize: 65}}>LET US HELP YOU THRIVE FINANCIALLY AND LIVE FULLY</h1>
                     <div className='landingSlogan'>
-                        <p>The Go-To Place for Tracking Finances and Building Financial Literacy</p>
+                        <p>Track your finances using our Dashboard and build your financial literacy using our AI-powered Chatbot and tailored Newsfeed.</p>
                         <Link to="./register">
                             <button className="getStartedButton">GET STARTED</button>
                         </Link>

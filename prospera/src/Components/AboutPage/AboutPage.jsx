@@ -7,8 +7,8 @@ const AboutPage = () => {
             <div className='aboutBody'>
                 <div className='leftAboutBody'>
                     <div className='leftAboutTextArea'>
-                        <h1>Make it possible with</h1>
-                        <span>PROSPERA</span>
+                        <h1>MAKE IT POSSIBLE WITH</h1>
+                        <span>P R O S P E R A</span>
                     </div>
                 </div>
 
@@ -21,7 +21,7 @@ const AboutPage = () => {
             
             <div className='teamAbout'>
                     <div className='team'>
-                        <h2>Meet Team MKNforce!</h2>
+                        <h2>MEET TEAM MKNFORCE!</h2>
                         <div className='teamIcons'>
                             <div className='teamMember'>
                                 <img src='https://ca.slack-edge.com/E7T5PNK3P-U07685Z465A-b44ceb4c18af-512' alt='team member' />

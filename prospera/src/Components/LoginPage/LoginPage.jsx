@@ -81,7 +81,7 @@ const LoginPage = () => {
                                 <span className="text">Olá,</span>
                                 <span className="text">Привет,</span>
                             </div>
-                            <h1>Login</h1>
+                            <h1>LOGIN</h1>
                         </div>
                         <p>Sign in to continue.</p>
                     </div>

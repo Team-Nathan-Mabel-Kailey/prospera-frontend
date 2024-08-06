@@ -50,6 +50,7 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-family: 'Lato';
     font-size: 20px;
 }
 
@@ -70,7 +71,7 @@
     margin-top: 0;
     border-bottom: 2px solid #4a148c; /* Dark purple underline */
     padding-bottom: 10px;
-    font-family: 'Playfair Display';
+    font-family: headerFont;
     font-weight: 700;
 }
 
@@ -97,7 +98,7 @@
     background-color: #ba68c8; /* User message background */
     color: #fff;
     width: 80%;
-    font-size: 20px;
+    font-size: 25px;
 
     align-self: flex-end;
     text-align: right;
@@ -107,8 +108,7 @@
     background-color: #9575cd; /* Assistant message background */
     color: #fff;
     width: 98%;
-    font-size: 20px;
-    
+    font-size: 25px;
     align-self: flex-start;
     text-align: left;
 }
@@ -116,6 +116,7 @@
 .message.user, .message.assistant {
     margin: 0;
     margin: 10px;
+    font-family: 'Lato';
 }
 
 .message.user:before {

@@ -98,7 +98,7 @@ return (
         <div className='headerSpace' id='tempHeader'></div>
         <div className="settingsBox">
             <div className='updaterUserInfoSpace'>
-                <h1>Account Settings</h1>
+                <h1>ACCOUNT SETTINGS</h1>
                 <div className='test'>
                         <div className='settingsTop'>
                             <img src="https://loremflickr.com/150/150/flower"></img>
