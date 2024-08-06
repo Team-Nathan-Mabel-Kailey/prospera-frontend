@@ -17,6 +17,7 @@ const HamMenu = ({ open }) => {
 
     return (
         <nav className={`menu ${open ? 'menu-open' : ''}`}>
+            {/* Dynamic hamburger menu that changes based on logged in user or not */}
             {isLoggedIn ? (
                 <div className='loggedInBurger'>
                     <Link to="/dashboard">DASHBOARD</Link>

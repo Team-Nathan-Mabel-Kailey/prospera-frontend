@@ -16,7 +16,6 @@ import { AuthProvider } from './Components/AuthContext/AuthContext';
 import LogOut from './Components/LogOut/LogOut';
 import { useState } from 'react';
 import HamMenu from './Components/HamMenu/HamMenu';
-// import Settings from './Components/Settings/Settings';
 import Account from './Components/Settings/Account';
 import TopicSelectionConfirmed from './Components/TopicSelectionPage/TopicSelectionConfirmed';
 import './assets/fonts.css';
@@ -45,7 +44,6 @@ function App() {
                 <Route path="/news" element={<NewsFeed />} />
                 <Route path="/news/:articleId" element={<NewsCardDetail />} />
                 <Route path="/chat" element={<ChatbotPage />} />
-                {/* <Route path="/settings" element={<Settings />} /> */}
                 <Route path='/topic-selection' element={<TopicSelectionPage />} />
                 <Route path='/topic-selection-confirmed' element={<TopicSelectionConfirmed />} />
                 <Route path='/account' element={<Account />} />

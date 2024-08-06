@@ -49,8 +49,6 @@ const LandingPage = () => {
                     </div>  
                 </div>
 
-                {/* <h2 className='landingQuestion'>Did you know?</h2> */}
-
                 <div className="landingCards">
                     <div className='landingCardContainer'>
                             <figure>
