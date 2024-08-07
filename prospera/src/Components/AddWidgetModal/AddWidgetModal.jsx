@@ -191,11 +191,11 @@ const AddWidgetModal = ({ isOpen, onClose, onAdd, userId }) => {
     } 
 
     else if (widgetType === 'News') {
-      minW = 2;
+      minW = 3;
       maxW = 3;
       minH = 3;
       maxH = 3;
-      startingW = 2;
+      startingW = 3;
       startingH = 3;
     }
 
