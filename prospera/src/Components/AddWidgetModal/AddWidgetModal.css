@@ -78,22 +78,15 @@
   }
   
   .widget-type-btn.active {
-    /* background: linear-gradient(45deg, #9d4edd, #c77dff);
-    box-shadow: 0 0 15px rgba(157, 78, 221, 0.6); */
     background: white;
     border-color: #7b2cbf;
     color: black;
   }
 
-  /* Styles for the widget creation options */
-  /* .createOptions {
-    background: rgb(255, 255, 255);
-    padding: 1.5rem;
-    padding-top: 0.25rem;
-    border-radius: 10px;
-    margin-top: 0;
-  } */
-
+  div.defaultSelect {
+    font-family: 'Lato';
+  }
+  
   .createOptions p, .createOptions h3,  .createOptions h2 {
     color: black;
   }
