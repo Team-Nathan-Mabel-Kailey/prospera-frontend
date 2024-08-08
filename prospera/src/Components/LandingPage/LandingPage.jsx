@@ -39,7 +39,7 @@ const LandingPage = () => {
                 <img className='landingImg' src={LandingImg} alt="Landing Page" />
                 
                 <div className='landingTexts'>
-                    <h1 style={{fontSize: 65}}>LET US HELP YOU THRIVE FINANCIALLY TO LIVE FULLY</h1>
+                    <h1>LET US HELP YOU THRIVE FINANCIALLY TO LIVE FULLY</h1>
                     <div className='landingSlogan'>
                         <p>Track your finances using our Dashboard and build your financial literacy using our AI-powered Chatbot and tailored Newsfeed.</p>
                         <Link to="./register">
