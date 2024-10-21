@@ -3,158 +3,231 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import PasswordChecklist from "react-password-checklist";
 import './RegisterPage.css';
+import { useAuth } from '../AuthContext/AuthContext';
+import { Link } from 'react-router-dom';
+import'ldrs/ring';
+import { tailChase } from 'ldrs';
 
 const Register = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [securityAnswer, setSecurityAnswer] = useState('');
-  const [passwordAgain, setPasswordAgain] = useState('');
-  const [showPassword1, setShowPassword1] = useState(false);
-  const [showPassword2, setShowPassword2] = useState(false);
-  const [showSecurityAnswer, setShowSecurityAnswer] = useState(false);
-  const [isValidPassword, setIsValidPassword] = useState(false);
-  const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [securityAnswer, setSecurityAnswer] = useState('');
+    const [passwordAgain, setPasswordAgain] = useState('');
+    const [showPassword1, setShowPassword1] = useState(false);
+    const [showPassword2, setShowPassword2] = useState(false);
+    const [showSecurityAnswer, setShowSecurityAnswer] = useState(false);
+    const [showIcon1, setShowIcon1] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+    const [showIcon2, setShowIcon2] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+    const [showIcon3, setShowIcon3] = useState('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+    const [isValidPassword, setIsValidPassword] = useState(false);
+    const navigate = useNavigate();
+    const { setIsLoggedIn, fetchUserData } = useAuth();
+    const [isLoading, setIsLoading] = useState(false);
+
+    let BASE_URL = import.meta.env.VITE_BASE_URL;
+
+    tailChase.register();
 
   //handle register
-  const handleRegister = async (evt) => {
-    evt.preventDefault();
-    try {
-      //register the user
-      const response = await axios.post(
-        'http://localhost:3000/users/register',
-        { username, email, password, securityAnswer }
-      );
-      //login the user
-      const loginResponse = await axios.post(
-        'http://localhost:3000/users/login',
-        { username, password }
-      );
-        console.log(response);
-      // Store the token in the localstorage as token
-      localStorage.setItem('token', loginResponse.data.token);
-      navigate('/dashboard');
-    } catch (error) {
-      alert('Registration failed. Try again.');
+    const handleRegister = async (evt) => {
+        evt.preventDefault();
+        setIsLoading(true);
+        try {
+            //register the user
+            const response = await axios.post(
+                `${BASE_URL}/users/register`,
+                { username, email, password, securityAnswer }
+            );
+            //login the user
+            const loginResponse = await axios.post(
+                `${BASE_URL}/users/login`,
+                { username, password }
+            );
+
+            localStorage.setItem('token', loginResponse.data.token);
+            await fetchUserData(loginResponse.data.token);
+
+
+            const {hasCompletedTopics} = response.data;
+
+            console.log(response);
+            setIsLoggedIn(true);
+            if (hasCompletedTopics) {
+                navigate('/dashboard');
+            } else {
+                navigate('/topic-selection');
+            }
+            // Store the token in the localstorage as token
+            
+            if (hasCompletedTopics) {
+            navigate('/dashboard');
+            } else {
+                navigate('/topic-selection');
+            }
+        } catch (error) {
+            alert(error.response.data.error);
+            console.log('error:', error)
+        } finally {
+            setIsLoading(false);  // Hide loader
+        }
+    };
+
+    const handleDisplaySecret1 = () => {
+        setShowPassword1((prev) => !prev);
+        
+        if (showIcon1 == 'https://img.icons8.com/ios-glyphs/30/visible--v1.png') {
+            setShowIcon1('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+        }
+
+        else {
+            setShowIcon1('https://img.icons8.com/ios-glyphs/30/visible--v1.png');
+        }
     }
-  };
 
-  return (
-    <div className='registerBody'>
-      <div className='registerBox'>
-          <div className='imageArea'>
-              <img src='https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=3570&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='Picture of plant inside pot filled with coins'/>
-          </div>
+    const handleDisplaySecret2 = () => {
+        setShowPassword2((prev) => !prev);
+        
+        if (showIcon2 == 'https://img.icons8.com/ios-glyphs/30/visible--v1.png') {
+            setShowIcon2('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+        }
 
-          <form className='registerForm'>
-              <div className='registerDescription'>
-                  <h1>Sign Up</h1>
-                  <p>Already have an account? <a href='/login'>Log in</a></p>
-              </div>
+        else {
+            setShowIcon2('https://img.icons8.com/ios-glyphs/30/visible--v1.png');
+        }
+    }
 
-              <label>Email</label>
-              <input
-                  type='text'
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-              />
+    const handleDisplaySecret3 = () => {
+        setShowSecurityAnswer((prev) => !prev);
+        
+        if (showIcon3 == 'https://img.icons8.com/ios-glyphs/30/visible--v1.png') {
+            setShowIcon3('https://img.icons8.com/ios-glyphs/30/closed-eye--v1.png');
+        }
 
-              <label>Username</label>
-              <input
-                  type='text'
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-              />
+        else {
+            setShowIcon3('https://img.icons8.com/ios-glyphs/30/visible--v1.png');
+        }
+    }
 
-              <label>Password</label>
-              <input
-                  type={
-                      showPassword1 ? 'text' : 'password'
-                  }
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-              />
+    return (
+        <>
+        <div className='headerSpace' id='tempHeader'></div>
+        
+        <div className='registerBody'>
+        <div className='registerBox'>
+            <div className='imageArea'>
+                <img src='https://images.unsplash.com/photo-1632849508137-3ef430962c8e?q=80&w=3109&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' alt='Picture of plant inside pot filled with coins'/>
+            </div>
 
-              <div className='showPassword1Area'>
-                  <input
-                      id='check1'
-                      type='checkbox'
-                      value={showPassword1}
-                      onChange={() =>
-                          setShowPassword1((prev) => !prev)
-                      }
-                  />
-                  <label htmlFor='check'>Show Password</label>
-              </div>
+            <form className='registerForm'>
+                <div className='registerDescription'>
+                    <h1>SIGN UP</h1>
+                    <p>Already have an account? <Link to="/login"> <a>Log in</a></Link></p>
+                </div>
 
-              <label>Retype Password</label>
-              <input
-                  type={
-                      showPassword2 ? 'text' : 'password'
-                  }
-                  onChange={(e) => setPasswordAgain(e.target.value)}
-                  required
-              />
+                <label>Email</label>
+                <input
+                    type='text'
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                />
 
-              <div className='showPassword2Area'>
-                  <input
-                      id='check2'
-                      type='checkbox'
-                      value={showPassword2}
-                      onChange={() =>
-                          setShowPassword2((prev) => !prev)
-                      }
-                  />
-                  <label htmlFor='check'>Show Password</label>
-              </div>
+                <label>Username</label>
+                <input
+                    type='text'
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                />
 
-              <PasswordChecklist
-                  rules={[
-                      "minLength",
-                      "number",
-                      "capital",
-                      "match",
-                  ]}
-                  minLength={8}
-                  value={password}
-                  valueAgain={passwordAgain}
-                  onChange={setIsValidPassword}
-              />
+                <div className='showSecret'>
+                    <label>Password</label>
+                    <button className='showPassword1Btn'type="button" title="Show Password" onClick={handleDisplaySecret1}>         
+                        <span className='showSymbol'>
+                            <img src={showIcon1}></img>
+                        </span>
+                    </button> 
+                </div>
 
-              <div className='questionArea'>
-                <p><b>Security question: </b> What city were you born in?</p>
-              </div>
+                <input
+                    type={
+                        showPassword1 ? 'text' : 'password'
+                    }
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
 
-              <label>Answer</label>
-              <input
-                type={
-                    showSecurityAnswer ? 'text' : 'password'
-                }
-                onChange={(e) => setSecurityAnswer(e.target.value)}
-                required
-              />
+                <div className='showSecret'>
+                    <label>Retype Password</label>
+                    <button className='showPassword2Btn'type="button" title="Show Password" onClick={handleDisplaySecret2}>         
+                        <span className='showSymbol'>
+                            <img src={showIcon2}></img>
+                        </span>
+                    </button> 
+                </div>
 
-              <div className='showSecurityAnswerArea'>
-                  <input
-                      id='check3'
-                      type='checkbox'
-                      value={showSecurityAnswer}
-                      onChange={() =>
-                          setShowSecurityAnswer((prev) => !prev)
-                      }
-                  />
-                  <label htmlFor='check'>Show Answer</label>
-              </div>
+                <input
+                    type={
+                        showPassword2 ? 'text' : 'password'
+                    }
+                    onChange={(e) => setPasswordAgain(e.target.value)}
+                    required
+                />
 
-              
-              <div className='registerButtonArea'>
-                  <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>Create Account</button>
-              </div>
-          </form>
-          
-      </div>
-    </div>
-  );
+
+                <PasswordChecklist
+                    rules={[
+                        "minLength",
+                        "number",
+                        "capital",
+                        "match",
+                    ]}
+                    minLength={8}
+                    value={password}
+                    valueAgain={passwordAgain}
+                    onChange={setIsValidPassword}
+                    className='passwordChecklist'
+                />
+
+                <div className='questionArea'>
+                    <p><b>Security question: </b> What city were you born in?</p>
+                </div>
+                
+                <div className='showSecret'>
+                    <label>Answer</label>
+                    <button className='showPassword3Btn'type="button" title="Show Password" onClick={handleDisplaySecret3}>         
+                        <span className='showSymbol'>
+                            <img src={showIcon3}></img>
+                        </span>
+                    </button> 
+                </div>
+
+                <input
+                    type={
+                        showSecurityAnswer ? 'text' : 'password'
+                    }
+                    onChange={(e) => setSecurityAnswer(e.target.value)}
+                    required
+                />
+                
+                <div className='registerButtonArea'>
+                {isLoading ? (
+                            <l-tail-chase
+                            size="50"
+                            speed="1.75" 
+                            color="purple" 
+                            ></l-tail-chase>
+                        ) : (
+                            <>
+                                <button onClick={handleRegister} className='registerButton' disabled={!isValidPassword}>CREATE ACCOUNT</button>
+                            </>
+                        )}
+                </div>
+            </form>
+            
+        </div>
+        </div>
+        </>
+    );
 };
 
 export default Register;

@@ -1,4 +1,157 @@
+.headerSpace {
+    height: 106px;
+}
+
+.dashboardTitle{
+    display: flex;
+    justify-content: space-between;
+
+
+    color: #000;
+    background-color: #fff;
+
+    padding: 0;
+    margin: 20px 55px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.descriptionParagraph{
+    /* width: 45%; */
+    text-align: justify;
+    padding: 10px;
+    border-radius: 5px;
+    color: #303030ee;
+    background-color: rgba(175, 132, 244, 0.4);
+}
+
+.descriptionParagraph p {
+    margin: 0;
+    font-size: 1.35rem;
+    text-align: center;
+    font-weight: 550;
+}
+
+.descriptionContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 55px;
+    gap: 20px;
+}
+
 .dashboardBody {
-    margin: 75px 0 0 0;
-    padding: 0 30px 30px 30px;
+    margin: 0;
+    padding: 0 15px 30px 15px;
+    min-height: 70vh;
+}
+
+.reactGridItem {
+    color: white;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.div.react-grid-layout.dash {
+    width: 10%;
+}
+
+.dash {
+    background-color: #fff;
+    color: #fff;
+    padding: 10px 10px 100px 10px;
+    border-radius: 5px;
+    min-height: 55vh;
+}
+
+.widgetContent {
+    overflow: hidden;
+    padding: 10px;
+    color: white;
+}
+
+.newWidgetBtn{
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+
+    padding: 10px 25px;
+
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+
+    outline: none;
+    position: relative;
+    overflow:hidden ;
+    align-self: center;
+    
+    width: 180px;
+    margin: 10px 30px;
+    display: block;
+}
+
+.newWidgetBtn::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.newWidgetBtn:hover::after{
+    transform: scale(4);
+}
+
+.newWidgetBtn:hover {
+    border-color: #666666;
+    background: #292929;
+}
+
+.widgetEditBtns {
+    margin-top: 3px;
+}
+
+.widgetEditBtns button{
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+}
+
+.widgetEditBtns button:hover {
+    cursor: pointer;
+    background-color: #27004e;
+}
+
+hr {
+    width: 100%;
+    margin:0 auto;
+}
+
+.css-5azppo-MuiTypography-root {
+    font-family: 'Lato' !important;
+}
+
+.css-1jzq0dw-MuiChip-label {
+    font-family: headerFont !important;
+    font-weight: 600 !important;
+}
+
+@media (max-width: 968px) {
+    .dashboardTitle{
+        flex-direction: column;
+    }
+
+    .dashboardTitle h1{
+        text-align: center;
+    }
 }

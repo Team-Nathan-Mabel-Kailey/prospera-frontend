@@ -1,4 +1,4 @@
-header {
+.mainHeader {
     position: fixed;
     display: flex;
     justify-content: space-between;
@@ -7,38 +7,37 @@ header {
     padding: 1rem 2rem;
 
     background-color: #fff;
-    width: 100%;
-    top: 0;
-    right: 0;
-    left:0;
+    width: 97%;
 
-    z-index: 1; 
+    z-index: 100; 
     overflow: hidden;
 
     margin-bottom: auto;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .headerLeft {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    font-weight: 500;
 }
 
-.headerLeft nav {
+.rightLinks  {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 10px;
 }
 
-header a {
+.mainHeader a {
     margin: 0 10px;
     color: #000;
     text-decoration: none;
     transition: all 0.4s ease;
+    font-size: 1rem;
 }
 
-/* Buttons */
 .auth-buttons button{
     padding: 10px;
 
@@ -50,28 +49,43 @@ header a {
     position: relative;
     overflow:hidden ;
     
-    width: 120%;
-    margin: 0 10px;
+    width: 115px;
+    font-size: 1rem;
+}
+
+.authButtonsLeft{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 70%;
+    font-weight: 500;
+}
+
+.mailIcon:hover{
+    cursor: pointer;
 }
 
 .auth-buttons{
     display: flex;
     justify-content: flex-end;
-    width: 100%;
-    margin-right: 90px;
+    align-items: center;
+    width: 70%;
+    font-weight: 500;
 }
+
 
 .login {
-    background-color: #000;
+    background-color: #232323 !important;
     color: #fff;
     text-decoration: none;
+    margin-right: 15px;
 }
 
-.register{
-    color: #000;
+button.register {
+    background-color: #ffffff;
+    color: #1a1a1a;
+    border: 2px solid #232323;
     text-decoration: none;
-    background-color: #fff;
-    border: none;
 }
 
 .login::after, 
@@ -80,8 +94,6 @@ header a {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     background: radial-gradient(
         circle,
         rgba(255, 255, 255, 0.25) 0%,
@@ -97,16 +109,139 @@ header a {
 
 .login:hover {
     border-color: #666666;
-    background: #292929;
+    background: #100f0f;
 }
 
 .register:hover {
-    background: #6303FF;
+    border-color: #9b62f8;
+    background: #5735df;
     color: #fff;
 }
 
 .logo img {
-    width: 45px;
-    height: 45px;
+    width: 70px;
     border-radius: 25px;
 }
+
+.burgerClose {
+    display: none;
+}
+
+@media (max-width: 968px) {
+
+    .auth-buttons, .rightLinks, .authButtonsLeft{
+        display: none;
+    }
+
+    .toggleHamburger {
+        display: flex;
+        align-items: center;
+    }
+
+    .toggleHamburger button:hover {
+        background-color: transparent;
+    }
+
+
+    .burger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+
+        width: 2rem;
+        height: 2rem;
+
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        
+        padding: 0;
+        margin-right: 50px;
+        z-index: 1100; 
+    }
+
+    .burgerAlign {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+
+    .burger:focus {
+        outline: none;
+    }
+
+    .burger div {
+        width: 2rem;
+        height: 0.25rem;
+        background: #232323;
+        border-radius: 10px;
+        transition: all 0.3s linear;
+        transform-origin: 1px;
+        margin-right: 0px;
+    }
+
+    .burger-open div {
+        background: #0D0C1D;
+    }
+
+    .burger div:first-child {
+        transform: rotate(0);
+    }
+
+    .burger-open div:first-child {
+        transform: rotate(45deg);
+    }
+
+    .burger div:nth-child(2) {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .burger-open div:nth-child(2) {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    .burger div:nth-child(3) {
+        transform: rotate(0);
+    }
+
+    .burger-open div:nth-child(3) {
+        transform: rotate(-45deg);
+    }
+}
+
+.goog-te-combo {
+    border-radius:16px;
+    width: 75%;
+}
+
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+    height: 0 !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+}
+
+.settingsIcon {
+    position: relative;
+    display: inline-block;
+}
+
+.settingsIcon img{
+    width: 30px;
+}
+
+.settingsIcon .hoverImg{
+    display: none;
+}
+
+.settingsIcon:hover .staticImg {
+    display: none;
+}
+
+.settingsIcon:hover .hoverImg{
+    display: block;
+}
+

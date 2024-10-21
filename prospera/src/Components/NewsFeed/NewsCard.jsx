@@ -1,32 +1,25 @@
-import './NewsCard.css'
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import './NewsCard.css';
+import noImagePlaceholder from './no_image_placeholder.png';
 
-const NewsCard = ({image, title, url}) => {
+const NewsCard = ({ article }) => {
     return (
-        <div className='newsCardContainer'>
-                <figure>
-                    {image ? <img src={image} alt={title} /> : <img src="https://placehold.jp/400x200.png" alt={title} />}
-                </figure>
-            <h3>{title}</h3>
+        <div className="newsCardContainer">
+        <figure>
+            <img src={article.urlToImage ? article.urlToImage : noImagePlaceholder} alt={article.title}/>
+        </figure>
+        <h3>{article.title}</h3>
+        <p>{article.description || article.content}</p>
 
-            {/* <Link to={`/news/${author}`} state={{title, content, createdAt, image}} className="read-more">Read more */}
-            <Link to={url} target="_blank" className="read-more">Read more
-                <svg xmlns="http://www.w3.org/2000/svg" className="icon" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-            </Link>
+        <div className="bottomText">
+            <a href={article.url} target="_blank" rel="noopener noreferrer" className="read-more">
+                Read more
+                <span className="icon">➜</span>
+            </a>
+            <p><small>{new Date(article.publishedAt).toLocaleString()}</small></p>
         </div>
-    )
-}
-
-NewsCard.propTypes = {
-    title: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+        </div>
+    );
 };
 
-export default NewsCard
+export default NewsCard;

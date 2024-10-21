@@ -2,18 +2,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
-    margin: 1.88rem 0 0 0;
+    color: #000;
+    margin: 4rem 0 6rem 0;
 }
 
 .registerBox {
     display: flex;
-    background-color: white;
+    background-color: #fff;
     border-radius: 20px;
     overflow: hidden;
-    width: 74rem;
-    height: 47rem;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    width: 65rem;
+    min-height: 47rem;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.registerBox input {
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
 }
 
 .registerForm {
@@ -33,7 +39,12 @@
 }
 
 .registerDescription a {
-    color: black;
+    color: #000;
+    font-weight: bold;
+}
+
+.registerDescription a:hover {
+    color: #5735df;
 }
 
 .registerDescription h1 {
@@ -44,13 +55,19 @@
     margin: 10px 0 0 0;
 }
 
-.showPasswordArea1, .showPasswordArea2 {
+.showSecret {
     display: flex;
-    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.showPasswordArea1 input, .showPasswordArea2 input {
-    margin: 0;
+.showPassword1Btn, .showPassword2Btn, .showPassword3Btn {
+    border: none;
+    background-color: #fff;
+}
+
+.showSymbol img {
+    width: 80%;
 }
 
 .questionArea p {
@@ -64,10 +81,10 @@
     position: relative;
 }
 
-.imageArea img {
+div.imageArea img {
     position: absolute;
     top: 50%;
-    left: 90%;
+    left: 50%;
     transform: translate(-50%, -50%);
     max-width: 250%;
     max-height: 150%;
@@ -76,19 +93,21 @@
 
 .registerButtonArea {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.8rem;
+    justify-content: center;
+
 }
 
 .registerButton {
     margin: 15px 0 0 0;
-    padding: 15px 30px;
+    padding: 15px 20px;
     border: 2px solid #2c2c2c;
-    background-color: #1a1a1a;
+    background-color: #232323;
     color: #ffffff;
     font-size: 1rem;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 15px;
     transition: all 0.4s ease;
     outline: none;
     position: relative;
@@ -142,4 +161,14 @@
 
 .registerButton:disabled::after {
     transition: none;
+}
+
+.headerSpace {
+    height: 106px;
+}
+
+@media (max-width: 968px) {
+    .registerBody{
+        margin-bottom: 200px;
+    }
 }

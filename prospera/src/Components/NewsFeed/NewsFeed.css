@@ -6,11 +6,22 @@
     margin: 20px 15px;
     border-radius: 5px;
 
-    margin-bottom: 300px;
-
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 100px;
+}
+
+.newsfeedTitle{
+    display: flex;
+    justify-content: center;
+
+    color: #000;
+    background-color: #fff;
+
+    padding: 0;
+    margin: 20px 15px;
+    border-radius: 5px;
 }
 
 .newsCategories{
@@ -22,6 +33,7 @@
 .newsCategories a{
     margin: 20px 20px;
 }
+
 .newsArticleCards {
     display: grid;
     max-width: 1200px;
@@ -31,7 +43,6 @@
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 50px;
 }
-
 
 .loadMoreButton{
     background-color: #000;
@@ -124,6 +135,191 @@
 
 .newsCategories a.active {
     color: #fff;
-    background-color: #6303FF;
+    background-color: #5735df;
 }
 
+.newsCategories {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.newsCategories button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    outline: none;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.newsCategories button.active {
+    background-color: #5735df;
+    color: #fff;
+}
+
+.newsCategories button:hover {
+    background-color: #292929;
+}
+
+.searchForm {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.searchForm input {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+.searchForm button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    background-color: #000;
+}
+
+.searchForm button:hover {
+    background-color: #292929;
+}
+
+
+
+.loadMoreButton {
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    width: 150px;
+    margin: 20px auto;
+    display: block;
+}
+
+.loadMoreButton::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 70%);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.loadMoreButton:hover::after {
+    transform: scale(4);
+}
+
+.loadMoreButton:hover {
+    border-color: #666666;
+    background: #292929;
+}
+
+.headerSpace {
+    height: 106px;
+}
+
+.nexBtn{
+    display: flex;
+    justify-content: center;
+
+    color: #000;
+    background-color: #fff;
+
+    padding: 0;
+    margin: 20px 15px;
+    border-radius: 5px;
+}
+
+.nexBtn, .prevBtn{
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+
+    padding: 10px 10px;
+
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.4s ease;
+
+    outline: none;
+    position: relative;
+    overflow:hidden ;
+    align-self: center;
+    
+    width: 100px;
+    margin: 10px auto;
+    display: block;
+}
+
+.nexBtn::after, .prevBtn::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.nexBtn:hover::after, .prevBtn:hover::after{
+    transform: scale(4);
+}
+
+.nexBtn:hover, .prevBtn:hover {
+    border-color: #666666;
+    background: #292929;
+}
+
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+@media (max-width: 968px) {
+    .newsCategories{
+        display:grid;
+        gap: 10px;
+    }
+
+    .newsArticleCards{
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .newsFeedContainer{
+        background-color: #fff;
+        color: #000;
+        margin-bottom: 250px;
+    }
+}

@@ -1,13 +1,18 @@
-html, body, #root {
-  min-height: 100vh;
-  min-width: 100vw;
+html, body {
   margin: 0;
-  padding-top: 25px;
-  background: linear-gradient(#6303FF 0%, #000000 100%);
+  padding: 0;
+  /* background: linear-gradient(#5735df 0%, #000000 100%); */
+  background-color: #ffffff;
   background-repeat:no-repeat;
   background-size: cover;
   scroll-behavior: smooth;
   position: relative;
+  top: 0px !important;
 }
 
-
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+  position: relative;
+}

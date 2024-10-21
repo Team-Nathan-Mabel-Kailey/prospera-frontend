@@ -1,7 +1,11 @@
+#aboutPage {
+    padding-top: 20px;
+}
+
 .aboutBody{
     font-size: 1.5rem;
-    margin-bottom: 1rem;
-    /* margin-top: 15rem; */
+    margin-top: 3rem;
+    margin-bottom: 5rem;
     margin-left: 100px;
     margin-right: 100px;
 
@@ -9,28 +13,74 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    color: #000;
+}
+
+.leftAboutTextArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(35, 35, 35);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 15px;
+    padding: 20px 30px 20px 30px;
+}
+
+.leftAboutTextArea h1 {
     color: #fff;
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translate(-100%, -50%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0%, -0%);
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        opacity: 0;
+        transform: translate(-100%, 50%); /* Change 100% to -100% */
+    }
+    to {
+        opacity: 1;
+        transform: translate(0%, -0%);
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .leftAboutTextArea {
+        animation: slide-in-left linear both;
+        animation-timeline: view();
+        animation-range: 25vh 75vh;
+    }
 }
 
 .leftAboutBody, .rightAboutBody {
     flex: 1;
     padding: 1rem;
-
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .leftAboutBody h1 {
     font-weight: bold;
     font-size: 3rem;
-    margin-bottom: 1rem;
+    margin: 0 ;
     line-height: 1.2;
+    text-align: center;
 }
 
-.leftAboutBody h1 em {
-    display: block;
-    font-style: italic;
-    font-size: 3.5rem;
+.leftAboutBody span {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #af84f4;
+    margin: 0;
 }
 
 .rightAboutBody{
@@ -48,8 +98,8 @@
 
 /* Log In Button */
 .aboutLogInButton {
-    padding: 10px;
-    background-color: #000;
+    padding: 15px 40px;
+    background-color: #232323;
     color: #ffffff;
 
     cursor: pointer;
@@ -57,11 +107,9 @@
     transition: all 0.4s ease;
 
     outline: none;
+    width: 120%;
     position: relative;
     overflow: hidden;
-    
-    width: 120%;
-    margin: 0 10px;
 }
 
 .aboutLogInButton::after {
@@ -96,14 +144,16 @@
     align-items: center;
     
     margin-top: 2rem;
-    margin-bottom: 19rem;
+    margin-bottom: 15
+    rem;
 
-    color: #fff;
+    color: #000;
 }
 
 .teamAbout h2 {
-    font-size: 2.5rem;
+    font-size: 3.1rem;
     margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 .team {
@@ -111,12 +161,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    /* margin-top: 2rem; */
-    padding: 20px;
+    padding: 70px 25px;
     border-radius: 7px;
-
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: #af84f466;
+    width: 97%;
 }
 
 .teamIcons {
@@ -126,10 +174,9 @@
     margin-top: 1rem;
 }
 
-@media (max-width: 950px) {
-    .teamIcons {
-        flex-direction: column;
-    }
+.teamIcons p {
+    margin-top: 0.3rem;
+    font-size: 1.2rem;
 }
 
 .teamMember {
@@ -143,6 +190,7 @@
 .teamMember h3 {
     font-size: 1.9rem;
     margin-top: 1rem;
+    margin-bottom: 0;
 }
 
 .teamMember img {
@@ -150,15 +198,55 @@
     height: 200px;
     border-radius: 50%;
     margin: 0px 15px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .teamMember a img{
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
+    box-shadow: none;
 }
 
 .teamSocials {
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+@media (max-width: 968px) {
+    .aboutBody {
+        flex-direction: column;
+        font-size: 1rem;
+        margin-left: 30px;
+        margin-right: 30px;
+    }
+
+    .leftAboutBody{
+        width: 100%;
+    }
+
+    .leftAboutBody h1 {
+        font-size: 2.5rem;
+    }
+
+    .leftAboutBody h1 em {
+        font-size: 3rem;
+    }
+
+    .leftAboutBody span{
+        font-size: 2.1rem;
+    }
+
+    .teamIcons {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .leftAboutTextArea h1 {
+        text-align: center;
+    }
+
+    .rightAboutBody{
+        font-size: 1.2rem;
+    }
 }

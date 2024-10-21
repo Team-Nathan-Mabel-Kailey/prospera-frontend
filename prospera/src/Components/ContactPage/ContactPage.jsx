@@ -1,5 +1,4 @@
 import { useState } from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './ContactPage.css'
 
 const ContactPage = () => {
@@ -27,14 +26,16 @@ const ContactPage = () => {
         // Reset formData for the next submission
         setFormData({firstName: '', lastName: '', email: '', message: ''});
     };
-
-    console.log('All form submissions: ', formSubmissions);
     
     return (
         <div className='checkBody'>
+            <div className='titleArea'>
+                <div className='contactTitle'>
+                    <h1>CONTACT <span>US!</span></h1>
+                </div>
+            </div>
             <div className='contactBody'>
                 <div className='leftContactPageContent'>
-                    <h1>Contact Us!</h1>
                     <div className='contactInfo'>
                         <div className='contactIcon'>
                             <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' height='80px' width='80px'><path fill="#ffffff" path d='M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V384c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z'/></svg>
@@ -77,7 +78,7 @@ const ContactPage = () => {
                                 required
                                 />
                             </div>
-                         </div>
+                        </div>
                             
                         <label htmlFor='email'>Email</label>
                         <input
@@ -98,7 +99,7 @@ const ContactPage = () => {
                         required
                         ></textarea>
                         
-                        <button type='submit' className='submitButton'>Submit</button>
+                        <button type='submit' className='submitButton'>SUBMIT</button>
                     </form>
                 </div>
             </div>

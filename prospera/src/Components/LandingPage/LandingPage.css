@@ -1,96 +1,140 @@
-.landingPageContent{
+.landingPageContent {
     position: relative;
     text-align: center;
-    
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-
-    height: 100vh;
-
-    --img-scale: 1.001;
-    --title-color: #000;
-    --link-icon-translate: -20px;
-    --link-icon-opacity: 0;
+    scroll-behavior: smooth;
 }
 
-.landingTexts{
+.landingTexts {
     position: absolute;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    right: 125px;
+    top: 90px;
+    gap: 20px;
 }
 
-.landingPageContent h1{
-    font-size: 4rem;
-    font-weight: bold;
-    margin: 2.5rem 1rem;
-    line-height: 1.2;
-    font-style: italic;
-    color: #fff;
-}
-
-.landingSlogan{
-    font-size: 1.5rem;
-    padding: 1px 5px;
-
+.getStartedButton {
+    padding: 15px 40px;
+    margin-top: 20px;
+    background-color: #232323;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
     border-radius: 10px;
-
-    color: #fff;
-    /* backdrop-filter: blur(10px) saturate(70%); */
+    transition: all 0.4s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
 }
 
-.landingSlogan p{
+.landingPageContent h1 {
+    font-size: 3.1rem;
+    font-weight: bold;
+    margin: 3.25rem 1rem 0 1rem;
+    line-height: 1.2;
+    color: #232323;
+    text-align: center;
+}
+
+.landingSlogan {
+    font-size: 1.85rem;
+    padding: 1px 5px;
+    border-radius: 10px;
+    color: #fff;
+}
+
+.landingSlogan p {
     z-index: 10;
     margin: 6px;
-    font-weight:600;
+    font-weight: 600;
+    font-size: 1.5rem;
 }   
 
 .landingImg {
     width: 100vw;
-    height: 35vh;
+    height: 56vh;
     object-fit: cover;
     object-position: 100%;
-    opacity: 0.7;
     z-index: 0;
 }
 
-#contactPage{
+#contactPage {
     display: flex;
     justify-content: center;
     align-items: center;
+}
 
-    margin-bottom: 100px;
+.headerSpace {
+    height: 106px;
+}
+
+.landingQuestion {
+    background-color: rgb(35, 35, 35);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 15px;
+    margin: 40px 0;
+    padding: 15px 25px;
+    font-size: 2.8rem;
+    color: #fff;
+}
+
+@keyframes scale-up {
+    from {
+        scale: .8;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .landingQuestion {
+        animation: scale-up linear both;
+        animation-timeline: view();
+        animation-range: 25vh 75vh;
+    }
 }
 
 .landingCardContainer {
     position: relative;
-    border-radius: 7px;
-    box-shadow: none;
-    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     transform-origin: center;
-    transition: all 0.4s ease-in-out;
     overflow: hidden;
+    border-radius: 7px;
+    transition: all 0.4s ease-in-out;
+    margin-top: 0;
+    max-width: 410px;
+    background: #fff;
     color: #000;
-    margin-top: 200px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
+
 .landingCardContainer img {
     max-width: 100%;
     transform-origin: center;
     transform: scale(var(--img-scale));
     transition: transform 0.4s ease-in-out;
 }
+
 .landingCardContainer h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.5rem;
     margin: 0;
-    padding: 16px;
+    padding: 25px;
     color: var(--title-color);
 }
+
 .landingCardContainer a {
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    color: #28666E;
+    color: rgb(156, 81, 202);
 }
+
 .landingCardContainer a .icon {
     min-width: 24px;
     width: 24px;
@@ -100,6 +144,7 @@
     opacity: var(--link-icon-opacity);
     transition: all 0.3s;
 }
+
 .landingCardContainer a::after {
     position: absolute;
     inset-block: 0;
@@ -107,16 +152,93 @@
     cursor: pointer;
     content: "";
 }
+
 .landingCardContainer:has(:hover, :focus) {
     --img-scale: 1.1;
-    --title-color: #28666E;
     --link-icon-translate: 0;
     --link-icon-opacity: 1;
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px; */
-    box-shadow: 10px 10px 60px #BEBEBE,
-    -10px -10px 60px #FFFFFF;
+    transform: rotate(3deg) scale(1);
 }
+
 .landingCards {
     display: flex;
-    gap: 40px;
+    gap: 130px;
+    margin: 100px 20px 0 20px;
 }
+
+.landingPageContent, #aboutPage {
+    position: relative;
+    width: 100%;
+}
+
+@media (max-width: 968px) {
+
+
+    .landingPageContent {
+        height: auto;
+    }
+
+    .landingTexts {
+        margin: 0 auto;
+        width: 100%;
+        right: 0;
+        top: 60px; 
+    }
+
+    .landingTexts h1{
+        font-size: 29px !important;
+    }
+
+    .landingTexts p {
+        color: #000;
+        font-size: 1rem;
+    }
+
+    .landingTexts h1 {
+        font-size: 2.5rem;
+        margin: 1.5rem 0rem;
+        padding: 0 20px;
+    }
+
+    .landingSlogan {
+        font-size: 1rem;
+        padding: 5px;
+        margin-bottom: 40px;
+    }
+
+    .landingSlogan p {
+       margin-top: 20px;
+    }
+
+    .landingSlogan button {
+        margin-bottom: 20px;
+     }
+
+    button.getStartedButton {
+        margin-top: 8px;
+    }
+
+    .landingImg {
+        height: 30vh;
+    }
+
+    .landingCards {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .landingCardContainer {
+        margin-top: 50px;
+    }
+
+    #contactPage, #aboutPage {
+        overflow: hidden;
+    }
+
+    .getStartedButton {
+        padding: 12px 30px;
+        font-size: 0.9rem;
+    }
+}
+
+

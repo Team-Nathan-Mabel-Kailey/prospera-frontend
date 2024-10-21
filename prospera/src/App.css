@@ -1,0 +1,63 @@
+@font-face {
+    font-family: headerFont;
+    src: url('././assets/Skrapbook.ttf');
+}
+
+.footerSpace{
+    height: 238.44px;
+}
+  
+h1 {
+    font-family: headerFont;
+}
+
+h2 {
+    font-family: 'Lato';
+    font-weight: 600;
+}
+
+p, span {
+    font-family: 'Lato';
+    font-weight: 500;
+}
+
+a, button {
+    font-family: 'Lato';
+    font-weight: 600;
+}
+
+h3 {
+    font-family: 'Lato';
+    font-weight: 550;
+}
+
+a.read-more {
+    font-family: headerFont;
+    font-size: 25px;
+    color: rgb(215, 119, 215);
+}
+
+.leftAboutTextArea span {
+    font-family: headerFont;
+}
+
+label {
+    font-family: 'Lato';
+    font-weight: 500;
+}
+
+.passwordChecklist {
+    font-family: 'Lato';
+    font-size: 0.9rem;
+}
+
+.teamAbout h2 {
+    font-family: headerFont;
+    text-align: center;
+}
+
+
+.dashboardTitle span {
+    font-family: headerFont;
+    font-size: 35px;
+}

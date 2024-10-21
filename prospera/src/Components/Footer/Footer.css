@@ -1,30 +1,127 @@
 .footer {
-    position:absolute;
-    bottom: 0;
     width: 100vw;
-
-    background-color: rgba(60, 57, 64, 0.3);
-    color: white;
-
+    
+    background-color: #171717;
+    color: #fff;
+    
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 20px;
+    
+    position: absolute;
+    bottom: 0;
+}
+
+.innerFooterCont {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.footerLeft{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.footerLeft p {
+    font-family: headerFont;
+    font-size: 19px;
+}
+
+.footerRight{
+    width: 100%;
+    display: flex;
     align-items: center;
 }
 
 .footerLinks {
     display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    width: 20%;
-    text-align: center;
+    justify-content: space-evenly;
+    gap: 15px;
+    width: 80%;
 }
 
 .footerLinks a{
-    color: white;
+    color: #fff;
     text-decoration: none;
 }
 
+.abt {
+    text-align: end;
+}
+
+h2 {
+    margin-top: 20px;
+}
 
 .footerLinks h2{
     font-weight: normal;
+    text-align: center;
+}
+
+.footerLogo img {
+    height: 80px;
+    border-radius: 15px;
+    margin: 10px 0;
+    margin-left: -4px;
+}
+
+.socials {
+    margin-top: 10px;
+    display: flex;
+    gap: 20px;
+    margin-right: 20px;
+}
+
+.socials img {
+    color: #fff;
+    height: 35px;
+    width: 35px;
+}
+
+.socials a {
+    display: inline-flex; 
+    justify-content: center; 
+    align-items: center;
+    border: 1px solid #eeeeee; 
+    border-radius: 50%;
+    padding: 7px; 
+}
+
+hr {
+    width: 90%;
+    color: #ececec;
+    border-width: 0.1px;
+}
+
+@media screen and (max-width: 768px) {
+    .innerFooterCont{
+        align-items: center;
+        flex-direction: column;
+    }
+    .footerRight{
+        flex-direction: column;
+    }
+    .footerLinks{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .socials {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .socials a {
+        margin-bottom: 10px;
+    }
+
+    hr {
+        width: 100%;
+    }
 }
